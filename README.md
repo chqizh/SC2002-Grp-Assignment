@@ -16,7 +16,7 @@ The FOMS is an application aimed at streamlining the process of ordering, paymen
 
 - Pang Boslyn ([@boslyn](https://github.com/boslyn))
 
-- Lim Yu Kang ([@cgtdqykpu](https://github.com/cgtdqykpu)
+- Lim Yu Kang ([@cgtdqykpu](https://github.com/cgtdqykpu))
 </div>
 
 <h2> Special Thanks </h2>
