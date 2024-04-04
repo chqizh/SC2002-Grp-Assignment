@@ -1,3 +1,3 @@
-public class manager {
+public class Manager {
     
 }
