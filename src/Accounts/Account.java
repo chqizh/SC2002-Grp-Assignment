@@ -1,7 +1,5 @@
 package Accounts;
 
-import javax.swing.plaf.TreeUI;
-
 public class Account {
     private String username;
     private String password;
@@ -22,7 +20,7 @@ public class Account {
         return username;
     }
 
-    public boolean checkPassword(String inputPassword){
+    public boolean isPasswordCorrect(String inputPassword){
         if (inputPassword == this.password) return true;
         else return false;
     }
