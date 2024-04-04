@@ -3,19 +3,19 @@ package Branch;
 import Accounts.*;
 
 public class Branch {
-    private String branchName;
+    private String branchLocation;
     private Manager branchManagers[];
     private int numManagers;
     private Staff staffList[];
     private int numStaff;
     private Orders ordersList[];
 
-    public String getBranchName() {
-        return branchName;
+    public String getBranchLocation() {
+        return branchLocation;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setBranchLocation(String branchName) {
+        this.branchLocation = branchName;
     }
 
     public Manager[] getBranchManagers() {
