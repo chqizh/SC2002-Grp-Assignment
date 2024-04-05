@@ -22,11 +22,22 @@ public class Branch {
         return branchManagers;
     }
 
-    public void setBranchManagers(Manager[] branchManagers) {
+    public void setBranchManagers(Manager[] branchManagers,int numStaff) {
         //TODO
+        int noOfManagers=0;
+
+        if (numStaff>=1 && numStaff<=4){
+            noOfManagers=1;
+        }
+        else if (numStaff>=5 && numStaff<=8){
+            noOfManagers=2;
+        }
+        else if (numStaff>=9 && numStaff<=15){
+            noOfManagers=3;
+        }
         this.branchManagers = branchManagers;
         numManagers++;
-        //test test test 
+        
     }
 
     public Staff[] getStaffList() {
