@@ -6,7 +6,7 @@ public class Order extends Customer {
     private int orderID;
     private String orderStatus;
     private String branchID;
-    private MenuItem orderItems[];
+    private OrderDetails orderItems[];
     private int numItems;
 
     public Order(int orderID, String branchID){
