@@ -1,5 +1,5 @@
 package Accounts;
 
-public class Admin extends Staff{
+public class Admin extends Employee{
     
 }

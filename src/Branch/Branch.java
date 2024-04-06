@@ -8,6 +8,7 @@ public class Branch {
     private int numManagers;
     private Staff staffList[];
     private int numStaff;
+    private Menu branchMenu;
     private Orders ordersList[];
 
     public String getBranchLocation() {
@@ -48,5 +49,13 @@ public class Branch {
         //TODO
         this.staffList = staffList;
         numStaff++;
+    }
+
+    public void setBranchMenu(Menu branchMenu) {
+        this.branchMenu = branchMenu;
+    }
+
+    public Menu getBranchMenu() {
+        return branchMenu;
     }
 }

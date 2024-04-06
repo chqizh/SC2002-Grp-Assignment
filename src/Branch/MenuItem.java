@@ -1,4 +1,4 @@
-package Menu;
+package Branch;
 
 public class MenuItem {
     private String itemName;

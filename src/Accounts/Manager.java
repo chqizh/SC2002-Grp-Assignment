@@ -1,13 +1,13 @@
 package Accounts;
 
-public class Manager extends Staff{
-    private String branchName;
+public class Manager extends Employee{
+    private String branchID;
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setBranchID(String branchID) {
+        this.branchID = branchID;
     }
 
-    public String getBranchName() {
-        return branchName;
+    public String getBranchID() {
+        return branchID;
     }
 }

@@ -1,17 +1,18 @@
-package Branch;
+package Customer;
 
-import Accounts.Customer;
-import Menu.MenuItem;
+import Branch;
 
-public class Order {
+public class Order extends Customer {
     private int orderID;
-    private Customer customer;
+    private String orderStatus;
+    private String branchID;
     private MenuItem orderItems[];
     private int numItems;
 
-    public Order(int orderID, Customer customer){
+    public Order(int orderID, String branchID){
         this.orderID = orderID;
-        this.customer = customer;
+        this.orderStatus = "Pending";
+        this.branchID = branchID;
         this.orderItems = new MenuItem[1000];
         this.numItems = 0;
     }

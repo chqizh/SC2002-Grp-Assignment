@@ -1,8 +1,9 @@
 package Accounts;
 
 public class Account {
-    private String username;
+    private String staffID;
     private String password;
+    private char userType; // Three types of staff: staff (S), Branch Manager (M), Admin (A). 
     
     Account(){
         this.password = "password";
@@ -12,16 +13,29 @@ public class Account {
         this.password = password;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setStaffID(String staffID) {
+        this.staffID = staffID;
     }
 
-    public String getUsername() {
-        return username;
+    public String getStaffID() {
+        return staffID;
     }
 
-    public boolean isPasswordCorrect(String inputPassword){
-        if (inputPassword == this.password) return true;
+    public boolean setUserType(char userType) {
+        if (userType == 'S' || userType == 'M' || userType == 'A'){
+            this.userType = userType;
+            return true;
+        }
         else return false;
     }
+
+    public char getUserType() {
+        return userType;
+    }
+
+    public boolean validateLogin(staffID, password){
+        if (password == this.password && staffID = this.staffID) return true;
+        else return false;
+    }
+
 }

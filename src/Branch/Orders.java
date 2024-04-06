@@ -1,5 +1,7 @@
 package Branch;
 
+import Customer.Order;
+
 public class Orders {
     private Order orderList[];
 
