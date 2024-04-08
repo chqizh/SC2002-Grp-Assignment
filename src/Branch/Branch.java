@@ -1,6 +1,7 @@
 package Branch;
 
 import Accounts.*;
+import Customer.*;
 
 public class Branch {
     private int branchID;
@@ -10,7 +11,7 @@ public class Branch {
     private Staff staffList[];
     private int numStaff;
     private Menu branchMenu;
-    private OrderList ordersList[];
+    private OrderList branchOrders;
 
     public int getBranchID() {
         return branchID;
@@ -68,7 +69,7 @@ public class Branch {
         return branchMenu;
     }
 
-    public OrderList[] getOrdersList() {
-        return ordersList;
+    public OrderList getBranchOrders() {
+        return branchOrders;
     }
 }
