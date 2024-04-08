@@ -3,20 +3,29 @@ package Branch;
 import Accounts.*;
 
 public class Branch {
-    private String branchLocation;
-    private Manager branchManagers[];
-    private int numManagers;
+    private int branchID;
+    private String branchName;
+    private Manager branchManagersList[];
+    private int numBranchManagers;
     private Staff staffList[];
     private int numStaff;
     private Menu branchMenu;
-    private Orders ordersList[];
+    private OrderList ordersList[];
 
-    public String getBranchLocation() {
-        return branchLocation;
+    public int getBranchID() {
+        return branchID;
     }
 
-    public void setBranchLocation(String branchName) {
-        this.branchLocation = branchName;
+    public void setBranchID(int branchID) {
+        this.branchID = branchID;
+    }
+
+    public String getBranchName() {
+        return branchName;
+    }
+
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
     }
 
     public Manager[] getBranchManagers() {
@@ -57,5 +66,9 @@ public class Branch {
 
     public Menu getBranchMenu() {
         return branchMenu;
+    }
+
+    public OrderList[] getOrdersList() {
+        return ordersList;
     }
 }

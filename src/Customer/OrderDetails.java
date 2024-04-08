@@ -1,6 +1,6 @@
 package Customer;
 
-public class OrderDetail {
+public class OrderDetails {
     private float price;
     private String item;
     private int quantity;

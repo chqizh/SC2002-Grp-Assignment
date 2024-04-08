@@ -6,7 +6,9 @@ public class Account {
     private char userType; // Three types of staff: staff (S), Branch Manager (M), Admin (A). 
     
     Account(){
+        this.staffID = null;
         this.password = "password";
+        userType = 'S';
     }
 
     public void setPassword(String password) {

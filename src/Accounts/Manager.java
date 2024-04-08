@@ -1,7 +1,7 @@
 package Accounts;
 
 public class Manager extends Employee{
-    private String branchID;
+    private int branchID;
 
     public void setBranchID(String branchID) {
         this.branchID = branchID;
