@@ -34,21 +34,13 @@ public class Branch {
         return branchManagers;
     }
 
-    public void setBranchManagers(Manager[] branchManagers,int numStaff) {
+    public void setBranchManagers(Manager[] branchManagers,int numManagers) {
         //TODO
-        int noOfManagers=0;
 
-        if (numStaff>=1 && numStaff<=4){
-            noOfManagers=1;
-        }
-        else if (numStaff>=5 && numStaff<=8){
-            noOfManagers=2;
-        }
-        else if (numStaff>=9 && numStaff<=15){
-            noOfManagers=3;
-        }
-        this.branchManagers = branchManagers;
-        numManagers++;
+
+
+
+
         
     }
 
@@ -56,8 +48,16 @@ public class Branch {
         return numManagers;
     }
 
-    public void setnumManagers(int numManagers){
-        this.numManagers=numManagers;
+    public void setnumManagers(int numStaff){
+        if (numStaff>=1 && numStaff<=4){
+            this.numManagers=1;
+        }
+        else if (numStaff>=5 && numStaff<=8){
+            this.numManagers=2;
+        }
+        else if (numStaff>=9 && numStaff<=15){
+            this.numManagers=3;
+        }
     }
 
     public Staff[] getStaffList() {
@@ -77,7 +77,6 @@ public class Branch {
     public void setCurNumStaff(int currentNumStaff){
         this.currentNumStaff=currentNumStaff;
     }
-
 
 
     public int getStaffQuota(){
