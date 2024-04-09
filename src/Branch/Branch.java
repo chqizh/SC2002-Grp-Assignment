@@ -6,10 +6,11 @@ import Customer.*;
 public class Branch {
     private int branchID;
     private String branchName;
-    private Manager branchManagersList[];
-    private int numBranchManagers;
+    private Manager branchManagers[];
+    private int numManagers;
     private Staff staffList[];
-    private int numStaff;
+    private int currentNumStaff;
+    private int staffQuota;
     private Menu branchMenu;
     private OrderList branchOrders;
 
@@ -51,6 +52,14 @@ public class Branch {
         
     }
 
+    public int getnumManagers(){
+        return numManagers;
+    }
+
+    public void setnumManagers(int numManagers){
+        this.numManagers=numManagers;
+    }
+
     public Staff[] getStaffList() {
         return staffList;
     }
@@ -58,15 +67,33 @@ public class Branch {
     public void setStaffList(Staff[] staffList) {
         //TODO
         this.staffList = staffList;
-        numStaff++;
+        currentNumStaff++;
     }
 
-    public void setBranchMenu(Menu branchMenu) {
-        this.branchMenu = branchMenu;
+    public int getCurNumStaff(){
+        return currentNumStaff;
+    }
+
+    public void setCurNumStaff(int currentNumStaff){
+        this.currentNumStaff=currentNumStaff;
+    }
+
+
+
+    public int getStaffQuota(){
+        return staffQuota;
+    }
+
+    public void setStaffQuota(int staffQuota){
+        this.staffQuota=staffQuota;
     }
 
     public Menu getBranchMenu() {
         return branchMenu;
+    }
+
+    public void setBranchMenu(Menu branchMenu) {
+        this.branchMenu = branchMenu;
     }
 
     public OrderList getBranchOrders() {
