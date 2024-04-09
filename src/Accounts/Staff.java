@@ -1,6 +1,6 @@
 package Accounts;
 
-import java.util.HashMap;
+import java.util.*;
 
 import Branch.*;
 import Customer.*;
@@ -8,12 +8,12 @@ import Customer.*;
 public class Staff extends Employee{
     private int branchID;
 
-    public void setBranchID(String branchID) {
+    public void setBranchID(int branchID) {
         this.branchID = branchID;
     }
     
-    public String getBranchID() {
-        return branchID;
+    public int getBranchID() {
+        return this.branchID;
     }
 
     private Order getOrderFromBranch(Branches branches, int orderID){
@@ -25,13 +25,21 @@ public class Staff extends Employee{
        //TODO
         while (true){
             HashMap<Integer, Order> orderList = branches.getSpecificBranch(branchID).getBranchOrders().getOrderList();
+            // Goes through every order to find new orders.
             for (Order order : orderList.values()){
                 if (order.getOrderStatus().equals("New order.")){
-                    // TODO printing function
+                    //Prints every item in order.
+                    String format = "%-20s%-20s%s%n";
+                    System.out.printf(format, "Item Name", "Qty", "Total Price");
+                    for (int i = 0; i < order.getOrderItems().length; i++){
+                        // TODO printing function may need to move into a seperate class.
+                        // The second string begins after 20 characters. The dash means that the first string is left-justified.
+                        System.out.printf(format, order.getOrderItems()[i]);
+                    }
                 }
             }
         }
-    }
+    } 
 
     //View the details of a particular order. 
     public void viewOrderDetails(Branches branches, int orderID){

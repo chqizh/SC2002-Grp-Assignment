@@ -35,8 +35,8 @@ public class Account {
         return userType;
     }
 
-    public boolean validateLogin(staffID, password){
-        if (password == this.password && staffID = this.staffID) return true;
+    public boolean validateLogin(String staffID, String password){
+        if (password == this.password && staffID == this.staffID) return true;
         else return false;
     }
 

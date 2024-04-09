@@ -39,9 +39,6 @@ public class Branch {
 
 
 
-
-
-        
     }
 
     public int getnumManagers(){
@@ -97,5 +94,9 @@ public class Branch {
 
     public OrderList getBranchOrders() {
         return branchOrders;
+    }
+
+    public Staff findStaff(String staffID){
+        return ;
     }
 }
