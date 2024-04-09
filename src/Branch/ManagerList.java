@@ -20,7 +20,6 @@ public class ManagerList {
                 return true;  
             }
         }
-        return false; 
-
+        return false;
     }
 }
