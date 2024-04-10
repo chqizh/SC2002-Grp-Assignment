@@ -2,7 +2,7 @@ package Accounts;
 
 public class Employee extends Account {
     private String name;
-    private String role; //Waiter, Dishwasher, Barista etc.
+    private char role = 'S';
     private char gender;
     private int age;
     
@@ -15,10 +15,27 @@ public class Employee extends Account {
     }
 
     public void setRole(char role) {
-        ;        
+        this.role = role;        
     }
 
     public char getRole() {
-        return role;
+        return this.role;
     }
+    public void setGender(char gender){
+        this.gender = gender;
+    }
+
+	public char getGender() {
+		return this.gender;
+	}
+
+	public void setAge(int age) {
+        this.age = age;
+        throw new UnsupportedOperationException();
+	}
+
+	public int getAge() {
+		return this.age;
+	}
+
 }
