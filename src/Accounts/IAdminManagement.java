@@ -1,3 +1,5 @@
+package Accounts;
+
 public interface IAdminManagement {
 
 	void addStaff();

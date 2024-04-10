@@ -1,3 +1,5 @@
+package Accounts;
+
 public interface IMenuManagement {
 
 	void addMenu();
