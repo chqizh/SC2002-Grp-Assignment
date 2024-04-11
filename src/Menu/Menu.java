@@ -18,7 +18,7 @@ public class Menu {
 	public void addItems() {		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to add?");
-	    int numberToAdd = sc.nextInt();
+	    	int numberToAdd = sc.nextInt();
 		sc.close();
 		
 		for (int i=0; i<numberToAdd; i++) {
@@ -45,7 +45,7 @@ public class Menu {
 		
 		Scanner sc1 = new Scanner(System.in);
 		System.out.println("How many menu items would you like to delete?");
-	    int numberToDelete = sc1.nextInt();
+	    	int numberToDelete = sc1.nextInt();
 		sc1.close();
 		
 		int[] idArray = null;
