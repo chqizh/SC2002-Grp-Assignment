@@ -28,20 +28,20 @@ public class MenuItems {
 	public void createMenuItem() {
 		Scanner sc = new Scanner(System.in);
 
-	    System.out.println("Enter menu item name:");
-	    String n = sc.nextLine();
+	    	System.out.println("Enter menu item name:");
+	    	String n = sc.nextLine();
 		this.name = n;
 		
 		System.out.println("Enter menu item price:");
-	    String p = sc.nextLine();
+	   	String p = sc.nextLine();
 		this.price = p;
 		
 		System.out.println("Enter menu item branch:");
-	    String b = sc.nextLine();
+	    	String b = sc.nextLine();
 		this.branch = b;
 		
 		System.out.println("Enter menu item category");
-	    String c = sc.nextLine();
+	    	String c = sc.nextLine();
 		this.category = c;
 		
 		sc.close();
