@@ -4,9 +4,9 @@ import Accounts.*;
 import Customer.*;
 
 public class Branch {
-    private int branchID;
     private String branchName;
-    private Manager branchManagers[];
+    private String branchLocation;
+    private BranchManager branchManagers[];
     private int numManagers;
     private Staff staffList[];
     private int currentNumStaff;
@@ -14,48 +14,31 @@ public class Branch {
     private Menu branchMenu;
     private OrderList branchOrders;
 
-    public int getBranchID() {
-        return branchID;
-    }
-
-    public void setBranchID(int branchID) {
-        this.branchID = branchID;
-    }
-
     public String getBranchName() {
         return branchName;
     }
 
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
+    public void setBranchName(String Name) {
+        this.branchName = Name;
     }
 
-    public Manager[] getBranchManagers() {
+    public String getBranchLocation() {
+        return branchLocation;
+    }
+
+    public void setBranchLocation(String Location) {
+        this.branchLocation = Location;
+    }
+
+    public BranchManager[] getBranchManagers() {
         return branchManagers;
     }
 
-    public void setBranchManagers(Manager[] branchManagers,int numManagers) {
-        //TODO
-
-
-
-    }
 
     public int getnumManagers(){
         return numManagers;
     }
 
-    public void setnumManagers(int numStaff){
-        if (numStaff>=1 && numStaff<=4){
-            this.numManagers=1;
-        }
-        else if (numStaff>=5 && numStaff<=8){
-            this.numManagers=2;
-        }
-        else if (numStaff>=9 && numStaff<=15){
-            this.numManagers=3;
-        }
-    }
 
     public Staff[] getStaffList() {
         return staffList;
@@ -96,7 +79,5 @@ public class Branch {
         return branchOrders;
     }
 
-    public Staff findStaff(String staffID){
-        return ;
-    }
+    
 }

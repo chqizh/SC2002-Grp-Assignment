@@ -9,6 +9,8 @@ public interface IStaffManagement {
 	 * @param gender
 	 * @param age
 	 */
-	void displayStaffList(String branch, char role, char gender, int age);
+	//void displayStaffList(String branch, char role, char gender, int age);
+
+	void displayStaffList(Staff staffList[]);
 
 }
