@@ -1,7 +1,29 @@
 package Customer;
 
+import java.util.List;
+
+import Branch.MenuItem;
+
 public class OrderDetails {
-    private float price;
-    private String item;
-    private int quantity;
+    private int orderId;
+    private int branchId;
+    private List<MenuItem> items;
+
+    public OrderDetails(int orderId, int branchId, List<MenuItem> items) {
+        this.orderId = orderId;
+        this.branchId = branchId;
+        this.items = items;
+    }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public int getBranchId() {
+        return branchId;
+    }
+
+    public List<MenuItem> getItems() {
+        return items;
+    }
 }
