@@ -1,8 +1,10 @@
 package Customer;
+import java.util.ArrayList;
+import java.util.List;
 
 import Branch.MenuItem;
 
-public class Order extends Customer {
+public class Order {
     private int orderID;
     enum orderStatusFlags {
         NEW,
@@ -11,15 +13,16 @@ public class Order extends Customer {
         COMPLETED
     }
     private orderStatusFlags orderStatus;
-    private String branchID;
-    private OrderDetails orderItems[];
+    private int branchID;
+    private List<OrderDetails> orderItems;
     private int numItems;
 
-    public Order(int orderID, String branchID){
+    public Order(int orderID, int branchID){
         this.orderID = orderID;
         this.orderStatus = orderStatusFlags.PROCESSED;
         this.branchID = branchID;
-        this.orderItems = new OrderDetails[1000];
+        //this.orderItems = new OrderDetails[1000];
+        this.orderItems = new ArrayList<>();
         this.numItems = 0;
     }
 
@@ -31,12 +34,12 @@ public class Order extends Customer {
         return orderID;
     }
 
-    public OrderDetails[] getOrderItems() {
+    public List<OrderDetails> getOrderItems() {
         return orderItems;
     }
     
-    public void placeOrder(MenuItem orderItem){
-        this.orderItems[numItems] = orderItem;
+    public void placeOrder(OrderDetails orderDetail){
+        this.orderItems.add(orderDetail);
         numItems++;
     }
 
