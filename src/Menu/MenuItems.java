@@ -9,6 +9,7 @@ public class MenuItems {
 	public String price;
 	public String branch;
 	public String category;
+	public String availability;
 	public String itemInfo;
 	public int id;
 	
@@ -17,12 +18,13 @@ public class MenuItems {
 	    createMenuItem();
 	}
 	
-	public MenuItems(String name, String price, String branch, String category) {
+	public MenuItems(String name, String price, String branch, String category, String availability) {
 	    this.name = name;
 	    this.price = price;
 	    this.branch = branch;
 	    this.category = category;
-	    this.itemInfo = String.format(",%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category);
+	    this.availability = availability;
+	    this.itemInfo = String.format(",%s,%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category, this.availability);
 	}
 	
 	public void createMenuItem() {
@@ -33,7 +35,7 @@ public class MenuItems {
 		this.name = n;
 		
 		System.out.println("Enter menu item price:");
-	   	String p = sc.nextLine();
+	    	String p = sc.nextLine();
 		this.price = p;
 		
 		System.out.println("Enter menu item branch:");
@@ -44,8 +46,12 @@ public class MenuItems {
 	    	String c = sc.nextLine();
 		this.category = c;
 		
+		System.out.println("Enter menu item availability");
+	    	String a = sc.nextLine();
+		this.category = a;
+		
 		sc.close();
 		
-		this.itemInfo = String.format(",%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category);
+		this.itemInfo = String.format(",%s,%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category, this.availability);
 	}	
 }
