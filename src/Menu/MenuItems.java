@@ -27,7 +27,8 @@ public class MenuItems {
 	    this.availability = availability;
 	    this.itemInfo = String.format(",%s,%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category, this.availability);
 	}
-	
+
+	//this constructor is necessary for initialising the object from the text file
 	public MenuItems(String[] menuItemInfoList) {
 	    this.id = menuItemInfoList[0];
 	    this.name = menuItemInfoList[1];
@@ -63,7 +64,8 @@ public class MenuItems {
 		
 		this.itemInfo = String.format(",%s,%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category, this.availability);
 	}	
-	
+
+	//must remember to update itemInfo of the object when writing to text file
 	public void updateItemInfo() {
 		this.itemInfo = String.format(",%s,%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category, this.availability);
 	}
