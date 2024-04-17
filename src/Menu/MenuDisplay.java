@@ -8,11 +8,14 @@ import java.util.*;
 //"Invalid order. If you would like to order from multiple branches, please make a separate order for each branch."
 public class MenuDisplay {
 	
-
-	public void displayFullMenu() {
+	public MenuDisplay() {
+		
+	}
+		
+	public void displayFullMenu(Menu menu) {
+		System.out.println("This is the current menu:");
 		try {
-			File menuFile = new File("Menu.txt")
-			BufferedReader reader = new BufferedReader(new FileReader(menuFile));
+			BufferedReader reader = new BufferedReader(new FileReader(menu.menuFile));
 			String line;
 			while ((line = reader.readLine()) != null) {
 				System.out.println(line);
@@ -21,6 +24,7 @@ public class MenuDisplay {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+		System.out.println("End of menu");
+	} 
 
 }
