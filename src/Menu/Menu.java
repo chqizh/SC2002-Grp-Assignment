@@ -66,7 +66,8 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to add?");
 	    	int numberToAdd = sc.nextInt();
-	      
+		
+	        //add items to menu array and to menuFile
 		for (int i=0; i<numberToAdd; i++) {
 			MenuItems item = new MenuItems();
  			this.menu[this.menuLength+i] = item;
@@ -132,7 +133,7 @@ public class Menu {
 			System.out.println("Please enter the id of the item you would like to delete");
 		    	int id = sc.nextInt();
 			
-		    //find the index of the item in this.menu
+		        //find the index of the item in this.menu
 			int match = 0;
 			for (int k=0; k<this.menuLength; k++) {
 				if (id==idArray[k]) {
