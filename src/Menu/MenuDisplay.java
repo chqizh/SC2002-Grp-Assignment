@@ -8,9 +8,7 @@ import java.util.*;
 //"Invalid order. If you would like to order from multiple branches, please make a separate order for each branch."
 public class MenuDisplay {
 	
-	public MenuDisplay() {
-		
-	}
+	public MenuDisplay() {}
 		
 	public void displayFullMenu(Menu menu) {
 		System.out.println("This is the current menu:");
