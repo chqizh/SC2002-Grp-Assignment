@@ -1,7 +1,7 @@
 package Accounts;
 import Branch.*;
 
-public class BranchManager extends Staff implements IMenuManagement, IStaffManagement {
+public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchID;
 
 	public void setBranchID(String branchID) {
