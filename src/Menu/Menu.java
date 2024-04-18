@@ -58,7 +58,7 @@ public class Menu {
 		//get the maxId of all menu items
 		int maxId = 0;
 		for (int i = 0; i<this.menuLength; i++) {
-			if (Integer.valueOf(this.menu[i].id) < maxId) {
+			if (Integer.valueOf(this.menu[i].id) > maxId) {
 				maxId = Integer.valueOf(this.menu[i].id);
 			}
 		}
@@ -72,7 +72,8 @@ public class Menu {
 			MenuItems item = new MenuItems();
  			this.menu[this.menuLength+i] = item;
  			//prevent id clash
-			int id = maxId + i + 1 + this.numberOfDeletions;
+			//int id = maxId + i + 1 + this.numberOfDeletions;
+			int id = maxId + i + 1;
 			this.menu[this.menuLength+i].id = Integer.toString(id);
 			//so the position in array could change after any deletion but the id won't change
 			this.menuLength++;
