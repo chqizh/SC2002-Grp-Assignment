@@ -90,6 +90,38 @@ public class FOMSApp{
     private void displayAdminInterface(Account account) {
         // Display options for admin users
         // E.g., add/remove staff, manage branches, etc.
+        System.out.println("Enter your choice.")
+        
+
+        int choice = sc.nextInt();
+        switch (choice):
+            case 1:
+                account.addStaff();
+                break;
+            case 2: 
+                account.removeStaff();
+            case 3:
+                account.editStaff();
+            case 4:
+                //Display staff list (filter: branch, role, gender, age). 
+                System.out.println("Filter by: (1) Branch, (2) Role, (3) Gender or (4) Age. Please enter choice number.");
+                int filterChoice = sc.nextInt();
+                account.displayStaffList(filterChoice);
+            case 5:
+                //Assign managers to each branch within the quota constraint.
+                account.assignManagers(staffID);
+            case 6:
+                // Promote a staff to a Branch manager. 
+                account.promoteStaff(staffID);
+            case 7:
+                //Transfer a staff/manager among branches. 
+                account.transferStaff(staffID, newBranchID);
+            case 8:
+                // Add/remove payment method
+                account.editPaymentMethod(paymentMethod);
+            case 9:
+                // Open/close branch
+                account.openCloseBranch(branchID);
     }
 
     private void displayCustomerInterface() {
