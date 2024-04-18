@@ -8,7 +8,6 @@ public class Menu {
 	MenuItems menu[] = new MenuItems[99];
 	File menuFile = new File("Menu.txt");
 	int menuLength;
-	int numberOfDeletions;
 	
 	public Menu() {
 		//initialise this.menuLength with BufferedReader
@@ -16,14 +15,12 @@ public class Menu {
 			BufferedReader reader = new BufferedReader(new FileReader(this.menuFile));
 			this.menuLength = 0;
 			while (reader.readLine() != null) {
-				this.menuLength++;
+			this.menuLength++;
 			}
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 
-				
-		this.numberOfDeletions = 0;
 	}
 	
 	public void addItems() {
@@ -66,13 +63,11 @@ public class Menu {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to add?");
 	    	int numberToAdd = sc.nextInt();
-		
-	        //add items to menu array and to menuFile
+	      
 		for (int i=0; i<numberToAdd; i++) {
 			MenuItems item = new MenuItems();
  			this.menu[this.menuLength+i] = item;
  			//prevent id clash
-			//int id = maxId + i + 1 + this.numberOfDeletions;
 			int id = maxId + i + 1;
 			this.menu[this.menuLength+i].id = Integer.toString(id);
 			//so the position in array could change after any deletion but the id won't change
@@ -95,6 +90,12 @@ public class Menu {
 		display.displayFullMenu(this);	
 		
 		System.out.printf("The menu length is %d\n", this.menuLength);
+		
+		//error checking for empty menu
+		if (this.menuLength == 0) {
+			System.out.println("The menu length is zero. You have to add items first.");
+			return;
+		}
 	
 		//initialise menu[] with BufferedReader 
 		try {
@@ -132,9 +133,34 @@ public class Menu {
 						
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Please enter the id of the item you would like to delete");
-		    	int id = sc.nextInt();
+		    	//int id = sc.nextInt();
+			int id = 0;
 			
-		        //find the index of the item in this.menu
+			//error checking for user input
+			boolean validId = false;
+			while (!validId) {
+				boolean integerId = false;
+				while (!integerId) {
+				    try {
+				    	id = Integer.parseInt(sc.nextLine());
+				    	integerId = true;
+				    } catch (NumberFormatException e) {
+				    	System.out.println("Error! Invalid id. Try again.");
+				    }
+				}
+				
+				for (int s = 0; s<this.menuLength; s++) {
+					if (id == idArray[s]) {
+						validId = true;
+					}
+				}
+				
+				if (!validId) {
+					System.out.println("Error! Invalid id. Try again.");
+				}
+			}	
+			
+		    	//find the index of the item in this.menu
 			int match = 0;
 			for (int k=0; k<this.menuLength; k++) {
 				if (id==idArray[k]) {
@@ -150,8 +176,7 @@ public class Menu {
 				idArray[p] = idArray[p+1];
 			}
 			
-			this.menuLength--;
-			this.numberOfDeletions++;			
+			this.menuLength--;		
 		}
 		
 		//empty this.menuFile
@@ -185,6 +210,12 @@ public class Menu {
 		display.displayFullMenu(this);	
 		
 		System.out.printf("The menu length is %d\n", this.menuLength);
+		
+		//error checking for empty menu
+		if (this.menuLength == 0) {
+			System.out.println("The menu length is zero. You have to add items first.");
+			return;
+		}
 	
 		//initialise menu[] with BufferedReader 
 		try {
@@ -207,15 +238,41 @@ public class Menu {
 			e.printStackTrace();
 		}
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the id of the item you would like to update the name of");
-	    	int id = sc.nextInt();
-		
-	    	//create idArray
+
+	    //create idArray
 		int[] idArray = new int[99];
 		//initialise idArray by matching values with menu items
 		for (int n=0; n<this.menuLength; n++) {
 			idArray[n] = Integer.valueOf(this.menu[n].id); 
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the id of the item you would like to update the name of");
+	    	//int id = sc.nextInt();
+		int id = 0;
+		
+		//error checking for user input
+		boolean validId = false;
+		while (!validId) {
+			boolean integerId = false;
+			while (!integerId) {
+			    try {
+			    	id = Integer.parseInt(sc.nextLine());
+			    	integerId = true;
+			    } catch (NumberFormatException e) {
+			    	System.out.println("Error! Invalid id. Try again.");
+			    }
+			}
+			
+			for (int s = 0; s<this.menuLength; s++) {
+				if (id == idArray[s]) {
+					validId = true;
+				}
+			}
+			
+			if (!validId) {
+				System.out.println("Error! Invalid id. Try again.");
+			}
 		}
 		
 		//find the index of the item in this.menu
@@ -268,6 +325,12 @@ public class Menu {
 		display.displayFullMenu(this);	
 		
 		System.out.printf("The menu length is %d\n", this.menuLength);
+
+		//error checking for empty menu
+		if (this.menuLength == 0) {
+			System.out.println("The menu length is zero. You have to add items first.");
+			return;
+		}
 	
 		//initialise menu[] with BufferedReader 
 		try {
@@ -290,15 +353,41 @@ public class Menu {
 			e.printStackTrace();
 		}
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the id of the item you would like to update the price of");
-	    	int id = sc.nextInt();
 
 	    	//create idArray
 		int[] idArray = new int[99];
 		//initialise idArray by matching values with menu items
 		for (int n=0; n<this.menuLength; n++) {
 			idArray[n] = Integer.valueOf(this.menu[n].id); 
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the id of the item you would like to update the price of");
+	    	//int id = sc.nextInt();
+		int id = 0;
+		
+		//error checking for user input
+		boolean validId = false;
+		while (!validId) {
+			boolean integerId = false;
+			while (!integerId) {
+			    try {
+			    	id = Integer.parseInt(sc.nextLine());
+			    	integerId = true;
+			    } catch (NumberFormatException e) {
+			    	System.out.println("Error! Invalid id. Try again.");
+			    }
+			}
+			
+			for (int s = 0; s<this.menuLength; s++) {
+				if (id == idArray[s]) {
+					validId = true;
+				}
+			}
+			
+			if (!validId) {
+				System.out.println("Error! Invalid id. Try again.");
+			}
 		}
 		
 		//find the index of the item in this.menu
@@ -348,10 +437,15 @@ public class Menu {
 		System.out.println("You have chosen to update the branch of an item.");
 		
 		MenuDisplay display = new MenuDisplay();
-		System.out.println("This is the current menu:");
 		display.displayFullMenu(this);	
 		
 		System.out.printf("The menu length is %d\n", this.menuLength);
+
+		//error checking for empty menu
+		if (this.menuLength == 0) {
+			System.out.println("The menu length is zero. You have to add items first.");
+			return;
+		}
 	
 		//initialise menu[] with BufferedReader 
 		try {
@@ -374,15 +468,40 @@ public class Menu {
 			e.printStackTrace();
 		}
 		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the id of the item you would like to update the branch of");
-	    	int id = sc.nextInt();
-
 	    	//create idArray
 		int[] idArray = new int[99];
 		//initialise idArray by matching values with menu items
 		for (int n=0; n<this.menuLength; n++) {
 			idArray[n] = Integer.valueOf(this.menu[n].id); 
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the id of the item you would like to update the branch of");
+	    	//int id = sc.nextInt();
+		int id = 0;
+		
+		//error checking for user input
+		boolean validId = false;
+		while (!validId) {
+			boolean integerId = false;
+			while (!integerId) {
+			    try {
+			    	id = Integer.parseInt(sc.nextLine());
+			    	integerId = true;
+			    } catch (NumberFormatException e) {
+			    	System.out.println("Error! Invalid id. Try again.");
+			    }
+			}
+			
+			for (int s = 0; s<this.menuLength; s++) {
+				if (id == idArray[s]) {
+					validId = true;
+				}
+			}
+			
+			if (!validId) {
+				System.out.println("Error! Invalid id. Try again.");
+			}
 		}
 		
 		//find the index of the item in this.menu
@@ -432,10 +551,15 @@ public class Menu {
 		System.out.println("You have chosen to update the category of an item.");
 		
 		MenuDisplay display = new MenuDisplay();
-		System.out.println("This is the current menu:");
 		display.displayFullMenu(this);	
 		
 		System.out.printf("The menu length is %d\n", this.menuLength);
+
+		//error checking for empty menu
+		if (this.menuLength == 0) {
+			System.out.println("The menu length is zero. You have to add items first.");
+			return;
+		}
 	
 		//initialise menu[] with BufferedReader 
 		try {
@@ -457,16 +581,41 @@ public class Menu {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the id of the item you would like to update the category of");
-	    	int id = sc.nextInt();
 
 	    	//create idArray
 		int[] idArray = new int[99];
 		//initialise idArray by matching values with menu items
 		for (int n=0; n<this.menuLength; n++) {
 			idArray[n] = Integer.valueOf(this.menu[n].id); 
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the id of the item you would like to update the category of");
+	    	//int id = sc.nextInt();
+		int id = 0;
+		
+		//error checking for user input
+		boolean validId = false;
+		while (!validId) {
+			boolean integerId = false;
+			while (!integerId) {
+			    try {
+			    	id = Integer.parseInt(sc.nextLine());
+			    	integerId = true;
+			    } catch (NumberFormatException e) {
+			    	System.out.println("Error! Invalid id. Try again.");
+			    }
+			}
+			
+			for (int s = 0; s<this.menuLength; s++) {
+				if (id == idArray[s]) {
+					validId = true;
+				}
+			}
+			
+			if (!validId) {
+				System.out.println("Error! Invalid id. Try again.");
+			}
 		}
 		
 		//find the index of the item in this.menu
@@ -516,10 +665,15 @@ public class Menu {
 		System.out.println("You have chosen to update the availability of an item.");
 		
 		MenuDisplay display = new MenuDisplay();
-		System.out.println("This is the current menu:");
 		display.displayFullMenu(this);	
 		
 		System.out.printf("The menu length is %d\n", this.menuLength);
+
+		//error checking for empty menu
+		if (this.menuLength == 0) {
+			System.out.println("The menu length is zero. You have to add items first.");
+			return;
+		}
 	
 		//initialise menu[] with BufferedReader 
 		try {
@@ -540,17 +694,42 @@ public class Menu {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
-		
-		Scanner sc = new Scanner(System.in);
-		System.out.println("Please enter the id of the item you would like to update the availability of");
-	    	int id = sc.nextInt();
+		}		
 
 	    	//create idArray
 		int[] idArray = new int[99];
 		//initialise idArray by matching values with menu items
 		for (int n=0; n<this.menuLength; n++) {
 			idArray[n] = Integer.valueOf(this.menu[n].id); 
+		}
+		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the id of the item you would like to update the availability of");
+	    	//int id = sc.nextInt();
+		int id = 0;
+		
+		//error checking for user input
+		boolean validId = false;
+		while (!validId) {
+			boolean integerId = false;
+			while (!integerId) {
+			    try {
+			    	id = Integer.parseInt(sc.nextLine());
+			    	integerId = true;
+			    } catch (NumberFormatException e) {
+			    	System.out.println("Error! Invalid id. Try again.");
+			    }
+			}
+			
+			for (int s = 0; s<this.menuLength; s++) {
+				if (id == idArray[s]) {
+					validId = true;
+				}
+			}
+			
+			if (!validId) {
+				System.out.println("Error! Invalid id. Try again.");
+			}
 		}
 		
 		//find the index of the item in this.menu
