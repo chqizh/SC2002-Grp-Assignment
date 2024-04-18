@@ -5,20 +5,20 @@ import Accounts.*;
 public class Branch {
     private String branchName;
     private String branchLocation;
-    private BranchManager branchManagers[];
+    private String branchManagerIDs[];
     private int numManagers;
-    private Staff staffList[];
+    private String staffIDs[];
     private int currentNumStaff;
     private int staffQuota;
     private Menu branchMenu;
     private OrderList branchOrders;
 
-    Branch (String branchName, String branchLocation, int staffQuota, Staff staffList[]){
+    Branch (String branchName, String branchLocation, int staffQuota, String staffIDs[]){
         this.branchName=branchName;
         this.branchLocation=branchLocation;
         this.staffQuota=staffQuota;
-        this.staffList=staffList;
-        this.currentNumStaff=staffList.length;
+        this.staffIDs=staffIDs;
+        this.currentNumStaff=staffIDs.length;
         setnumManagers(currentNumStaff);
     }
 
@@ -30,8 +30,8 @@ public class Branch {
         return branchLocation;
     }
 
-    public BranchManager[] getBranchManagers() {
-        return branchManagers;
+    public String[] getBranchManagers() {
+        return branchManagerIDs;
     }
 
     public void setnumManagers(int currentNumStaff){
@@ -53,15 +53,8 @@ public class Branch {
         return numManagers;
     }
 
-
-    public Staff[] getStaffList() {
-        return staffList;
-    }
-
-    public void setStaffList(Staff[] staffList) {
-        //TODO
-        this.staffList = staffList;
-        currentNumStaff++;
+    public String[] getStaffIDs() {
+        return staffIDs;
     }
 
     public int getCurNumStaff(){
