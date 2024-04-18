@@ -4,15 +4,13 @@ import java.util.Scanner;
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
 
-    Scanner sc =new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
-    public void addStaff(){
-
-        Staff newStaff = new Staff();
-
+    public void addStaff(String name, char gender, int age, String branchID){
+        Staff newStaff = new Staff(name, gender, age, branchID);
         newStaff.getBranchID();
-
     }
+
     public void displayStaffListAdmin (Staff staffList[]){
 
         int choice;
@@ -37,11 +35,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             case 2: 
                 System.out.println("Branch: ");
                 String branch = sc.nextLine();
-                for (Staff staff:staffList){
-                    if (staff.getBranchID()==branch){
+                for (Staff staff : staffList){
+                    if (staff.getBranchID() == branch){
                         System.out.println("Staff "+ i++);
                         System.out.println("Name: " + staff.getName());
-                        System.out.println("Role: " + staff.getRole());
+                        System.out.println("Role: " + staff.getUserType());
                         System.out.println("Age: "+getAge());
                         System.out.println("Gender: "+getGender());
                     }
@@ -62,13 +60,6 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             default:
                 break;
         }
-
-        
-
-
     }
-
-
-
 }
 
