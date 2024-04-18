@@ -5,18 +5,51 @@ import java.util.*;
 import Branch.*;
 import Customer.*;
 
-public class Staff extends Employee{
-    private int branchID;
+/**
+ * This class represents a staff member, which is a specific type of employee with a branch association.
+ */
+public class Staff extends Employee {
+    private String branchID;
 
-    public void setBranchID(int branchID) {
+    /**
+     * Constructs a new Staff member with the specified details.
+     *
+     * @param name     The name of the staff member.
+     * @param gender   The gender of the staff member, represented as a char ('M' or 'F').
+     * @param age      The age of the staff member.
+     * @param branchID The ID of the branch this staff member is associated with.
+     */
+    public Staff(String name, char gender, int age, String branchID) {
+        super(name, UserType.STAFF, gender, age);
+        this.branchID = branchID;
+    }
+
+    /**
+     * Gets the branch ID associated with this staff member.
+     *
+     * @return The branch ID.
+     */
+    public String getBranchID() {
+        return branchID;
+    }
+
+    /**
+     * Sets the branch ID for this staff member.
+     *
+     * @param branchID The new branch ID.
+     */
+    public void setBranchID(String branchID) {
         this.branchID = branchID;
     }
     
-    public int getBranchID() {
-        return this.branchID;
-    }
 
-    private Order getOrderFromBranch(Branches branches, int orderID){
+
+
+
+
+}
+
+/*     private Order getOrderFromBranch(Branches branches, int orderID){
         return branches.getSpecificBranch(branchID).getBranchOrders().getSpecificOrder(orderID);
     }
 
@@ -51,4 +84,4 @@ public class Staff extends Employee{
     public boolean processOrder(Branches branches, int orderID){
         return getOrderFromBranch(branches, orderID).updateOrderStatus();
     }
-}
+} */
