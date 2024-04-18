@@ -1,12 +1,29 @@
 package Accounts;
 
-import java.util.*;
-import Branch.*;
-import Customer.*;
+//import java.util.*;
+//import Branch.*;
+//import Customer.*;
 
 public interface IOrderProcess {
 
-	private Order getOrderFromBranch(Branches branches, int orderID) {
+	/**
+	 * 
+	 * @param orderID
+	 */
+	void processOrders(int orderID);
+
+	void viewNewOrders();
+
+	/**
+	 * 
+	 * @param orderID
+	 */
+	void viewOrder(int orderID);
+	
+
+
+}
+/* 	private Order getOrderFromBranch(Branches branches, int orderID) {
 		return branches.getSpecificBranch(branch.branchID).getBranchOrders().getSpecificOrder(orderID);
 	}
 
@@ -42,4 +59,4 @@ public void viewOrderDetails(Branches branches, int orderID){
 public boolean processOrder(Branches branches, int orderID){
 	return getOrderFromBranch(branches, orderID).updateOrderStatus();
 	}
-}
+} */

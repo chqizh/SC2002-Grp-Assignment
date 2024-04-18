@@ -8,7 +8,7 @@ import Customer.*;
 /**
  * This class represents a staff member, which is a specific type of employee with a branch association.
  */
-public class Staff extends Employee {
+public class Staff extends Employee implements IOrderProcess{
     private String branchID;
 
     /**
@@ -41,10 +41,19 @@ public class Staff extends Employee {
     public void setBranchID(String branchID) {
         this.branchID = branchID;
     }
-    
+
+    // From IOrderProcess
+	void processOrders(int orderID){
+
+    }
 
 
 
+	void viewNewOrders(){
+
+    }
+
+	void viewOrder(int orderID){}
 
 
 }
