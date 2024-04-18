@@ -13,7 +13,8 @@ public class FOMSApp{
     // Declaring ANSI_RESET so that we can reset the color 
     public static final String ANSI_RESET = "\u001B[0m"; 
     // Declaring the color theme
-    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_CYAN = "\u001B[36m";\
+    
     private static final String DATA_STORE = "data_store.ser";
     private Scanner sc;
     private InMemoryDatabase db;
@@ -49,7 +50,7 @@ public class FOMSApp{
             String password = sc.nextLine();
             // A method that returns the Account object after validation
             Account account = db.validateLogin(staffID, password);
-            
+
             if (account != null) {
                 UserType userType = account.getUserType();
                 switch (userType) {
