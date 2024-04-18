@@ -1,20 +1,17 @@
 package serializationtest;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InMemoryDatabase {
-    private List<Integer> TestTable;
+public class InMemoryDatabase implements Serializable{
+    private Animal animal;
 
-    public InMemoryDatabase() {
-        this.TestTable = new ArrayList<>();
+    InMemoryDatabase(){
+        animal = new Animal();
     }
 
-    public void addTestTable() {
-        this.TestTable.add(5);
-    }
-
-    public List<Integer> getTestTable() {
-        return this.TestTable;
+    public int getTestTable() {
+        return animal.test;
     }
 }

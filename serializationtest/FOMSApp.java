@@ -5,7 +5,7 @@ import java.util.Scanner;
 import java.io.*;
 
 
-public class FOMSApp{
+public class FOMSApp implements Serializable{
     private static final String DATA_STORE = "data_store.ser";
     private Scanner sc;
     private InMemoryDatabase db;
@@ -17,20 +17,29 @@ public class FOMSApp{
         try {
             db = (InMemoryDatabase) SerializationUtil.deserialize(DATA_STORE);
         } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace(); 
             db = new InMemoryDatabase(); // Create a new one if no data is found
         }
+        
+    }
+
+    public InMemoryDatabase getDB(){
+        return db;
     }
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
         app.run();
         app.sc.close();
+        System.out.printf("%d", app.getDB().getTestTable());
     }
 
     public void run() {
-        System.out.println("Welcome to the Fastfood Ordering Management System.");
-        System.out.println("Are you a customer? (Y/N)");
-        boolean isCustomer = (sc.next().charAt(0) == 'Y');
-        sc.nextLine(); // Consume the rest of the line
+        // Serialization
+        try {
+            SerializationUtil.serialize(db, DATA_STORE);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
