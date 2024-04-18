@@ -1,7 +1,6 @@
 package Branch;
 
 import Accounts.*;
-import Customer.*;
 
 public class Branch {
     private String branchName;
@@ -14,24 +13,39 @@ public class Branch {
     private Menu branchMenu;
     private OrderList branchOrders;
 
-    public String getBranchName() {
-        return branchName;
+    Branch (String branchName, String branchLocation, int staffQuota, Staff staffList[]){
+        this.branchName=branchName;
+        this.branchLocation=branchLocation;
+        this.staffQuota=staffQuota;
+        this.staffList=staffList;
+        this.currentNumStaff=staffList.length;
+        setnumManagers(currentNumStaff);
     }
 
-    public void setBranchName(String Name) {
-        this.branchName = Name;
+    public String getBranchName() {
+        return branchName;
     }
 
     public String getBranchLocation() {
         return branchLocation;
     }
 
-    public void setBranchLocation(String Location) {
-        this.branchLocation = Location;
-    }
-
     public BranchManager[] getBranchManagers() {
         return branchManagers;
+    }
+
+    public void setnumManagers(int currentNumStaff){
+        if (currentNumStaff>=1 && currentNumStaff<=4){
+            this.numManagers=1;
+        }
+
+        else if (currentNumStaff>=5 && currentNumStaff<=8){
+            this.numManagers=2;
+        }
+
+        else if (currentNumStaff>=9 && currentNumStaff<=15){
+            this.numManagers=4;
+        }
     }
 
 
@@ -53,11 +67,6 @@ public class Branch {
     public int getCurNumStaff(){
         return currentNumStaff;
     }
-
-    public void setCurNumStaff(int currentNumStaff){
-        this.currentNumStaff=currentNumStaff;
-    }
-
 
     public int getStaffQuota(){
         return staffQuota;

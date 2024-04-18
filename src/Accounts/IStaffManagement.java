@@ -13,6 +13,4 @@ public interface IStaffManagement {
 
 	void displayStaffList(Staff staffList[]);
 
-	void displayStaffListAdmin (Staff staffList[]);
-
 }
