@@ -6,7 +6,7 @@ import Branch.MenuItem;
 
 public class Order {
     private int orderID;
-    enum orderStatusFlags {
+    public enum orderStatusFlags {
         NEW,
         PROCESSED,
         PICKUP,
@@ -43,7 +43,23 @@ public class Order {
         numItems++;
     }
 
-    public String getOrderStatus(){
+    public orderStatusFlags getOrderStatus(){
+        return this.orderStatus;
+    }
+
+    public void setOrderStatus(orderStatusFlags Flag){
+        if (this.orderStatus != Flag){
+            this.orderStatus = Flag;
+        }
+        else {
+            System.out.println("Order is currently"  + this.orderStatus + "already.");
+        }
+
+    }
+
+    // wrote another setter and getter for the Flag class ^
+
+    public String checkOrderStatus(){
         if (orderStatus == orderStatusFlags.NEW){
             return "New order.";
         }

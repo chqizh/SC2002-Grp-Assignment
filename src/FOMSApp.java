@@ -77,6 +77,8 @@ public class FOMSApp {
 
     private void displayStaffInterface(Staff staff) {
         boolean keepRunning = true;
+        Branch branch = db.getBranchByBranchName(staff.getBranchID());
+
         while (keepRunning) {
             System.out.println("\n|| Welcome to STAFF Workspace || ");
             System.out.println("(1) Display New Orders ");
@@ -89,19 +91,19 @@ public class FOMSApp {
 
             switch (choice) {
                 case 1:
-                    staff.viewNewOrders();
+                    staff.viewNewOrders(branch);
                     break;
                 case 2:
                     System.out.println("Enter the order ID: ");
                     int orderID = sc.nextInt();
                     sc.nextLine();
-                    staff.viewOrder(orderID);
+                    staff.viewOrder(branch,orderID);
                     break;
                 case 3:
                     System.out.println("Enter the order ID to be processed: ");
                     int orderID_P = sc.nextInt();
                     sc.nextLine();
-                    staff.processOrders(orderID_P);
+                    staff.processOrders(branch,orderID_P);
                     break;
                 case 4:
                     System.out.println("Logging out...");
@@ -229,7 +231,7 @@ public class FOMSApp {
     private void displayCustomerInterface() {
         boolean keepRunning = true;
         Customer customer = new Customer();
-        
+
         while (keepRunning) {
             System.out.println("/n|| Welcome to MadDonkeys! ||");
             System.out.println("(1) Browse Menu");

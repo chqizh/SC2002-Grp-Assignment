@@ -4,6 +4,7 @@ import java.util.*;
 
 import Branch.*;
 import Customer.*;
+import Database.*;
 
 /**
  * This class represents a staff member, which is a specific type of employee with a branch association.
@@ -19,8 +20,8 @@ public class Staff extends Employee implements IOrderProcess{
      * @param age      The age of the staff member.
      * @param branchID The ID of the branch this staff member is associated with.
      */
-    public Staff(String name, char gender, int age, String branchID) {
-        super(name, UserType.STAFF, gender, age);
+    public Staff(String name, String staffID, char gender, int age, String branchID) {
+        super(name, staffID, UserType.STAFF, gender, age);
         this.branchID = branchID;
     }
 
@@ -43,54 +44,54 @@ public class Staff extends Employee implements IOrderProcess{
     }
 
     // From IOrderProcess
-	void processOrders(int orderID){
-
+    public void viewNewOrders(Branch branch) {
+        System.out.println("New Orders:");
+        branch.getBranchOrders().getOrderList().values().stream()
+                .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
+                .forEach(System.out::println); // Print each order (implement toString in Order for better output)
     }
 
-
-
-	void viewNewOrders(){
-
+    public void viewOrder(Branch branch, int orderID) {
+        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        if (order != null) {
+            System.out.println(order); // Assuming toString() in Order is overridden
+        } else {
+            System.out.println("Order ID " + orderID + " not found.");
+        }
     }
 
-	void viewOrder(int orderID){}
+    public void processOrders(Branch branch, int orderID) {
+        Scanner  sc = new Scanner(System.in);
+        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        if (order != null) {
+            System.out.println("Current status is " + order.getOrderStatus());
+            System.out.println("Pick update action:");
+            System.out.println("(1) Processed");
+            System.out.println("(2) Pickup");
+            System.out.println("(3) Completed");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    order.setOrderStatus(Order.orderStatusFlags.PROCESSED);
+                    break;
+                case 2:
+                    order.setOrderStatus(Order.orderStatusFlags.PICKUP);
+                    break;
+                case 3:
+                    order.setOrderStatus(Order.orderStatusFlags.COMPLETED);
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again.");
+                    break;
+            }
+            System.out.println("Order ID " + orderID + " has been updated to" + order.getOrderStatus());
+        } else {
+            System.out.println("Order ID " + orderID + " not found.");
+        }
+    }
 
 
 }
-
-/*     private Order getOrderFromBranch(Branches branches, int orderID){
-        return branches.getSpecificBranch(branchID).getBranchOrders().getSpecificOrder(orderID);
-    }
-
-    //Display the new orders. 
-    public void viewNewOrders(Branches branches, int orderID){
-       //TODO
-        while (true){
-            HashMap<Integer, Order> orderList = branches.getSpecificBranch(branchID).getBranchOrders().getOrderList();
-            // Goes through every order to find new orders.
-            for (Order order : orderList.values()){
-                if (order.getOrderStatus().equals("New order.")){
-                    //Prints every item in order.
-                    String format = "%-20s%-20s%s%n";
-                    System.out.printf(format, "Item Name", "Qty", "Total Price");
-                    for (int i = 0; i < order.getOrderItems().length; i++){
-                        // TODO printing function may need to move into a seperate class.
-                        // The second string begins after 20 characters. The dash means that the first string is left-justified.
-                        System.out.printf(format, order.getOrderItems()[i]);
-                    }
-                }
-            }
-        }
-    } 
-
-    //View the details of a particular order. 
-    public void viewOrderDetails(Branches branches, int orderID){
-        OrderDetails order[] = getOrderFromBranch(branches, orderID).getOrderItems();
-        //TODO printing function
-    }
-
-    //Process order: select order to process, update the status of the processed order from a new order to be “Ready to pickup”.
-    public boolean processOrder(Branches branches, int orderID){
-        return getOrderFromBranch(branches, orderID).updateOrderStatus();
-    }
-} */

@@ -1,17 +1,85 @@
 package Accounts;
+
+import java.util.*;
+
 import Branch.*;
+import Customer.*;
 
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchID;
 
-	public void setBranchID(String branchID) {
+	public BranchManager(String name, String staffID, char gender, int age, String branchID) {
+        super(name, staffID, UserType.BRANCH_MANAGER, gender, age);
         this.branchID = branchID;
-        throw new UnsupportedOperationException();
-	}
+    }
 
-	public String getBranchID() {
-		return this.branchID;
-	}
+    /**
+     * Gets the branch ID associated with this branch manager.
+     *
+     * @return The branch ID.
+     */
+    public String getBranchID() {
+        return branchID;
+    }
+
+    /**
+     * Sets the branch ID for this branch manager.
+     *
+     * @param branchID The new branch ID.
+     */
+    public void setBranchID(String branchID) {
+        this.branchID = branchID;
+    }
+
+    // From IOrderProcess
+    public void viewNewOrders(Branch branch) {
+        System.out.println("New Orders:");
+        branch.getBranchOrders().getOrderList().values().stream()
+                .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
+                .forEach(System.out::println); // Print each order (implement toString in Order for better output)
+    }
+
+    public void viewOrder(Branch branch, int orderID) {
+        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        if (order != null) {
+            System.out.println(order); // Assuming toString() in Order is overridden
+        } else {
+            System.out.println("Order ID " + orderID + " not found.");
+        }
+    }
+
+    public void processOrders(Branch branch, int orderID) {
+        Scanner sc = new Scanner(System.in);
+        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        if (order != null) {
+            System.out.println("Current status is " + order.getOrderStatus());
+            System.out.println("Pick update action:");
+            System.out.println("(1) Processed");
+            System.out.println("(2) Pickup");
+            System.out.println("(3) Completed");
+
+            int choice = sc.nextInt();
+            sc.nextLine();
+
+            switch (choice) {
+                case 1:
+                    order.setOrderStatus(Order.orderStatusFlags.PROCESSED);
+                    break;
+                case 2:
+                    order.setOrderStatus(Order.orderStatusFlags.PICKUP);
+                    break;
+                case 3:
+                    order.setOrderStatus(Order.orderStatusFlags.COMPLETED);
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again.");
+                    break;
+            }
+            System.out.println("Order ID " + orderID + " has been updated to" + order.getOrderStatus());
+        } else {
+            System.out.println("Order ID " + orderID + " not found.");
+        }
+    }
 
 	public void displayStaffList(Staff staffList[]){
 		int i=1;
