@@ -65,8 +65,12 @@ public class InMemoryDatabase implements Serializable{
     // To validate account
     public Employee validateEmployee(String staffID, String password) {
         Account account = getAccountByStaffID(staffID);
+        if (account == null){                     
+            System.out.println("StaffID not found!");
+            return null;
+            }
 
-        if (account != null && account.validateLogin(staffID,password)) {
+        else if (account.validateLogin(password)) {
             if (staffMap.containsKey(staffID)) {
                 return staffMap.get(staffID);
             } 

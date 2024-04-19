@@ -81,17 +81,17 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         }
     }
 
-	public void displayStaffList(Staff staffList[]){
-		int i=1;
-		
-		for (Staff staff : staffList){
-			System.out.println("Staff "+ i++);
-			System.out.println("Name: " + staff.getName());
-			System.out.println("Role: " + staff.getUserType());
-			System.out.println("Age: "+getAge());
-			System.out.println("Gender: "+getGender());
-		}
-	}
+
+// From IMenuManagement
+
+public void addMenuItem(Branch branch){};
+
+public void removeMenuItem(Branch branch){};
+
+public void editMenuItem(Branch branch){};
+
+// From IStaffManagement
+	public void displayStaffList(){}
 
 
 }
