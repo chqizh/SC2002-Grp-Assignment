@@ -18,10 +18,10 @@ public class Branch implements Serializable {
     private OrderList branchOrders;
     private boolean operating;
 
-    Branch (String branchName, String branchLocation, int staffQuota){
-        this.branchName=branchName;
-        this.branchLocation=branchLocation;
-        this.staffQuota=staffQuota;
+    public Branch (String branchName, String branchLocation, int staffQuota){
+        this.branchName = branchName;
+        this.branchLocation = branchLocation;
+        this.staffQuota = staffQuota;
     }
     
     public String getBranchName() {

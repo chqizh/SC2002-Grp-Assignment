@@ -1,39 +1,78 @@
 package Accounts;
 import Branch.*;
+import Database.InMemoryDatabase;
+
 import java.util.Scanner; 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
 
     Scanner sc = new Scanner(System.in);
 
+    // From IAdminManagement
+    public void addStaff(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db){
+        Staff newStaff = new Staff(name, staffID, gender, age, branchID);
+        Account newAccount = new Account(staffID);
+        db.addStaff(newStaff);
+        db.addAccount(newAccount);
+    };
 
-// From IAdminManagement
+    public void removeStaff(String staffID, InMemoryDatabase db){
+        db.removeStaff(staffID);
+    };
 
-public void addStaff(){
-    Staff newStaff = new Staff(name, staffID, gender, age, branchID);
-    Account newAccount = new Account(getStaffID());
+    public void editStaff(String staffID, InMemoryDatabase db){
+        System.out.println("What would you like to edit?");
+        System.out.println("(1) Name");
+        System.out.println("(2) Gender");
+        System.out.println("(3) Age");
+        Staff staff = db.getStaff(staffID);
+        try {
+            int choice = sc.nextInt();
+            switch (choice){
+                case 1:
+                    System.out.println("Please enter a new name.");
+                    String name = sc.next();
+                    staff.setName(name);
+                    break;
+                case 2:
+                    System.out.println("Please enter a new gender.");
+                    char gender = sc.next().charAt(0);
+                    staff.setGender(gender);
+                    break;
+                case 3:
+                    System.out.println("Please enter a new age.");
+                    int age = sc.nextInt();
+                    staff.setAge(age);
+                    break;
+                default:
+                    System.out.println("Invalid integer.");
+                    break;
+            }
+        }
+        catch (Exception e){
+            System.out.println("Invalid integer.");
+        }
+    };
+
+    public void assignManager(){};
+
+    public void transfer(){};
+
+    public void addPayment(){};
+
+    public void removePayment(){};
+
+    public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db){
+        Branch newBranch = new Branch(branchName, branchLocation, staffQuota);
+        db.addBranch(newBranch);
+    };
+
+    public void removeBranch(String branchName, InMemoryDatabase db){
+        db.removeBranch(branchName);
+    };
 
 
-};
-
-public void editStaff(){};
-
-public void removeStaff(){};
-
-public void assignManager(){};
-
-public void transfer(){};
-
-public void addPayment(){};
-
-public void removePayment(){};
-
-public void addBranch(){};
-
-public void removeBranch(){};
-
-
-// From IStaffManagement
+    // From IStaffManagement
     public void displayStaffListAdmin (Staff staffList[]){
 
         int choice;

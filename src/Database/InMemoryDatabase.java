@@ -26,12 +26,24 @@ public class InMemoryDatabase implements Serializable{
         this.accounts.put(account.getStaffID(), account);
     }
 
+    public void removeAccount(String accountID) {
+        this.accounts.remove(accountID);
+    }
+
     public void addBranch(Branch branch) {
         this.branches.put(branch.getBranchName(), branch);
     }
 
+    public void removeBranch(String branchName) {
+        this.branches.remove(branchName);
+    }
+
     public void addStaff(Staff staff) {
         this.staffMap.put(staff.getStaffID(), staff);
+    }
+
+    public void removeStaff(String staffID){
+        this.staffMap.remove(staffID);
     }
 
     public void addBranchManager(BranchManager branchManager) {
