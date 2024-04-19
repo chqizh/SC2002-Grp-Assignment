@@ -3,6 +3,7 @@ package Accounts;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Scanner;
 
 /**
  * This class represents an account for a user with a staff ID, password, and role type.
@@ -18,9 +19,9 @@ public class Account {
      * @param password The password for this account.
      * @param userType The UserType representing the role of the user.
      */
-    public Account(String staffID, String password) {
+    public Account(String staffID){
         this.staffID = staffID;
-        this.passwordHash = hashPassword(password);
+        this.passwordHash = hashPassword("password");
     }
 
     /**
@@ -71,7 +72,6 @@ public class Account {
             byte[] hash = digest.digest(password.getBytes());
             return Base64.getEncoder().encodeToString(hash);
         } catch (NoSuchAlgorithmException e) {
-            // Ideally, handle this exception in a way that doesn't expose details to the caller.
             throw new RuntimeException("Could not hash password", e);
         }
     }
@@ -83,7 +83,14 @@ public class Account {
      * @param password The password to validate.
      * @return true if the credentials match, false otherwise.
      */
-    public boolean validateLogin(String staffID, String password) {
-        return this.passwordHash.equals(hashPassword(password)) && this.staffID.equals(staffID);
+    public boolean validateLogin(String password) {
+        String hashedInputPassword = hashPassword(password);
+
+        if (this.passwordHash.equals(hashedInputPassword))
+            return true;
+        else {
+            System.out.println("Wrong Password!");
+            return false;
+        }
     }
 }

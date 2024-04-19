@@ -1,11 +1,13 @@
 package Accounts;
 
+import Branch.*;
+
 public interface IMenuManagement {
 
-	void addMenu();
+	void addMenuItem(Branch branch);
 
-	void removeMenu();
+	void removeMenuItem(Branch branch);
 
-	void editMenu();
+	void editMenuItem(Branch branch);
 
 }

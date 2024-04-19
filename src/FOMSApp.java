@@ -48,6 +48,7 @@ public class FOMSApp {
             String staffID = sc.nextLine();
             System.out.println("Enter your password: ");
             String password = sc.nextLine();
+
             // A method that returns the Account object after validation
             Employee employee = db.validateEmployee(staffID, password);
 
@@ -117,6 +118,7 @@ public class FOMSApp {
     }
 
     private void displayBranchManagerInterface(BranchManager manager) {
+        Branch branch = db.getBranchByBranchName(manager.getBranchID());
         boolean keepRunning = true;
         while (keepRunning) {
             System.out.println("\n|| Welcome to the BRANCH MANAGER Workspace ||");
@@ -135,31 +137,31 @@ public class FOMSApp {
             sc.nextLine(); // Consume the newline
             switch (choice) {
                 case 1:
-                    manager.viewNewOrders();
+                    manager.viewNewOrders(branch);
                     break;
                 case 2:
                     System.out.println("Enter order ID: ");
                     int orderID = sc.nextInt();
                     sc.nextLine(); // Consume the newline
-                    manager.viewOrder(orderID);
+                    manager.viewOrder(branch,orderID);
                     break;
                 case 3:
                     System.out.println("Enter order ID to process: ");
                     int orderIdToProcess = sc.nextInt();
                     sc.nextLine(); // Consume the newline
-                    manager.processOrders(orderIdToProcess);
+                    manager.processOrders(branch,orderIdToProcess);
                     break;
                 case 4:
                     manager.displayStaffList();
                     break;
                 case 5:
-                    manager.addMenuItem();
+                    manager.addMenuItem(branch);
                     break;
                 case 6:
-                    manager.editMenuItem();
+                    manager.editMenuItem(branch);
                     break;
                 case 7:
-                    manager.removeMenuItem();
+                    manager.removeMenuItem(branch);
                     break;
                 case 8:
                     System.out.println("Logging out...");

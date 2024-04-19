@@ -4,7 +4,6 @@ import java.util.*;
 
 import Branch.*;
 import Customer.*;
-import Database.*;
 
 /**
  * This class represents a staff member, which is a specific type of employee with a branch association.
@@ -91,7 +90,7 @@ public class Staff extends Employee implements IOrderProcess{
         } else {
             System.out.println("Order ID " + orderID + " not found.");
         }
+        sc.close();
     }
-
 
 }
