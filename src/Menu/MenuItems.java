@@ -71,6 +71,6 @@ public class MenuItems implements Serializable{
 
 	public void displayMenu(){
 		MenuDisplay display = new MenuDisplay();
-		display.displayMenu(menu);
+		display.displayMenu();
 	}
 }
