@@ -1,23 +1,27 @@
 package Customer;
-import Branch.Menu;
-import OldMenu.MenuItem;
-
+import Menu.MenuItem;
+import Menu.MenuDisplay;
+import java.util.ArrayList;
 import java.util.List;
 
 import Branch.Branch;
 
 public class Customer{
     private Branch selectedBranch;
-    private List<MenuItem>cart;
+    private ArrayList<MenuItem>cart;
     private static int nextOrderID =1;
     private List<Order> orders;
 
+    public Customer(){
+        ArrayList<MenuItem> cart = new ArrayList<>();
+    }
     public void selectBranch(Branch branch){
         this.selectedBranch = branch;
     }
 
-    public void browseMenu(Menu menu){
-        menu.printMenuItems();
+    public void browseMenu(){
+        MenuDisplay menu= new MenuDisplay();
+        menu.displayMenu();
     }
 
     public void addToCart(MenuItem item){
