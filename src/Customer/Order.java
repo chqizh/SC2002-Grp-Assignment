@@ -5,17 +5,19 @@ import java.util.List;
 import Branch.MenuItem;
 
 public class Order {
-    private int orderID;
     public enum orderStatusFlags {
         NEW,
         PROCESSED,
         PICKUP,
         COMPLETED
     }
+
+    private int orderID;
     private orderStatusFlags orderStatus;
     private int branchID;
     private List<OrderDetails> orderItems;
     private int numItems;
+    private static int nextOrderID = 1;
 
     public Order(int orderID, int branchID){
         this.orderID = orderID;
@@ -24,14 +26,15 @@ public class Order {
         //this.orderItems = new OrderDetails[1000];
         this.orderItems = new ArrayList<>();
         this.numItems = 0;
+        
+    }
+
+    public int generateOrderID (){
+        return Order.nextOrderID++;
     }
 
     public void setOrderID(int orderID){
         this.orderID = orderID;
-    }
-
-    public int getOrderID() {
-        return orderID;
     }
 
     public List<OrderDetails> getOrderItems() {
