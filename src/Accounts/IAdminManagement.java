@@ -1,23 +1,24 @@
 package Accounts;
 
+import Database.InMemoryDatabase;
+
 public interface IAdminManagement {
+	public void addStaff(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db);
 
-	void addStaff();
+	public void removeStaff(String staffID, InMemoryDatabase db);
+	
+	public void editStaff(String staffID, InMemoryDatabase db);
 
-	void editStaff();
+	public void assignManager();
 
-	void removeStaff();
+	public void transfer();
 
-	void assignManager();
+	public void addPayment();
 
-	void transfer();
+	public void removePayment();
 
-	void addPayment();
+	public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db);
 
-	void removePayment();
-
-	void addBranch();
-
-	void removeBranch();
+	public void removeBranch(String branchName, InMemoryDatabase db);
 
 }
