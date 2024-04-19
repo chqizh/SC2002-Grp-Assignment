@@ -2,7 +2,7 @@ package Customer;
 
 import java.util.List;
 
-import Branch.MenuItem;
+import Menu.MenuItem;
 
 public class OrderDetails {
     private int orderId;

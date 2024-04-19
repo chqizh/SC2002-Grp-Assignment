@@ -1,6 +1,6 @@
 package Customer;
 import Branch.Menu;
-import Branch.MenuItem;
+import Menu.MenuItem;
 
 import java.util.List;
 
