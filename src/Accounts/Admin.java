@@ -6,11 +6,34 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
     Scanner sc = new Scanner(System.in);
 
-    public void addStaff(String name, char gender, int age, String branchID){
-        Staff newStaff = new Staff(name, gender, age, branchID);
-        newStaff.getBranchID();
-    }
 
+// From IAdminManagement
+
+public void addStaff(){
+    Staff newStaff = new Staff(name, staffID, gender, age, branchID);
+    Account newAccount = new Account(getStaffID());
+
+
+};
+
+public void editStaff(){};
+
+public void removeStaff(){};
+
+public void assignManager(){};
+
+public void transfer(){};
+
+public void addPayment(){};
+
+public void removePayment(){};
+
+public void addBranch(){};
+
+public void removeBranch(){};
+
+
+// From IStaffManagement
     public void displayStaffListAdmin (Staff staffList[]){
 
         int choice;
