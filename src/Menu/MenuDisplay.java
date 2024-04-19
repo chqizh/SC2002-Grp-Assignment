@@ -5,10 +5,10 @@ import DataPersistence.SerializationUtil;
 
 public class MenuDisplay {
     @SuppressWarnings("unchecked")
-	public void displayMenu(ArrayList<MenuItem> menu) {
+	public void displayMenu() {
         // Deserialize the menu from the file
         try {
-            menu = (ArrayList<MenuItem>) SerializationUtil.deserialize("menu.ser");
+            ArrayList<MenuItem> menu = (ArrayList<MenuItem>) SerializationUtil.deserialize("menu.ser");
             //System.out.println("Menu deserialized successfully.");
         } catch (IOException | ClassNotFoundException e) {
             //System.err.println("Deserialization failed: " + e.getMessage());
