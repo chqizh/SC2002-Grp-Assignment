@@ -78,7 +78,6 @@ public class Customer{
         }
     }
     
-
     public int generateOrderID(){
         return nextOrderID++;
     }

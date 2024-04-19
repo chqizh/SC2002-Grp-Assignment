@@ -2,7 +2,7 @@ package Customer;
 import java.util.ArrayList;
 import java.util.List;
 
-import Branch.MenuItem;
+import Menu.MenuItem;
 
 public class Order {
     public enum orderStatusFlags {
@@ -15,18 +15,15 @@ public class Order {
     private int orderID;
     private orderStatusFlags orderStatus;
     private int branchID;
-    private List<OrderDetails> orderItems;
-    private int numItems;
+    private ArrayList<MenuItem> orderItems;
+    //private int numItems;
     private static int nextOrderID = 1;
 
-    public Order(int orderID, int branchID){
+    public Order(int branchID){
         this.orderID = orderID;
         this.orderStatus = orderStatusFlags.PROCESSED;
         this.branchID = branchID;
-        //this.orderItems = new OrderDetails[1000];
         this.orderItems = new ArrayList<>();
-        this.numItems = 0;
-        
     }
 
     public int generateOrderID (){
@@ -37,13 +34,8 @@ public class Order {
         this.orderID = orderID;
     }
 
-    public List<OrderDetails> getOrderItems() {
+    public List<MenuItem> getOrderItems() {
         return orderItems;
-    }
-    
-    public void placeOrder(OrderDetails orderDetail){
-        this.orderItems.add(orderDetail);
-        numItems++;
     }
 
     public orderStatusFlags getOrderStatus(){
@@ -57,7 +49,6 @@ public class Order {
         else {
             System.out.println("Order is currently"  + this.orderStatus + "already.");
         }
-
     }
 
     // wrote another setter and getter for the Flag class ^
