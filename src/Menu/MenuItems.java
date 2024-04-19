@@ -6,7 +6,7 @@ import java.util.*;
 import DataPersistence.SerializationUtil;
 
 public class MenuItems implements Serializable{
-	private static final long serialVersionUID = 1L;
+	//private static final long serialVersionUID = 1L;
 	ArrayList<MenuItem> menu;
 	EditMenu editmenu = new EditMenu(menu);
 	
