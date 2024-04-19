@@ -16,6 +16,7 @@ public class Branch implements Serializable {
     private int staffQuota;
     private ArrayList <MenuItem> branchMenu = new ArrayList <MenuItem> ();
     private OrderList branchOrders;
+    private boolean operating;
 
     Branch (String branchName, String branchLocation, int staffQuota){
         this.branchName=branchName;

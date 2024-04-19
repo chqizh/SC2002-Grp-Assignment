@@ -23,4 +23,9 @@ public class Branches{
     public Branch getSpecificBranch(int branchID){
         return branchesList.get(branchID);
     }
+
+    public boolean closeBranch (int branchID, Branch branch){
+        if (branchesList.remove(branchID,branch)==true)return true;
+        else return false;
+    }
 }
