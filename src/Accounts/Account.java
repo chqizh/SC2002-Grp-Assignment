@@ -10,7 +10,6 @@ import java.util.Base64;
 public class Account {
     private String staffID;
     private String passwordHash;
-    private UserType userType;
 
     /**
      * Constructor that initializes an account with a specified staff ID, password, and user type.
@@ -19,12 +18,11 @@ public class Account {
      * @param password The password for this account.
      * @param userType The UserType representing the role of the user.
      */
-    public Account(String staffID, String password, UserType userType) {
+    public Account(String staffID, String password) {
         this.staffID = staffID;
         this.passwordHash = hashPassword(password);
-        this.userType = userType;
     }
-    
+
     /**
      * Gets the staff ID.
      * 
@@ -59,31 +57,6 @@ public class Account {
      */
     public void setPassword(String password) {
         this.passwordHash = hashPassword(password);
-    }
-
-    /**
-     * Gets the user type.
-     * 
-     * @return The UserType representing the role of the user.
-     */
-    public UserType getUserType() {
-        return userType;
-    }
-
-    /**
-     * Sets the user type based on a given code if the code is valid.
-     * 
-     * @param userTypeCode The code that represents a UserType.
-     * @return true if the user type is valid and set, false otherwise.
-     */
-    public boolean setUserType(char userTypeCode) {
-        UserType userType = UserType.fromCode(userTypeCode);
-        if (userType != null) {
-            this.userType = userType;
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**
