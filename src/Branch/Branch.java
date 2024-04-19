@@ -1,27 +1,28 @@
 package Branch;
 
-import Accounts.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-public class Branch {
+import Menu.*;
+//import Accounts.*;
+
+public class Branch implements Serializable {
     private String branchName;
     private String branchLocation;
-    private String branchManagerIDs[];
+    private ArrayList <String> branchManagerIDs = new ArrayList <String> ();
     private int numManagers;
-    private String staffIDs[];
+    private ArrayList <String> staffIDs = new ArrayList <String> ();
     private int currentNumStaff;
     private int staffQuota;
-    private Menu branchMenu;
+    private ArrayList <MenuItem> branchMenu = new ArrayList <MenuItem> ();
     private OrderList branchOrders;
 
-    Branch (String branchName, String branchLocation, int staffQuota, String staffIDs[]){
+    Branch (String branchName, String branchLocation, int staffQuota){
         this.branchName=branchName;
         this.branchLocation=branchLocation;
         this.staffQuota=staffQuota;
-        this.staffIDs=staffIDs;
-        this.currentNumStaff=staffIDs.length;
-        setnumManagers(currentNumStaff);
     }
-
+    
     public String getBranchName() {
         return branchName;
     }
@@ -30,7 +31,7 @@ public class Branch {
         return branchLocation;
     }
 
-    public String[] getBranchManagers() {
+    public ArrayList<String> getBranchManagers() {
         return branchManagerIDs;
     }
 
@@ -48,12 +49,11 @@ public class Branch {
         }
     }
 
-
     public int getnumManagers(){
         return numManagers;
     }
 
-    public String[] getStaffIDs() {
+    public ArrayList<String> getStaffIDs() {
         return staffIDs;
     }
 
@@ -65,16 +65,8 @@ public class Branch {
         return staffQuota;
     }
 
-    public void setStaffQuota(int staffQuota){
-        this.staffQuota=staffQuota;
-    }
-
-    public Menu getBranchMenu() {
+    public ArrayList <MenuItem> getBranchMenu() {
         return branchMenu;
-    }
-
-    public void setBranchMenu(Menu branchMenu) {
-        this.branchMenu = branchMenu;
     }
 
     public OrderList getBranchOrders() {
