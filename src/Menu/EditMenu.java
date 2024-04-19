@@ -3,13 +3,13 @@ package Menu;
 import java.io.*;
 import java.util.*;
 
-public class Menu {
+public class EditMenu {
 	
 	MenuItems menu[] = new MenuItems[99];
 	File menuFile = new File("Menu.txt");
 	int menuLength;
 	
-	public Menu() {
+	public EditMenu() {
 		//initialise this.menuLength with BufferedReader
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(this.menuFile));
