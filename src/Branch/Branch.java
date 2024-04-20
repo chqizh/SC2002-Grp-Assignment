@@ -7,6 +7,8 @@ import Menu.*;
 //import Accounts.*;
 
 public class Branch implements Serializable {
+    private int branchID;
+    private static int nextBranchID=1;
     private String branchName;
     private String branchLocation;
     private ArrayList <String> branchManagerIDs = new ArrayList <String> ();
@@ -18,9 +20,15 @@ public class Branch implements Serializable {
     private OrderList branchOrders;
 
     public Branch (String branchName, String branchLocation, int staffQuota){
+        this.branchID = nextBranchID;
         this.branchName = branchName;
         this.branchLocation = branchLocation;
         this.staffQuota = staffQuota;
+        nextBranchID++;
+    }
+
+    public int getbranchID(){
+        return branchID;
     }
     
     public String getBranchName() {
