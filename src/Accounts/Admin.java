@@ -54,13 +54,24 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void assignManager(){};
+    public void assignManager(String staffID, String branchName, InMemoryDatabase db){
+        if (db.getStaff(staffID) == null) {
+            System.out.println("Manager does not exist. Manager assignment unsuccessful.");
+        }
+        else if (db.getBranchByBranchName(branchName) == null) {
+            System.out.println("Manager does not exist. Manager assignment unsuccessful.");
+        }
+        else {
+            db.getBranchByBranchName(branchName).addBranchManager(staffID);
+            System.out.printf("Successfully assigned Branch Manager (%s) to Branch (%s).", staffID, branchName);
+        }
+    };
 
-    public void transfer(){};
+    public void transfer(InMemoryDatabase db){};
 
-    public void addPayment(){};
+    public void addPayment(InMemoryDatabase db){};
 
-    public void removePayment(){};
+    public void removePayment(InMemoryDatabase db){};
 
     public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db){
         Branch newBranch = new Branch(branchName, branchLocation, staffQuota);

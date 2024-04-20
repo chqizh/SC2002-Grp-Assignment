@@ -2,6 +2,7 @@ package Branch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import Menu.*;
 //import Accounts.*;
@@ -12,13 +13,13 @@ public class Branch implements Serializable {
     private String branchName;
     private String branchLocation;
     private ArrayList <String> branchManagerIDs = new ArrayList <String> ();
-    private int numManagers;
+    private int numManagers = 1;
     private ArrayList <String> staffIDs = new ArrayList <String> ();
     private int currentNumStaff;
     private int staffQuota;
     private ArrayList <MenuItem> branchMenu = new ArrayList <MenuItem> ();
     private OrderList branchOrders;
-
+    
     public Branch (String branchName, String branchLocation, int staffQuota){
         this.branchID = nextBranchID;
         this.branchName = branchName;
@@ -42,6 +43,37 @@ public class Branch implements Serializable {
     public ArrayList<String> getBranchManagers() {
         return branchManagerIDs;
     }
+
+    public boolean addBranchManager(String staffID){
+        if (branchManagerIDs.contains(staffID)){
+            System.out.printf("Branch already contains Branch Manager with staffID %s.", staffID);
+            return false;            
+        }
+        else if (branchManagerIDs.size() >= numManagers){
+            System.out.printf("Branch already maximum number of Branch Managers.", staffID);
+            return false;
+        }
+        else {
+            branchManagerIDs.add(staffID);
+            return true;
+        }
+    }
+
+    public boolean removeBranchManager(String staffID){
+        if (branchManagerIDs.contains(staffID)){
+            System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
+            branchManagerIDs.remove(staffID);
+            System.out.printf("Number of Branch Managers is below required amount. Please add another Branch Manager.", staffID);
+            Scanner sc = new Scanner(System.in);
+            String newBranchManager = sc.next();
+            addBranchManager(newBranchManager);
+            return true;            
+        }
+        else {
+            return false;
+        }
+    }
+
 
     public void setnumManagers(int currentNumStaff){
         if (currentNumStaff>=1 && currentNumStaff<=4){
