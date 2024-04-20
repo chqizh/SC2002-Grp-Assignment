@@ -10,10 +10,28 @@ public class EditMenu implements Serializable{
 		this.menu = menu;
 	}
 
+	public int getIntegerFromUser() {
+		Scanner sc = new Scanner(System.in);
+		int userInput = 0;
+		
+		boolean integerUserInput = false;
+		while (!integerUserInput) {
+		    try {
+		    	userInput = Integer.parseInt(sc.nextLine());
+		    	integerUserInput = true;
+		    } catch (NumberFormatException e) {
+		    	System.out.println("Error! Please enter a number. Try again.");
+		    }
+		}		
+		
+		return userInput;
+	}
+
 	public MenuItem addItems(){
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter item ID:");
-		int itemId = sc.nextInt();
+		
+		int itemId = this.getIntegerFromUser();
 		sc.nextLine();
 
 	    System.out.println("Enter menu item name:");
@@ -38,7 +56,7 @@ public class EditMenu implements Serializable{
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
-        int id = sc.nextInt();
+        int id = this.getIntegerFromUser();
 		sc.nextLine();
         
         boolean found = false;
