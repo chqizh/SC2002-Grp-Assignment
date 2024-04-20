@@ -1,7 +1,8 @@
 package Customer;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import Branch.OrderList;
 import Menu.MenuItem;
 
 public class Order {
@@ -18,6 +19,7 @@ public class Order {
     private ArrayList<MenuItem> orderItems;
     //private int numItems;
     private static int nextOrderID = 1;
+    private OrderList orderList;
 
     public Order(int branchID){
         this.orderID = orderID;
@@ -84,6 +86,10 @@ public class Order {
             return true;
         }
         return false;
+    }
+
+    public void placeOrder(Order order) throws IOException{
+        orderList.addOrder(order);
     }
     
 }
