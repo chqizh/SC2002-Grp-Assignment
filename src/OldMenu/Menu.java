@@ -131,6 +131,15 @@ public class Menu {
 			}
 		}
 	}
+
+	public void resetId() {
+		System.out.println("You have chosen to reset the id of all menu items");
+		this.initialiseMenuFromFile();
+		for (int i = 0; i<this.menuLength; i++) {
+			this.menu[i].id = String.valueOf(i+1);
+		}
+		this.writeToFile();
+	}
 	
 	public void addItems() {
 		System.out.println("You have chosen to add items to the menu.");
