@@ -70,7 +70,7 @@ public class Menu {
 	
 	public int getIdFromUserAndMatchWithIdFromMenu() {
 		Scanner sc = new Scanner(System.in);
-	    //int id = sc.nextInt();
+	    	//int id = sc.nextInt();
 		int id = 0;
 		
 		//error checking for user input
@@ -131,6 +131,15 @@ public class Menu {
 			}
 		}
 	}
+
+	public void resetId() {
+		System.out.println("You have chosen to reset the id of all menu items");
+		this.initialiseMenuFromFile();
+		for (int i = 0; i<this.menuLength; i++) {
+			this.menu[i].id = String.valueOf(i+1);
+		}
+		this.writeToFile();
+	}
 	
 	public void addItems() {
 		System.out.println("You have chosen to add items to the menu.");
@@ -151,7 +160,7 @@ public class Menu {
 		}
 		
 		System.out.println("How many menu items would you like to add?");
-	    int numberToAdd = this.getIntegerFromUser();
+	    	int numberToAdd = this.getIntegerFromUser();
 	      
 		for (int i=0; i<numberToAdd; i++) {
 			MenuItems item = new MenuItems();
@@ -189,7 +198,7 @@ public class Menu {
 		this.initialiseMenuFromFile();
 		
 		System.out.println("How many menu items would you like to delete?");
-	    int numberToDelete = this.getIntegerFromUser();
+	    	int numberToDelete = this.getIntegerFromUser();
 		
 		for (int i=0; i<numberToDelete; i++) {
 			
@@ -232,9 +241,9 @@ public class Menu {
 		
 		Scanner sc2 = new Scanner(System.in);
 		System.out.printf("Old name is %s, please enter new name:", this.menu[match].name);
-	    String newName = sc2.nextLine();	
+	    	String newName = sc2.nextLine();	
 		
-	    //update name
+	    	//update name
 		this.menu[match].name = newName;
 		
 		//update itemInfo
@@ -266,9 +275,9 @@ public class Menu {
 		
 		Scanner sc2 = new Scanner(System.in);
 		System.out.printf("Old price is %s, please enter new price:", this.menu[match].price);
-	    String newPrice = sc2.nextLine();
+	    	String newPrice = sc2.nextLine();
 		
-	    //update price
+	    	//update price
 		this.menu[match].price = newPrice;
 		
 		//update itemInfo
@@ -300,9 +309,9 @@ public class Menu {
 		
 		Scanner sc2 = new Scanner(System.in);
 		System.out.printf("Old branch is %s, please enter new branch:", this.menu[match].branch);
-	    String newBranch = sc2.nextLine();
+	    	String newBranch = sc2.nextLine();
 		
-	    //update branch
+	    	//update branch
 		this.menu[match].branch = newBranch;
 		
 		//update itemInfo
@@ -334,9 +343,9 @@ public class Menu {
 		
 		Scanner sc2 = new Scanner(System.in);
 		System.out.printf("Old category is %s, please enter new category:", this.menu[match].category);
-	    String newCategory = sc2.nextLine();
+	    	String newCategory = sc2.nextLine();
 		
-	    //update category
+	    	//update category
 		this.menu[match].category = newCategory;
 
 		//update itemInfo
@@ -368,9 +377,9 @@ public class Menu {
 		
 		Scanner sc2 = new Scanner(System.in);
 		System.out.printf("Old availability is %s, please enter new availability:", this.menu[match].availability);
-	    String newAvailability = sc2.nextLine();
+	    	String newAvailability = sc2.nextLine();
 		
-	    //update availability
+	    	//update availability
 		this.menu[match].availability = newAvailability;
 		
 		//update itemInfo
