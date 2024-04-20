@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Branch.OrderList;
 import Menu.MenuItem;
+import Branch.Branch;
 
 public class Order {
     public enum orderStatusFlags {
@@ -20,6 +21,7 @@ public class Order {
     //private int numItems;
     private static int nextOrderID = 1;
     private OrderList orderList;
+    public Branch branch;
 
     public Order(int branchID){
         this.orderID = orderID;
@@ -89,7 +91,6 @@ public class Order {
     }
 
     public void placeOrder(Order order) throws IOException{
-        orderList.addOrder(order);
+        branch.getBranchOrders().addOrder(order);
     }
-    
 }
