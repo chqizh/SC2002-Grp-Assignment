@@ -1,11 +1,24 @@
 package Branch;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
+import DataPersistence.SerializationUtil;
 
-public class Branches{
+public class Branches implements Serializable{
     // Create a HashMap with keys and values (branchID, branch)
     // Basically like a dictionary in python.
     private static HashMap<Integer, Branch> branchesList = new HashMap<Integer, Branch>();
+
+    public Branches() throws IOException{
+        try{
+            branchesList=(HashMap<Integer, Branch>) SerializationUtil.deserialize("Branches.ser");
+            //System.out.println("Menu deserialized successfully.");
+        }
+        catch( IOException | ClassNotFoundException e ){
+            branchesList = new HashMap<Integer, Branch>();
+        }
+    }
 
     public void setBranchesList(HashMap<Integer, Branch> branchesList) {
         Branches.branchesList = branchesList;
@@ -15,17 +28,25 @@ public class Branches{
         return branchesList;
     }
 
-    public boolean insertBranch(int branchID, Branch branch){
-        if (branchesList.put(branchID, branch) == null) return true;
-        else return false;
-    }
-
     public Branch getSpecificBranch(int branchID){
         return branchesList.get(branchID);
     }
 
-    public boolean closeBranch (int branchID, Branch branch){
-        if (branchesList.remove(branchID,branch)==true)return true;
-        else return false;
+    public boolean insertBranch(int branchID, Branch branch) throws IOException{
+        boolean flag = false;
+        if (branchesList.put(branch.getbranchID(), branch) == null){
+            flag = true;
+        }
+        SerializationUtil.serialize(branchesList, "Branches.ser");
+        return flag;
+    }
+
+    public boolean closeBranch (int branchID) throws IOException{
+        boolean flag = true;
+        if (branchesList.remove(branchID)==null){
+            flag = false;
+        }
+        SerializationUtil.serialize(branchesList, "Branches.ser");
+        return flag;
     }
 }
