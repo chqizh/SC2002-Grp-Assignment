@@ -9,13 +9,13 @@ public interface IAdminManagement {
 	
 	public void editStaff(String staffID, InMemoryDatabase db);
 
-	public void assignManager();
+	public void assignManager(String staffID, String branchName, InMemoryDatabase db);
 
-	public void transfer();
+	public void transferEmployee(String staffID, String branchName, InMemoryDatabase db);
 
-	public void addPayment();
+	public void addPaymentMethod(String branchName, InMemoryDatabase db);
 
-	public void removePayment();
+	public void removePaymentMethod(String branchName, InMemoryDatabase db);
 
 	public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db);
 

@@ -6,29 +6,29 @@ import Branch.*;
 import Customer.*;
 
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
-    private String branchID;
+    private String branchName;
 
 	public BranchManager(String name, String staffID, char gender, int age, String branchID) {
         super(name, staffID, UserType.BRANCH_MANAGER, gender, age);
-        this.branchID = branchID;
+        this.branchName = branchID;
     }
 
     /**
-     * Gets the branch ID associated with this branch manager.
+     * Gets the branch name associated with this branch manager.
      *
-     * @return The branch ID.
+     * @return The branch name.
      */
-    public String getBranchID() {
-        return branchID;
+    public String getBranchName() {
+        return branchName;
     }
 
     /**
-     * Sets the branch ID for this branch manager.
+     * Sets the branch name for this branch manager.
      *
-     * @param branchID The new branch ID.
+     * @param branchName The new branch name.
      */
-    public void setBranchID(String branchID) {
-        this.branchID = branchID;
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
     }
 
     // From IOrderProcess
@@ -83,12 +83,11 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
 
 
 // From IMenuManagement
+    public void addMenuItem(Branch branch){};
 
-public void addMenuItem(Branch branch){};
+    public void removeMenuItem(Branch branch){};
 
-public void removeMenuItem(Branch branch){};
-
-public void editMenuItem(Branch branch){};
+    public void editMenuItem(Branch branch){};
 
 // From IStaffManagement
 	public void displayStaffList(){}

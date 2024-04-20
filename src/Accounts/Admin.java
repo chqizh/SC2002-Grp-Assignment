@@ -10,6 +10,10 @@ import Accounts.UserType;
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
     Scanner sc = new Scanner(System.in);
 
+    Admin(){
+        super();
+    }
+
     // From IAdminManagement
     public void addStaff(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db){
         Staff newStaff = new Staff(name, staffID, gender, age, branchID);
@@ -93,17 +97,31 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             else System.out.println("Transfer unsuccessful.");
         }
         else if (db.getStaff(staffID).getUserType() == UserType.BRANCH_MANAGER){
+            BranchManager manager = db.getBranchManager(staffID);
+            String oldBranchName = manager.getBranchName();
 
-            System.out.printf("Successfully transferred Branch Manager (%s) to Branch (%s)", staffID, branchName);
+            if (db.getBranchByBranchName(oldBranchName).removeBranchManager(staffID) ==  false){
+                System.out.println("Transfer unsuccessful.");
+                return;
+            }
+            else if (db.getBranchByBranchName(branchName).addBranchManager(staffID)){
+                manager.setBranchName(branchName);
+                System.out.printf("Successfully transferred Branch Manager (%s) to Branch (%s)", staffID, branchName);
+            }
+            else System.out.println("Transfer unsuccessful.");
         }
         else if (db.getStaff(staffID).getUserType() == UserType.ADMIN){
-            System.out.println("Unable to transfer Admin.");
+            System.out.println("Transfer unsuccesful. Unable to transfer Admin.");
         }
     };
 
-    public void addPayment(InMemoryDatabase db){};
+    public void addPaymentMethod(String branchName, InMemoryDatabase db){
+        db.getBranchByBranchName(branchName).addPaymentMethod();
+    };
 
-    public void removePayment(InMemoryDatabase db){};
+    public void removePaymentMethod(String branchName, InMemoryDatabase db){
+        db.getBranchByBranchName(branchName).removePaymentMethod();
+    };
 
     public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db){
         Branch newBranch = new Branch(branchName, branchLocation, staffQuota);

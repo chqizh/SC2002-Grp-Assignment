@@ -118,7 +118,7 @@ public class FOMSApp {
     }
 
     private void displayBranchManagerInterface(BranchManager manager) {
-        Branch branch = db.getBranchByBranchName(manager.getBranchID());
+        Branch branch = db.getBranchByBranchName(manager.getBranchName());
         boolean keepRunning = true;
         while (keepRunning) {
             System.out.println("\n|| Welcome to the BRANCH MANAGER Workspace ||");

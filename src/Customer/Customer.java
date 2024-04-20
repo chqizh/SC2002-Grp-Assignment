@@ -11,12 +11,17 @@ import java.util.ArrayList;
 
 public class Customer implements ICustomerOrderProcess{
     private OrderList orderList;
-    private List<MenuItem>cart = new ArrayList<>();
+    private ArrayList<MenuItem>cart = new ArrayList<>();
+    private static ArrayList<String> paymentMethods = new ArrayList<>();
 
     // private Branch selectedBranch;
     // public void selectBranch(Branch branch){
     //     this.selectedBranch = branch;
     // }
+
+    public static ArrayList<String> getPaymentMethods(){
+        return paymentMethods;
+    }
 
     public void browseMenu(){
         MenuDisplay menudisplay = new MenuDisplay();
@@ -158,7 +163,6 @@ public class Customer implements ICustomerOrderProcess{
     private boolean processPayment(Payment paymentMethod, double amount) {
         return paymentMethod.processPayment(amount);
     }
-
 
 }
     
