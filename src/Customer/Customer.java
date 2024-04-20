@@ -5,11 +5,8 @@ import Menu.MenuItems;
 import Branch.OrderList;
 import java.util.List;
 import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
-import Payment.Payment;
-import Payment.BankCard;
-import Payment.PayNow;
-import Payment.Paypal;
 
 
 public class Customer{
@@ -88,7 +85,7 @@ public class Customer{
     }
 
 
-    public void placeOrder(int branchID) {
+    public void placeOrder(int branchID) throws IOException {
         if (cart.isEmpty()) {
             System.out.println("Cannot place an empty order.");
             return;
@@ -114,7 +111,7 @@ public class Customer{
                 for(MenuItem item: cart){
                     order.getOrderItems().add(item);
                 }
-                orderList.addOrder(order);
+                order.placeOrder(order);
 
                 System.out.println("Order placed successfully.");
                 cart.clear();
