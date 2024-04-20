@@ -29,7 +29,6 @@ public class MenuItems implements Serializable{
 
 	
 	public void deleteItems() throws IOException {
-		
 		Scanner sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to delete?");
 	    int numberToDelete = sc.nextInt();

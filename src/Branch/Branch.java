@@ -17,10 +17,10 @@ public class Branch implements Serializable {
     private ArrayList <MenuItem> branchMenu = new ArrayList <MenuItem> ();
     private OrderList branchOrders;
 
-    Branch (String branchName, String branchLocation, int staffQuota){
-        this.branchName=branchName;
-        this.branchLocation=branchLocation;
-        this.staffQuota=staffQuota;
+    public Branch (String branchName, String branchLocation, int staffQuota){
+        this.branchName = branchName;
+        this.branchLocation = branchLocation;
+        this.staffQuota = staffQuota;
     }
     
     public String getBranchName() {

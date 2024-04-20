@@ -1,22 +1,23 @@
 package Branch;
-
 import java.util.HashMap;
-import Customer.*;
+import Customer.Order;
 
 public class OrderList {
-    // Create a HashMap with keys and values (orderID, orderDetails)
-    // Basically like a dictionary in python.
-    HashMap<Integer, Order> orderList = new HashMap<Integer, Order>();
+    private HashMap<Integer, Order> orderMap;
 
-    public void setOrderList(HashMap<Integer, Order> orderList) {
-        //TODO
+    public OrderList() {
+        orderMap = new HashMap<Integer, Order>();
     }
 
-    public HashMap<Integer, Order> getOrderList() {
-        return orderList;
+    public void addOrder(Order order) {
+        orderMap.put(order.getOrderID(), order);
     }
 
-    public Order getSpecificOrder(int orderID){
-        return orderList.get(orderID);
+    public void removeOrder(int orderID) {
+        orderMap.remove(orderID);
+    }
+
+    public Order getOrder(int orderID) {
+        return orderMap.get(orderID);
     }
 }

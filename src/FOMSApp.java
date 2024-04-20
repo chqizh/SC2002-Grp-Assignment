@@ -104,7 +104,7 @@ public class FOMSApp {
                     System.out.println("Enter the order ID to be processed: ");
                     int orderID_P = sc.nextInt();
                     sc.nextLine();
-                    staff.processOrders(branch,orderID_P);
+                    staff.processOrders(branch, orderID_P);
                     break;
                 case 4:
                     System.out.println("Logging out...");
@@ -186,20 +186,26 @@ public class FOMSApp {
             System.out.println("(6) Promote Staff to Manager");
             System.out.println("(7) Transfer Staff/Manager");
             System.out.println("(8) Edit Payment Method");
-            System.out.println("(9) Open/Close Branch");
+            System.out.println("(9) Open Branch");
+            System.out.println("(10) Close Branch");
             System.out.println("Please select your action: ");
         
             int choice = sc.nextInt();
             sc.nextLine(); // Consume the newline
             switch (choice) {
                 case 1:
-                    admin.addStaff();
+                    String name = sc.next();
+                    String staffID = sc.next();
+                    char gender = sc.next().charAt(0);
+                    int age = sc.nextInt();
+                    String branchID = sc.next();
+                    admin.addStaff(name, staffID, gender, age, branchID, db);
                     break;
                 case 2:
-                    admin.removeStaff();
+                    admin.removeStaff(staffID, db);
                     break;
                 case 3:
-                    admin.editStaff();
+                    admin.editStaff(staffID, db);
                     break;
                 case 4:
                     admin.displayStaffList();
@@ -217,9 +223,12 @@ public class FOMSApp {
                     admin.editPaymentMethod();
                     break;
                 case 9:
-                    admin.openCloseBranch();
+                    admin.addBranch(branchName, branchLocation, staffQuota);
                     break;
                 case 10:
+                    admin.removeBranch(branchName);
+                    break;
+                case 11:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;
