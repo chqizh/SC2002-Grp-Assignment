@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import Menu.*;
 import Customer.Customer;
-//import Accounts.*;
 
 public class Branch implements Serializable {
     private int branchID;

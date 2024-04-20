@@ -34,13 +34,13 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     // From IOrderProcess
     public void viewNewOrders(Branch branch) {
         System.out.println("New Orders:");
-        branch.getBranchOrders().getOrderList().values().stream()
+        branch.getBranchOrders().getOrderList().stream()
                 .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
                 .forEach(System.out::println); // Print each order (implement toString in Order for better output)
     }
 
     public void viewOrder(Branch branch, int orderID) {
-        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println(order); // Assuming toString() in Order is overridden
         } else {
@@ -50,7 +50,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
 
     public void processOrders(Branch branch, int orderID) {
         Scanner sc = new Scanner(System.in);
-        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println("Current status is " + order.getOrderStatus());
             System.out.println("Pick update action:");

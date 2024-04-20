@@ -2,12 +2,15 @@ package Branch;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.ArrayList;
 import Customer.Order;
 import DataPersistence.SerializationUtil;
 
 public class OrderList implements Serializable{
+    // <orderID, order>
     public HashMap<Integer, Order> orderMap;
 
+    /*
     public OrderList() throws IOException {
         try {
             orderMap = (HashMap<Integer, Order>) SerializationUtil.deserialize("orderList.ser");
@@ -18,6 +21,7 @@ public class OrderList implements Serializable{
             orderMap = new HashMap<Integer,Order>();
         }
     }
+    */
 
     public void addOrder(Order order) throws IOException {
         orderMap.put(order.getOrderID(), order);
@@ -33,4 +37,8 @@ public class OrderList implements Serializable{
         return orderMap.get(orderID);
     }
 
+    public ArrayList<Order> getOrderList(){
+        ArrayList<Order> orderList = new ArrayList<Order>(orderMap.values());
+        return orderList;
+    }
 }

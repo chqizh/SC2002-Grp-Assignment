@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import Branch.*;
 import Database.InMemoryDatabase;
-import Accounts.UserType;
 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {

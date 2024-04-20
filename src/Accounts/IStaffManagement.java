@@ -1,7 +1,5 @@
 package Accounts;
 
-import Database.InMemoryDatabase;
-
 public interface IStaffManagement {
 
 	/**

@@ -1,7 +1,5 @@
 package Accounts;
 
-import java.util.concurrent.ExecutionException;
-
 public enum UserType {
     STAFF('S'),
     BRANCH_MANAGER('M'),
