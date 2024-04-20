@@ -3,79 +3,86 @@ package Database;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.Serializable;
+import java.util.ArrayList;
+
 
 import Accounts.*;
 import Branch.*;
 
 public class InMemoryDatabase implements Serializable{
-    private Map<String, Account> accounts;
-    private Map<String, Branch> branches;
-    private Map<String, Staff> staffMap;
-    private Map<String, BranchManager> branchManagerMap;
-    private Map<String, Admin> adminMap;
+    private static Map<String, Account> accounts;
+    private static Map<String, Branch> branches;
+    private static Map<String, Staff> staffMap;
+    private static Map<String, BranchManager> branchManagerMap;
+    private static Map<String, Admin> adminMap;
 
     public InMemoryDatabase() {
-        this.accounts = new HashMap<>();
-        this.branches = new HashMap<>();
-        this.staffMap = new HashMap<>();
-        this.branchManagerMap = new HashMap<>();
-        this.adminMap = new HashMap<>();
+        accounts = new HashMap<>();
+        branches = new HashMap<>();
+        staffMap = new HashMap<>();
+        branchManagerMap = new HashMap<>();
+        adminMap = new HashMap<>();
     }
 
-    public void addAccount(Account account) {
-        this.accounts.put(account.getStaffID(), account);
+    public static void addAccount(Account account) {
+        accounts.put(account.getStaffID(), account);
     }
 
-    public void removeAccount(String accountID) {
-        this.accounts.remove(accountID);
+    public static void removeAccount(String accountID) {
+        accounts.remove(accountID);
     }
 
-    public void addBranch(Branch branch) {
-        this.branches.put(branch.getBranchName(), branch);
+    public static void addBranch(Branch branch) {
+        branches.put(branch.getBranchName(), branch);
     }
 
-    public void removeBranch(String branchName) {
-        this.branches.remove(branchName);
+    public static void removeBranch(String branchName) {
+        branches.remove(branchName);
     }
 
-    public void addStaff(Staff staff) {
-        this.staffMap.put(staff.getStaffID(), staff);
+    public static void addStaff(Staff staff) {
+        staffMap.put(staff.getStaffID(), staff);
     }
 
-    public void removeStaff(String staffID){
-        this.staffMap.remove(staffID);
+    public static void removeStaff(String staffID){
+        staffMap.remove(staffID);
     }
 
-    public void addBranchManager(BranchManager branchManager) {
-        this.branchManagerMap.put(branchManager.getStaffID(), branchManager);
+    public static void addBranchManager(BranchManager branchManager) {
+        branchManagerMap.put(branchManager.getStaffID(), branchManager);
     }
 
-    public void addAdmin(Admin admin) {
-        this.adminMap.put(admin.getStaffID(), admin);
+    public static void addAdmin(Admin admin) {
+        adminMap.put(admin.getStaffID(), admin);
     }
 
-    public Account getAccountByStaffID(String staffID) {
-        return this.accounts.get(staffID);
+    public static Account getAccountByStaffID(String staffID) {
+        return accounts.get(staffID);
     }
 
-    public Branch getBranchByBranchName(String branchName) {
-        return this.branches.get(branchName);
+    public static Branch getBranchByBranchName(String branchName) {
+        return branches.get(branchName);
     }
 
-    public Staff getStaff(String staffID) {
-        return this.staffMap.get(staffID);
+    public static Staff getStaff(String staffID) {
+        return staffMap.get(staffID);
     }
 
-    public BranchManager getBranchManager(String staffID) {
-        return this.branchManagerMap.get(staffID);
+    public static ArrayList<String> getStaffIDs(){
+        ArrayList<String> staffIDsList = new ArrayList<String>(staffMap.keySet());
+        return staffIDsList;
     }
 
-    public Admin getAdmin(String staffID) {
-        return this.adminMap.get(staffID);
+    public static BranchManager getBranchManager(String staffID) {
+        return branchManagerMap.get(staffID);
+    }
+
+    public static Admin getAdmin(String staffID) {
+        return adminMap.get(staffID);
     }
 
     // To validate account
-    public Employee validateEmployee(String staffID, String password) {
+    public static Employee validateEmployee(String staffID, String password) {
         Account account = getAccountByStaffID(staffID);
         if (account == null){                     
             System.out.println("StaffID not found!");

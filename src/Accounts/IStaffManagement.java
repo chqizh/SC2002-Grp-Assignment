@@ -12,5 +12,5 @@ public interface IStaffManagement {
 	 * @param age
 	 */
 	//void displayStaffList(String branch, char role, char gender, int age, InMemoryDatabase db);
-	public void displayStaffListAdmin(InMemoryDatabase db)
+	public void displayStaffListAdmin();
 }

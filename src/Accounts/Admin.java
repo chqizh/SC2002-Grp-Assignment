@@ -1,5 +1,6 @@
 package Accounts;
 
+import java.util.ArrayList;
 import java.util.Scanner; 
 
 import Branch.*;
@@ -10,28 +11,28 @@ import Accounts.UserType;
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
     Scanner sc = new Scanner(System.in);
 
-    Admin(){
-        super();
+    Admin(String name, String staffID, UserType userType, char gender, int age){
+        super(name, staffID, UserType.ADMIN, gender, age);
     }
 
     // From IAdminManagement
-    public void addStaff(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db){
+    public void addStaff(String name, String staffID, char gender, int age, String branchID){
         Staff newStaff = new Staff(name, staffID, gender, age, branchID);
         Account newAccount = new Account(staffID);
-        db.addStaff(newStaff);
-        db.addAccount(newAccount);
+        InMemoryDatabase.addStaff(newStaff);
+        InMemoryDatabase.addAccount(newAccount);
     };
 
-    public void removeStaff(String staffID, InMemoryDatabase db){
-        db.removeStaff(staffID);
+    public void removeStaff(String staffID){
+        InMemoryDatabase.removeStaff(staffID);
     };
 
-    public void editStaff(String staffID, InMemoryDatabase db){
+    public void editStaff(String staffID){
         System.out.println("What would you like to edit?");
         System.out.println("(1) Name");
         System.out.println("(2) Gender");
         System.out.println("(3) Age");
-        Staff staff = db.getStaff(staffID);
+        Staff staff = InMemoryDatabase.getStaff(staffID);
         try {
             int choice = sc.nextInt();
             switch (choice){
@@ -60,82 +61,82 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void assignManager(String staffID, String branchName, InMemoryDatabase db){
-        if (db.getStaff(staffID) == null) {
+    public void assignManager(String staffID, String branchName){
+        if (InMemoryDatabase.getStaff(staffID) == null) {
             System.out.println("Manager does not exist. Manager assignment unsuccessful.");
         }
-        else if (db.getBranchByBranchName(branchName) == null) {
+        else if (InMemoryDatabase.getBranchByBranchName(branchName) == null) {
             System.out.println("Branch does not exist. Manager assignment unsuccessful.");
         }
         else {
-            db.getBranchByBranchName(branchName).addBranchManager(staffID);
+            InMemoryDatabase.getBranchByBranchName(branchName).addBranchManager(staffID);
             System.out.printf("Successfully assigned Branch Manager (%s) to Branch (%s).", staffID, branchName);
         }
     };
 
-    public void transferEmployee(String staffID, String branchName, InMemoryDatabase db){
-        if (db.getStaff(staffID) == null) {
+    public void transferEmployee(String staffID, String branchName){
+        if (InMemoryDatabase.getStaff(staffID) == null) {
             System.out.println("Staff/Manager does not exist. Employee assignment unsuccessful.");
         }
-        else if (db.getBranchByBranchName(branchName) == null) {
+        else if (InMemoryDatabase.getBranchByBranchName(branchName) == null) {
             System.out.println("Branch does not exist. Employee assignment unsuccessful.");
         }
         
-        if (db.getStaff(staffID).getUserType() == UserType.STAFF){
-            Staff staff = db.getStaff(staffID);
+        if (InMemoryDatabase.getStaff(staffID).getUserType() == UserType.STAFF){
+            Staff staff = InMemoryDatabase.getStaff(staffID);
             String oldBranchName = staff.getBranchName();
             // Removes staff from their old branch.
-            if (db.getBranchByBranchName(oldBranchName).removeStaff(staffID) == false){
+            if (InMemoryDatabase.getBranchByBranchName(oldBranchName).removeStaff(staffID) == false){
                 System.out.println("Transfer unsuccessful.");
                 return;
             }
             // Transfers staff to new branch.
-            else if (db.getBranchByBranchName(branchName).addStaff(staffID)){
+            else if (InMemoryDatabase.getBranchByBranchName(branchName).addStaff(staffID)){
                 staff.setBranchName(branchName);
                 System.out.printf("Successfully transferred Staff (%s) to Branch (%s)", staffID, branchName);
             }
             else System.out.println("Transfer unsuccessful.");
         }
-        else if (db.getStaff(staffID).getUserType() == UserType.BRANCH_MANAGER){
-            BranchManager manager = db.getBranchManager(staffID);
+        else if (InMemoryDatabase.getStaff(staffID).getUserType() == UserType.BRANCH_MANAGER){
+            BranchManager manager = InMemoryDatabase.getBranchManager(staffID);
             String oldBranchName = manager.getBranchName();
 
-            if (db.getBranchByBranchName(oldBranchName).removeBranchManager(staffID) ==  false){
+            if (InMemoryDatabase.getBranchByBranchName(oldBranchName).removeBranchManager(staffID) ==  false){
                 System.out.println("Transfer unsuccessful.");
                 return;
             }
-            else if (db.getBranchByBranchName(branchName).addBranchManager(staffID)){
+            else if (InMemoryDatabase.getBranchByBranchName(branchName).addBranchManager(staffID)){
                 manager.setBranchName(branchName);
                 System.out.printf("Successfully transferred Branch Manager (%s) to Branch (%s)", staffID, branchName);
             }
             else System.out.println("Transfer unsuccessful.");
         }
-        else if (db.getStaff(staffID).getUserType() == UserType.ADMIN){
+        else if (InMemoryDatabase.getStaff(staffID).getUserType() == UserType.ADMIN){
             System.out.println("Transfer unsuccesful. Unable to transfer Admin.");
         }
     };
 
-    public void addPaymentMethod(String branchName, InMemoryDatabase db){
-        db.getBranchByBranchName(branchName).addPaymentMethod();
+    public void addPaymentMethod(String branchName){
+        InMemoryDatabase.getBranchByBranchName(branchName).addPaymentMethod();
     };
 
-    public void removePaymentMethod(String branchName, InMemoryDatabase db){
-        db.getBranchByBranchName(branchName).removePaymentMethod();
+    public void removePaymentMethod(String branchName){
+        InMemoryDatabase.getBranchByBranchName(branchName).removePaymentMethod();
     };
 
-    public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db){
+    public void addBranch(String branchName, String branchLocation, int staffQuota){
         Branch newBranch = new Branch(branchName, branchLocation, staffQuota);
-        db.addBranch(newBranch);
+        InMemoryDatabase.addBranch(newBranch);
     };
 
-    public void removeBranch(String branchName, InMemoryDatabase db){
-        db.removeBranch(branchName);
+    public void removeBranch(String branchName){
+        InMemoryDatabase.removeBranch(branchName);
     };
 
 
     // From IStaffManagement
-    public void displayStaffListAdmin(InMemoryDatabase db){
-        Staff staffList[];
+    public void displayStaffListAdmin(){
+        ArrayList<String> staffIDsList = InMemoryDatabase.getStaffIDs();
         int choice;
         System.out.println("Choose Filter: ");
         System.out.println("(1) Display all ");
@@ -147,38 +148,77 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
         switch(choice){
             case 1:
-                for (Staff staff : staffList){
-                    System.out.println("Staff "+ i++);
+                for (String staffID : staffIDsList){
+                    Staff staff = InMemoryDatabase.getStaff(staffID);
+                    System.out.println("StaffID: " + staff.getStaffID());
+                    System.out.println("Branch: " + staff.getBranchName());
                     System.out.println("Name: " + staff.getName());
-                    System.out.println("Role: " + staff.getRole());
-                    System.out.println("Age: "+getAge());
-                    System.out.println("Gender: "+getGender());
+                    System.out.println("Role: " + staff.getUserType().stringFromUserType());
+                    System.out.println("Age: " + getAge());
+                    System.out.println("Gender: " + getGender());
                 }
                 break;
             case 2: 
                 System.out.println("Branch: ");
                 String branch = sc.nextLine();
-                for (Staff staff : staffList){
+                for (String staffID : staffIDsList){
+                    Staff staff = InMemoryDatabase.getStaff(staffID);
                     if (staff.getBranchName() == branch){
-                        System.out.println("Staff "+ i++);
+                        System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Name: " + staff.getName());
-                        System.out.println("Role: " + staff.getUserType());
-                        System.out.println("Age: "+getAge());
-                        System.out.println("Gender: "+getGender());
+                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
+                        System.out.println("Age: " + getAge());
+                        System.out.println("Gender: "+ getGender());
                     }
                 }
                 break;
             case 3:
-                System.out.println("Role: ");
-                String role = sc.nextLine();
-                 break;
+                System.out.println("Role: S/M/A");
+                char roleInput = sc.next().charAt(0);
+                try {
+                    UserType role = UserType.fromCode(roleInput);
+                    for (String staffID : staffIDsList){
+                        Staff staff = InMemoryDatabase.getStaff(staffID);
+                        if (staff.getUserType() == role){
+                            System.out.println("StaffID: " + staff.getStaffID());
+                            System.out.println("Branch: " + staff.getBranchName());
+                            System.out.println("Name: " + staff.getName());
+                            System.out.println("Age: " + getAge());
+                            System.out.println("Gender: "+ getGender());
+                        }
+                    }
+                }
+                catch (Exception e){
+                    System.out.println("Invalid role chosen.");
+                }
+                break;
             case 4: 
-                System.out.println("Gender: ");
-                String gender= sc.nextLine();
+                System.out.println("Gender: M/F");
+                char gender = sc.next().charAt(0);
+                for (String staffID : staffIDsList){
+                    Staff staff = InMemoryDatabase.getStaff(staffID);
+                    if (staff.getGender() == gender){
+                        System.out.println("StaffID: " + staff.getStaffID());
+                        System.out.println("Branch: " + staff.getBranchName());
+                        System.out.println("Name: " + staff.getName());
+                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
+                        System.out.println("Age: " + getAge());
+                    }
+                }
                 break;
             case 5:
                 System.out.println("Age: ");
-                String age= sc.nextLine();
+                int age = sc.nextInt();
+                for (String staffID : staffIDsList){
+                    Staff staff = InMemoryDatabase.getStaff(staffID);
+                    if (staff.getAge() == age){
+                        System.out.println("StaffID: " + staff.getStaffID());
+                        System.out.println("Branch: " + staff.getBranchName());
+                        System.out.println("Name: " + staff.getName());
+                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
+                        System.out.println("Gender: "+ getGender());
+                    }
+                }
                 break;
             default:
                 break;
