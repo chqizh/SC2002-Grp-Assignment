@@ -239,9 +239,24 @@ public class FOMSApp {
         }
     }
     
-    private void displayCustomerInterface() {
+    private void displayCustomerInterface() throws IOException {
         boolean keepRunning = true;
         Customer customer = new Customer();
+        System.out.println("Enter Branch ID:");
+        int branchID = sc.nextInt();
+        sc.nextLine();
+
+        Branches branches = new Branches();
+        Branch branch = branches.getSpecificBranch(branchID);
+
+        while(branch == null){
+            System.out.println("You have entered an invalid Branch ID!");
+            System.out.println("Enter Branch ID:");
+            branchID = sc.nextInt();
+            sc.nextLine();
+            branch = branches.getSpecificBranch(branchID);
+        }
+
 
         while (keepRunning) {
             System.out.println("/n|| Welcome to MadDonkeys! ||");

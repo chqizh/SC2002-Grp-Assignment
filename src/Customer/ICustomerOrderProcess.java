@@ -1,5 +1,7 @@
 package Customer;
 
+import java.io.IOException;
+
 public interface ICustomerOrderProcess {
 
     void browseMenu();
@@ -8,10 +10,10 @@ public interface ICustomerOrderProcess {
 
     void deleteFromCart();
 
-    void placeOrder();
+    void viewCart();
 
-    void trackOrder();
+    void placeOrder(int branchID)throws IOException;
 
-    void makePayment();
+    void trackOrder(int branchID);
     
 }
