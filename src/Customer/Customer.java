@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class Customer{
+public class Customer implements ICustomerOrderProcess{
     private OrderList orderList;
     private List<MenuItem>cart = new ArrayList<>();
 

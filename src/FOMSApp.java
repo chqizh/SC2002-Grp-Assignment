@@ -239,7 +239,7 @@ public class FOMSApp {
         }
     }
     
-    private void displayCustomerInterface() {
+    private void displayCustomerInterface() throws IOException {
         boolean keepRunning = true;
         Customer customer = new Customer();
         System.out.println("Enter Branch ID:");
