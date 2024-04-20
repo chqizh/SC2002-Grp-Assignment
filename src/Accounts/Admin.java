@@ -1,11 +1,13 @@
 package Accounts;
-import Branch.*;
-import Database.InMemoryDatabase;
 
 import java.util.Scanner; 
 
-public class Admin extends Employee implements IAdminManagement, IStaffManagement {
+import Branch.*;
+import Database.InMemoryDatabase;
+import Accounts.UserType;
 
+
+public class Admin extends Employee implements IAdminManagement, IStaffManagement {
     Scanner sc = new Scanner(System.in);
 
     // From IAdminManagement
@@ -59,7 +61,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             System.out.println("Manager does not exist. Manager assignment unsuccessful.");
         }
         else if (db.getBranchByBranchName(branchName) == null) {
-            System.out.println("Manager does not exist. Manager assignment unsuccessful.");
+            System.out.println("Branch does not exist. Manager assignment unsuccessful.");
         }
         else {
             db.getBranchByBranchName(branchName).addBranchManager(staffID);
@@ -67,7 +69,37 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void transfer(InMemoryDatabase db){};
+    public void transferEmployee(String staffID, String branchName, InMemoryDatabase db){
+        if (db.getStaff(staffID) == null) {
+            System.out.println("Staff/Manager does not exist. Employee assignment unsuccessful.");
+        }
+        else if (db.getBranchByBranchName(branchName) == null) {
+            System.out.println("Branch does not exist. Employee assignment unsuccessful.");
+        }
+        
+        if (db.getStaff(staffID).getUserType() == UserType.STAFF){
+            Staff staff = db.getStaff(staffID);
+            String oldBranchName = staff.getBranchName();
+            // Removes staff from their old branch.
+            if (db.getBranchByBranchName(oldBranchName).removeStaff(staffID) == false){
+                System.out.println("Transfer unsuccessful.");
+                return;
+            }
+            // Transfers staff to new branch.
+            else if (db.getBranchByBranchName(branchName).addStaff(staffID)){
+                staff.setBranchName(branchName);
+                System.out.printf("Successfully transferred Staff (%s) to Branch (%s)", staffID, branchName);
+            }
+            else System.out.println("Transfer unsuccessful.");
+        }
+        else if (db.getStaff(staffID).getUserType() == UserType.BRANCH_MANAGER){
+
+            System.out.printf("Successfully transferred Branch Manager (%s) to Branch (%s)", staffID, branchName);
+        }
+        else if (db.getStaff(staffID).getUserType() == UserType.ADMIN){
+            System.out.println("Unable to transfer Admin.");
+        }
+    };
 
     public void addPayment(InMemoryDatabase db){};
 
@@ -84,8 +116,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
 
     // From IStaffManagement
-    public void displayStaffListAdmin (Staff staffList[]){
-
+    public void displayStaffListAdmin(InMemoryDatabase db){
+        Staff staffList[];
         int choice;
         System.out.println("Choose Filter: ");
         System.out.println("(1) Display all ");
@@ -109,7 +141,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 System.out.println("Branch: ");
                 String branch = sc.nextLine();
                 for (Staff staff : staffList){
-                    if (staff.getBranchID() == branch){
+                    if (staff.getBranchName() == branch){
                         System.out.println("Staff "+ i++);
                         System.out.println("Name: " + staff.getName());
                         System.out.println("Role: " + staff.getUserType());

@@ -1,5 +1,7 @@
 package Accounts;
 
+import Database.InMemoryDatabase;
+
 public interface IStaffManagement {
 
 	/**
@@ -9,8 +11,6 @@ public interface IStaffManagement {
 	 * @param gender
 	 * @param age
 	 */
-	//void displayStaffList(String branch, char role, char gender, int age);
-
-	void displayStaffList();
-
+	//void displayStaffList(String branch, char role, char gender, int age, InMemoryDatabase db);
+	public void displayStaffListAdmin(InMemoryDatabase db)
 }

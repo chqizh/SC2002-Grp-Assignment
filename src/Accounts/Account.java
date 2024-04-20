@@ -3,7 +3,6 @@ package Accounts;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
-import java.util.Scanner;
 
 /**
  * This class represents an account for a user with a staff ID, password, and role type.

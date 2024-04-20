@@ -9,7 +9,7 @@ import Customer.*;
  * This class represents a staff member, which is a specific type of employee with a branch association.
  */
 public class Staff extends Employee implements IOrderProcess{
-    private String branchID;
+    private String branchName;
 
     /**
      * Constructs a new Staff member with the specified details.
@@ -21,25 +21,25 @@ public class Staff extends Employee implements IOrderProcess{
      */
     public Staff(String name, String staffID, char gender, int age, String branchID) {
         super(name, staffID, UserType.STAFF, gender, age);
-        this.branchID = branchID;
+        this.branchName = branchID;
     }
 
     /**
-     * Gets the branch ID associated with this staff member.
+     * Gets the branch ID associated with this staff member.import java.util.Scanner; 
      *
      * @return The branch ID.
      */
-    public String getBranchID() {
-        return branchID;
+    public String getBranchName() {
+        return branchName;
     }
 
     /**
      * Sets the branch ID for this staff member.
      *
-     * @param branchID The new branch ID.
+     * @param branchName The new branchName.
      */
-    public void setBranchID(String branchID) {
-        this.branchID = branchID;
+    public void setBranchName(String branchName) {
+        this.branchName = branchName;
     }
 
     // From IOrderProcess

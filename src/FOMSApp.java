@@ -78,7 +78,7 @@ public class FOMSApp {
 
     private void displayStaffInterface(Staff staff) {
         boolean keepRunning = true;
-        Branch branch = db.getBranchByBranchName(staff.getBranchID());
+        Branch branch = db.getBranchByBranchName(staff.getBranchName());
 
         while (keepRunning) {
             System.out.println("\n|| Welcome to STAFF Workspace || ");

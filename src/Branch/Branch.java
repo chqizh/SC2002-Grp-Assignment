@@ -97,6 +97,32 @@ public class Branch implements Serializable {
         return staffIDs;
     }
 
+    public boolean addStaff(String staffID){
+        if (staffIDs.contains(staffID)){
+            System.out.printf("Branch already contains Staff with staffID %s", staffID);
+            return false;
+        }
+        else if (staffIDs.size() >= staffQuota){
+            System.out.println("Staff quota is already filled.");
+            return false;
+        }
+        else {
+            staffIDs.add(staffID);
+            return true;
+        }
+    }
+
+    public boolean removeStaff(String staffID){
+        if (!staffIDs.contains(staffID)){
+            System.out.printf("Branch does not contain Staff with staffID %s", staffID);
+            return false;
+        }
+        else {
+            staffIDs.remove(staffID);
+            return true;
+        }
+    }
+
     public int getCurNumStaff(){
         return currentNumStaff;
     }
