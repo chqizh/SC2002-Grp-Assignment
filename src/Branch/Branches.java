@@ -16,6 +16,7 @@ public class Branches implements Serializable{
             //System.out.println("Menu deserialized successfully.");
         }
         catch( IOException | ClassNotFoundException e ){
+            //System.err.println("Deserialization failed: " + e.getMessage());
             branchesList = new HashMap<Integer, Branch>();
         }
     }
