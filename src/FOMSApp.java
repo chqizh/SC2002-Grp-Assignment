@@ -52,27 +52,29 @@ public class FOMSApp {
 
         System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
         System.out.println("Are you a customer? (Y/N)");
-        String userType = console.readLine(); // Use readLine for non-password inputs
+        String userType = console.readLine();
         if ("Y".equalsIgnoreCase(userType)) {
             displayCustomerInterface();
         } else {
-            String staffID = console.readLine("Enter your staffID: ");
-            char[] passwordArray = console.readPassword("Enter your password: "); // Password will be masked
-            String password = new String(passwordArray);
-
-            // A method that returns the Account object after validation
-            Employee employee = db.validateEmployee(staffID, password);
-
-            if (employee != null) {
-                if (employee instanceof Staff) {
-                    displayStaffInterface((Staff) employee);
-                } else if (employee instanceof BranchManager) {
-                    displayBranchManagerInterface((BranchManager) employee);
-                } else if (employee instanceof Admin) {
-                    displayAdminInterface((Admin) employee);
+            Employee employee = null;
+            while (employee == null) {
+                String staffID = console.readLine("Enter your staffID: ");
+                char[] passwordArray = console.readPassword("Enter your password: "); // Password will be masked
+                String password = new String(passwordArray);
+    
+                employee = db.validateEmployee(staffID, password);
+                if (employee == null) {
+                    System.out.println("Login unsuccessful. Please try again.");
+                    java.util.Arrays.fill(passwordArray, ' ');
                 }
-            } else {
-                System.out.println("Login unsuccessful.");
+            }
+
+            if (employee instanceof Staff) {
+                displayStaffInterface((Staff) employee);
+            } else if (employee instanceof BranchManager) {
+                displayBranchManagerInterface((BranchManager) employee);
+            } else if (employee instanceof Admin) {
+                displayAdminInterface((Admin) employee);
             }
         }
 

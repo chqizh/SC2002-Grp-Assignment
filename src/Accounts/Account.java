@@ -85,10 +85,17 @@ public class Account implements Serializable {
      */
     public boolean validateLogin(String password) {
         String hashedInputPassword = hashPassword(password);
+        String defaultPasswordHash = hashPassword("password");
 
-        if (this.passwordHash.equals(hashedInputPassword))
+        if (this.passwordHash.equals(hashedInputPassword)) {
+            if (this.passwordHash.equals(defaultPasswordHash)) {
+                System.out.println("You are using the default password. Please change your password.");
+                System.out.println("New Password: ");
+                
+
+            }
             return true;
-        else {
+        } else {
             System.out.println("Wrong Password!");
             return false;
         }
