@@ -23,7 +23,7 @@ public class OrderList implements Serializable{
     }
     */
 
-    public void addOrder(Order order) throws IOException {
+  /*   public void addOrder(Order order) throws IOException {
         orderMap.put(order.getOrderID(), order);
         SerializationUtil.serialize(orderMap, "orderList.ser");
     }
@@ -31,6 +31,14 @@ public class OrderList implements Serializable{
     public void removeOrder(int orderID) throws IOException {
         orderMap.remove(orderID);
         SerializationUtil.serialize(orderMap, "orderList.ser");
+    }
+ */
+    public void addOrder(Order order){
+        orderMap.put(order.getOrderID(), order);
+    }
+
+    public void removeOrder(int orderID) {
+        orderMap.remove(orderID);
     }
 
     public Order getOrder(int orderID) {
@@ -41,4 +49,5 @@ public class OrderList implements Serializable{
         ArrayList<Order> orderList = new ArrayList<Order>(orderMap.values());
         return orderList;
     }
+
 }

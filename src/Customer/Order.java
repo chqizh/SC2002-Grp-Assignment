@@ -16,18 +16,27 @@ public class Order {
 
     private int orderID;
     private orderStatusFlags orderStatus;
-    private int branchID;
+    /* */ private int branchID;
+    private String branchName;
     private ArrayList<MenuItem> orderItems;
     //private int numItems;
     private static int nextOrderID = 1;
     private OrderList orderList;
     public Branch branch;
 
-    public Order(int branchID){
+/*     public Order(int branchID){
         this.orderID = orderID;
         this.orderStatus = orderStatusFlags.PROCESSED;
         this.branchID = branchID;
         this.orderItems = new ArrayList<>();
+    } */
+
+        // im not sure if this version i did is correctly done. This is constructor?- KH
+    public Order(String branchName){ 
+        this.orderID = orderID; // shld we assign to static/const variable?
+        this.orderStatus = orderStatusFlags.PROCESSED; // why processed?
+        this.branchName = branchName; 
+        this.orderItems = new ArrayList<>(); 
     }
 
     public int generateOrderID (){
@@ -90,7 +99,8 @@ public class Order {
         return false;
     }
 
-    public void placeOrder() throws IOException{
+    // public void placeOrder() throws IOException{
+    public void placeOrder(){
         branch.getBranchOrders().addOrder(this);
     }
 }

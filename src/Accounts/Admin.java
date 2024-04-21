@@ -10,7 +10,7 @@ import Database.InMemoryDatabase;
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
     Scanner sc = new Scanner(System.in);
 
-    Admin(String name, String staffID, UserType userType, char gender, int age){
+    public Admin(String name, String staffID, char gender, int age){
         super(name, staffID, UserType.ADMIN, gender, age);
     }
 

@@ -32,6 +32,11 @@ public class FOMSApp {
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
+        Admin admin1 = new Admin("Kurt", "KurtA", 'M', 40);
+        InMemoryDatabase.addAdmin(admin1);
+        Account adminACC = new Account("KurtA");
+        InMemoryDatabase.addAccount(adminACC);
+
         app.run();
         app.sc.close();
     }
@@ -39,7 +44,7 @@ public class FOMSApp {
     public void run() {
         System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
         System.out.println("Are you a customer? (Y/N)");
-        boolean isCustomer = (sc.next().charAt(0) == 'Y');
+        boolean isCustomer = (Character.toUpperCase(sc.next().charAt(0)) == 'Y');
         sc.nextLine(); // Consume the rest of the line
         if (isCustomer) {
             displayCustomerInterface();
@@ -199,34 +204,34 @@ public class FOMSApp {
                     char gender = sc.next().charAt(0);
                     int age = sc.nextInt();
                     String branchID = sc.next();
-                    admin.addStaff(name, staffID, gender, age, branchID, db);
+                    //admin.addStaff(name, staffID, gender, age, branchID, db);
                     break;
                 case 2:
-                    admin.removeStaff(staffID, db);
+                    //admin.removeStaff(staffID, db);
                     break;
                 case 3:
-                    admin.editStaff(staffID, db);
+                    //admin.editStaff(staffID, db);
                     break;
                 case 4:
-                    admin.displayStaffList();
+                    //admin.displayStaffList();
                     break;
                 case 5:
-                    admin.assignManagers();
+                    //admin.assignManagers();
                     break;
                 case 6:
-                    admin.promoteStaff();
+                    //admin.promoteStaff();
                     break;
                 case 7:
-                    admin.transferStaff();
+                    //admin.transferStaff();
                     break;
                 case 8:
-                    admin.editPaymentMethod();
+                    //admin.editPaymentMethod();
                     break;
                 case 9:
-                    admin.addBranch(branchName, branchLocation, staffQuota);
+                    //admin.addBranch(branchName, branchLocation, staffQuota);
                     break;
                 case 10:
-                    admin.removeBranch(branchName);
+                    //admin.removeBranch(branchName);
                     break;
                 case 11:
                     System.out.println("Logging out...");
@@ -239,22 +244,29 @@ public class FOMSApp {
         }
     }
     
-    private void displayCustomerInterface() throws IOException {
+    //private void displayCustomerInterface() throws IOException {
+    private void displayCustomerInterface() {
+
         boolean keepRunning = true;
         Customer customer = new Customer();
-        System.out.println("Enter Branch ID:");
-        int branchID = sc.nextInt();
+        System.out.println("Enter Branch Name:");
+        // int branchID = sc.nextInt();
+        String branchName = sc.next();
         sc.nextLine();
 
-        Branches branches = new Branches();
-        Branch branch = branches.getSpecificBranch(branchID);
+       // Branches branches = new Branches();
+       // Branch branch = branches.getSpecificBranch(branchID);
+
+       Branch branch = InMemoryDatabase.getBranchByBranchName(branchName);
 
         while(branch == null){
             System.out.println("You have entered an invalid Branch ID!");
             System.out.println("Enter Branch ID:");
-            branchID = sc.nextInt();
+            // branchID = sc.nextInt();
+            branchName = sc.next();
+
             sc.nextLine();
-            branch = branches.getSpecificBranch(branchID);
+            branch = InMemoryDatabase.getBranchByBranchName(branchName);
         }
 
 
@@ -286,10 +298,10 @@ public class FOMSApp {
                 customer.viewCart();
                     break;
                 case 5:
-                customer.placeOrder(branchID);
+                customer.placeOrder(branchName);
                     break;
                 case 6:
-                customer.trackOrder(branchID);
+                customer.trackOrder(branchName);
                     break;
                 case 7:
                     System.out.println("Exiting customer interface...");

@@ -89,7 +89,9 @@ public class Customer implements ICustomerOrderProcess{
     }
 
 
-    public void placeOrder(int branchID) throws IOException {
+    //public void placeOrder(int branchID) throws IOException {
+    public void placeOrder(String branchName){
+
         if (cart.isEmpty()) {
             System.out.println("Cannot place an empty order.");
             return;
@@ -110,7 +112,9 @@ public class Customer implements ICustomerOrderProcess{
 
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {
-                Order order = new Order(branchID);
+                //Order order = new Order(branchID);
+                Order order = new Order(branchName);
+
 
                 for(MenuItem item: cart){
                     order.getOrderItems().add(item);
@@ -128,7 +132,8 @@ public class Customer implements ICustomerOrderProcess{
         }
     }
 
-    public void trackOrder(int branchID) {
+    // public void trackOrder(int branchID) {
+    public void trackOrder(String branchName) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter Order ID:");
         int orderID = sc.nextInt();
