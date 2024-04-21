@@ -1,20 +1,22 @@
 package Menu;
+
 import java.io.*;
 import java.util.ArrayList;
 import DataPersistence.SerializationUtil;
 
 public class MenuDisplay {
-    @SuppressWarnings("unchecked")
-    ArrayList<MenuItem> menu;
+    //@SuppressWarnings("unchecked")
+    private ArrayList<MenuItem> menu;
+    
 	public void displayMenu() {
         // Deserialize the menu from the file
-        try {
-            menu = (ArrayList<MenuItem>) SerializationUtil.deserialize("menu.ser");
-            //System.out.println("Menu deserialized successfully.");
-        } catch (IOException | ClassNotFoundException e) {
-            //System.err.println("Deserialization failed: " + e.getMessage());
-            return; // Exit the method or handle the error accordingly
-        }
+        // try {
+        //     menu = (ArrayList<MenuItem>) SerializationUtil.deserialize("menu.ser");
+        //     //System.out.println("Menu deserialized successfully.");
+        // } catch (IOException | ClassNotFoundException e) {
+        //     //System.err.println("Deserialization failed: " + e.getMessage());
+        //     return; // Exit the method or handle the error accordingly
+        // }
         
         // Display header columns
         System.out.printf("%-8s %-20s %-10s %-15s\n", "Item ID", "Name", "Price", "Category");
