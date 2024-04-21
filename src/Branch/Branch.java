@@ -17,8 +17,8 @@ public class Branch implements Serializable {
     private ArrayList <String> staffIDs = new ArrayList <String> ();
     private int currentNumStaff;
     private int staffQuota;
-    private ArrayList <MenuItem> branchMenu = new ArrayList <MenuItem> ();
-    private OrderList branchOrders;
+    private MenuItems branchMenu = new MenuItems();
+    private OrderList branchOrders = new OrderList();
     private ArrayList <String> paymentMethods = new ArrayList<String> ();
     
     public Branch (String branchName, String branchLocation, int staffQuota){
@@ -76,7 +76,6 @@ public class Branch implements Serializable {
         }
     }
 
-
     public void setnumManagers(int currentNumStaff){
         if (currentNumStaff>=1 && currentNumStaff<=4){
             this.numManagers=1;
@@ -133,7 +132,7 @@ public class Branch implements Serializable {
         return staffQuota;
     }
 
-    public ArrayList <MenuItem> getBranchMenu() {
+    public MenuItems getBranchMenu() {
         return branchMenu;
     }
 

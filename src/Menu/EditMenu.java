@@ -5,7 +5,6 @@ import java.util.*;
 
 public class EditMenu implements Serializable{
 	public ArrayList<MenuItem> menu;
-	//public MenuItem menu_item;
 	public EditMenu(ArrayList<MenuItem> menu) {
 		this.menu = menu;
 	}
