@@ -36,7 +36,7 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40,app.db));
+        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA"));
         app.run();
         app.sc.close();
@@ -206,15 +206,15 @@ public class FOMSApp{
                     char gender = sc.next().charAt(0);
                     int age = sc.nextInt();
                     String branchName = sc.next();
-                    admin.addStaff(name, staffID, gender, age, branchName, db);
+                    admin.addStaff(name, staffID, gender, age, branchName);
                     break;
                 case 2:
                     String staffID2 = sc.next();
-                    admin.removeStaff(staffID2, db);
+                    admin.removeStaff(staffID2);
                     break;
                 case 3:
                     String staffID3 = sc.next();
-                    //admin.editStaff(staffID3, db);
+                    admin.editStaff(staffID3);
                     break;
                 case 4:
                     admin.displayStaffList();

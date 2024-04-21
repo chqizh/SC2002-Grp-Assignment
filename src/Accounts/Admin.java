@@ -17,7 +17,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     }
 
     // From IAdminManagement
-    public void addStaff(String name, String staffID, char gender, int age, String branchID,InMemoryDatabase db){
+    public void addStaff(String name, String staffID, char gender, int age, String branchID){
         Staff newStaff = new Staff(name, staffID, gender, age, branchID);
         Account newAccount = new Account(staffID);
         db.addStaff(newStaff);
