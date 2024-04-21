@@ -15,7 +15,7 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, Staff> staffMap;
     private Map<String, BranchManager> branchManagerMap;
     public Map<String, Admin> adminMap;
-    public ArrayList<Payment> paymentMethodsMap;
+    public ArrayList<Payment> paymentMethods;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();
@@ -23,7 +23,7 @@ public class InMemoryDatabase implements Serializable {
         this.staffMap = new HashMap<>();
         this.branchManagerMap = new HashMap<>();
         this.adminMap = new HashMap<>();
-        this.paymentMethodsMap = new ArrayList<>();
+        this.paymentMethods = new ArrayList<>();
     }
 
     public void addAccount(Account account) {
@@ -52,10 +52,26 @@ public class InMemoryDatabase implements Serializable {
 
     public void addBranchManager(BranchManager branchManager) {
         this.branchManagerMap.put(branchManager.getStaffID(), branchManager);
+
+    }
+    public void removeBranchManager(String staffID) {
+        this.branchManagerMap.remove(staffID);
     }
 
     public void addAdmin(Admin admin) {
         this.adminMap.put(admin.getStaffID(), admin);
+    }
+
+    public void removeAdmin(String staffID) {
+        this.adminMap.remove(staffID);
+    }
+
+    public void addPaymentMethod(Payment paymentMethod) {
+        this.paymentMethods.add(paymentMethod);
+    }
+
+    public void removePaymentMethod(Payment paymentMethod) {
+        this.paymentMethods.remove(paymentMethod);
     }
 
     public Account getAccountByStaffID(String staffID) {
@@ -81,6 +97,10 @@ public class InMemoryDatabase implements Serializable {
 
     public Admin getAdmin(String staffID) {
         return this.adminMap.get(staffID);
+    }
+
+    public ArrayList<Payment> getPaymentMethods() {
+        return new ArrayList<>(this.paymentMethods);
     }
 
     // To validate account
