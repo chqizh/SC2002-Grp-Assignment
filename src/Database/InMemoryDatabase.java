@@ -2,6 +2,7 @@ package Database;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.ArrayList;
 import java.io.Serializable;
 
 import Accounts.*;
@@ -64,6 +65,11 @@ public class InMemoryDatabase implements Serializable {
 
     public Staff getStaff(String staffID) {
         return this.staffMap.get(staffID);
+    }
+
+    public ArrayList<String> getStaffIDs(){
+        ArrayList<String> staffIDsList = new ArrayList<String>(staffMap.keySet());
+        return staffIDsList;
     }
 
     public BranchManager getBranchManager(String staffID) {

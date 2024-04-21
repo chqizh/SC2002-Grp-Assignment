@@ -34,7 +34,7 @@ public class FOMSApp {
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt", "KurtA", 'M', 40));
+        app.db.addAdmin(new Admin("Kurt", "KurtA", 'M', 40, app.db));
         app.db.addAccount(new Account("KurtA"));
 
         app.run();
