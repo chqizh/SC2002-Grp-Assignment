@@ -11,21 +11,12 @@ import java.util.ArrayList;
 public class Customer implements ICustomerOrderProcess{
     private OrderList orderList;
     private ArrayList<MenuItem> cart = new ArrayList<>();
-    private ArrayList<String> paymentMethods;
     private transient Scanner sc;
 
     // private Branch selectedBranch;
     // public void selectBranch(Branch branch){
     //     this.selectedBranch = branch;
     // }
-
-    Customer (){
-        paymentMethods = new ArrayList<Payments>();
-    }
-    
-    public static ArrayList<String> getPaymentMethods(){
-        return paymentMethods;
-    }
 
     public void browseMenu(){
         MenuDisplay menudisplay = new MenuDisplay();

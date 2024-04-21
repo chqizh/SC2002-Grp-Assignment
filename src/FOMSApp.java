@@ -33,10 +33,10 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        // app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
-        // app.db.addAccount(new Account("KurtA"));
-        // app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
-        // app.db.addAccount(new Account("HenryT"));
+        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+        app.db.addAccount(new Account("KurtA"));
+        app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
+        app.db.addAccount(new Account("HenryT"));
         app.run();
         app.sc.close();
     }
@@ -264,17 +264,20 @@ public class FOMSApp{
         String branchName = sc.next();
         sc.nextLine();
         Branch branch = db.getBranchByBranchName(branchName);
+        // DISPLAY ALL BRANCHES HERE 
 
-        while(branch == null){
-            System.out.println("You have entered an invalid Branch ID!");
-            System.out.println("Enter Branch ID:");
-            branchName = sc.next();
-            sc.nextLine();
-            branch = db.getBranchByBranchName(branchName);
-        }
+
+
+        // while(branch == null){
+        //     System.out.println("You have entered an invalid Branch Name!");
+        //     System.out.println("Enter Branch Name:");
+        //     branchName = sc.next();
+        //     sc.nextLine();
+        //     branch = db.getBranchByBranchName(branchName);
+        // }
 
         while (keepRunning) {
-            System.out.println("/n|| Welcome to MadDonkeys! ||");
+            System.out.println("|| Welcome to MadDonkeys! ||");
             System.out.println("(1) Browse Menu");
             System.out.println("(2) Add to Cart");
             System.out.println("(3) Delete from Cart");

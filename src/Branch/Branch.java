@@ -18,14 +18,12 @@ public class Branch implements Serializable {
     private int staffQuota;
     private MenuItems branchMenu = new MenuItems();
     private OrderList branchOrders = new OrderList();
-    private ArrayList <String> paymentMethods = new ArrayList<String> ();
     private transient Scanner sc;
     
     public Branch (String branchName, String branchLocation, int staffQuota){
         this.branchName = branchName;
         this.branchLocation = branchLocation;
         this.staffQuota = staffQuota;
-        this.paymentMethods.addAll(Customer.getPaymentMethods());
         this.sc = new Scanner(System.in);
     }
     
@@ -136,81 +134,81 @@ public class Branch implements Serializable {
         return branchOrders;
     }
 
-    public boolean addPaymentMethod(){
-        System.out.println("Which payment method would you like to add?");
-        System.out.println("(1) Bank Card");
-        System.out.println("(2) Paynow");
-        System.out.println("(3) Paypal");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+    // public boolean addPaymentMethod(){
+    //     System.out.println("Which payment method would you like to add?");
+    //     System.out.println("(1) Bank Card");
+    //     System.out.println("(2) Paynow");
+    //     System.out.println("(3) Paypal");
+    //     Scanner sc = new Scanner(System.in);
+    //     int choice = sc.nextInt();
         
-        switch (choice){
-            case 1:
-                if (!paymentMethods.contains("Bank Card")){ 
-                    paymentMethods.add("Bank Card");
-                    System.out.println("Payment method successfully added to branch.");
-                }
-                else System.out.println("Payment method already accepted in branch.");
-                break;
-            case 2:
-                if (!paymentMethods.contains("Paynow")){ 
-                    paymentMethods.add("Paynow");
-                    System.out.println("Payment method successfully added to branch.");
-                }
-                else System.out.println("Payment method already accepted in branch.");
-                break;
-            case 3:
-                if (!paymentMethods.contains("Paypal")){ 
-                    paymentMethods.add("Paypal");
-                    System.out.println("Payment method successfully added to branch.");
-                }
-                else System.out.println("Payment method already accepted in branch.");
-                break;
-            default:
-                System.out.println("Invalid option chosen.");
-                return false;
-        }
+    //     switch (choice){
+    //         case 1:
+    //             if (!paymentMethods.contains("Bank Card")){ 
+    //                 paymentMethods.add("Bank Card");
+    //                 System.out.println("Payment method successfully added to branch.");
+    //             }
+    //             else System.out.println("Payment method already accepted in branch.");
+    //             break;
+    //         case 2:
+    //             if (!paymentMethods.contains("Paynow")){ 
+    //                 paymentMethods.add("Paynow");
+    //                 System.out.println("Payment method successfully added to branch.");
+    //             }
+    //             else System.out.println("Payment method already accepted in branch.");
+    //             break;
+    //         case 3:
+    //             if (!paymentMethods.contains("Paypal")){ 
+    //                 paymentMethods.add("Paypal");
+    //                 System.out.println("Payment method successfully added to branch.");
+    //             }
+    //             else System.out.println("Payment method already accepted in branch.");
+    //             break;
+    //         default:
+    //             System.out.println("Invalid option chosen.");
+    //             return false;
+    //     }
 
-        return true;
-    }
+    //     return true;
+    // }
 
-    public boolean removePaymentMethod(){
-        System.out.println("Which payment method would you like to remove?");
-        System.out.println("(1) Bank Card");
-        System.out.println("(2) Paynow");
-        System.out.println("(3) Paypal");
-        Scanner sc = new Scanner(System.in);
-        int choice = sc.nextInt();
+    // public boolean removePaymentMethod(){
+    //     System.out.println("Which payment method would you like to remove?");
+    //     System.out.println("(1) Bank Card");
+    //     System.out.println("(2) Paynow");
+    //     System.out.println("(3) Paypal");
+    //     Scanner sc = new Scanner(System.in);
+    //     int choice = sc.nextInt();
         
-        switch (choice){
-            case 1:
-                if (paymentMethods.contains("Bank Card")){ 
-                    paymentMethods.remove("Bank Card");
-                    System.out.println("Payment method successfully removed to branch.");
-                }
-                else System.out.println("Payment method already not accepted in branch.");
-                break;
-            case 2:
-                if (paymentMethods.contains("Paynow")){ 
-                    paymentMethods.remove("Paynow");
-                    System.out.println("Payment method successfully removed to branch.");
-                }
-                else System.out.println("Payment method already not accepted in branch.");
-                break;
-            case 3:
-                if (paymentMethods.contains("Paypal")){ 
-                    paymentMethods.remove("Paypal");
-                    System.out.println("Payment method successfully removed to branch.");
-                }
-                else System.out.println("Payment method already not accepted in branch.");
-                break;
-            default:
-                System.out.println("Invalid option chosen.");
-                return false;
-        }
+    //     switch (choice){
+    //         case 1:
+    //             if (paymentMethods.contains("Bank Card")){ 
+    //                 paymentMethods.remove("Bank Card");
+    //                 System.out.println("Payment method successfully removed to branch.");
+    //             }
+    //             else System.out.println("Payment method already not accepted in branch.");
+    //             break;
+    //         case 2:
+    //             if (paymentMethods.contains("Paynow")){ 
+    //                 paymentMethods.remove("Paynow");
+    //                 System.out.println("Payment method successfully removed to branch.");
+    //             }
+    //             else System.out.println("Payment method already not accepted in branch.");
+    //             break;
+    //         case 3:
+    //             if (paymentMethods.contains("Paypal")){ 
+    //                 paymentMethods.remove("Paypal");
+    //                 System.out.println("Payment method successfully removed to branch.");
+    //             }
+    //             else System.out.println("Payment method already not accepted in branch.");
+    //             break;
+    //         default:
+    //             System.out.println("Invalid option chosen.");
+    //             return false;
+    //     }
         
-        return true;
-    }
+    //     return true;
+    // }
 
     public int nextOrderID(){
         int maxOrderID = branchOrders.getOrderList().size();

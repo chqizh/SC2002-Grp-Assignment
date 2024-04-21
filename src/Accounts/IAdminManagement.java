@@ -19,6 +19,6 @@ public interface IAdminManagement {
 
 	public void addBranch();
 
-	public void removeBranch(String branchName,InMemoryDatabase db);
+	public void removeBranch(String branchName);
 
 }

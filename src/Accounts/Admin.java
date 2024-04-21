@@ -8,15 +8,15 @@ import Database.InMemoryDatabase;
 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
-    private transient Scanner sc = new Scanner(System.in);
+    private transient Scanner sc;
 
     public Admin(String name, String staffID, char gender, int age, InMemoryDatabase db){
         super(name, staffID, UserType.ADMIN, gender, age, db);
     }
 
     // From IAdminManagement
-    public void addStaff(String name, String staffID, char gender, int age, String branchID){
-        Staff newStaff = new Staff(name, staffID, gender, age, branchID, this.db);
+    public void addStaff(String name, String staffID, char gender, int age, String branchName){
+        Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
         Account newAccount = new Account(staffID);
         db.addStaff(newStaff);
         db.addAccount(newAccount);
@@ -127,6 +127,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     public void addBranch(){
+        sc = new Scanner(System.in);
         System.out.println("Enter branch name: ");
         String branchName=sc.nextLine();
 
@@ -134,7 +135,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         String branchLocation=sc.nextLine();
 
         System.out.println("Enter staff quota: ");
-        int staffQuota =sc.nextInt();
+        int staffQuota = sc.nextInt();
         sc.nextLine();
 
         Branch newBranch = new Branch(branchName, branchLocation, staffQuota); 
@@ -154,15 +155,16 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
     // From IStaffManagement
     public void displayStaffList(){
+        sc = new Scanner(System.in);
         ArrayList<String> staffIDsList = db.getStaffIDs();
-        int choice;
         System.out.println("Choose Filter: ");
         System.out.println("(1) Display all ");
         System.out.println("(2) Filter by Branch ");
         System.out.println("(3) Filter by Role ");
         System.out.println("(4) Filter by Gender ");
         System.out.println("(5) Filter by Age ");
-        choice=sc.nextInt();
+        int choice = sc.nextInt();
+        sc.nextLine();
 
         switch(choice){
             case 1:
@@ -172,8 +174,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                     System.out.println("Branch: " + staff.getBranchName());
                     System.out.println("Name: " + staff.getName());
                     System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                    System.out.println("Age: " + getAge());
-                    System.out.println("Gender: " + getGender());
+                    System.out.println("Age: " + staff.getAge());
+                    System.out.println("Gender: " + staff.getGender());
                 }
                 break;
             case 2: 
@@ -181,12 +183,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 String branch = sc.nextLine();
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
-                    if (staff.getBranchName() == branch){
+                    if (staff.getBranchName().equals(branch)){
                         System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Name: " + staff.getName());
                         System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Age: " + getAge());
-                        System.out.println("Gender: "+ getGender());
+                        System.out.println("Age: " + staff.getAge());
+                        System.out.println("Gender: "+ staff.getGender());
                     }
                 }
                 break;
@@ -201,8 +203,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                             System.out.println("StaffID: " + staff.getStaffID());
                             System.out.println("Branch: " + staff.getBranchName());
                             System.out.println("Name: " + staff.getName());
-                            System.out.println("Age: " + getAge());
-                            System.out.println("Gender: "+ getGender());
+                            System.out.println("Age: " + staff.getAge());
+                            System.out.println("Gender: "+ staff.getGender());
                         }
                     }
                 }
@@ -220,7 +222,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                         System.out.println("Branch: " + staff.getBranchName());
                         System.out.println("Name: " + staff.getName());
                         System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Age: " + getAge());
+                        System.out.println("Age: " + staff.getAge());
                     }
                 }
                 break;
@@ -234,7 +236,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                         System.out.println("Branch: " + staff.getBranchName());
                         System.out.println("Name: " + staff.getName());
                         System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Gender: "+ getGender());
+                        System.out.println("Gender: "+ staff.getGender());
                     }
                 }
                 break;
@@ -243,8 +245,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     }
 
-    public void removeStaff(String staffID, InMemoryDatabase db) {
+    public void removeStaff(String staffID) {
         db.removeStaff(staffID);
     }
 }
-
