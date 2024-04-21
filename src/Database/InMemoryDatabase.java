@@ -13,7 +13,7 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, Branch> branches;
     private Map<String, Staff> staffMap;
     private Map<String, BranchManager> branchManagerMap;
-    private Map<String, Admin> adminMap;
+    public Map<String, Admin> adminMap;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();

@@ -4,6 +4,7 @@ import java.io.*;
 import java.io.Console;
 
 
+
 import Accounts.*;
 import Branch.*;
 import Customer.*;
@@ -11,14 +12,14 @@ import Display.*;
 import Database.*;
 import DataPersistence.*;
 
-public class FOMSApp {
+public class FOMSApp{
     // Declaring ANSI_RESET so that we can reset the color
     public static final String ANSI_RESET = "\u001B[0m";
     // Declaring the color theme
     public static final String ANSI_CYAN = "\u001B[36m";
 
     private static final String DATA_STORE = "data_store.ser";
-    private Scanner sc;
+    private transient Scanner sc;
     private InMemoryDatabase db;
 
     public FOMSApp() {
@@ -27,6 +28,7 @@ public class FOMSApp {
         // Deserialization
         try {
             db = (InMemoryDatabase) SerializationUtil.deserialize(DATA_STORE);
+            System.out.println("reading from DATA_STORE");
         } catch (IOException | ClassNotFoundException e) {
             db = new InMemoryDatabase(); // Create a new one if no data is found
         }
@@ -34,9 +36,8 @@ public class FOMSApp {
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt", "KurtA", 'M', 40, app.db));
+        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40,app.db));
         app.db.addAccount(new Account("KurtA"));
-
         app.run();
         app.sc.close();
     }
@@ -45,13 +46,6 @@ public class FOMSApp {
         System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
         System.out.println("Are you a customer? (Y/N)");
         Console console = System.console();
-        if (console == null) {
-            System.out.println("No console available");
-            return;
-        }
-
-        System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
-        System.out.println("Are you a customer? (Y/N)");
         String userType = console.readLine();
         if ("Y".equalsIgnoreCase(userType)) {
             displayCustomerInterface();
@@ -80,13 +74,11 @@ public class FOMSApp {
 
         // Serialization
         try
-
         {
             SerializationUtil.serialize(db, DATA_STORE);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     private void displayStaffInterface(Staff staff) {
@@ -201,6 +193,8 @@ public class FOMSApp {
             System.out.println("(8) Edit Payment Method");
             System.out.println("(9) Open Branch");
             System.out.println("(10) Close Branch");
+            System.out.println("(11) Log Out");
+
             System.out.println("Please select your action: ");
         
             int choice = sc.nextInt();
@@ -211,17 +205,19 @@ public class FOMSApp {
                     String staffID = sc.next();
                     char gender = sc.next().charAt(0);
                     int age = sc.nextInt();
-                    String branchID = sc.next();
-                    //admin.addStaff(name, staffID, gender, age, branchID, db);
+                    String branchName = sc.next();
+                    admin.addStaff(name, staffID, gender, age, branchName, db);
                     break;
                 case 2:
-                    //admin.removeStaff(staffID, db);
+                    String staffID2 = sc.next();
+                    admin.removeStaff(staffID2, db);
                     break;
                 case 3:
-                    //admin.editStaff(staffID, db);
+                    String staffID3 = sc.next();
+                    //admin.editStaff(staffID3, db);
                     break;
                 case 4:
-                    //admin.displayStaffList();
+                    admin.displayStaffList();
                     break;
                 case 5:
                     //admin.assignManagers();
@@ -236,7 +232,7 @@ public class FOMSApp {
                     //admin.editPaymentMethod();
                     break;
                 case 9:
-                    //admin.addBranch(branchName, branchLocation, staffQuota);
+                    admin.addBranch();
                     break;
                 case 10:
                     //admin.removeBranch(branchName);
@@ -277,11 +273,6 @@ public class FOMSApp {
             branch = db.getBranchByBranchName(branchName);
         }
 
-        System.out.println("Enter your option:");
-        System.out.println("(1) Dine-In");
-        System.out.println("(2) Takeaway");
-        int option = sc.nextInt();
-        sc.nextLine();
 
         while (keepRunning) {
             System.out.println("/n|| Welcome to MadDonkeys! ||");

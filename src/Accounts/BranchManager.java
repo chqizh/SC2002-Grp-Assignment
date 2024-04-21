@@ -132,11 +132,11 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     }
 
 // From IStaffManagement
-	public void displayStaffList(){
-    ArrayList<String> staffIDsList = InMemoryDatabase.getStaffIDs();
+	public void displayStaffList(InMemoryDatabase db){
+    ArrayList<String> staffIDsList = db.getStaffIDs();
                 String branch = this.branchName;
                 for (String staffID : staffIDsList){
-                    Staff staff = InMemoryDatabase.getStaff(staffID);
+                    Staff staff = db.getStaff(staffID);
                     if (staff.getBranchName() == branch){
                         System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Name: " + staff.getName());

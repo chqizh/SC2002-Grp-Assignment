@@ -1,9 +1,9 @@
 package Accounts;
 
-//import Database.InMemoryDatabase;
+import Database.InMemoryDatabase;
 
 public interface IAdminManagement {
-	public void addStaff(String name, String staffID, char gender, int age, String branchID);
+	public void addStaff(String name, String staffID, char gender, int age, String branchID,InMemoryDatabase db);
 
 	public void removeStaff(String staffID);
 	
@@ -17,7 +17,7 @@ public interface IAdminManagement {
 
 	public void removePaymentMethod(String branchName);
 
-	public void addBranch(String branchName, String branchLocation, int staffQuota);
+	public void addBranch();
 
 	public void removeBranch(String branchName);
 

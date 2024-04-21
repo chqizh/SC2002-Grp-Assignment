@@ -5,6 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+
 /**
  * This class represents an account for a user with a staff ID, password, and role type.
  */
@@ -76,13 +77,6 @@ public class Account implements Serializable {
         }
     }
 
-    /**
-     * Validates the login credentials against the stored password hash.
-     * 
-     * @param staffID The staff ID to validate.
-     * @param password The password to validate.
-     * @return true if the credentials match, false otherwise.
-     */
     public boolean validateLogin(String password) {
         String hashedInputPassword = hashPassword(password);
         String defaultPasswordHash = hashPassword("password");
@@ -91,7 +85,8 @@ public class Account implements Serializable {
             if (this.passwordHash.equals(defaultPasswordHash)) {
                 System.out.println("You are using the default password. Please change your password.");
                 System.out.println("New Password: ");
-                
+/*              char[] passwordArray = console.readPassword("New Password: "); // Password will be masked
+                String password = new String(passwordArray); */
 
             }
             return true;

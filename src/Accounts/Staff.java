@@ -9,7 +9,7 @@ import Customer.*;
 /**
  * This class represents a staff member, which is a specific type of employee with a branch association.
  */
-public class Staff extends Employee implements IOrderProcess{
+public class Staff extends Employee implements IOrderProcess, Serializable{
     private String branchName;
 
     /**
