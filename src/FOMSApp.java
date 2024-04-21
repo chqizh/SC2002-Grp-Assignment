@@ -275,6 +275,11 @@ public class FOMSApp {
             branch = db.getBranchByBranchName(branchName);
         }
 
+        System.out.println("Enter your option:");
+        System.out.println("(1) Dine-In");
+        System.out.println("(2) Takeaway");
+        int option = sc.nextInt();
+        sc.nextLine();
 
         while (keepRunning) {
             System.out.println("/n|| Welcome to MadDonkeys! ||");
