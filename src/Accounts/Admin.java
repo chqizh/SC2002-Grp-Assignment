@@ -243,9 +243,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     }
 
-    public void removeStaff(String staffID2, InMemoryDatabase db2) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeStaff'");
+    public void removeStaff(String staffID, InMemoryDatabase db) {
+        db.removeStaff(staffID);
     }
 }
 
