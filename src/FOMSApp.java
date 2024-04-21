@@ -1,9 +1,6 @@
 import java.lang.System;
 import java.util.Scanner;
 import java.io.*;
-import java.io.Console;
-
-
 
 import Accounts.*;
 import Branch.*;
@@ -36,8 +33,10 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
-        app.db.addAccount(new Account("KurtA"));
+        // app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+        // app.db.addAccount(new Account("KurtA"));
+        // app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
+        // app.db.addAccount(new Account("HenryT"));
         app.run();
         app.sc.close();
     }
@@ -201,12 +200,19 @@ public class FOMSApp{
             sc.nextLine(); // Consume the newline
             switch (choice) {
                 case 1:
-                    String name = sc.next();
-                    String staffID = sc.next();
-                    char gender = sc.next().charAt(0);
+                    System.out.println("Enter a name.");
+                    String name = sc.nextLine();
+                    System.out.println("Enter a staffID.");
+                    String staffID = sc.nextLine();
+                    System.out.println("Enter a gender (M/F/N).");
+                    char gender = sc.nextLine().charAt(0);
+                    System.out.println("Enter a age.");
                     int age = sc.nextInt();
+                    sc.nextLine();
+                    System.out.println("Enter a branch.");
                     String branchName = sc.next();
                     admin.addStaff(name, staffID, gender, age, branchName);
+                    System.out.println("Success.");
                     break;
                 case 2:
                     String staffID2 = sc.next();
