@@ -268,9 +268,7 @@ public class FOMSApp{
         while(branch == null){
             System.out.println("You have entered an invalid Branch ID!");
             System.out.println("Enter Branch ID:");
-            // branchID = sc.nextInt();
             branchName = sc.next();
-
             sc.nextLine();
             branch = db.getBranchByBranchName(branchName);
         }

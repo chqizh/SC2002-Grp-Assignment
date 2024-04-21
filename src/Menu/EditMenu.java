@@ -4,13 +4,15 @@ import java.io.Serializable;
 import java.util.*;
 
 public class EditMenu implements Serializable{
-	public ArrayList<MenuItem> menu;
+	private ArrayList<MenuItem> menu;
+    private transient Scanner sc;
+
 	public EditMenu(ArrayList<MenuItem> menu) {
 		this.menu = menu;
 	}
 
 	public int getIntegerFromUser() {
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		int userInput = 0;
 		
 		boolean integerUserInput = false;
@@ -27,7 +29,7 @@ public class EditMenu implements Serializable{
 	}
 
 	public MenuItem addItems(){
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		System.out.println("Enter item ID:");
 		
 		int itemId = this.getIntegerFromUser();
@@ -53,7 +55,7 @@ public class EditMenu implements Serializable{
 
 	public ArrayList<MenuItem> deleteItems(ArrayList<MenuItem>menu) {
 
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
         int id = this.getIntegerFromUser();
 		sc.nextLine();

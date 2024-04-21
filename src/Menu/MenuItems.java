@@ -7,15 +7,16 @@ import DataPersistence.SerializationUtil;
 
 public class MenuItems implements Serializable{
 	//private static final long serialVersionUID = 1L;
-	ArrayList<MenuItem> menu;
-	EditMenu editmenu = new EditMenu(menu);
+	private ArrayList<MenuItem> menu;
+	private EditMenu editmenu = new EditMenu(menu);
+	private transient Scanner sc;
 	
 	public MenuItems() {
 		menu = new ArrayList<>();
 	}
 
 	public int getIntegerFromUser() {
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		int userInput = 0;
 		
 		boolean integerUserInput = false;
@@ -32,7 +33,7 @@ public class MenuItems implements Serializable{
 	}
 	
 	public void addItems() throws IOException {		
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to add?");
 	    int numberToAdd = this.getIntegerFromUser();
 
@@ -45,7 +46,7 @@ public class MenuItems implements Serializable{
 
 	
 	public void deleteItems() throws IOException {
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to delete?");
 	    int numberToDelete = this.getIntegerFromUser();
 		
@@ -56,7 +57,7 @@ public class MenuItems implements Serializable{
 	}
 
 	public void updateName() throws IOException{
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		System.out.println("Enter ID of item:");
 		int itemId = this.getIntegerFromUser();
 		sc.nextLine();
@@ -68,7 +69,7 @@ public class MenuItems implements Serializable{
 	}
 
 	public void updatePrice() throws IOException{
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 		System.out.println("Enter ID of Item:");
 		int itemId = this.getIntegerFromUser();
 		sc.nextLine();
