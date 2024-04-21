@@ -1,6 +1,8 @@
 import java.lang.System;
 import java.util.Scanner;
 import java.io.*;
+import java.io.Console;
+
 
 import Accounts.*;
 import Branch.*;
@@ -42,15 +44,21 @@ public class FOMSApp {
     public void run() {
         System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
         System.out.println("Are you a customer? (Y/N)");
-        boolean isCustomer = (Character.toUpperCase(sc.next().charAt(0)) == 'Y');
-        sc.nextLine(); // Consume the rest of the line
-        if (isCustomer) {
+        Console console = System.console();
+        if (console == null) {
+            System.out.println("No console available");
+            return;
+        }
+
+        System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
+        System.out.println("Are you a customer? (Y/N)");
+        String userType = console.readLine(); // Use readLine for non-password inputs
+        if ("Y".equalsIgnoreCase(userType)) {
             displayCustomerInterface();
         } else {
-            System.out.println("Enter your staffID: ");
-            String staffID = sc.nextLine();
-            System.out.println("Enter your password: ");
-            String password = sc.nextLine();
+            String staffID = console.readLine("Enter your staffID: ");
+            char[] passwordArray = console.readPassword("Enter your password: "); // Password will be masked
+            String password = new String(passwordArray);
 
             // A method that returns the Account object after validation
             Employee employee = db.validateEmployee(staffID, password);

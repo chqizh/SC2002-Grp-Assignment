@@ -1,5 +1,6 @@
 package Accounts;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -7,7 +8,7 @@ import java.util.Base64;
 /**
  * This class represents an account for a user with a staff ID, password, and role type.
  */
-public class Account {
+public class Account implements Serializable {
     private String staffID;
     private String passwordHash;
 

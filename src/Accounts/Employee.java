@@ -1,9 +1,11 @@
 package Accounts;
+import java.io.Serializable;
+
 
 /**
  * This class represents an employee with a name, staff ID, user type, gender, and age.
  */
-public class Employee {
+public class Employee implements Serializable {
     private String name;
     private String staffID; // New attribute for staff ID
     private UserType userType; // Uses UserType enum
