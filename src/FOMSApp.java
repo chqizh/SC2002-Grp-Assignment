@@ -34,7 +34,7 @@ public class FOMSApp {
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt", "KurtA", 'M', 40));
+        app.db.addAdmin(new Admin("Kurt", "KurtA", 'M', 40, app.db));
         app.db.addAccount(new Account("KurtA"));
 
         app.run();
@@ -277,6 +277,11 @@ public class FOMSApp {
             branch = db.getBranchByBranchName(branchName);
         }
 
+        System.out.println("Enter your option:");
+        System.out.println("(1) Dine-In");
+        System.out.println("(2) Takeaway");
+        int option = sc.nextInt();
+        sc.nextLine();
 
         while (keepRunning) {
             System.out.println("/n|| Welcome to MadDonkeys! ||");

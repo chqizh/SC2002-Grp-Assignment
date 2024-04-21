@@ -1,5 +1,7 @@
 package Accounts;
 
+//import Database.InMemoryDatabase;
+
 public interface IAdminManagement {
 	public void addStaff(String name, String staffID, char gender, int age, String branchID);
 

@@ -9,27 +9,25 @@ import Database.InMemoryDatabase;
 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
-    private Scanner sc = new Scanner(System.in);
-    private InMemoryDatabase db;
+    Scanner sc = new Scanner(System.in);
 
-    public Admin(String name, String staffID, char gender, int age, InMemoryDatabase db){
+    public Admin(String name, String staffID, char gender, int age){
         super(name, staffID, UserType.ADMIN, gender, age);
-        this.db = db;
     }
 
     // From IAdminManagement
-    public void addStaff(String name, String staffID, char gender, int age, String branchID){
+    public void addStaff(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db){
         Staff newStaff = new Staff(name, staffID, gender, age, branchID);
         Account newAccount = new Account(staffID);
         db.addStaff(newStaff);
         db.addAccount(newAccount);
     };
 
-    public void removeStaff(String staffID){
+    public void removeStaff(String staffID, InMemoryDatabase db){
         db.removeStaff(staffID);
     };
 
-    public void editStaff(String staffID){
+    public void editStaff(String staffID, InMemoryDatabase db){
         System.out.println("What would you like to edit?");
         System.out.println("(1) Name");
         System.out.println("(2) Gender");
@@ -63,7 +61,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void assignManager(String staffID, String branchName){
+    public void assignManager(String staffID, String branchName, InMemoryDatabase db){
         if (db.getStaff(staffID) == null) {
             System.out.println("Manager does not exist. Manager assignment unsuccessful.");
         }
@@ -76,7 +74,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void transferEmployee(String staffID, String branchName){
+    public void transferEmployee(String staffID, String branchName, InMemoryDatabase db){
         if (db.getStaff(staffID) == null) {
             System.out.println("Staff/Manager does not exist. Employee assignment unsuccessful.");
         }
@@ -118,20 +116,20 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void addPaymentMethod(String branchName){
+    public void addPaymentMethod(String branchName, InMemoryDatabase db){
         db.getBranchByBranchName(branchName).addPaymentMethod();
     };
 
-    public void removePaymentMethod(String branchName){
+    public void removePaymentMethod(String branchName, InMemoryDatabase db){
         db.getBranchByBranchName(branchName).removePaymentMethod();
     };
 
-    public void addBranch(String branchName, String branchLocation, int staffQuota){
+    public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db){
         Branch newBranch = new Branch(branchName, branchLocation, staffQuota);
         db.addBranch(newBranch);
     };
 
-    public void removeBranch(String branchName){
+    public void removeBranch(String branchName, InMemoryDatabase db){
         db.removeBranch(branchName);
     };
 
