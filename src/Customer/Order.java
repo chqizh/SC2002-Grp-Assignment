@@ -90,7 +90,7 @@ public class Order {
         return false;
     }
 
-    public void placeOrder(Order order) throws IOException{
-        branch.getBranchOrders().addOrder(order);
+    public void placeOrder() throws IOException{
+        branch.getBranchOrders().addOrder(this);
     }
 }

@@ -115,7 +115,8 @@ public class Customer implements ICustomerOrderProcess{
                 for(MenuItem item: cart){
                     order.getOrderItems().add(item);
                 }
-                order.placeOrder(order);
+                
+                order.placeOrder();
 
                 System.out.println("Order placed successfully.");
                 cart.clear();
