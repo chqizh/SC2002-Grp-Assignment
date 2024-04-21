@@ -2,6 +2,7 @@ package Branch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import Menu.*;
@@ -209,5 +210,10 @@ public class Branch implements Serializable {
         }
         
         return true;
+    }
+
+    public int nextOrderID(){
+        int maxOrderID = branchOrders.getOrderList().size();
+        return maxOrderID++;
     }
 }

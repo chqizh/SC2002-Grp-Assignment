@@ -10,8 +10,9 @@ import java.util.ArrayList;
 
 public class Customer implements ICustomerOrderProcess{
     private OrderList orderList;
-    private ArrayList<MenuItem>cart = new ArrayList<>();
-    private static ArrayList<String> paymentMethods = new ArrayList<>();
+    private ArrayList<MenuItem> cart = new ArrayList<>();
+    private ArrayList<String> paymentMethods = new ArrayList<>();
+    private transient Scanner sc;
 
     // private Branch selectedBranch;
     // public void selectBranch(Branch branch){
@@ -46,7 +47,7 @@ public class Customer implements ICustomerOrderProcess{
         MenuItems menu = new MenuItems();
         ArrayList<MenuItem> menu_items = menu.getMenuItems();
 
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Enter the item's ID you would like to order:");
         int item_id = sc.nextInt();
         sc.nextLine();
@@ -68,7 +69,7 @@ public class Customer implements ICustomerOrderProcess{
 
 
     public void deleteFromCart() {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Enter Item ID that you would like to remove:");
         int itemID = sc.nextInt();
         sc.nextLine();
@@ -132,9 +133,8 @@ public class Customer implements ICustomerOrderProcess{
         }
     }
 
-    // public void trackOrder(int branchID) {
     public void trackOrder(String branchName) {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Enter Order ID:");
         int orderID = sc.nextInt();
         sc.nextLine(); // Consume newline character

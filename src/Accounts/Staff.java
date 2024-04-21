@@ -62,7 +62,8 @@ public class Staff extends Employee implements IOrderProcess{
     }
 
     public void processOrders(Branch branch, int orderID) {
-        Scanner  sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
+        // NEED TO PRINT ALL ORDERS OUT
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println("Current status is " + order.getOrderStatus());

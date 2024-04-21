@@ -37,11 +37,10 @@ public class MenuItems implements Serializable{
 	    int numberToAdd = this.getIntegerFromUser();
 
 		for (int i=0; i<numberToAdd; i++) {
-			
 			MenuItem newItem = editmenu.addItems();
 			menu.add(newItem);
 		}
-		SerializationUtil.serialize(menu, "menu.ser");
+		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
 	
@@ -53,7 +52,7 @@ public class MenuItems implements Serializable{
 		for (int i=0; i<numberToDelete; i++) {
 			menu = editmenu.deleteItems(menu);
 		}
-		SerializationUtil.serialize(menu, "menu.ser");	
+		//SerializationUtil.serialize(menu, "menu.ser");	
 	}
 
 	public void updateName() throws IOException{
@@ -65,7 +64,7 @@ public class MenuItems implements Serializable{
 		String newName = sc.nextLine();
 
 		editmenu.updateName(itemId, newName, menu);
-		SerializationUtil.serialize(menu, "menu.ser");
+		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
 	public void updatePrice() throws IOException{
@@ -78,7 +77,7 @@ public class MenuItems implements Serializable{
 		sc.nextLine();
 
 		editmenu.updatePrice(itemId, newprice, menu);
-		SerializationUtil.serialize(menu, "menu.ser");
+		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
 	public ArrayList<MenuItem> getMenuItems() {

@@ -8,7 +8,7 @@ import DataPersistence.SerializationUtil;
 
 public class OrderList implements Serializable{
     // <orderID, order>
-    public HashMap<Integer, Order> orderMap;
+    private HashMap<Integer, Order> orderMap;
 
     /*
     public OrderList() throws IOException {
@@ -51,4 +51,8 @@ public class OrderList implements Serializable{
         return orderList;
     }
 
+    public ArrayList<Order> getOrderList(){
+        ArrayList<Order> orderList = new ArrayList<Order>(orderMap.values());
+        return orderList;
+    }
 }

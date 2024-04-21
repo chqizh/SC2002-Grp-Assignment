@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import Branch.OrderList;
+import Database.InMemoryDatabase;
 import Menu.MenuItem;
 import Branch.Branch;
 
@@ -16,13 +17,14 @@ public class Order {
 
     private int orderID;
     private orderStatusFlags orderStatus;
-    // private int branchID;
     private String branchName;
     private ArrayList<MenuItem> orderItems;
     //private int numItems;
     private static int nextOrderID = 1;
     private OrderList orderList;
-    public Branch branch;
+    private Branch branch;
+    private String customisation;
+
 
 /*     public Order(int branchID){
         this.orderID = orderID;
@@ -31,11 +33,11 @@ public class Order {
         this.orderItems = new ArrayList<>();
     } */
 
-        // im not sure if this version i did is correctly done. This is constructor?- KH
-    public Order(String branchName){ 
-        this.orderID = orderID; // shld we assign to static/const variable?
-        this.orderStatus = orderStatusFlags.PROCESSED; // why processed?
-        this.branchName = branchName; 
+    // im not sure if this version i did is correctly done. This is constructor?- KH
+    public Order(Branch branch){ 
+        this.orderID = branch.nextOrderID();
+        this.orderStatus = orderStatusFlags.NEW;
+        this.branchName = branch.getBranchName(); 
         this.orderItems = new ArrayList<>(); 
     }
 

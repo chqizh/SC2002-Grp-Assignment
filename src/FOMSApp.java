@@ -261,14 +261,9 @@ public class FOMSApp{
         boolean keepRunning = true;
         Customer customer = new Customer();
         System.out.println("Enter Branch Name:");
-        // int branchID = sc.nextInt();
         String branchName = sc.next();
         sc.nextLine();
-
-       // Branches branches = new Branches();
-       // Branch branch = branches.getSpecificBranch(branchID);
-
-       Branch branch = db.getBranchByBranchName(branchName);
+        Branch branch = db.getBranchByBranchName(branchName);
 
         while(branch == null){
             System.out.println("You have entered an invalid Branch ID!");
@@ -279,7 +274,6 @@ public class FOMSApp{
             sc.nextLine();
             branch = db.getBranchByBranchName(branchName);
         }
-
 
         while (keepRunning) {
             System.out.println("/n|| Welcome to MadDonkeys! ||");
