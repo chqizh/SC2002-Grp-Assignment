@@ -25,15 +25,6 @@ public class Order {
     private Branch branch;
     private String customisation;
 
-
-/*     public Order(int branchID){
-        this.orderID = orderID;
-        this.orderStatus = orderStatusFlags.PROCESSED;
-        this.branchID = branchID;
-        this.orderItems = new ArrayList<>();
-    } */
-
-    // im not sure if this version i did is correctly done. This is constructor?- KH
     public Order(Branch branch){ 
         this.orderID = branch.nextOrderID();
         this.orderStatus = orderStatusFlags.NEW;
@@ -85,21 +76,6 @@ public class Order {
         else return "Completed.";
     }
 
-    public boolean updateOrderStatus(){
-        if (this.orderStatus == orderStatusFlags.NEW){
-            this.orderStatus = orderStatusFlags.PROCESSED;
-            return true;
-        }
-        else if (this.orderStatus == orderStatusFlags.PROCESSED){
-            this.orderStatus = orderStatusFlags.PICKUP;
-            return true;
-        }
-        else if (this.orderStatus == orderStatusFlags.PICKUP){
-            this.orderStatus = orderStatusFlags.COMPLETED;
-            return true;
-        }
-        return false;
-    }
 
     // public void placeOrder() throws IOException{
     public void placeOrder(){

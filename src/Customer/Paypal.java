@@ -1,8 +1,16 @@
 package Customer;
 
-public class Paypal implements Payment {
+public class Paypal extends Payment {
     private String email;
     private String password;
+
+    Paypal(){
+        setPaymentMethodName("Paypal");
+    }
+    
+    public String getPaymentMethodName(){
+        return paymentMethodName;
+    }
 
     public Paypal(String email, String password) {
         this.email = email;

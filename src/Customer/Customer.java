@@ -2,7 +2,7 @@ package Customer;
 import Menu.MenuDisplay;
 import Menu.MenuItem;
 import Menu.MenuItems;
-import Branch.OrderList;
+import Branch.*;
 import java.util.Scanner;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Customer implements ICustomerOrderProcess{
     private OrderList orderList;
     private ArrayList<MenuItem> cart = new ArrayList<>();
-    private ArrayList<String> paymentMethods = new ArrayList<>();
+    private ArrayList<String> paymentMethods;
     private transient Scanner sc;
 
     // private Branch selectedBranch;
@@ -19,6 +19,10 @@ public class Customer implements ICustomerOrderProcess{
     //     this.selectedBranch = branch;
     // }
 
+    Customer (){
+        paymentMethods = new ArrayList<Payments>();
+    }
+    
     public static ArrayList<String> getPaymentMethods(){
         return paymentMethods;
     }
@@ -91,7 +95,7 @@ public class Customer implements ICustomerOrderProcess{
 
 
     //public void placeOrder(int branchID) throws IOException {
-    public void placeOrder(String branchName){
+    public void placeOrder(Branch branch){
 
         if (cart.isEmpty()) {
             System.out.println("Cannot place an empty order.");
@@ -113,9 +117,7 @@ public class Customer implements ICustomerOrderProcess{
 
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {
-                //Order order = new Order(branchID);
-                Order order = new Order(branchName);
-
+                Order order = new Order(branch);
 
                 for(MenuItem item: cart){
                     order.getOrderItems().add(item);

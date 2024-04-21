@@ -1,7 +1,15 @@
 package Customer;
 
-public class PayNow implements Payment {
+public class PayNow extends Payment {
     private String mobileNumber;
+
+    PayNow(){
+        setPaymentMethodName("Paynow");
+    }
+
+    public String getPaymentMethodName(){
+        return paymentMethodName;
+    }
 
     public PayNow(String mobileNumber) {
         this.mobileNumber = mobileNumber;

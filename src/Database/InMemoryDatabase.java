@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 import Accounts.*;
 import Branch.*;
+import Customer.*;
 
 public class InMemoryDatabase implements Serializable {
     private Map<String, Account> accounts;
@@ -14,6 +15,7 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, Staff> staffMap;
     private Map<String, BranchManager> branchManagerMap;
     public Map<String, Admin> adminMap;
+    public ArrayList<Payment> paymentMethodsMap;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();
@@ -21,6 +23,7 @@ public class InMemoryDatabase implements Serializable {
         this.staffMap = new HashMap<>();
         this.branchManagerMap = new HashMap<>();
         this.adminMap = new HashMap<>();
+        this.paymentMethodsMap = new ArrayList<>();
     }
 
     public void addAccount(Account account) {

@@ -1,5 +1,13 @@
 package Customer;
 
-public interface Payment {
-    boolean processPayment(double amount);
+public abstract class Payment {
+    public String paymentMethodName;
+
+    public abstract boolean processPayment(double amount);
+
+    public void setPaymentMethodName(String name){
+        paymentMethodName = name;
+    };
+
+    public abstract String getPaymentMethodName();
 }
