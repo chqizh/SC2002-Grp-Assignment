@@ -3,10 +3,9 @@ import java.io.Serializable;
 
 import Database.InMemoryDatabase;
 
-
 /**
- * This class represents an employee with a name, staff ID, user type, gender, and age.
- */
+* This class represents an employee with a name, staff ID, user type, gender, and age.
+*/
 public class Employee implements Serializable {
     private String name;
     private String staffID; // New attribute for staff ID

@@ -119,11 +119,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     public void addPaymentMethod(String branchName){
-        db.getBranchByBranchName(branchName).addPaymentMethod();
+        db.addPaymentMethod();
     };
 
     public void removePaymentMethod(String branchName){
-        db.getBranchByBranchName(branchName).removePaymentMethod();
+        db.removePaymentMethod();
     };
 
     public void addBranch(){

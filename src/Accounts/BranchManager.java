@@ -8,6 +8,7 @@ import Database.*;
 
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchName;
+    private transient Scanner sc;
 
 	public BranchManager(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db) {
         super(name, staffID, UserType.BRANCH_MANAGER, gender, age, db);
@@ -50,7 +51,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     }
 
     public void processOrders(Branch branch, int orderID) {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println("Current status is " + order.getOrderStatus());
@@ -106,7 +107,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         System.out.println("What would you like to edit?");
         System.out.println("(1) Update name of menu item.");
         System.out.println("(1) Update price of menu item.");
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         int choice = sc.nextInt();
         switch (choice){
             case 1:
