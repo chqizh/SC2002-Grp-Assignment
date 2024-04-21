@@ -16,7 +16,7 @@ public class Order {
 
     private int orderID;
     private orderStatusFlags orderStatus;
-    /* */ private int branchID;
+    // private int branchID;
     private String branchName;
     private ArrayList<MenuItem> orderItems;
     //private int numItems;

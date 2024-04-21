@@ -84,11 +84,52 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
 
 
 // From IMenuManagement
-    public void addMenuItem(Branch branch){};
+    public void addMenuItem(Branch branch){
+        try {
+            branch.getBranchMenu().addItems();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
-    public void removeMenuItem(Branch branch){};
+    public void removeMenuItem(Branch branch){
+        try {
+            branch.getBranchMenu().deleteItems();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
-    public void editMenuItem(Branch branch){};
+    public void editMenuItem(Branch branch){
+        System.out.println("What would you like to edit?");
+        System.out.println("(1) Update name of menu item.");
+        System.out.println("(1) Update price of menu item.");
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        switch (choice){
+            case 1:
+                try {
+                    branch.getBranchMenu().updateName();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                break;
+            case 2:
+                try {
+                    branch.getBranchMenu().updatePrice();
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+                break;
+            default:
+                System.out.println("Invalid option entered.");
+                break;
+        }   
+    }
 
 // From IStaffManagement
 	public void displayStaffList(){
