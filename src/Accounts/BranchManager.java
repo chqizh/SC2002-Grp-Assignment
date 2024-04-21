@@ -4,6 +4,7 @@ import java.util.*;
 
 import Branch.*;
 import Customer.*;
+import Database.*;
 
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchName;
@@ -90,7 +91,18 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     public void editMenuItem(Branch branch){};
 
 // From IStaffManagement
-	public void displayStaffList(){}
-
-
+	public void displayStaffList(){
+    ArrayList<String> staffIDsList = InMemoryDatabase.getStaffIDs();
+                String branch = this.branchName;
+                for (String staffID : staffIDsList){
+                    Staff staff = InMemoryDatabase.getStaff(staffID);
+                    if (staff.getBranchName() == branch){
+                        System.out.println("StaffID: " + staff.getStaffID());
+                        System.out.println("Name: " + staff.getName());
+                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
+                        System.out.println("Age: " + getAge());
+                        System.out.println("Gender: "+ getGender());
+                    }
+                }
+            }
 }

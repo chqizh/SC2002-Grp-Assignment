@@ -134,7 +134,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
 
     // From IStaffManagement
-    public void displayStaffListAdmin(){
+    public void displayStaffList(){
         ArrayList<String> staffIDsList = InMemoryDatabase.getStaffIDs();
         int choice;
         System.out.println("Choose Filter: ");

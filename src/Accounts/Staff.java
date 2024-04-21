@@ -19,13 +19,13 @@ public class Staff extends Employee implements IOrderProcess{
      * @param age      The age of the staff member.
      * @param branchID The ID of the branch this staff member is associated with.
      */
-    public Staff(String name, String staffID, char gender, int age, String branchID) {
+    public Staff(String name, String staffID, char gender, int age, String branchName) {
         super(name, staffID, UserType.STAFF, gender, age);
-        this.branchName = branchID;
+        this.branchName = branchName;
     }
 
     /**
-     * Gets the branch ID associated with this staff member.import java.util.Scanner; 
+     * Gets the branch ID associated with this staff member.
      *
      * @return The branch ID.
      */
@@ -36,7 +36,7 @@ public class Staff extends Employee implements IOrderProcess{
     /**
      * Sets the branch ID for this staff member.
      *
-     * @param branchName The new branchName.
+     * @param branchID The new branch ID.
      */
     public void setBranchName(String branchName) {
         this.branchName = branchName;
@@ -45,15 +45,15 @@ public class Staff extends Employee implements IOrderProcess{
     // From IOrderProcess
     public void viewNewOrders(Branch branch) {
         System.out.println("New Orders:");
-        branch.getBranchOrders().getOrderList().values().stream()
+        branch.getBranchOrders().getOrderList().stream()
                 .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
                 .forEach(System.out::println); // Print each order (implement toString in Order for better output)
     }
 
     public void viewOrder(Branch branch, int orderID) {
-        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
-            System.out.println(order); // Assuming toString() in Order is overridden
+            System.out.println(order); 
         } else {
             System.out.println("Order ID " + orderID + " not found.");
         }
@@ -61,7 +61,7 @@ public class Staff extends Employee implements IOrderProcess{
 
     public void processOrders(Branch branch, int orderID) {
         Scanner  sc = new Scanner(System.in);
-        Order order = branch.getBranchOrders().getSpecificOrder(orderID);
+        Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println("Current status is " + order.getOrderStatus());
             System.out.println("Pick update action:");
