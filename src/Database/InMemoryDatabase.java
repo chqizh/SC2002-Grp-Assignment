@@ -3,6 +3,100 @@ package Database;
 import java.util.HashMap;
 import java.util.Map;
 import java.io.Serializable;
+
+import Accounts.*;
+import Branch.*;
+
+public class InMemoryDatabase implements Serializable {
+    private Map<String, Account> accounts;
+    private Map<String, Branch> branches;
+    private Map<String, Staff> staffMap;
+    private Map<String, BranchManager> branchManagerMap;
+    private Map<String, Admin> adminMap;
+
+    public InMemoryDatabase() {
+        this.accounts = new HashMap<>();
+        this.branches = new HashMap<>();
+        this.staffMap = new HashMap<>();
+        this.branchManagerMap = new HashMap<>();
+        this.adminMap = new HashMap<>();
+    }
+
+    public void addAccount(Account account) {
+        this.accounts.put(account.getStaffID(), account);
+    }
+
+    public void removeAccount(String accountID) {
+        this.accounts.remove(accountID);
+    }
+
+    public void addBranch(Branch branch) {
+        this.branches.put(branch.getBranchName(), branch);
+    }
+
+    public void removeBranch(String branchName) {
+        this.branches.remove(branchName);
+    }
+
+    public void addStaff(Staff staff) {
+        this.staffMap.put(staff.getStaffID(), staff);
+    }
+
+    public void removeStaff(String staffID) {
+        this.staffMap.remove(staffID);
+    }
+
+    public void addBranchManager(BranchManager branchManager) {
+        this.branchManagerMap.put(branchManager.getStaffID(), branchManager);
+    }
+
+    public void addAdmin(Admin admin) {
+        this.adminMap.put(admin.getStaffID(), admin);
+    }
+
+    public Account getAccountByStaffID(String staffID) {
+        return this.accounts.get(staffID);
+    }
+
+    public Branch getBranchByBranchName(String branchName) {
+        return this.branches.get(branchName);
+    }
+
+    public Staff getStaff(String staffID) {
+        return this.staffMap.get(staffID);
+    }
+
+    public BranchManager getBranchManager(String staffID) {
+        return this.branchManagerMap.get(staffID);
+    }
+
+    public Admin getAdmin(String staffID) {
+        return this.adminMap.get(staffID);
+    }
+
+    // To validate account
+    public Employee validateEmployee(String staffID, String password) {
+        Account account = getAccountByStaffID(staffID);
+        if (account != null && account.validateLogin(password)) {
+            if (this.staffMap.containsKey(staffID)) {
+                return this.staffMap.get(staffID);
+            } else if (this.branchManagerMap.containsKey(staffID)) {
+                return this.branchManagerMap.get(staffID);
+            } else if (this.adminMap.containsKey(staffID)) {
+                return this.adminMap.get(staffID);
+            }
+        }
+        return null; // Login failed or staffID not found in any map
+    }
+
+}
+
+
+/* package Database;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
@@ -103,4 +197,4 @@ public class InMemoryDatabase implements Serializable{
         return null; // Login failed or staffID not found in any map
     }
 
-}
+} */
