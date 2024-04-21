@@ -1,7 +1,6 @@
 package Accounts;
 
 import java.util.ArrayList;
-import java.io.Serializable;
 import java.util.Scanner; 
 
 import Branch.*;
@@ -9,25 +8,27 @@ import Database.InMemoryDatabase;
 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
-    Scanner sc = new Scanner(System.in);
+    private transient Scanner sc = new Scanner(System.in);
+    private InMemoryDatabase db;
 
-    public Admin(String name, String staffID, char gender, int age){
+    public Admin(String name, String staffID, char gender, int age, InMemoryDatabase db){
         super(name, staffID, UserType.ADMIN, gender, age);
+        this.db = db;
     }
 
     // From IAdminManagement
-    public void addStaff(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db){
+    public void addStaff(String name, String staffID, char gender, int age, String branchID,InMemoryDatabase db){
         Staff newStaff = new Staff(name, staffID, gender, age, branchID);
         Account newAccount = new Account(staffID);
         db.addStaff(newStaff);
         db.addAccount(newAccount);
     };
 
-    public void removeStaff(String staffID, InMemoryDatabase db){
+    public void removeStaff(String staffID){
         db.removeStaff(staffID);
     };
 
-    public void editStaff(String staffID, InMemoryDatabase db){
+    public void editStaff(String staffID){
         System.out.println("What would you like to edit?");
         System.out.println("(1) Name");
         System.out.println("(2) Gender");
@@ -61,7 +62,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void assignManager(String staffID, String branchName, InMemoryDatabase db){
+    public void assignManager(String staffID, String branchName){
         if (db.getStaff(staffID) == null) {
             System.out.println("Manager does not exist. Manager assignment unsuccessful.");
         }
@@ -74,7 +75,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void transferEmployee(String staffID, String branchName, InMemoryDatabase db){
+    public void transferEmployee(String staffID, String branchName){
         if (db.getStaff(staffID) == null) {
             System.out.println("Staff/Manager does not exist. Employee assignment unsuccessful.");
         }
@@ -116,26 +117,41 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void addPaymentMethod(String branchName, InMemoryDatabase db){
+    public void addPaymentMethod(String branchName){
         db.getBranchByBranchName(branchName).addPaymentMethod();
     };
 
-    public void removePaymentMethod(String branchName, InMemoryDatabase db){
+    public void removePaymentMethod(String branchName){
         db.getBranchByBranchName(branchName).removePaymentMethod();
     };
 
-    public void addBranch(String branchName, String branchLocation, int staffQuota, InMemoryDatabase db){
-        Branch newBranch = new Branch(branchName, branchLocation, staffQuota);
-        db.addBranch(newBranch);
+    public void addBranch(){
+        System.out.println("Enter branch name: ");
+        String branchName=sc.nextLine();
+
+        System.out.println("Enter branch location: ");
+        String branchLocation=sc.nextLine();
+
+        System.out.println("Enter staff quota: ");
+        int staffQuota =sc.nextInt();
+        sc.nextLine();
+
+        Branch newBranch = new Branch(branchName, branchLocation, staffQuota);        
+        System.out.println("You have successfully opened a branch.");
+ /*        }
+        else{
+            System.out.println("Unsuccessful in opening of branch.");
+        }
+        return newBranch; */
     };
 
-    public void removeBranch(String branchName, InMemoryDatabase db){
+    public void removeBranch(String branchName){
         db.removeBranch(branchName);
     };
 
 
     // From IStaffManagement
-    public void displayStaffList(InMemoryDatabase db){
+    public void displayStaffList(){
         ArrayList<String> staffIDsList = db.getStaffIDs();
         int choice;
         System.out.println("Choose Filter: ");
@@ -225,58 +241,9 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     }
 
-    @Override
-    public void displayStaffList() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'displayStaffList'");
-    }
-
-    @Override
-    public void removeStaff(String staffID) {
+    public void removeStaff(String staffID2, InMemoryDatabase db2) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'removeStaff'");
-    }
-
-    @Override
-    public void editStaff(String staffID) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'editStaff'");
-    }
-
-    @Override
-    public void assignManager(String staffID, String branchName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'assignManager'");
-    }
-
-    @Override
-    public void transferEmployee(String staffID, String branchName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'transferEmployee'");
-    }
-
-    @Override
-    public void addPaymentMethod(String branchName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addPaymentMethod'");
-    }
-
-    @Override
-    public void removePaymentMethod(String branchName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removePaymentMethod'");
-    }
-
-    @Override
-    public void addBranch() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'addBranch'");
-    }
-
-    @Override
-    public void removeBranch(String branchName) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeBranch'");
     }
 }
 
