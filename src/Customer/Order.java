@@ -2,6 +2,7 @@ package Customer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 import Branch.OrderList;
 import Database.InMemoryDatabase;
 import Menu.MenuItem;
@@ -12,18 +13,20 @@ public class Order {
         NEW,
         PROCESSED,
         PICKUP,
-        COMPLETED
+        COMPLETED,
+        CANCELLED
     }
 
     private int orderID;
     private orderStatusFlags orderStatus;
     private String branchName;
     private ArrayList<MenuItem> orderItems;
-    //private int numItems;
     private static int nextOrderID = 1;
     private OrderList orderList;
     private Branch branch;
     private String customisation;
+    private boolean dineIn;
+    private Timer pickupTimestamp;
 
     public Order(Branch branch){ 
         this.orderID = branch.nextOrderID();
@@ -80,5 +83,18 @@ public class Order {
     // public void placeOrder() throws IOException{
     public void placeOrder(){
         branch.getBranchOrders().addOrder(this);
+    }
+
+    public boolean getDineIn(){
+        return dineIn;
+    }
+
+    public void setDineIn(boolean value){
+        this.dineIn = value;
+    }
+
+    public boolean autoCancellation(){
+        //FutureTask class or something (cancel 30mins after ready to pickup if not collected)
+        return true;
     }
 }
