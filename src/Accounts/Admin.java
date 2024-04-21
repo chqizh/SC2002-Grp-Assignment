@@ -9,22 +9,23 @@ import Database.InMemoryDatabase;
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
     private transient Scanner sc = new Scanner(System.in);
-    private InMemoryDatabase db;
 
     public Admin(String name, String staffID, char gender, int age, InMemoryDatabase db){
-        super(name, staffID, UserType.ADMIN, gender, age);
-        this.db = db;
+        super(name, staffID, UserType.ADMIN, gender, age, db);
     }
 
     // From IAdminManagement
     public void addStaff(String name, String staffID, char gender, int age, String branchID){
-        Staff newStaff = new Staff(name, staffID, gender, age, branchID);
+        Staff newStaff = new Staff(name, staffID, gender, age, branchID, this.db);
         Account newAccount = new Account(staffID);
         db.addStaff(newStaff);
         db.addAccount(newAccount);
     };
 
-    public void removeStaff(String staffID){
+    public void removeStaff(){
+        System.out.println("Select staff to remove.");
+        displayStaffList(); // Find someway to disply all instead of filtering
+        String staffID = sc.next();
         db.removeStaff(staffID);
     };
 
@@ -136,7 +137,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         int staffQuota =sc.nextInt();
         sc.nextLine();
 
-        Branch newBranch = new Branch(branchName, branchLocation, staffQuota);        
+        Branch newBranch = new Branch(branchName, branchLocation, staffQuota); 
+        db.addBranch(newBranch);
         System.out.println("You have successfully opened a branch.");
  /*        }
         else{

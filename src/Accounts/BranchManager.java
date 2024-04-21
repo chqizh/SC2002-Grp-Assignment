@@ -9,8 +9,8 @@ import Database.*;
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchName;
 
-	public BranchManager(String name, String staffID, char gender, int age, String branchID) {
-        super(name, staffID, UserType.BRANCH_MANAGER, gender, age);
+	public BranchManager(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db) {
+        super(name, staffID, UserType.BRANCH_MANAGER, gender, age, db);
         this.branchName = branchID;
     }
 
@@ -132,7 +132,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     }
 
 // From IStaffManagement
-	public void displayStaffList(InMemoryDatabase db){
+	public void displayStaffList(){
     ArrayList<String> staffIDsList = db.getStaffIDs();
                 String branch = this.branchName;
                 for (String staffID : staffIDsList){

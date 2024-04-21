@@ -1,6 +1,8 @@
 package Accounts;
 import java.io.Serializable;
 
+import Database.InMemoryDatabase;
+
 
 /**
  * This class represents an employee with a name, staff ID, user type, gender, and age.
@@ -11,6 +13,7 @@ public class Employee implements Serializable {
     private UserType userType; // Uses UserType enum
     private char gender;
     private int age;
+    protected InMemoryDatabase db;
 
     /**
      * Constructs a new Employee with the specified details.
@@ -21,12 +24,13 @@ public class Employee implements Serializable {
      * @param gender   the gender of the employee, represented as a char ('M' or 'F')
      * @param age      the age of the employee
      */
-    public Employee(String name, String staffID, UserType userType, char gender, int age) {
+    public Employee(String name, String staffID, UserType userType, char gender, int age, InMemoryDatabase db) {
         this.name = name;
         this.staffID = staffID; // Initialize staff ID
         this.userType = userType;
         this.gender = gender;
         this.age = age;
+        this.db = db;
     }
 
     // Getter and setter for name

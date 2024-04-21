@@ -215,6 +215,7 @@ public class FOMSApp{
                     System.out.println("Success.");
                     break;
                 case 2:
+                    System.out.println("Enter a staffID.");
                     String staffID2 = sc.next();
                     admin.removeStaff(staffID2);
                     break;

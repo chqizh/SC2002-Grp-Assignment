@@ -5,11 +5,12 @@ import java.io.Serializable;
 
 import Branch.*;
 import Customer.*;
+import Database.InMemoryDatabase;
 
 /**
  * This class represents a staff member, which is a specific type of employee with a branch association.
  */
-public class Staff extends Employee implements IOrderProcess, Serializable{
+public class Staff extends Employee implements IOrderProcess{
     private String branchName;
 
     /**
@@ -20,8 +21,8 @@ public class Staff extends Employee implements IOrderProcess, Serializable{
      * @param age      The age of the staff member.
      * @param branchID The ID of the branch this staff member is associated with.
      */
-    public Staff(String name, String staffID, char gender, int age, String branchName) {
-        super(name, staffID, UserType.STAFF, gender, age);
+    public Staff(String name, String staffID, char gender, int age, String branchName, InMemoryDatabase db) {
+        super(name, staffID, UserType.STAFF, gender, age, db);
         this.branchName = branchName;
     }
 

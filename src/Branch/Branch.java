@@ -18,14 +18,14 @@ public class Branch implements Serializable {
     private MenuItems branchMenu = new MenuItems();
     private OrderList branchOrders = new OrderList();
     private ArrayList <String> paymentMethods = new ArrayList<String> ();
+    private transient Scanner sc;
     
     public Branch (String branchName, String branchLocation, int staffQuota){
-       // this.branchID = nextBranchID;
         this.branchName = branchName;
         this.branchLocation = branchLocation;
         this.staffQuota = staffQuota;
-        //nextBranchID++;
         this.paymentMethods.addAll(Customer.getPaymentMethods());
+        this.sc = new Scanner(System.in);
     }
     
     public String getBranchName() {
@@ -60,10 +60,9 @@ public class Branch implements Serializable {
             System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
             branchManagerIDs.remove(staffID);
             System.out.printf("Number of Branch Managers is below required amount. Please add another Branch Manager.", staffID);
-            Scanner sc = new Scanner(System.in);
             String newBranchManager = sc.next();
             addBranchManager(newBranchManager);
-            return true;            
+            return true;
         }
         else {
             return false;
@@ -103,6 +102,7 @@ public class Branch implements Serializable {
         }
         else {
             staffIDs.add(staffID);
+            currentNumStaff++;
             return true;
         }
     }
@@ -114,6 +114,7 @@ public class Branch implements Serializable {
         }
         else {
             staffIDs.remove(staffID);
+            currentNumStaff--;
             return true;
         }
     }

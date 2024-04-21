@@ -1,7 +1,6 @@
 package Branch;
 
 public class BranchDisplay {
-
     private Branch branch;
 
     public BranchDisplay(Branch branch) {
