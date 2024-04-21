@@ -32,10 +32,8 @@ public class FOMSApp {
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        Admin admin1 = new Admin("Kurt", "KurtA", 'M', 40);
-        InMemoryDatabase.addAdmin(admin1);
-        Account adminACC = new Account("KurtA");
-        InMemoryDatabase.addAccount(adminACC);
+        app.db.addAdmin(new Admin("Kurt", "KurtA", 'M', 40));
+        app.db.addAccount(new Account("KurtA"));
 
         app.run();
         app.sc.close();
@@ -257,7 +255,7 @@ public class FOMSApp {
        // Branches branches = new Branches();
        // Branch branch = branches.getSpecificBranch(branchID);
 
-       Branch branch = InMemoryDatabase.getBranchByBranchName(branchName);
+       Branch branch = db.getBranchByBranchName(branchName);
 
         while(branch == null){
             System.out.println("You have entered an invalid Branch ID!");
@@ -266,7 +264,7 @@ public class FOMSApp {
             branchName = sc.next();
 
             sc.nextLine();
-            branch = InMemoryDatabase.getBranchByBranchName(branchName);
+            branch = db.getBranchByBranchName(branchName);
         }
 
 
