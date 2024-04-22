@@ -13,7 +13,7 @@ import DataPersistence.*;
 
 public class FOMSApp{
     private static String filePath = new File("").getAbsolutePath();
-    private static final String DATA_STORE = "data_store.ser";
+    private static final String DATA_STORE = "Data/data_store.ser";
     private transient Scanner sc;
     private InMemoryDatabase db;
 
@@ -23,7 +23,7 @@ public class FOMSApp{
         // Deserialization
         try {
             db = (InMemoryDatabase) SerializationUtil.deserialize(DATA_STORE);
-            System.out.println("reading from DATA_STORE");
+            System.out.println("Reading from DATA_STORE");
         } catch (IOException | ClassNotFoundException e) {
             db = new InMemoryDatabase(); // Create a new one if no data is found
         }
