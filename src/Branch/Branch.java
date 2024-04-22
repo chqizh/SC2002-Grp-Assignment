@@ -17,6 +17,7 @@ public class Branch implements Serializable {
     private int staffQuota;
     private MenuItems branchMenu;
     private OrderList branchOrders;
+    private int maxOrderID;
     private transient Scanner sc;
 
     public Branch(){
@@ -26,10 +27,19 @@ public class Branch implements Serializable {
         this.currentNumStaff = 0;
         this.branchMenu = new MenuItems();
         this.branchOrders = new OrderList();
+        this.maxOrderID = 0;
         this.sc = new Scanner(System.in);
     }
     
     public Branch (String branchName, String branchLocation, int staffQuota){
+        this.branchManagerIDs = new ArrayList<>();
+        this.maxNumManagers = 1;
+        this.staffIDs = new ArrayList<>();
+        this.currentNumStaff = 0;
+        this.branchMenu = new MenuItems();
+        this.branchOrders = new OrderList();
+        this.maxOrderID = 0;
+        this.sc = new Scanner(System.in);
         this.branchName = branchName;
         this.branchLocation = branchLocation;
         this.staffQuota = staffQuota;   
@@ -161,7 +171,6 @@ public class Branch implements Serializable {
     }
 
     public int nextOrderID(){
-        int maxOrderID = branchOrders.getOrderList().size();
-        return maxOrderID++;
+        return ++maxOrderID;
     }
 }

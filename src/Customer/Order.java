@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import Menu.MenuItem;
 import Branch.Branch;
+import Branch.OrderList;
 
 public class Order {
     public enum orderStatusFlags {
@@ -21,19 +22,16 @@ public class Order {
     private orderStatusFlags orderStatus;
     private String branchName;
     private ArrayList<MenuItem> orderItems;
-    private static int nextOrderID = 1;
     private String customisation;
     private boolean dineIn;
+    private OrderList orderListRef;
 
     public Order(Branch branch){ 
         this.orderID = branch.nextOrderID();
         this.orderStatus = orderStatusFlags.NEW;
         this.branchName = branch.getBranchName(); 
         this.orderItems = new ArrayList<>(); 
-    }
-
-    public int generateOrderID (){
-        return Order.nextOrderID++;
+        this.orderListRef = branch.getBranchOrders();
     }
 
     public int getOrderID() {
@@ -64,10 +62,11 @@ public class Order {
         return this.orderStatus;
     }
 
-    public void setOrderStatus(orderStatusFlags Flag){
-        if (this.orderStatus != Flag){
-            this.orderStatus = Flag;
-            if (Flag == orderStatusFlags.PICKUP) this.scheduleAutoCancellation(15, TimeUnit.SECONDS);
+    public void setOrderStatus(orderStatusFlags flag){
+        if (this.orderStatus != flag){
+            this.orderStatus = flag;
+            if (flag == orderStatusFlags.PICKUP) this.scheduleAutoCancellation(15, TimeUnit.SECONDS);
+            if (flag == orderStatusFlags.COMPLETED) orderListRef.removeOrder(this.orderID);
         }
         else {
             System.out.println("Order is currently"  + this.orderStatus + "already.");
@@ -114,6 +113,7 @@ public class Order {
 
     private boolean autoCancellation() {
         this.orderStatus = orderStatusFlags.CANCELLED;
+        this.orderListRef.removeOrder(this.orderID);
         return true;
     }
 

@@ -22,7 +22,6 @@ public class Customer implements ICustomerOrderProcess{
     }
 
     public void browseMenu(String branchName){
-        //TODO
         Branch branch = db.getBranchByBranchName(branchName);
         MenuDisplay menudisplay = new MenuDisplay(branch.getBranchMenu());
         menudisplay.displayMenu();
@@ -89,7 +88,6 @@ public class Customer implements ICustomerOrderProcess{
             System.out.println("Item with ID "+itemID+" not found in cart.");
         }
     }
-
 
     //public void placeOrder(string branchName) throws IOException {
     public void placeOrder(String branchName){
