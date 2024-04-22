@@ -342,14 +342,17 @@ public class FOMSApp{
     private static void printFOMSTitle() {
         System.out.println();
         System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        System.out.println("║                                 ███████╗ ██████╗ ███╗   ███╗███████╗                              ║");
-        System.out.println("║                                 ██╔════╝██╔═══██╗████╗ ████║██╔════╝                              ║");
-        System.out.println("║                                 █████╗  ██║   ██║██╔████╔██║███████╗                              ║");
-        System.out.println("║                                 ██╔══╝  ██║   ██║██║╚██╔╝██║╚════██║                              ║");
-        System.out.println("║                                 ██║     ╚██████╔╝██║ ╚═╝ ██║███████║                              ║");
-        System.out.println("║                                 ╚═╝      ╚═════╝ ╚═╝     ╚═╝╚══════╝                              ║");
+        System.out.println("║                                                                                                   ║");
+        System.out.println("║                                                                                                   ║");
+        System.out.println("║                             ███████╗   ██████╗   ███╗   ███╗  ███████╗                            ║");
+        System.out.println("║                             ██╔════╝  ██╔═══██╗  ████╗ ████║  ██╔════╝                            ║");
+        System.out.println("║                             █████╗    ██║   ██║  ██╔████╔██║  ███████╗                            ║");
+        System.out.println("║                             ██╔══╝    ██║   ██║  ██║╚██╔╝██║  ╚════██║                            ║");
+        System.out.println("║                             ██║       ╚██████╔╝  ██║ ╚═╝ ██║  ███████║                            ║");
+        System.out.println("║                             ╚═╝        ╚═════╝   ╚═╝     ╚═╝  ╚══════╝                            ║");
         System.out.println("║                         Welcome to Fastfood Ordering and Management System                        ║");
         System.out.println("║                                            FDAA Grp 1                                             ║");
+        System.out.println("║                                                                                                   ║");
         System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
         System.out.println();
     }
