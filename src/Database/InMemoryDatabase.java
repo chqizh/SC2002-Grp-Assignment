@@ -103,7 +103,7 @@ public class InMemoryDatabase implements Serializable {
         return new ArrayList<>(this.paymentMethods);
     }
 
-    // To validate account
+/*     // To validate account
     public Employee validateEmployee(String staffID, String password) {
         Account account = getAccountByStaffID(staffID);
         if (account != null && account.validateLogin(password)) {
@@ -117,5 +117,19 @@ public class InMemoryDatabase implements Serializable {
         }
         return null; // Login failed or staffID not found in any map
     }
+ */
+public Employee getEmployee(String staffID) {
+    Account account = getAccountByStaffID(staffID);
+    if (account != null) {
+        if (this.staffMap.containsKey(staffID)) {
+            return this.staffMap.get(staffID);
+        } else if (this.branchManagerMap.containsKey(staffID)) {
+            return this.branchManagerMap.get(staffID);
+        } else if (this.adminMap.containsKey(staffID)) {
+            return this.adminMap.get(staffID);
+        }
+    }
+    return null; // Login failed or staffID not found in any map
+}
 
 }

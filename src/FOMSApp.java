@@ -33,7 +33,7 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+     app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA"));
         app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
         app.db.addAccount(new Account("HenryT"));
@@ -43,38 +43,54 @@ public class FOMSApp{
 
     public void run() {
         System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
-        System.out.println("Are you a customer? (Y/N)");
         Console console = System.console();
-        String userType = console.readLine();
+        String userType = console.readLine("Are you a customer? (Y/N): ");
         if ("Y".equalsIgnoreCase(userType)) {
             displayCustomerInterface();
         } else {
-            Employee employee = null;
-            while (employee == null) {
+            boolean loginSuccessful = false;
+            Account account = null;
+            while (!loginSuccessful) {
                 String staffID = console.readLine("Enter your staffID: ");
+                account = db.getAccountByStaffID(staffID);
+                if (account == null) {
+                    System.out.println("Staff ID not found. Please try again.");
+                    continue;
+                }
+    
                 char[] passwordArray = console.readPassword("Enter your password: "); // Password will be masked
                 String password = new String(passwordArray);
-    
-                employee = db.validateEmployee(staffID, password);
-                if (employee == null) {
+                
+                if (account.validateLogin(password)) {
+                    account.checkAndChangeDefaultPassword(console);
+                    // Save the state of the account here if necessary.
+                    loginSuccessful = true;
+                } else {
                     System.out.println("Login unsuccessful. Please try again.");
-                    java.util.Arrays.fill(passwordArray, ' ');
                 }
+                
+                java.util.Arrays.fill(passwordArray, ' ');
             }
-
-            if (employee instanceof Staff) {
-                displayStaffInterface((Staff) employee);
-            } else if (employee instanceof BranchManager) {
-                displayBranchManagerInterface((BranchManager) employee);
-            } else if (employee instanceof Admin) {
-                displayAdminInterface((Admin) employee);
+    
+            // Continue with logged-in user
+            Employee employee = db.getEmployee(account.getStaffID());
+            if (employee != null) {
+                if (employee instanceof Staff) {
+                    displayStaffInterface((Staff) employee);
+                } else if (employee instanceof BranchManager) {
+                    displayBranchManagerInterface((BranchManager) employee);
+                } else if (employee instanceof Admin) {
+                    displayAdminInterface((Admin) employee);
+                }
+            } else {
+                System.out.println("An error occurred retrieving employee information.");
             }
         }
-
         // Serialization
         try
         {
             SerializationUtil.serialize(db, DATA_STORE);
+            // System.out.println("successfully serialized.");
         } catch (IOException e) {
             e.printStackTrace();
         }

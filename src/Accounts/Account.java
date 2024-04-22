@@ -60,6 +60,7 @@ public class Account implements Serializable {
      */
     public void setPassword(String password) {
         this.passwordHash = hashPassword(password);
+    // System.out.println("sussessfully updated to " + this.getPasswordHash());
     }
 
     /**
@@ -78,22 +79,65 @@ public class Account implements Serializable {
         }
     }
 
-    public boolean validateLogin(String password) {
+/*     public boolean validateLogin(String password) {
         String hashedInputPassword = hashPassword(password);
         String defaultPasswordHash = hashPassword("password");
         Console console = System.console();
-
+        System.out.println("current is " + this.getPasswordHash() + "default is "+ defaultPasswordHash); 
         if (this.passwordHash.equals(hashedInputPassword)) {
             while (this.passwordHash.equals(defaultPasswordHash)) {
                 System.out.println("You are using the default password. Please change your password.");
                 char[] passwordArray = console.readPassword("New Password: "); // Password will be masked
                 String newPassword = new String(passwordArray);
                 this.setPassword(newPassword);
-            }
+                }
             return true;
         } else {
             System.out.println("Wrong Password!");
             return false;
         }
+    }
+}
+ */
+
+ public boolean validateLogin(String password) {
+    String hashedInputPassword = hashPassword(password);
+    if (this.passwordHash.equals(hashedInputPassword)) {
+        return true; // Login successful.
+    } else {
+        System.out.println("Wrong Password!");
+        return false; // Login failed.
+    }
+}
+
+public boolean checkAndChangeDefaultPassword(Console console) {
+    String defaultPasswordHash = hashPassword("password");
+    if (this.passwordHash.equals(defaultPasswordHash)) {
+        System.out.println("You are using the default password. Please change your password.");
+        boolean passwordsMatch = false;
+        while (!passwordsMatch) {
+            char[] newPasswordArray = console.readPassword("New Password: "); // Password will be masked
+            char[] confirmPasswordArray = console.readPassword("Confirm New Password: "); // Password will be masked
+            
+            String newPassword = new String(newPasswordArray);
+            String confirmPassword = new String(confirmPasswordArray);
+            if (hashPassword(newPassword).equals(this.passwordHash)){
+                System.out.println("new password cannot be the same as previous");
+            }
+            else if (newPassword.equals(confirmPassword)) {
+                setPassword(newPassword); // Set new password.
+                passwordsMatch = true;
+                System.out.println("Password changed successfully.");
+            } else {
+                System.out.println("Passwords do not match. Please try again.");
+            }
+            
+            // Clear password arrays for security.
+            java.util.Arrays.fill(newPasswordArray, ' ');
+            java.util.Arrays.fill(confirmPasswordArray, ' ');
+        }
+        return true; // Password changed.
+    }
+    return false; // No need to change the password.
     }
 }
