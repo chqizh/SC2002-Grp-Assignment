@@ -35,11 +35,16 @@ public class FOMSApp{
 
         Scanner sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))){
-            System.out.println("staff_list.csv file was found. Initialize using staff_list.csv?");
-            if (sc.nextLine().charAt(0) == 'Y'){
+            System.out.println("staff_list.csv file was found. Initialize using staff_list.csv? (Y/N)");
+            char choice = sc.nextLine().charAt(0);
+            if (choice == 'Y'){
                 DatabaseInitializer initializer = new DatabaseInitializer(app.db);
                 initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
-            }   
+            }
+            else if (choice == 'N'){}
+            else {
+                System.out.println("Invalid choice entered. staff_list.csv will not be imported.");
+            }
         }
 
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
@@ -126,13 +131,13 @@ public class FOMSApp{
                     staff.viewNewOrders(branch);
                     break;
                 case 2:
-                    System.out.println("Enter the order ID: ");
+                    System.out.print("Enter the order ID: ");
                     int orderID = sc.nextInt();
                     sc.nextLine();
                     staff.viewOrder(branch,orderID);
                     break;
                 case 3:
-                    System.out.println("Enter the order ID to be processed: ");
+                    System.out.print("Enter the order ID to be processed: ");
                     int orderID_P = sc.nextInt();
                     sc.nextLine();
                     staff.processOrders(branch, orderID_P);

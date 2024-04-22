@@ -38,13 +38,13 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         System.out.println("New Orders:");
         branch.getBranchOrders().getOrderList().stream()
                 .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
-                .forEach(System.out::println); // Print each order (implement toString in Order for better output)
+                .forEach(order -> order.printOrder()); // Print each order
     }
 
     public void viewOrder(Branch branch, int orderID) {
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
-            System.out.println(order); // Assuming toString() in Order is overridden
+            order.printOrder();
         } else {
             System.out.println("Order ID " + orderID + " not found.");
         }

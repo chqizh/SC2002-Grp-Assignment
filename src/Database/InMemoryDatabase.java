@@ -88,7 +88,8 @@ public class InMemoryDatabase implements Serializable {
         Branch branch = getBranchByBranchName(branchName);
         // Create branch if referenced branch does not exist yet.
         if (branch == null){
-            this.addBranch(new Branch(branchName, branchName, 0));
+            branch = new Branch(branchName, branchName, 15);
+            this.addBranch(branch);
         }
         branch.addStaff(staff.getStaffID());
         this.staffMap.put(staffID, staff);

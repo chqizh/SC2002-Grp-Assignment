@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.ArrayList;
 import Customer.Order;
-import DataPersistence.SerializationUtil;
+import DataPersistence.*;
 
 public class OrderList implements Serializable{
     // <orderID, order>
     private HashMap<Integer, Order> orderMap;
+
+    OrderList (){
+        orderMap = new HashMap<Integer, Order>();
+    }
 
     /*
     public OrderList() throws IOException {
@@ -44,11 +48,6 @@ public class OrderList implements Serializable{
 
     public Order getOrder(int orderID) {
         return orderMap.get(orderID);
-    }
-
-    public ArrayList<Order> getOrderList(){
-        ArrayList<Order> orderList = new ArrayList<Order>(orderMap.values());
-        return orderList;
     }
 
     public ArrayList<Order> getOrderList(){
