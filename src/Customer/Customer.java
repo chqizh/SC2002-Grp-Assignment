@@ -3,22 +3,27 @@ import Menu.MenuDisplay;
 import Menu.MenuItem;
 import Menu.MenuItems;
 import Branch.*;
+import Database.InMemoryDatabase;
+
 import java.util.Scanner;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 
 public class Customer implements ICustomerOrderProcess{
-    private OrderList orderList;
-    private ArrayList<MenuItem> cart = new ArrayList<>();
+    //private OrderList orderList;
+    private ArrayList<MenuItem> cart;
     private transient Scanner sc;
+    private InMemoryDatabase db;
 
-    // private Branch selectedBranch;
-    // public void selectBranch(Branch branch){
-    //     this.selectedBranch = branch;
-    // }
-    
-    public void browseMenu(){
+    public Customer(InMemoryDatabase db){
+        //this.orderList = new OrderList();
+        this.cart = new ArrayList<>();
+        this.db = db;
+    }
+
+    public void browseMenu(String branchName){
         MenuDisplay menudisplay = new MenuDisplay();
         menudisplay.displayMenu();
     }
@@ -38,30 +43,31 @@ public class Customer implements ICustomerOrderProcess{
         }
     }
 
-    public void addToCart(){
-        MenuItems menu = new MenuItems();
-        ArrayList<MenuItem> menu_items = menu.getMenuItems();
-
+    public void addToCart(String branchName){
+        MenuItems menu = db.getBranchByBranchName(branchName).getBranchMenu();
+        ArrayList<MenuItem> menu_items = menu.getMenuItemsList();
+        
         sc = new Scanner(System.in);
         System.out.println("Enter the item's ID you would like to order:");
-        int item_id = sc.nextInt();
+        int itemID = sc.nextInt();
         sc.nextLine();
+
         MenuItem menuItem = null;
-        for(MenuItem item: menu_items){
-            if(item.getItemID() == item_id){
+        for(MenuItem item : menu_items){
+            if(item.getItemID() == itemID){
                 menuItem = item;
                 break;
             }
         }
-        if(menuItem != null){
+
+        if (menuItem != null) {
             cart.add(menuItem);
             System.out.println("Item added to cart!");
         }
-        else{
-            System.out.println("Item with ID "+item_id+" not found in the menu");
+        else {
+            System.out.println("Item with ID "+itemID+" not found in the menu");
         }
     }
-
 
     public void deleteFromCart() {
         sc = new Scanner(System.in);
@@ -75,18 +81,23 @@ public class Customer implements ICustomerOrderProcess{
             if (item.getItemID() == itemID) {
                 cart.remove(i);
                 removed = true;
-                System.out.println("Item with ID " + itemID + " removed from cart.");
+                System.out.println("Item with ID "+itemID+" removed from cart.");
                 break;
             }
         }
         if (!removed) {
-            System.out.println("Item with ID " + itemID + " not found in cart.");
+            System.out.println("Item with ID "+itemID+" not found in cart.");
         }
     }
 
 
-    //public void placeOrder(int branchID) throws IOException {
-    public void placeOrder(Branch branch){
+    //public void placeOrder(string branchName) throws IOException {
+    public void placeOrder(String branchName){
+        Branch branch = db.getBranchByBranchName(branchName);
+        if (branch == null){
+            System.out.println("Invalid branch entered.");
+            return;
+        }
 
         if (cart.isEmpty()) {
             System.out.println("Cannot place an empty order.");
@@ -96,7 +107,7 @@ public class Customer implements ICustomerOrderProcess{
         double totalPrice = calculateTotalPrice();
         System.out.println("Total Price: $" + totalPrice);
 
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Select Payment Method:");
         System.out.println("1. Bank Card");
         System.out.println("2. PayPal");
@@ -109,19 +120,19 @@ public class Customer implements ICustomerOrderProcess{
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {
                 Order order = new Order(branch);
-
-                for(MenuItem item: cart){
-                    order.getOrderItems().add(item);
+                for (MenuItem item : cart){
+                    order.addOrderItems(item);
                 }
                 
-                order.placeOrder();
-
+                branch.addOrder(order);
                 System.out.println("Order placed successfully.");
                 cart.clear();
-            } else {
+            }
+            else {
                 System.out.println("Payment failed. Order not placed.");
             }
-        } else {
+        } 
+        else {
             System.out.println("Invalid payment method selected.");
         }
     }
@@ -132,9 +143,12 @@ public class Customer implements ICustomerOrderProcess{
         int orderID = sc.nextInt();
         sc.nextLine(); // Consume newline character
         
-        // Retrieve the order from the branch's order list
-        Order order = orderList.getOrder(orderID);
-        order.getOrderStatus();
+        Branch branch = db.getBranchByBranchName(branchName);
+        if (branch != null){
+            Order order = branch.getBranchOrders().getOrder(orderID); // Retrieve the order from the branch's order list
+            System.out.println(order.getOrderStatusString());
+        }
+        else System.out.println("Invalid branch entered.");
     }
 
     private double calculateTotalPrice() {

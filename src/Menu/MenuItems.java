@@ -81,7 +81,7 @@ public class MenuItems implements Serializable{
 		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
-	public ArrayList<MenuItem> getMenuItems() {
+	public ArrayList<MenuItem> getMenuItemsList() {
         return menu;
     }
 

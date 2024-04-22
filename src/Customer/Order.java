@@ -22,7 +22,6 @@ public class Order {
     private String branchName;
     private ArrayList<MenuItem> orderItems;
     private static int nextOrderID = 1;
-    private Branch branch;
     private String customisation;
     private boolean dineIn;
 
@@ -57,6 +56,10 @@ public class Order {
         return orderItems;
     }
 
+    public void addOrderItems(MenuItem item){
+        this.orderItems.add(item);
+    }
+
     public orderStatusFlags getOrderStatus(){
         return this.orderStatus;
     }
@@ -86,12 +89,6 @@ public class Order {
             default:
                 return "Invalid.";
         }
-    }
-
-
-    // public void placeOrder() throws IOException{
-    public void placeOrder(){
-        branch.getBranchOrders().addOrder(this);
     }
 
     public boolean getDineIn(){

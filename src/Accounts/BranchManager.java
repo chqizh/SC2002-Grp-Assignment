@@ -51,7 +51,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     }
 
     public void processOrders(Branch branch, int orderID) {
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println("Current status is " + order.getOrderStatus());

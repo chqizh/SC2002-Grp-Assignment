@@ -5,14 +5,11 @@ public class Paypal extends Payment {
     private String password;
 
     Paypal(){
-        setPaymentMethodName("Paypal");
-    }
-    
-    public String getPaymentMethodName(){
-        return paymentMethodName;
+        super("Paypal");
     }
 
     public Paypal(String email, String password) {
+        super("Paypal");
         this.email = email;
         this.password = password;
     }

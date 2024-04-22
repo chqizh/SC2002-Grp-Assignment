@@ -58,7 +58,7 @@ public class FOMSApp{
         Console console = System.console();
         String userType = console.readLine("Are you a customer? (Y/N): ");
         if ("Y".equalsIgnoreCase(userType)) {
-            displayCustomerInterface();
+            displayCustomerInterface(new Customer(db));
         } else {
             boolean loginSuccessful = false;
             Account account = null;
@@ -298,11 +298,9 @@ public class FOMSApp{
     }
     
     //private void displayCustomerInterface() throws IOException {
-    private void displayCustomerInterface() {
-
+    private void displayCustomerInterface(Customer customer) {
         boolean keepRunning = true;
-        Customer customer = new Customer();
-        // DISPLAY ALL BRANCHES HERE 
+    
         ArrayList<String> branchNames = db.getAllBranchNames();
         int i = 1;
         for (String branchName : branchNames){
@@ -335,10 +333,10 @@ public class FOMSApp{
 
             switch (choice) {
                 case 1:
-                    customer.browseMenu();
+                    customer.browseMenu(branchName);
                     break;
                 case 2:
-                    customer.addToCart();
+                    customer.addToCart(branchName);
                     break;
                 case 3:
                     customer.deleteFromCart();

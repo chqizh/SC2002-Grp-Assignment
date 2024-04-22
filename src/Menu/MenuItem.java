@@ -55,13 +55,12 @@ public class MenuItem implements Serializable{
         return price;
     }
 
-
     public int getItemID() {
         return itemID;
     }
 
-
     public void setItemID(int itemID) {
         this.itemID = itemID;
     }
+
 }

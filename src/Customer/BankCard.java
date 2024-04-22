@@ -6,14 +6,11 @@ public class BankCard extends Payment {
     private String cvv;
 
     BankCard(){
-        setPaymentMethodName("Bank Card");
-    }
-
-    public String getPaymentMethodName(){
-        return paymentMethodName;
+        super("Bank Card");
     }
 
     public BankCard(String cardNumber, String expiryDate, String cvv) {
+        super("Bank Card");
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cvv = cvv;

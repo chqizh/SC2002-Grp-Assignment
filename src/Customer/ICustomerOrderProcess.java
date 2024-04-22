@@ -4,9 +4,9 @@ package Customer;
 
 public interface ICustomerOrderProcess {
 
-    void browseMenu();
+    void browseMenu(String branchName);
 
-    void addToCart();
+    void addToCart(String branchName);
 
     void deleteFromCart();
 

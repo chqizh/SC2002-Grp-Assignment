@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Menu.*;
+import Customer.*;
 
 public class Branch implements Serializable {
     private String branchName;
@@ -141,6 +142,14 @@ public class Branch implements Serializable {
 
     public OrderList getBranchOrders() {
         return branchOrders;
+    }
+
+    public void addOrder(Order order){
+        this.branchOrders.addOrder(order);
+    }
+
+    public void removeOrder(int orderID){
+        this.branchOrders.removeOrder(orderID);
     }
 
     public int nextOrderID(){
