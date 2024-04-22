@@ -1,8 +1,11 @@
 package Database;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.io.Serializable;
 
 import Accounts.*;
@@ -15,7 +18,7 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, Staff> staffMap;
     private Map<String, BranchManager> branchManagerMap;
     public Map<String, Admin> adminMap;
-    public ArrayList<Payment> paymentMethods;
+    public Map<Payment, Boolean> paymentMethods;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();
@@ -23,7 +26,7 @@ public class InMemoryDatabase implements Serializable {
         this.staffMap = new HashMap<>();
         this.branchManagerMap = new HashMap<>();
         this.adminMap = new HashMap<>();
-        this.paymentMethods = new ArrayList<>();
+        this.paymentMethods = new HashMap<>();
     }
 
     public Map<String, Account> getAccountsMap() {
@@ -58,12 +61,24 @@ public class InMemoryDatabase implements Serializable {
         this.accounts.remove(accountID);
     }
 
-    public void addBranch(Branch branch) {
-        this.branches.put(branch.getBranchName(), branch);
+    public boolean addBranch(Branch branch) {
+        // Branches must not contain existing branch with same branchName as new branch.
+        if (branches.get(branch.getBranchName()) == null){
+            this.branches.put(branch.getBranchName(), branch);
+            return true;
+        }
+        else {
+            System.out.printf("Branch with %s as branchName already exists.\n", branch.getBranchName());
+            return false;
+        }
     }
 
-    public void removeBranch(String branchName) {
-        this.branches.remove(branchName);
+    public boolean removeBranch(String branchName) {
+        if (this.branches.remove(branchName) != null) return true;
+        else {
+            System.out.printf("%s branch does not exist.\n", branchName);
+            return false;
+        }
     }
 
     public void addStaff(Staff staff) {
@@ -90,12 +105,23 @@ public class InMemoryDatabase implements Serializable {
         this.adminMap.remove(staffID);
     }
 
-    public void addPaymentMethod(Payment paymentMethod) {
-        this.paymentMethods.add(paymentMethod);
+    public Set<Payment> getPaymentMethods() {
+        Set<Payment> paymentMethodNames = this.paymentMethods.keySet();
+        return paymentMethodNames;
     }
 
-    public void removePaymentMethod(Payment paymentMethod) {
-        this.paymentMethods.remove(paymentMethod);
+    public List<String> getPaymentMethodsNames() {
+        List<String> paymentMethodNames = this.paymentMethods.keySet().stream().map(Payment::getPaymentMethodName).collect(Collectors.toList());
+        return paymentMethodNames;
+    }
+
+    public boolean getPaymentMethodsStatus(Payment paymentMethod) {
+        return this.paymentMethods.get(paymentMethod);
+    }
+
+    public void togglePaymentMethod(Payment paymentMethod) {
+        if (this.paymentMethods.get(paymentMethod) == true) this.paymentMethods.replace(paymentMethod, false);
+        else this.paymentMethods.replace(paymentMethod, true);
     }
 
     public Account getAccountByStaffID(String staffID) {
@@ -123,9 +149,6 @@ public class InMemoryDatabase implements Serializable {
         return this.adminMap.get(staffID);
     }
 
-    public ArrayList<Payment> getPaymentMethods() {
-        return new ArrayList<>(this.paymentMethods);
-    }
     public Employee getEmployee(String staffID) {
         Account account = getAccountByStaffID(staffID);
         if (account != null) {
