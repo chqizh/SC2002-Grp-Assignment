@@ -70,7 +70,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             switch (choice){
                 case 1:
                     System.out.print("Please enter a new name: ");
-                    String name = sc.nexLine();
+                    String name = sc.nextLine();
                     staff.setName(name);
                     break;
                 case 2:

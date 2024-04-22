@@ -9,11 +9,6 @@ import Database.*;
 import DataPersistence.*;
 
 public class FOMSApp{
-    // Declaring ANSI_RESET so that we can reset the color
-    public static final String ANSI_RESET = "\u001B[0m";
-    // Declaring the color theme
-    public static final String ANSI_CYAN = "\u001B[36m";
-
     private static final String DATA_STORE = "data_store.ser";
     private transient Scanner sc;
     private InMemoryDatabase db;
@@ -32,30 +27,18 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-
+        printFOMSTitle();
         // Run only once if not it would override all passwords to default. 
-        //DatabaseInitializer initializer = new DatabaseInitializer(app.db);
-        //initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
-        
+        // DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+        // initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
-        app.run();
-
-        try {
-            String csvFilePath = "C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list_export.csv";
-            DatabaseExporter exporter = new DatabaseExporter(app.db);
-            exporter.exportDataToCSV(csvFilePath); // This could throw an IOException
-            System.out.println("Data export to CSV completed successfully.");
-        } catch (IOException e) {
-            System.err.println("An error occurred during data export: " + e.getMessage());
-            e.printStackTrace();
-        }        
         
+        app.run();
         app.sc.close();
     }
 
     public void run() {
-        System.out.println(ANSI_CYAN + "Welcome to the Fastfood Ordering Management System." + ANSI_RESET);
         Console console = System.console();
         String userType = console.readLine("Are you a customer? (Y/N): ");
         if ("Y".equalsIgnoreCase(userType)) {
@@ -229,7 +212,8 @@ public class FOMSApp{
             System.out.println("(8) Edit Payment Method");
             System.out.println("(9) Open Branch");
             System.out.println("(10) Close Branch");
-            System.out.println("(11) Log Out");
+            System.out.println("(11) Export Staff List");
+            System.out.println("(12) Log Out");
 
             System.out.println("Please select your action: ");
             sc = new Scanner(System.in);
@@ -269,6 +253,17 @@ public class FOMSApp{
                     //admin.removeBranch(branchName);
                     break;
                 case 11:
+                    try {
+                        String csvFilePath = "C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list_export.csv";
+                        DatabaseExporter exporter = new DatabaseExporter(db);
+                        exporter.exportDataToCSV(csvFilePath); // This could throw an IOException
+                        System.out.println("Data export to CSV completed successfully.");
+                    } catch (IOException e) {
+                        System.err.println("An error occurred during data export: " + e.getMessage());
+                        e.printStackTrace();
+                    }        
+                    break;
+                case 12:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;
@@ -343,4 +338,20 @@ public class FOMSApp{
             }
         }
     }
+
+    private static void printFOMSTitle() {
+        System.out.println();
+        System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                                 ███████╗ ██████╗ ███╗   ███╗███████╗                              ║");
+        System.out.println("║                                 ██╔════╝██╔═══██╗████╗ ████║██╔════╝                              ║");
+        System.out.println("║                                 █████╗  ██║   ██║██╔████╔██║███████╗                              ║");
+        System.out.println("║                                 ██╔══╝  ██║   ██║██║╚██╔╝██║╚════██║                              ║");
+        System.out.println("║                                 ██║     ╚██████╔╝██║ ╚═╝ ██║███████║                              ║");
+        System.out.println("║                                 ╚═╝      ╚═════╝ ╚═╝     ╚═╝╚══════╝                              ║");
+        System.out.println("║                         Welcome to Fastfood Ordering and Management System                        ║");
+        System.out.println("║                                            FDAA Grp 1                                             ║");
+        System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
+        System.out.println();
+    }
+    
 }
