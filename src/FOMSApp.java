@@ -1,4 +1,5 @@
 import java.lang.System;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
 
@@ -287,21 +288,22 @@ public class FOMSApp{
 
         boolean keepRunning = true;
         Customer customer = new Customer();
-        System.out.println("Enter Branch Name:");
-        String branchName = sc.next();
-        sc.nextLine();
-        Branch branch = db.getBranchByBranchName(branchName);
         // DISPLAY ALL BRANCHES HERE 
+        ArrayList<String> branchNames = db.getAllBranchNames();
+        int i = 1;
+        for (String branchName : branchNames){
+            System.out.printf("(%i) %s", i, branchName);
+            i++;
+        }
 
-
-
-        // while(branch == null){
-        //     System.out.println("You have entered an invalid Branch Name!");
-        //     System.out.println("Enter Branch Name:");
-        //     branchName = sc.next();
-        //     sc.nextLine();
-        //     branch = db.getBranchByBranchName(branchName);
-        // }
+        Branch branch;
+        String branchName;
+        do {
+            System.out.println("Enter Branch Name:");
+            branchName = sc.nextLine();
+            branch = db.getBranchByBranchName(branchName);
+            if (branch == null) System.out.println("You have entered an invalid Branch Name!");
+        } while (branch == null);
 
         while (keepRunning) {
             System.out.println("|| Welcome to MadDonkeys! ||");
@@ -319,22 +321,22 @@ public class FOMSApp{
 
             switch (choice) {
                 case 1:
-                customer.browseMenu();
+                    customer.browseMenu();
                     break;
                 case 2:
-                customer.addToCart();
+                    customer.addToCart();
                     break;
                 case 3:
-                customer.deleteFromCart();
+                    customer.deleteFromCart();
                     break;
                 case 4:
-                customer.viewCart();
+                    customer.viewCart();
                     break;
                 case 5:
-                customer.placeOrder(branchName);
+                    customer.placeOrder(branchName);
                     break;
                 case 6:
-                customer.trackOrder(branchName);
+                    customer.trackOrder(branchName);
                     break;
                 case 7:
                     System.out.println("Exiting customer interface...");

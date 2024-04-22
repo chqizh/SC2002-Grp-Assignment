@@ -57,6 +57,11 @@ public class InMemoryDatabase implements Serializable {
         this.accounts.remove(accountID);
     }
 
+    public ArrayList<String> getAllBranchNames(){
+        ArrayList<String> allBranchNamesList= new ArrayList<>(this.branches.keySet());
+        return allBranchNamesList;
+    }
+
     public boolean addBranch(Branch branch) {
         // Branches must not contain existing branch with same branchName as new branch.
         if (branches.get(branch.getBranchName()) == null){
