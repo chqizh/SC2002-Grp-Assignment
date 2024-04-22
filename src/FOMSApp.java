@@ -33,10 +33,10 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-     app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+/*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA"));
         app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
-        app.db.addAccount(new Account("HenryT"));
+        app.db.addAccount(new Account("HenryT")); */
         app.run();
         app.sc.close();
     }
@@ -62,8 +62,9 @@ public class FOMSApp{
                 String password = new String(passwordArray);
                 
                 if (account.validateLogin(password)) {
-                    account.checkAndChangeDefaultPassword(console);
-                    // Save the state of the account here if necessary.
+                    if (account.isUsingDefaultPassword()){
+                        account.changePassword(console);
+                    };
                     loginSuccessful = true;
                 } else {
                     System.out.println("Login unsuccessful. Please try again.");
@@ -97,6 +98,7 @@ public class FOMSApp{
     }
 
     private void displayStaffInterface(Staff staff) {
+        Console console = System.console();
         boolean keepRunning = true;
         Branch branch = db.getBranchByBranchName(staff.getBranchName());
 
@@ -105,6 +107,8 @@ public class FOMSApp{
             System.out.println("(1) Display New Orders ");
             System.out.println("(2) View Order Details ");
             System.out.println("(3) Process Order ");
+            System.out.println("(4) Change Password ");
+            System.out.println("(5) Log Out ");
             System.out.println("Please select your action: ");
 
             int choice = sc.nextInt();
@@ -127,6 +131,11 @@ public class FOMSApp{
                     staff.processOrders(branch, orderID_P);
                     break;
                 case 4:
+                    Account account = db.getAccountByStaffID(staff.getStaffID());
+                    account.changePassword(console);
+                    keepRunning = false;
+                    break;
+                case 5:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;
