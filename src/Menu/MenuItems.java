@@ -3,10 +3,8 @@ package Menu;
 import java.io.*;
 import java.util.*;
 
-import DataPersistence.SerializationUtil;
 
 public class MenuItems implements Serializable{
-	//private static final long serialVersionUID = 1L;
 	private ArrayList<MenuItem> menu;
 	private EditMenu editmenu = new EditMenu(menu);
 	private transient Scanner sc;
@@ -41,7 +39,6 @@ public class MenuItems implements Serializable{
 			MenuItem newItem = editmenu.addItems();
 			menu.add(newItem);
 		}
-		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
 	
@@ -53,7 +50,6 @@ public class MenuItems implements Serializable{
 		for (int i=0; i<numberToDelete; i++) {
 			menu = editmenu.deleteItems(menu);
 		}
-		//SerializationUtil.serialize(menu, "menu.ser");	
 	}
 
 	public void updateName() throws IOException{
@@ -65,7 +61,6 @@ public class MenuItems implements Serializable{
 		String newName = sc.nextLine();
 
 		editmenu.updateName(itemId, newName, menu);
-		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
 	public void updatePrice() throws IOException{
@@ -78,7 +73,6 @@ public class MenuItems implements Serializable{
 		sc.nextLine();
 
 		editmenu.updatePrice(itemId, newprice, menu);
-		//SerializationUtil.serialize(menu, "menu.ser");
 	}
 
 	public ArrayList<MenuItem> getMenuItemsList() {

@@ -54,7 +54,6 @@ public class EditMenu implements Serializable{
 	}
 
 	public ArrayList<MenuItem> deleteItems(ArrayList<MenuItem>menu) {
-
         sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
         int id = this.getIntegerFromUser();

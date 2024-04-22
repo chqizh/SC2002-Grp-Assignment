@@ -51,7 +51,7 @@ public class FOMSApp{
         app.db.addAccount(new Account("KurtA")); */
         
         app.run();
-        app.sc.close();
+        sc.close();
     }
 
     public void run() {

@@ -1,7 +1,6 @@
 package OldMenu;
 
 import java.io.*;
-import java.util.*;
 
 //We will use exception handling when customer makes orders
 //If they select from different branches, we say it is an invalid order

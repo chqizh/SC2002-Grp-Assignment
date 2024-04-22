@@ -1,20 +1,18 @@
 package OldMenu;
 
-import java.io.*;
 import java.util.*;
 
 public class MenuItems {
 	
-	public String name=null;
-	public String price=null;
-	public String branch=null;
-	public String category=null;
-	public String availability=null;
-	public String itemInfo=null;
-	public String id = null;
+	private String name = null;
+	private String price = null;
+	private String branch = null;
+	private String category = null;
+	private String availability = null;
+	private String itemInfo = null;
+	private String id = null;
 	
 	public MenuItems() {
-	    System.out.println("Here we create a menu item");
 	    createMenuItem();
 	}
 	
@@ -40,26 +38,26 @@ public class MenuItems {
 	}
 	
 	public void createMenuItem() {
-		Scanner sc = new Scanner(System.in);
+		sc = new Scanner(System.in);
 
-	    	System.out.println("Enter menu item name:");
-	    	String n = sc.nextLine();
+	    System.out.println("Enter menu item name:");
+	    String n = sc.nextLine();
 		this.name = n;
 		
 		System.out.println("Enter menu item price:");
-	    	String p = sc.nextLine();
+	    String p = sc.nextLine();
 		this.price = p;
 		
 		System.out.println("Enter menu item branch:");
-	    	String b = sc.nextLine();
+	    String b = sc.nextLine();
 		this.branch = b;
 		
 		System.out.println("Enter menu item category");
-	    	String c = sc.nextLine();
+	    String c = sc.nextLine();
 		this.category = c;
 		
 		System.out.println("Enter menu item availability");
-	    	String a = sc.nextLine();
+	    String a = sc.nextLine();
 		this.availability = a;
 		
 		this.itemInfo = String.format(",%s,%s,%s,%s,%s\n", this.name, this.price, this.branch, this.category, this.availability);
