@@ -29,7 +29,7 @@ public class FOMSApp{
         }
     }
 
-    public static void main(String[] args) {ß
+    public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
         printFOMSTitle();
 

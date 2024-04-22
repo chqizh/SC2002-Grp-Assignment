@@ -25,9 +25,13 @@ public class Branch implements Serializable {
         this.staffQuota = staffQuota;
         this.sc = new Scanner(System.in);
     }
-    
+
     public String getBranchName() {
         return branchName;
+    }
+
+    public void setBranchLocation(String branchLocation){
+        this.branchLocation = branchLocation;
     }
 
     public String getBranchLocation() {
@@ -122,7 +126,6 @@ public class Branch implements Serializable {
     public int getCurNumStaff(){
         return currentNumStaff;
     }
-
 
     public void setStaffQuota(int staffQuota){
         this.staffQuota = staffQuota;

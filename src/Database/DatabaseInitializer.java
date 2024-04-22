@@ -5,6 +5,8 @@ import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.List;
 
+import com.apple.laf.resources.aqua;
+
 import Accounts.*;
 import Branch.*;
 import Customer.*;
@@ -84,6 +86,12 @@ public class DatabaseInitializer {
                 String location = data[1].trim();
                 int staffQuota = Integer.parseInt(data[2].trim());
                 
+                Branch branchCheck = db.getBranchByBranchName(name);
+                if (branchCheck != null){
+                    branchCheck.setBranchLocation(location);
+                    branchCheck.setStaffQuota(staffQuota);
+                }
+
                 Branch branch = new Branch(name, location, staffQuota);
                 db.addBranch(branch);
             }
