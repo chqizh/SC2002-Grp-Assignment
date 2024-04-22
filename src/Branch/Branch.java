@@ -10,21 +10,29 @@ import Customer.*;
 public class Branch implements Serializable {
     private String branchName;
     private String branchLocation;
-    private ArrayList <String> branchManagerIDs = new ArrayList <String> ();
+    private ArrayList <String> branchManagerIDs;
     private int maxNumManagers;
-    private ArrayList <String> staffIDs = new ArrayList <String> ();
+    private ArrayList <String> staffIDs;
     private int currentNumStaff;
     private int staffQuota;
-    private MenuItems branchMenu = new MenuItems();
-    private OrderList branchOrders = new OrderList();
+    private MenuItems branchMenu;
+    private OrderList branchOrders;
     private transient Scanner sc;
+
+    public Branch(){
+        this.branchManagerIDs = new ArrayList<>();
+        this.maxNumManagers = 1;
+        this.staffIDs = new ArrayList<>();
+        this.currentNumStaff = 0;
+        this.branchMenu = new MenuItems();
+        this.branchOrders = new OrderList();
+        this.sc = new Scanner(System.in);
+    }
     
     public Branch (String branchName, String branchLocation, int staffQuota){
         this.branchName = branchName;
         this.branchLocation = branchLocation;
-        this.maxNumManagers = 1;
-        this.staffQuota = staffQuota;
-        this.sc = new Scanner(System.in);
+        this.staffQuota = staffQuota;   
     }
 
     public String getBranchName() {

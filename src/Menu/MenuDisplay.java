@@ -7,6 +7,14 @@ import DataPersistence.SerializationUtil;
 public class MenuDisplay {
     //@SuppressWarnings("unchecked")
     private ArrayList<MenuItem> menu;
+
+    public MenuDisplay(){
+        menu = new ArrayList<>();
+    }
+
+    public MenuDisplay(MenuItems branchMenu){
+        menu = branchMenu.getMenuItemsList();
+    }
     
 	public void displayMenu() {
         // Deserialize the menu from the file

@@ -12,19 +12,19 @@ import java.util.ArrayList;
 
 
 public class Customer implements ICustomerOrderProcess{
-    //private OrderList orderList;
     private ArrayList<MenuItem> cart;
     private transient Scanner sc;
     private InMemoryDatabase db;
 
     public Customer(InMemoryDatabase db){
-        //this.orderList = new OrderList();
         this.cart = new ArrayList<>();
         this.db = db;
     }
 
     public void browseMenu(String branchName){
-        MenuDisplay menudisplay = new MenuDisplay();
+        //TODO
+        Branch branch = db.getBranchByBranchName(branchName);
+        MenuDisplay menudisplay = new MenuDisplay(branch.getBranchMenu());
         menudisplay.displayMenu();
     }
 
