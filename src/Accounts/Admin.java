@@ -1,6 +1,7 @@
 package Accounts;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner; 
 
 import Branch.*;
@@ -15,55 +16,93 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     }
 
     // From IAdminManagement
-    public void addStaff(String name, String staffID, char gender, int age, String branchName){
-        Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
-        Account newAccount = new Account(staffID);
-        db.addStaff(newStaff);
-        db.addAccount(newAccount);
+    public boolean addStaff(){
+        sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter their name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter their Staff ID: ");
+            String staffID = sc.nextLine();
+            System.out.print("Enter their gender (M/F/N): ");
+            char gender = sc.nextLine().charAt(0);
+            System.out.print("Enter their age: ");
+            int age = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Enter their assigned Branch: ");
+            String branchName = sc.nextLine();
+            Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
+            Account newAccount = new Account(staffID);
+            db.addStaff(newStaff);
+            db.addAccount(newAccount);
+            return true;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
     };
 
-    public void removeStaff(){
-        System.out.println("Select staff to remove.");
+    public boolean removeStaff(){
+        System.out.print("Enter a staffID to remove: ");
         displayStaffList(); // Find someway to disply all instead of filtering
-        String staffID = sc.next();
-        db.removeStaff(staffID);
+        String staffID = sc.nextLine();
+        if (db.getAccountByStaffID(staffID) != null){
+            db.removeStaff(staffID);
+            return true;
+        }
+        else return false;
     };
 
-    public void editStaff(String staffID){
-        System.out.println("What would you like to edit?");
+    public boolean editStaff(){
+        sc = new Scanner(System.in);
+        displayStaffList();
+        System.out.print("Enter the staffID would you like to edit: ");
+        String staffID = sc.nextLine();
+        Staff staff = db.getStaff(staffID);
+        if (staff == null) return false;
+        System.out.print("What would you like to edit? Enter the numerical option: ");
         System.out.println("(1) Name");
         System.out.println("(2) Gender");
         System.out.println("(3) Age");
-        Staff staff = db.getStaff(staffID);
         try {
             int choice = sc.nextInt();
+            sc.nextLine();
             switch (choice){
                 case 1:
-                    System.out.println("Please enter a new name.");
-                    String name = sc.next();
+                    System.out.print("Please enter a new name: ");
+                    String name = sc.nexLine();
                     staff.setName(name);
                     break;
                 case 2:
-                    System.out.println("Please enter a new gender.");
-                    char gender = sc.next().charAt(0);
+                    System.out.print("Please enter a new gender: ");
+                    char gender = sc.nextLine().charAt(0);
                     staff.setGender(gender);
                     break;
                 case 3:
-                    System.out.println("Please enter a new age.");
+                    System.out.print("Please enter a new age: ");
                     int age = sc.nextInt();
+                    sc.nextLine();
                     staff.setAge(age);
                     break;
                 default:
-                    System.out.println("Invalid integer.");
+                    System.out.println("Invalid integer entered.");
                     break;
             }
         }
         catch (Exception e){
-            System.out.println("Invalid integer.");
+            System.out.println("Invalid integer entered.");
+            return false;
         }
+        return true;
     };
 
-    public void assignManager(String staffID, String branchName){
+    public void assignManager(){
+        sc = new Scanner(System.in);
+        System.out.print("Enter Branch to assign Manager to: ");
+        String branchName = sc.nextLine();
+        System.out.print("Enter staffID of Manager: ");
+        String staffID = sc.nextLine();
+        
         if (db.getStaff(staffID) == null) {
             System.out.println("Manager does not exist. Manager assignment unsuccessful.");
         }
@@ -76,7 +115,16 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void transferEmployee(String staffID, String branchName){
+    public void promoteStaff(){
+        ;
+    }
+
+    public void transferEmployee(){
+        sc = new Scanner(System.in);
+        System.out.print("Enter employee's staffID: ");
+        String staffID = sc.nextLine();
+        System.out.print("Enter employee's new Branch: ");
+        String branchName = sc.nextLine();
         if (db.getStaff(staffID) == null) {
             System.out.println("Staff/Manager does not exist. Employee assignment unsuccessful.");
         }
@@ -118,11 +166,15 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void addPaymentMethod(String branchName){
+    public void editPaymentMethod(){
+        ;
+    }
+
+    private void addPaymentMethod(String branchName){
         db.addPaymentMethod();
     };
 
-    public void removePaymentMethod(String branchName){
+    private void removePaymentMethod(String branchName){
         db.removePaymentMethod();
     };
 
@@ -170,12 +222,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             case 1:
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
-                    System.out.println("StaffID: " + staff.getStaffID());
-                    System.out.println("Branch: " + staff.getBranchName());
                     System.out.println("Name: " + staff.getName());
+                    System.out.println("StaffID: " + staff.getStaffID());
                     System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                    System.out.println("Age: " + staff.getAge());
                     System.out.println("Gender: " + staff.getGender());
+                    System.out.println("Age: " + staff.getAge());
+                    System.out.println("Branch: " + staff.getBranchName());
                 }
                 break;
             case 2: 
@@ -184,11 +236,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
                     if (staff.getBranchName().equals(branch)){
-                        System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Name: " + staff.getName());
+                        System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Age: " + staff.getAge());
                         System.out.println("Gender: "+ staff.getGender());
+                        System.out.println("Age: " + staff.getAge());   
                     }
                 }
                 break;
@@ -200,11 +252,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                     for (String staffID : staffIDsList){
                         Staff staff = db.getStaff(staffID);
                         if (staff.getUserType() == role){
-                            System.out.println("StaffID: " + staff.getStaffID());
-                            System.out.println("Branch: " + staff.getBranchName());
                             System.out.println("Name: " + staff.getName());
-                            System.out.println("Age: " + staff.getAge());
+                            System.out.println("StaffID: " + staff.getStaffID());
                             System.out.println("Gender: "+ staff.getGender());
+                            System.out.println("Age: " + staff.getAge());
+                            System.out.println("Branch: " + staff.getBranchName());
                         }
                     }
                 }
@@ -218,11 +270,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
                     if (staff.getGender() == gender){
-                        System.out.println("StaffID: " + staff.getStaffID());
-                        System.out.println("Branch: " + staff.getBranchName());
                         System.out.println("Name: " + staff.getName());
+                        System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Role: " + staff.getUserType().stringFromUserType());
                         System.out.println("Age: " + staff.getAge());
+                        System.out.println("Branch: " + staff.getBranchName());
                     }
                 }
                 break;
@@ -232,20 +284,16 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
                     if (staff.getAge() == age){
-                        System.out.println("StaffID: " + staff.getStaffID());
-                        System.out.println("Branch: " + staff.getBranchName());
                         System.out.println("Name: " + staff.getName());
+                        System.out.println("StaffID: " + staff.getStaffID());
                         System.out.println("Role: " + staff.getUserType().stringFromUserType());
                         System.out.println("Gender: "+ staff.getGender());
+                        System.out.println("Branch: " + staff.getBranchName());
                     }
                 }
                 break;
             default:
                 break;
         }
-    }
-
-    public void removeStaff(String staffID) {
-        db.removeStaff(staffID);
     }
 }

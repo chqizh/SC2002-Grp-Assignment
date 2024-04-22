@@ -33,10 +33,10 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-/*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA"));
         app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
-        app.db.addAccount(new Account("HenryT")); */
+        app.db.addAccount(new Account("HenryT"));
         app.run();
         app.sc.close();
     }
@@ -161,7 +161,7 @@ public class FOMSApp{
             System.out.println("(7) Remove Menu Item");
             System.out.println("(8) Log Out");
             System.out.println("Please select your action: ");
-
+            sc = new Scanner(System.in);
             int choice = sc.nextInt();
             sc.nextLine(); // Consume the newline
             switch (choice) {
@@ -211,7 +211,7 @@ public class FOMSApp{
             System.out.println("(2) Remove Staff");
             System.out.println("(3) Edit Staff");
             System.out.println("(4) Display Staff List");
-            System.out.println("(5) Assign Managers");
+            System.out.println("(5) Assign Manager");
             System.out.println("(6) Promote Staff to Manager");
             System.out.println("(7) Transfer Staff/Manager");
             System.out.println("(8) Edit Payment Method");
@@ -220,45 +220,32 @@ public class FOMSApp{
             System.out.println("(11) Log Out");
 
             System.out.println("Please select your action: ");
-        
+            sc = new Scanner(System.in);
             int choice = sc.nextInt();
             sc.nextLine(); // Consume the newline
             switch (choice) {
                 case 1:
-                    System.out.println("Enter a name.");
-                    String name = sc.nextLine();
-                    System.out.println("Enter a staffID.");
-                    String staffID = sc.nextLine();
-                    System.out.println("Enter a gender (M/F/N).");
-                    char gender = sc.nextLine().charAt(0);
-                    System.out.println("Enter a age.");
-                    int age = sc.nextInt();
-                    sc.nextLine();
-                    System.out.println("Enter a branch.");
-                    String branchName = sc.next();
-                    admin.addStaff(name, staffID, gender, age, branchName);
-                    System.out.println("Success.");
+                    if (admin.addStaff()) System.out.println("Successfully added a new staff.");
+                    else System.out.println("Failed to add staff.");
                     break;
                 case 2:
-                    System.out.println("Enter a staffID.");
-                    String staffID2 = sc.next();
-                    admin.removeStaff(staffID2);
+                    if (admin.removeStaff()) System.out.println("Successfully removed staff.");
+                    else System.out.println("Failed to remove staff.");
                     break;
                 case 3:
-                    String staffID3 = sc.next();
-                    admin.editStaff(staffID3);
+                    admin.editStaff();
                     break;
                 case 4:
                     admin.displayStaffList();
                     break;
                 case 5:
-                    //admin.assignManagers();
+                    admin.assignManager();
                     break;
                 case 6:
                     //admin.promoteStaff();
                     break;
                 case 7:
-                    //admin.transferStaff();
+                    //admin.transferEmployee();
                     break;
                 case 8:
                     //admin.editPaymentMethod();

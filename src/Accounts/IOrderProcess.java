@@ -1,8 +1,6 @@
 package Accounts;
 
-//import java.util.*;
 import Branch.*;
-//import Customer.*;
 
 public interface IOrderProcess {
 
