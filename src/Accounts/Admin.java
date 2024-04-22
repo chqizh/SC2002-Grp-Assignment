@@ -228,6 +228,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                     System.out.println("Gender: " + staff.getGender());
                     System.out.println("Age: " + staff.getAge());
                     System.out.println("Branch: " + staff.getBranchName());
+                    System.out.println();
                 }
                 break;
             case 2: 

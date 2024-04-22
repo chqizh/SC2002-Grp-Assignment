@@ -5,7 +5,6 @@ import java.io.*;
 import Accounts.*;
 import Branch.*;
 import Customer.*;
-import Display.*;
 import Database.*;
 import DataPersistence.*;
 
@@ -33,11 +32,25 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
-        app.db.addAccount(new Account("KurtA"));
-        app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
-        app.db.addAccount(new Account("HenryT"));
+
+        // Run only once if not it would override all passwords to default. 
+        //DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+        //initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
+        
+/*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+        app.db.addAccount(new Account("KurtA")); */
         app.run();
+
+        try {
+            String csvFilePath = "C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list_export.csv";
+            DatabaseExporter exporter = new DatabaseExporter(app.db);
+            exporter.exportDataToCSV(csvFilePath); // This could throw an IOException
+            System.out.println("Data export to CSV completed successfully.");
+        } catch (IOException e) {
+            System.err.println("An error occurred during data export: " + e.getMessage());
+            e.printStackTrace();
+        }        
+        
         app.sc.close();
     }
 
@@ -133,7 +146,6 @@ public class FOMSApp{
                 case 4:
                     Account account = db.getAccountByStaffID(staff.getStaffID());
                     account.changePassword(console);
-                    keepRunning = false;
                     break;
                 case 5:
                     System.out.println("Logging out...");
