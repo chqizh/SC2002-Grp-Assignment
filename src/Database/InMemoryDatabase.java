@@ -26,6 +26,30 @@ public class InMemoryDatabase implements Serializable {
         this.paymentMethods = new ArrayList<>();
     }
 
+    public Map<String, Account> getAccountsMap() {
+        return accounts;
+    }
+
+    public Map<String, Branch> getBranchesMap() {
+        return branches;
+    }
+
+    public Map<String, Staff> getStaffMap() {
+        return staffMap;
+    }
+
+    public Map<String, BranchManager> getBranchManagerMap() {
+        return branchManagerMap;
+    }
+
+    public Map<String, Admin> getAdminMap() {
+        return adminMap;
+    }
+
+    public ArrayList<Payment> getPaymentMethodsList() {
+        return paymentMethods;
+    }
+
     public void addAccount(Account account) {
         this.accounts.put(account.getStaffID(), account);
     }

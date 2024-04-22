@@ -32,12 +32,25 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        // DatabaseInitializer initializer = new DatabaseInitializer(app.db);
-        // initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
+
+        // Run only once if not it would override all passwords to default. 
+        //DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+        //initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
         
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
         app.run();
+
+        try {
+            String csvFilePath = "C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list_export.csv";
+            DatabaseExporter exporter = new DatabaseExporter(app.db);
+            exporter.exportDataToCSV(csvFilePath); // This could throw an IOException
+            System.out.println("Data export to CSV completed successfully.");
+        } catch (IOException e) {
+            System.err.println("An error occurred during data export: " + e.getMessage());
+            e.printStackTrace();
+        }        
+        
         app.sc.close();
     }
 
