@@ -2,17 +2,15 @@ package Branch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
 import Menu.*;
-import Customer.Customer;
 
 public class Branch implements Serializable {
     private String branchName;
     private String branchLocation;
     private ArrayList <String> branchManagerIDs = new ArrayList <String> ();
-    private int numManagers = 1;
+    private int maxNumManagers;
     private ArrayList <String> staffIDs = new ArrayList <String> ();
     private int currentNumStaff;
     private int staffQuota;
@@ -23,6 +21,7 @@ public class Branch implements Serializable {
     public Branch (String branchName, String branchLocation, int staffQuota){
         this.branchName = branchName;
         this.branchLocation = branchLocation;
+        this.maxNumManagers = 1;
         this.staffQuota = staffQuota;
         this.sc = new Scanner(System.in);
     }
@@ -44,7 +43,7 @@ public class Branch implements Serializable {
             System.out.printf("Branch already contains Branch Manager with staffID %s.", staffID);
             return false;            
         }
-        else if (branchManagerIDs.size() >= numManagers){
+        else if (branchManagerIDs.size() >= maxNumManagers){
             System.out.printf("Branch already maximum number of Branch Managers.", staffID);
             return false;
         }
@@ -68,22 +67,22 @@ public class Branch implements Serializable {
         }
     }
 
-    public void setnumManagers(int currentNumStaff){
+    public void setMaxNumManagers(int currentNumStaff){
         if (currentNumStaff>=1 && currentNumStaff<=4){
-            this.numManagers=1;
+            this.maxNumManagers=1;
         }
 
         else if (currentNumStaff>=5 && currentNumStaff<=8){
-            this.numManagers=2;
+            this.maxNumManagers=2;
         }
 
         else if (currentNumStaff>=9 && currentNumStaff<=15){
-            this.numManagers=4;
+            this.maxNumManagers=4;
         }
     }
 
     public int getnumManagers(){
-        return numManagers;
+        return maxNumManagers;
     }
 
     public ArrayList<String> getStaffIDs() {
@@ -102,6 +101,7 @@ public class Branch implements Serializable {
         else {
             staffIDs.add(staffID);
             currentNumStaff++;
+            setMaxNumManagers(currentNumStaff);
             return true;
         }
     }
@@ -114,12 +114,18 @@ public class Branch implements Serializable {
         else {
             staffIDs.remove(staffID);
             currentNumStaff--;
+            setMaxNumManagers(currentNumStaff);
             return true;
         }
     }
 
     public int getCurNumStaff(){
         return currentNumStaff;
+    }
+
+
+    public void setStaffQuota(int staffQuota){
+        this.staffQuota = staffQuota;
     }
 
     public int getStaffQuota(){
@@ -133,82 +139,6 @@ public class Branch implements Serializable {
     public OrderList getBranchOrders() {
         return branchOrders;
     }
-
-    // public boolean addPaymentMethod(){
-    //     System.out.println("Which payment method would you like to add?");
-    //     System.out.println("(1) Bank Card");
-    //     System.out.println("(2) Paynow");
-    //     System.out.println("(3) Paypal");
-    //     Scanner sc = new Scanner(System.in);
-    //     int choice = sc.nextInt();
-        
-    //     switch (choice){
-    //         case 1:
-    //             if (!paymentMethods.contains("Bank Card")){ 
-    //                 paymentMethods.add("Bank Card");
-    //                 System.out.println("Payment method successfully added to branch.");
-    //             }
-    //             else System.out.println("Payment method already accepted in branch.");
-    //             break;
-    //         case 2:
-    //             if (!paymentMethods.contains("Paynow")){ 
-    //                 paymentMethods.add("Paynow");
-    //                 System.out.println("Payment method successfully added to branch.");
-    //             }
-    //             else System.out.println("Payment method already accepted in branch.");
-    //             break;
-    //         case 3:
-    //             if (!paymentMethods.contains("Paypal")){ 
-    //                 paymentMethods.add("Paypal");
-    //                 System.out.println("Payment method successfully added to branch.");
-    //             }
-    //             else System.out.println("Payment method already accepted in branch.");
-    //             break;
-    //         default:
-    //             System.out.println("Invalid option chosen.");
-    //             return false;
-    //     }
-
-    //     return true;
-    // }
-
-    // public boolean removePaymentMethod(){
-    //     System.out.println("Which payment method would you like to remove?");
-    //     System.out.println("(1) Bank Card");
-    //     System.out.println("(2) Paynow");
-    //     System.out.println("(3) Paypal");
-    //     Scanner sc = new Scanner(System.in);
-    //     int choice = sc.nextInt();
-        
-    //     switch (choice){
-    //         case 1:
-    //             if (paymentMethods.contains("Bank Card")){ 
-    //                 paymentMethods.remove("Bank Card");
-    //                 System.out.println("Payment method successfully removed to branch.");
-    //             }
-    //             else System.out.println("Payment method already not accepted in branch.");
-    //             break;
-    //         case 2:
-    //             if (paymentMethods.contains("Paynow")){ 
-    //                 paymentMethods.remove("Paynow");
-    //                 System.out.println("Payment method successfully removed to branch.");
-    //             }
-    //             else System.out.println("Payment method already not accepted in branch.");
-    //             break;
-    //         case 3:
-    //             if (paymentMethods.contains("Paypal")){ 
-    //                 paymentMethods.remove("Paypal");
-    //                 System.out.println("Payment method successfully removed to branch.");
-    //             }
-    //             else System.out.println("Payment method already not accepted in branch.");
-    //             break;
-    //         default:
-    //             System.out.println("Invalid option chosen.");
-    //             return false;
-    //     }
-        
-    //     return true;
-    // }
 
     public int nextOrderID(){
         int maxOrderID = branchOrders.getOrderList().size();

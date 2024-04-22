@@ -83,10 +83,21 @@ public class InMemoryDatabase implements Serializable {
     }
 
     public void addStaff(Staff staff) {
-        this.staffMap.put(staff.getStaffID(), staff);
+        String branchName = staff.getBranchName();
+        String staffID = staff.getStaffID();
+        Branch branch = getBranchByBranchName(branchName);
+        // Create branch if referenced branch does not exist yet.
+        if (branch == null){
+            this.addBranch(new Branch(branchName, branchName, 0));
+        }
+        branch.addStaff(staff.getStaffID());
+        this.staffMap.put(staffID, staff);
     }
 
     public void removeStaff(String staffID) {
+        Staff staff = this.getStaff(staffID);
+        String branchName = staff.getBranchName();
+        this.getBranchByBranchName(branchName).removeStaff(staffID);
         this.staffMap.remove(staffID);
     }
 

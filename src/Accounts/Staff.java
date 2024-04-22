@@ -17,7 +17,7 @@ public class Staff extends Employee implements IOrderProcess{
      * @param name     The name of the staff member.
      * @param gender   The gender of the staff member, represented as a char ('M' or 'F').
      * @param age      The age of the staff member.
-     * @param branchID The ID of the branch this staff member is associated with.
+     * @param branchName The name of the branch this staff member is associated with.
      */
     public Staff(String name, String staffID, char gender, int age, String branchName, InMemoryDatabase db) {
         super(name, staffID, UserType.STAFF, gender, age, db);
@@ -25,18 +25,18 @@ public class Staff extends Employee implements IOrderProcess{
     }
 
     /**
-     * Gets the branch ID associated with this staff member.
+     * Gets the branch name associated with this staff member.
      *
-     * @return The branch ID.
+     * @return The branch name.
      */
     public String getBranchName() {
         return branchName;
     }
 
     /**
-     * Sets the branch ID for this staff member.
+     * Sets the branch name for this staff member.
      *
-     * @param branchID The new branch ID.
+     * @param branchname The new branch name.
      */
     public void setBranchName(String branchName) {
         this.branchName = branchName;

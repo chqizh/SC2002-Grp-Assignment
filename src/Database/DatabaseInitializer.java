@@ -37,16 +37,16 @@ public class DatabaseInitializer {
                 String role = data[2].trim();
                 char gender = data[3].trim().charAt(0);
                 int age = Integer.parseInt(data[4].trim());
-                String branchID = (data.length > 5 && !data[5].trim().isEmpty()) ? data[5].trim() : null;
+                String branchName = (data.length > 5 && !data[5].trim().isEmpty()) ? data[5].trim() : null;
 
                 switch (role) {
                     case "S":
-                        Staff staff = new Staff(name, staffID, gender, age, branchID, db);
+                        Staff staff = new Staff(name, staffID, gender, age, branchName, db);
                         db.addStaff(staff);
                         staffCount++;
                         break;
                     case "M":
-                        BranchManager manager = new BranchManager(name, staffID, gender, age, branchID, db);
+                        BranchManager manager = new BranchManager(name, staffID, gender, age, branchName, db);
                         db.addBranchManager(manager);
                         managerCount++;
                         break;
@@ -79,13 +79,12 @@ public class DatabaseInitializer {
                 String line = lines.get(i).trim();
                 if (line.isEmpty()) continue;
                 String[] data = line.split(",");
-                // Assuming your branch CSV has the format: Name,Location,StaffQuota
+                // Assuming your branch CSV has the format: Name, Location, StaffQuota
                 String name = data[0].trim();
                 String location = data[1].trim();
                 int staffQuota = Integer.parseInt(data[2].trim());
                 
                 Branch branch = new Branch(name, location, staffQuota);
-                // Assuming db has a method to add branches
                 db.addBranch(branch);
             }
         } catch (IOException e) {

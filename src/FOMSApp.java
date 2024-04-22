@@ -1,4 +1,6 @@
 import java.lang.System;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
@@ -27,12 +29,19 @@ public class FOMSApp{
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {ß
         FOMSApp app = new FOMSApp();
         printFOMSTitle();
-        // Run only once if not it would override all passwords to default.
-        DatabaseInitializer initializer = new DatabaseInitializer(app.db);
-        initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
+
+        Scanner sc = new Scanner(System.in);
+        if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))){
+            System.out.println("staff_list.csv file was found. Initialize using staff_list.csv?");
+            if (sc.nextLine().charAt(0) == 'Y'){
+                DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+                initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
+            }   
+        }
+
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
         
@@ -223,7 +232,7 @@ public class FOMSApp{
             sc.nextLine();
             switch (choice) {
                 case 1:
-                    if (admin.addStaff()) System.out.println("Successfully added a new staff.");
+                    if (admin.addStaff()) System.out.println("Successfully added new staff.");
                     else System.out.println("Failed to add staff.");
                     break;
                 case 2:
@@ -254,12 +263,12 @@ public class FOMSApp{
                     else System.out.println("Failed to edit payment method.");
                     break;
                 case 9:
-                    if (admin.addBranch()) System.out.println("Successfully added a branch.");
-                    else System.out.println("Failed to add a branch.");
+                    if (admin.addBranch()) System.out.println("Successfully added branch.");
+                    else System.out.println("Failed to add branch.");
                     break;
                 case 10:
-                    if (admin.removeBranch()) System.out.println("Successfully removed a branch.");
-                    else System.out.println("Failed to remove a branch.");
+                    if (admin.removeBranch()) System.out.println("Successfully removed branch.");
+                    else System.out.println("Failed to remove branch.");
                     break;
                 case 11:
                     try {
@@ -360,7 +369,8 @@ public class FOMSApp{
         System.out.println("║                             ██╔══╝    ██║   ██║  ██║╚██╔╝██║  ╚════██║                            ║");
         System.out.println("║                             ██║       ╚██████╔╝  ██║ ╚═╝ ██║  ███████║                            ║");
         System.out.println("║                             ╚═╝        ╚═════╝   ╚═╝     ╚═╝  ╚══════╝                            ║");
-        System.out.println("║                         Welcome to Fastfood Ordering and Management System                        ║");
+        System.out.println("║                                                                                                   ║");
+        System.out.println("║                       Welcome to the Fastfood Ordering and Management System!                     ║");
         System.out.println("║                                            FDAA Grp 1                                             ║");
         System.out.println("║                                                                                                   ║");
         System.out.println("╚═══════════════════════════════════════════════════════════════════════════════════════════════════╝");
