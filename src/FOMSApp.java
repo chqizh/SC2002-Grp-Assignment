@@ -9,6 +9,7 @@ import Database.*;
 import DataPersistence.*;
 
 public class FOMSApp{
+    private static String filePath = new File("").getAbsolutePath();
     private static final String DATA_STORE = "data_store.ser";
     private transient Scanner sc;
     private InMemoryDatabase db;
@@ -28,9 +29,9 @@ public class FOMSApp{
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
         printFOMSTitle();
-        // Run only once if not it would override all passwords to default. 
-        // DatabaseInitializer initializer = new DatabaseInitializer(app.db);
-        // initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
+        // Run only once if not it would override all passwords to default.
+        DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+        initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
         
@@ -261,7 +262,7 @@ public class FOMSApp{
                     break;
                 case 11:
                     try {
-                        String csvFilePath = "C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list_export.csv";
+                        String csvFilePath = filePath.concat("/Data/staff_list_export.csv");
                         DatabaseExporter exporter = new DatabaseExporter(db);
                         exporter.exportDataToCSV(csvFilePath); // This could throw an IOException
                         System.out.println("Data export to CSV completed successfully.");
