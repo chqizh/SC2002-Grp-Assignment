@@ -1,9 +1,10 @@
 package Customer;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import Database.InMemoryDatabase;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import Menu.MenuItem;
 import Branch.Branch;
 
@@ -24,7 +25,6 @@ public class Order {
     private Branch branch;
     private String customisation;
     private boolean dineIn;
-    private Timer pickupTimestamp;
 
     public Order(Branch branch){ 
         this.orderID = branch.nextOrderID();
@@ -64,6 +64,7 @@ public class Order {
     public void setOrderStatus(orderStatusFlags Flag){
         if (this.orderStatus != Flag){
             this.orderStatus = Flag;
+            if (Flag == orderStatusFlags.PICKUP) this.scheduleAutoCancellation(15, TimeUnit.SECONDS);
         }
         else {
             System.out.println("Order is currently"  + this.orderStatus + "already.");
@@ -109,12 +110,30 @@ public class Order {
         this.dineIn = value;
     }
 
-    public boolean autoCancellation(){
-        //FutureTask class or something (cancel 30mins after ready to pickup if not collected)
+    private void scheduleAutoCancellation(int delay, TimeUnit unit) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.schedule(this::autoCancellation, delay, unit); // Schedule the autoCancellation task to run after 15 minutes
+    }
+
+    private boolean autoCancellation() {
+        this.orderStatus = orderStatusFlags.CANCELLED;
         return true;
     }
 
     public void printOrder(){
         System.out.println("OrderID: " + orderID);
+        System.out.printf("%-8s %-8s %-20s %-10s %-15s\n", "OrderID", "Item ID", "Name", "Price", "Category");
+        System.out.println("--------------------------------------------------------------------");
+
+        // Display menu items
+        //ArrayList<MenuItem> menuItems = menu.getMenuItems();
+        for (MenuItem orderItem : orderItems) {
+            System.out.printf("%-8d %-8d %-20s $%-10.2f %-15s\n",
+                                this.orderID,
+                                orderItem.getItemID(), 
+                                orderItem.getItemName(), 
+                                orderItem.getPrice(), 
+                                orderItem.getCategory());
+        }
     }
 }
