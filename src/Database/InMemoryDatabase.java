@@ -115,9 +115,13 @@ public class InMemoryDatabase implements Serializable {
         return this.paymentMethods.get(paymentMethod);
     }
 
-    public void togglePaymentMethod(Payment paymentMethod) {
-        if (this.paymentMethods.get(paymentMethod) == true) this.paymentMethods.replace(paymentMethod, false);
-        else this.paymentMethods.replace(paymentMethod, true);
+    public boolean togglePaymentMethod(Payment paymentMethod) {
+        if (this.paymentMethods.containsKey(paymentMethod)){
+            if (this.paymentMethods.get(paymentMethod) == true) this.paymentMethods.replace(paymentMethod, false);
+            else this.paymentMethods.replace(paymentMethod, true);
+            return true;
+        }
+        else return false;
     }
 
     public Account getAccountByStaffID(String staffID) {

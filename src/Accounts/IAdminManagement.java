@@ -7,16 +7,16 @@ public interface IAdminManagement {
 	
 	public boolean editStaff();
 
-	public void assignManager();
+	public boolean assignManager();
 
 	public boolean promoteStaff();
 
-	public void transferEmployee();
+	public boolean transferEmployee();
 
-	public void editPaymentMethod();
+	public boolean editPaymentMethod();
 	
-	public void addBranch();
+	public boolean addBranch();
 
-	public void removeBranch();
+	public boolean removeBranch();
 
 }

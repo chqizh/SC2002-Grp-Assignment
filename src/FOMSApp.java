@@ -229,29 +229,35 @@ public class FOMSApp{
                     else System.out.println("Failed to remove staff.");
                     break;
                 case 3:
-                    admin.editStaff();
+                    if (admin.editStaff()) System.out.println("Successfully edited staff.");
+                    else System.out.println("Failed to edit staff.");
                     break;
                 case 4:
                     admin.displayStaffList();
                     break;
                 case 5:
-                    admin.assignManager();
+                    if (admin.assignManager()) System.out.println("Successfully assigned manager.");
+                    else System.out.println("Failed to assign manager.");
                     break;
                 case 6:
                     if (admin.promoteStaff()) System.out.println("Successfully promoted staff.");
                     else System.out.println("Failed to promote staff.");
                     break;
                 case 7:
-                    admin.transferEmployee();
+                    if (admin.transferEmployee()) System.out.println("Successfully transferred employee.");
+                    else System.out.println("Failed to transfer employee.");
                     break;
                 case 8:
-                    admin.editPaymentMethod();
+                    if (admin.editPaymentMethod()) System.out.println("Successfully edited payment method.");
+                    else System.out.println("Failed to edit payment method.");
                     break;
                 case 9:
-                    admin.addBranch();
+                    if (admin.addBranch()) System.out.println("Successfully added a branch.");
+                    else System.out.println("Failed to add a branch.");
                     break;
                 case 10:
-                    admin.removeBranch(branchName);
+                    if (admin.removeBranch()) System.out.println("Successfully removed a branch.");
+                    else System.out.println("Failed to remove a branch.");
                     break;
                 case 11:
                     try {

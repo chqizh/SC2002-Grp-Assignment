@@ -97,7 +97,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         return true;
     };
 
-    public void assignManager(){
+    public boolean assignManager(){
         sc = new Scanner(System.in);
         System.out.print("Enter Branch to assign Manager to: ");
         String branchName = sc.nextLine();
@@ -105,14 +105,17 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         String staffID = sc.nextLine();
         
         if (db.getStaff(staffID) == null) {
-            System.out.println("Manager does not exist. Manager assignment unsuccessful.");
+            System.out.println("Manager does not exist.");
+            return false;
         }
         else if (db.getBranchByBranchName(branchName) == null) {
-            System.out.println("Branch does not exist. Manager assignment unsuccessful.");
+            System.out.println("Branch does not exist.");
+            return false;
         }
         else {
             db.getBranchByBranchName(branchName).addBranchManager(staffID);
-            System.out.printf("Successfully assigned Branch Manager (%s) to Branch (%s).", staffID, branchName);
+            System.out.printf("%s assigned to %s.", staffID, branchName);
+            return true;
         }
     };
 
@@ -133,17 +136,19 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     }
 
-    public void transferEmployee(){
+    public boolean transferEmployee(){
         sc = new Scanner(System.in);
         System.out.print("Enter employee's staffID: ");
         String staffID = sc.nextLine();
         System.out.print("Enter employee's new Branch: ");
         String branchName = sc.nextLine();
         if (db.getStaff(staffID) == null) {
-            System.out.println("Staff/Manager does not exist. Employee assignment unsuccessful.");
+            System.out.print("Staff/Manager does not exist.");
+            return false;
         }
         else if (db.getBranchByBranchName(branchName) == null) {
-            System.out.println("Branch does not exist. Employee assignment unsuccessful.");
+            System.out.print("Branch does not exist.");
+            return false;
         }
         
         if (db.getStaff(staffID).getUserType() == UserType.STAFF){
@@ -151,36 +156,40 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String oldBranchName = staff.getBranchName();
             // Removes staff from their old branch.
             if (db.getBranchByBranchName(oldBranchName).removeStaff(staffID) == false){
-                System.out.println("Transfer unsuccessful.");
-                return;
+                System.out.printf("Failed to remove %s from old branch %s.", staffID, oldBranchName);
+                return false;
             }
             // Transfers staff to new branch.
             else if (db.getBranchByBranchName(branchName).addStaff(staffID)){
                 staff.setBranchName(branchName);
-                System.out.printf("Successfully transferred Staff (%s) to Branch (%s)", staffID, branchName);
+                System.out.printf("%s transferred to new branch %s", staffID, branchName);
+                return true;
             }
-            else System.out.println("Transfer unsuccessful.");
+            else return false;
         }
         else if (db.getStaff(staffID).getUserType() == UserType.BRANCH_MANAGER){
             BranchManager manager = db.getBranchManager(staffID);
             String oldBranchName = manager.getBranchName();
 
             if (db.getBranchByBranchName(oldBranchName).removeBranchManager(staffID) ==  false){
-                System.out.println("Transfer unsuccessful.");
-                return;
+                System.out.printf("Failed to remove %s from old branch %s.", staffID, oldBranchName);
+                return false;
             }
             else if (db.getBranchByBranchName(branchName).addBranchManager(staffID)){
                 manager.setBranchName(branchName);
-                System.out.printf("Successfully transferred Branch Manager (%s) to Branch (%s)", staffID, branchName);
+                System.out.printf("%s transferred to new branch %s", staffID, branchName);
+                return true;
             }
-            else System.out.println("Transfer unsuccessful.");
+            else return false;
         }
         else if (db.getStaff(staffID).getUserType() == UserType.ADMIN){
-            System.out.println("Transfer unsuccesful. Unable to transfer Admin.");
+            System.out.print("Employee is an Admin.");
+            return false;
         }
+        else return false;
     };
 
-    public void editPaymentMethod(){
+    public boolean editPaymentMethod(){
         sc = new Scanner(System.in);
         List<Payment> paymentMethods = new ArrayList<>(db.getPaymentMethods());
         
@@ -193,30 +202,40 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
         int choice = sc.nextInt();
         sc.nextLine();
-        db.togglePaymentMethod(paymentMethods.get(choice));
+        return db.togglePaymentMethod(paymentMethods.get(choice));
     }
 
-    public void addBranch(){
-        sc = new Scanner(System.in);
-        System.out.println("Enter branch name: ");
-        String branchName=sc.nextLine();
-        System.out.println("Enter branch location: ");
-        String branchLocation=sc.nextLine();
-        System.out.println("Enter staff quota: ");
-        int staffQuota = sc.nextInt();
-        sc.nextLine();
-
-        Branch newBranch = new Branch(branchName, branchLocation, staffQuota); 
-        if (db.addBranch(newBranch)) System.out.println("You have successfully opened a branch.");
-        else System.out.println("Unsuccessful in opening branch.");
+    public boolean addBranch(){
+        try {
+            sc = new Scanner(System.in);
+            System.out.println("Enter branch name: ");
+            String branchName=sc.nextLine();
+            System.out.println("Enter branch location: ");
+            String branchLocation=sc.nextLine();
+            System.out.println("Enter staff quota: ");
+            int staffQuota = sc.nextInt();
+            sc.nextLine();
+    
+            Branch newBranch = new Branch(branchName, branchLocation, staffQuota); 
+            if (db.addBranch(newBranch)){
+                return true;
+            }
+            else return false;
+        }
+        catch (Exception e){
+            System.out.print("Invalid input entered.");
+            e.printStackTrace();
+            return false;
+        }
+        
     };
 
-    public void removeBranch(){
+    public boolean removeBranch(){
         sc = new Scanner(System.in);
         System.out.println("Enter branch name: ");
         String branchName = sc.nextLine();
-        if (db.removeBranch(branchName)) System.out.println("You have successfully removed a branch.");
-        else System.out.println("Unsuccessful in removing branch.");
+        if (db.removeBranch(branchName)) return true;
+        else return false;
     };
 
 
@@ -224,7 +243,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     public void displayStaffList(){
         sc = new Scanner(System.in);
         ArrayList<String> staffIDsList = db.getStaffIDs();
-        System.out.println("Choose Filter: ");
+        System.out.println("Choose filter for staff list display: ");
         System.out.println("(1) Display all ");
         System.out.println("(2) Filter by Branch ");
         System.out.println("(3) Filter by Role ");
