@@ -5,7 +5,6 @@ import java.io.*;
 import Accounts.*;
 import Branch.*;
 import Customer.*;
-import Display.*;
 import Database.*;
 import DataPersistence.*;
 
@@ -33,6 +32,9 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
+        DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+        initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data");
+        
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA"));
         app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
@@ -133,7 +135,6 @@ public class FOMSApp{
                 case 4:
                     Account account = db.getAccountByStaffID(staff.getStaffID());
                     account.changePassword(console);
-                    keepRunning = false;
                     break;
                 case 5:
                     System.out.println("Logging out...");

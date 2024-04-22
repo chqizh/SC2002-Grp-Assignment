@@ -102,11 +102,9 @@ public class InMemoryDatabase implements Serializable {
     public ArrayList<Payment> getPaymentMethods() {
         return new ArrayList<>(this.paymentMethods);
     }
-
-/*     // To validate account
-    public Employee validateEmployee(String staffID, String password) {
+    public Employee getEmployee(String staffID) {
         Account account = getAccountByStaffID(staffID);
-        if (account != null && account.validateLogin(password)) {
+        if (account != null) {
             if (this.staffMap.containsKey(staffID)) {
                 return this.staffMap.get(staffID);
             } else if (this.branchManagerMap.containsKey(staffID)) {
@@ -115,21 +113,6 @@ public class InMemoryDatabase implements Serializable {
                 return this.adminMap.get(staffID);
             }
         }
-        return null; // Login failed or staffID not found in any map
+        return null;
     }
- */
-public Employee getEmployee(String staffID) {
-    Account account = getAccountByStaffID(staffID);
-    if (account != null) {
-        if (this.staffMap.containsKey(staffID)) {
-            return this.staffMap.get(staffID);
-        } else if (this.branchManagerMap.containsKey(staffID)) {
-            return this.branchManagerMap.get(staffID);
-        } else if (this.adminMap.containsKey(staffID)) {
-            return this.adminMap.get(staffID);
-        }
-    }
-    return null; // Login failed or staffID not found in any map
-}
-
 }
