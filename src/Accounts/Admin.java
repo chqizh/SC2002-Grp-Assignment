@@ -171,11 +171,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
                     System.out.println("StaffID: " + staff.getStaffID());
-                    System.out.println("Branch: " + staff.getBranchName());
                     System.out.println("Name: " + staff.getName());
+                    System.out.println("Branch: " + staff.getBranchName());
                     System.out.println("Role: " + staff.getUserType().stringFromUserType());
                     System.out.println("Age: " + staff.getAge());
                     System.out.println("Gender: " + staff.getGender());
+                    System.out.println();
                 }
                 break;
             case 2: 

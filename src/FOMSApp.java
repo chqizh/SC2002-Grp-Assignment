@@ -32,13 +32,11 @@ public class FOMSApp{
 
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
-        DatabaseInitializer initializer = new DatabaseInitializer(app.db);
-        initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data");
+        // DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+        // initializer.initializeStaffList("C:/Users/tyeck/Documents/GitHub/SC2002-Grp-Assignment/Data/staff_list.csv");
         
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
-        app.db.addAccount(new Account("KurtA"));
-        app.db.addAdmin(new Admin("Henry", "HenryT", 'M', 60,app.db));
-        app.db.addAccount(new Account("HenryT")); */
+        app.db.addAccount(new Account("KurtA")); */
         app.run();
         app.sc.close();
     }
