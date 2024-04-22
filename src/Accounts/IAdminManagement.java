@@ -14,9 +14,7 @@ public interface IAdminManagement {
 	public void transferEmployee();
 
 	public void editPaymentMethod();
-
-	//public void addPaymentMethod(); public void removePaymentMethod();
-
+	
 	public void addBranch();
 
 	public void removeBranch();

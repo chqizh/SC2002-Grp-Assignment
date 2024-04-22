@@ -3,8 +3,11 @@ package Accounts;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner; 
+import java.util.List; 
+import java.util.Set; 
 
 import Branch.*;
+import Customer.*;
 import Database.InMemoryDatabase;
 
 
@@ -167,41 +170,42 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     public void editPaymentMethod(){
-        ;
+        sc = new Scanner(System.in);
+        List<Payment> paymentMethods = new ArrayList<>(db.getPaymentMethods());
+        
+        System.out.println("Enter which payment method you would like to enable/disable:");
+        int i = 0;
+        for (Payment paymentMethod : paymentMethods){
+            if (db.getPaymentMethodsStatus(paymentMethod)) System.out.println("(" + i + ") " + paymentMethod.getPaymentMethodName() + ": Enabled");
+            else System.out.println("(" + i + ") " + paymentMethod.getPaymentMethodName() + ": Disabled");
+            i++;
+        }
+        int choice = sc.nextInt();
+        sc.nextLine();
+        db.togglePaymentMethod(paymentMethods.get(choice));
     }
-
-    private void addPaymentMethod(String branchName){
-        db.addPaymentMethod();
-    };
-
-    private void removePaymentMethod(String branchName){
-        db.removePaymentMethod();
-    };
 
     public void addBranch(){
         sc = new Scanner(System.in);
         System.out.println("Enter branch name: ");
         String branchName=sc.nextLine();
-
         System.out.println("Enter branch location: ");
         String branchLocation=sc.nextLine();
-
         System.out.println("Enter staff quota: ");
         int staffQuota = sc.nextInt();
         sc.nextLine();
 
         Branch newBranch = new Branch(branchName, branchLocation, staffQuota); 
-        db.addBranch(newBranch);
-        System.out.println("You have successfully opened a branch.");
- /*        }
-        else{
-            System.out.println("Unsuccessful in opening of branch.");
-        }
-        return newBranch; */
+        if (db.addBranch(newBranch)) System.out.println("You have successfully opened a branch.");
+        else System.out.println("Unsuccessful in opening branch.");
     };
 
-    public void removeBranch(String branchName){
-        db.removeBranch(branchName);
+    public void removeBranch(){
+        sc = new Scanner(System.in);
+        System.out.println("Enter branch name: ");
+        String branchName = sc.nextLine();
+        if (db.removeBranch(branchName)) System.out.println("You have successfully removed a branch.");
+        else System.out.println("Unsuccessful in removing branch.");
     };
 
 
