@@ -9,7 +9,7 @@ public interface IAdminManagement {
 
 	public void assignManager();
 
-	public void promoteStaff();
+	public boolean promoteStaff();
 
 	public void transferEmployee();
 

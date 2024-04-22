@@ -158,7 +158,7 @@ public class FOMSApp{
             System.out.println("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
-            sc.nextLine(); // Consume the newline
+            sc.nextLine();
             switch (choice) {
                 case 1:
                     manager.viewNewOrders(branch);
@@ -218,7 +218,7 @@ public class FOMSApp{
             System.out.println("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
-            sc.nextLine(); // Consume the newline
+            sc.nextLine();
             switch (choice) {
                 case 1:
                     if (admin.addStaff()) System.out.println("Successfully added a new staff.");
@@ -238,19 +238,20 @@ public class FOMSApp{
                     admin.assignManager();
                     break;
                 case 6:
-                    //admin.promoteStaff();
+                    if (admin.promoteStaff()) System.out.println("Successfully promoted staff.");
+                    else System.out.println("Failed to promote staff.");
                     break;
                 case 7:
-                    //admin.transferEmployee();
+                    admin.transferEmployee();
                     break;
                 case 8:
-                    //admin.editPaymentMethod();
+                    admin.editPaymentMethod();
                     break;
                 case 9:
                     admin.addBranch();
                     break;
                 case 10:
-                    //admin.removeBranch(branchName);
+                    admin.removeBranch(branchName);
                     break;
                 case 11:
                     try {

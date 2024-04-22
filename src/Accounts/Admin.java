@@ -1,10 +1,8 @@
 package Accounts;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner; 
 import java.util.List; 
-import java.util.Set; 
 
 import Branch.*;
 import Customer.*;
@@ -118,8 +116,21 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
-    public void promoteStaff(){
-        ;
+    public boolean promoteStaff(){
+        sc = new Scanner(System.in);
+        System.out.print("Enter staffID to promote: ");
+        String staffID = sc.nextLine();
+        if (db.getEmployee(staffID).getUserType() == UserType.STAFF){
+            Staff staff = db.getStaff(staffID);
+            BranchManager newBranchManager = new BranchManager(staff.getName(), staffID, staff.getGender(), staff.getAge(), staff.getBranchName(), db);
+            db.addBranchManager(newBranchManager);
+            db.removeStaff(staffID);
+            return true;
+        }
+        else {
+            System.out.println("Employee with chosen staffID is already a Branch Manager.");
+            return false;
+        }
     }
 
     public void transferEmployee(){

@@ -49,10 +49,6 @@ public class InMemoryDatabase implements Serializable {
         return adminMap;
     }
 
-    public ArrayList<Payment> getPaymentMethodsList() {
-        return paymentMethods;
-    }
-
     public void addAccount(Account account) {
         this.accounts.put(account.getStaffID(), account);
     }
@@ -154,9 +150,11 @@ public class InMemoryDatabase implements Serializable {
         if (account != null) {
             if (this.staffMap.containsKey(staffID)) {
                 return this.staffMap.get(staffID);
-            } else if (this.branchManagerMap.containsKey(staffID)) {
+            } 
+            else if (this.branchManagerMap.containsKey(staffID)) {
                 return this.branchManagerMap.get(staffID);
-            } else if (this.adminMap.containsKey(staffID)) {
+            } 
+            else if (this.adminMap.containsKey(staffID)) {
                 return this.adminMap.get(staffID);
             }
         }

@@ -10,9 +10,9 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     private String branchName;
     private transient Scanner sc;
 
-	public BranchManager(String name, String staffID, char gender, int age, String branchID, InMemoryDatabase db) {
+	public BranchManager(String name, String staffID, char gender, int age, String branchName, InMemoryDatabase db) {
         super(name, staffID, UserType.BRANCH_MANAGER, gender, age, db);
-        this.branchName = branchID;
+        this.branchName = branchName;
     }
 
     /**
