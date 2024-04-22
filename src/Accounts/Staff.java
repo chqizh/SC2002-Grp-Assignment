@@ -1,8 +1,6 @@
 package Accounts;
 
 import java.util.*;
-import java.io.Serializable;
-
 import Branch.*;
 import Customer.*;
 import Database.InMemoryDatabase;

@@ -1,5 +1,6 @@
 package Accounts;
 
+import java.io.Console;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -80,14 +81,14 @@ public class Account implements Serializable {
     public boolean validateLogin(String password) {
         String hashedInputPassword = hashPassword(password);
         String defaultPasswordHash = hashPassword("password");
+        Console console = System.console();
 
         if (this.passwordHash.equals(hashedInputPassword)) {
-            if (this.passwordHash.equals(defaultPasswordHash)) {
+            while (this.passwordHash.equals(defaultPasswordHash)) {
                 System.out.println("You are using the default password. Please change your password.");
-                System.out.println("New Password: ");
-/*              char[] passwordArray = console.readPassword("New Password: "); // Password will be masked
-                String password = new String(passwordArray); */
-
+                char[] passwordArray = console.readPassword("New Password: "); // Password will be masked
+                String newPassword = new String(passwordArray);
+                this.setPassword(newPassword);
             }
             return true;
         } else {
