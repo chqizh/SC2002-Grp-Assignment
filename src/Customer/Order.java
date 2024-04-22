@@ -76,15 +76,15 @@ public class Order {
 
     public String getOrderStatusString(){
         switch (this.orderStatus){
-            case orderStatusFlags.NEW:
+            case NEW:
                 return "New order.";
-            case orderStatusFlags.PROCESSED:
+            case PROCESSED:
                 return "Order has been processed.";
-            case orderStatusFlags.PICKUP:
+            case PICKUP:
                 return "Order is ready to pickup.";
-            case orderStatusFlags.COMPLETED:
+            case COMPLETED:
                 return "Order has been completed.";
-            case orderStatusFlags.CANCELLED:
+            case CANCELLED:
                 return "Order has been cancelled.";
             default:
                 return "Invalid.";
