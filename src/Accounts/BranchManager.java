@@ -138,17 +138,16 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
 
 // From IStaffManagement
 	public void displayStaffList(){
-    ArrayList<String> staffIDsList = db.getStaffIDs();
-                String branch = this.branchName;
-                for (String staffID : staffIDsList){
-                    Staff staff = db.getStaff(staffID);
-                    if (staff.getBranchName() == branch){
-                        System.out.println("StaffID: " + staff.getStaffID());
-                        System.out.println("Name: " + staff.getName());
-                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Age: " + getAge());
-                        System.out.println("Gender: "+ getGender());
-                    }
-                }
-            }
+        //TO ADD BRANCH MANAGERS ABLE TO SEE
+        ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();
+        String branch = this.branchName;
+        for (String staffID : staffIDsList){
+            Staff staff = db.getStaff(staffID);
+            System.out.println("StaffID: " + staff.getStaffID());
+            System.out.println("Name: " + staff.getName());
+            System.out.println("Role: " + staff.getUserType().stringFromUserType());
+            System.out.println("Age: " + getAge());
+            System.out.println("Gender: "+ getGender());
+        }
+    }
 }

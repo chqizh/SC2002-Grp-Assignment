@@ -154,11 +154,6 @@ public class InMemoryDatabase implements Serializable {
         return this.staffMap.get(staffID);
     }
 
-    public ArrayList<String> getStaffIDs(){
-        ArrayList<String> staffIDsList = new ArrayList<String>(staffMap.keySet());
-        return staffIDsList;
-    }
-
     public ArrayList<String> getAllEmployeeIDs(){
         ArrayList<String> employeeIDsList = new ArrayList<String>(this.staffMap.keySet());
         employeeIDsList.addAll(this.branchManagerMap.keySet());
