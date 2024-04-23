@@ -1,4 +1,5 @@
 package Customer;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -9,7 +10,7 @@ import Menu.MenuItem;
 import Branch.Branch;
 import Branch.OrderList;
 
-public class Order {
+public class Order implements Serializable{
     public enum orderStatusFlags {
         NEW,
         PROCESSED,

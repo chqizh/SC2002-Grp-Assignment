@@ -35,7 +35,7 @@ public class FOMSApp{
 
         Scanner sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))){
-            System.out.println("staff_list.csv file was found. Initialize using staff_list.csv? (Y/N)");
+            System.out.print("staff_list.csv file was found. Initialize using staff_list.csv (Y/N)? ");
             char choice = sc.nextLine().charAt(0);
             if (choice == 'Y'){
                 DatabaseInitializer initializer = new DatabaseInitializer(app.db);
@@ -52,7 +52,7 @@ public class FOMSApp{
         
         //Menu Initializer
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
-            System.out.println("menu_list.csv file was found. Initialize using menu_list.csv? (Y/N)");
+            System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
             char choice = sc.nextLine().charAt(0);
             if (choice == 'Y'){
                 DatabaseInitializer initializer = new DatabaseInitializer(app.db);
@@ -237,7 +237,10 @@ public class FOMSApp{
     private void displayAdminInterface(Admin admin) {
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("\n|| Welcome to the ADMIN Workspace ||\n");
+            System.out.println("");
+            System.out.println("====================================");
+            System.out.println("|| Welcome to the ADMIN Workspace ||");
+            System.out.println("====================================");
             System.out.println("(1) Add Staff");
             System.out.println("(2) Remove Staff");
             System.out.println("(3) Edit Staff");
@@ -250,7 +253,6 @@ public class FOMSApp{
             System.out.println("(10) Close Branch");
             System.out.println("(11) Export Staff List");
             System.out.println("(12) Log Out");
-            System.out.println("");
             System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
@@ -322,6 +324,7 @@ public class FOMSApp{
         boolean keepRunning = true;
     
         ArrayList<String> branchNames = db.getAllBranchNames();
+        System.out.println("Please select a Branch.");
         int i = 1;
         for (String branchName : branchNames){
             System.out.printf("(%d) %s%n", i, branchName);
@@ -331,14 +334,17 @@ public class FOMSApp{
         Branch branch;
         String branchName;
         do {
-            System.out.println("Enter Branch Name:");
+            System.out.print("Enter Branch Name:");
             branchName = sc.nextLine();
             branch = db.getBranchByBranchName(branchName);
             if (branch == null) System.out.println("You have entered an invalid Branch Name!");
         } while (branch == null);
 
         while (keepRunning) {
+            System.out.println("");
+            System.out.println("============================");
             System.out.println("|| Welcome to MadDonkeys! ||");
+            System.out.println("============================");
             System.out.println("(1) Browse Menu");
             System.out.println("(2) Add to Cart");
             System.out.println("(3) Delete from Cart");
@@ -347,7 +353,7 @@ public class FOMSApp{
             System.out.println("(6) Track Order");
             System.out.println("(7) Collect Order");
             System.out.println("(8) Exit System");
-            System.out.println("Please select your action:");
+            System.out.print("Please select your action: ");
 
             int choice = sc.nextInt();
             sc.nextLine();

@@ -25,6 +25,7 @@ public class MenuDisplay {
         // }
         
         // Display header columns
+        System.out.println("------------------------------------------------------------");
         System.out.printf("%-8s %-20s %-10s %-15s\n", "Item ID", "Name", "Price", "Category");
         System.out.println("------------------------------------------------------------");
 

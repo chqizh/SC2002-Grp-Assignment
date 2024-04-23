@@ -1,17 +1,15 @@
 package Customer;
-import Menu.MenuDisplay;
-import Menu.MenuItem;
-import Menu.MenuItems;
+
+import java.util.Scanner;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import Menu.*;
 import Branch.*;
 import Customer.Order.orderStatusFlags;
 import Database.InMemoryDatabase;
-import java.util.Scanner;
-//import java.io.IOException;
-//import java.net.Inet4Address;
-import java.util.ArrayList;
 
-
-public class Customer implements ICustomerOrderProcess{
+public class Customer implements ICustomerOrderProcess, Serializable{
     private ArrayList<MenuItem> cart;
     private transient Scanner sc;
     private InMemoryDatabase db;
