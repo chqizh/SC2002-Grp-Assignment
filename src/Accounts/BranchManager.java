@@ -140,7 +140,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
 
 // From IStaffManagement
 	public void displayStaffList(){
-        //TO ADD BRANCH MANAGERS ABLE TO SEE
+        //TODO: ADD BRANCH MANAGERS ABLE TO SEE
         ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();
         String branch = this.branchName;
         for (String staffID : staffIDsList){

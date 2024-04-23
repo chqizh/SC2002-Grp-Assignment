@@ -3,17 +3,15 @@ package Menu;
 import java.io.Serializable;
 import java.util.*;
 
-public class EditMenu implements Serializable{
+public class MenuEditor implements Serializable{
 	private ArrayList<MenuItem> menu;
-    private String branchName;
     private transient Scanner sc;
 
-	public EditMenu(ArrayList<MenuItem> menu, String branchName) {
+	public MenuEditor(ArrayList<MenuItem> menu) {
 		this.menu = menu;
-        this.branchName = branchName;
 	}
 
-	public MenuItem addItems(){
+	public MenuItem addItems(String branchName){
 		sc = new Scanner(System.in);
 		System.out.print("Enter item ID: ");
 		int itemId = sc.nextInt();
@@ -41,13 +39,13 @@ public class EditMenu implements Serializable{
                 System.out.print("Enter menu item category: ");
                 String category = sc.nextLine();
 
-                MenuItem menuItem = new MenuItem(itemId, name, price, category, this.branchName);
+                MenuItem menuItem = new MenuItem(itemId, name, price, category, branchName);
                 return menuItem;
             }
         }
 	}
 
-	public ArrayList<MenuItem> deleteItems(ArrayList<MenuItem>menu) {
+	public void deleteItems() {
         sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
         int id = sc.nextInt();
@@ -55,8 +53,8 @@ public class EditMenu implements Serializable{
         
         boolean found = false;
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getItemID() == id) {
-                menu.remove(i);
+            if (this.menu.get(i).getItemID() == id) {
+                this.menu.remove(i);
                 found = true;
                 break; 
             }
@@ -66,8 +64,6 @@ public class EditMenu implements Serializable{
         } else {
             System.out.println("Item with ID " + id + " not found.");
         }
-        
-        return menu; // Return the updated menu
     }
 
 	public void updateName(int id, String newName, ArrayList<MenuItem> menu) {

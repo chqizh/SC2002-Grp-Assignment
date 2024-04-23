@@ -7,15 +7,15 @@ public class MenuItem implements Serializable{
     private double price;
     private int itemID;
     private String category;
-    private String branch;
+    private String branchName;
     private String customisation;
 
-    public MenuItem(int itemID, String itemName, double price, String category, String branch){
+    public MenuItem(int itemID, String itemName, double price, String category, String branchName){
         this.itemID = itemID;
         this.itemName = itemName;
         this.price = price;
         this.category = category;
-        this.branch = branch;
+        this.branchName = branchName;
         this.customisation = "-";
     }
 
@@ -30,13 +30,13 @@ public class MenuItem implements Serializable{
     }
 
 
-    public String getBranch() {
-        return branch;
+    public String getBranchName() {
+        return branchName;
     }
 
 
-    public void setBranch(String branch) {
-        this.branch = branch;
+    public void setBranchName(String branch) {
+        this.branchName = branch;
     }
 
 

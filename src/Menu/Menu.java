@@ -5,16 +5,16 @@ import java.util.*;
 
 public class Menu implements Serializable{
 	private ArrayList<MenuItem> menu;
-	private EditMenu editMenu;
+	private MenuEditor editMenu;
 	private String branchName;
 	private transient Scanner sc;
 	
 	public Menu(String branchName) {
 		this.menu = new ArrayList<MenuItem>();
-		this.editMenu = new EditMenu(this.menu, this.branchName);
-
+		this.editMenu = new MenuEditor(this.menu);
 	}
 	
+	//TODO REFACTOR MENU, editMenu already has the a reference to menu. No need to return values back and forth. NEED TO ADD addITEMS TO UML ALSO.
 	public boolean addItems() throws IOException {		
 		sc = new Scanner(System.in);
 		System.out.print("Enter the number of items you would like to add: ");
@@ -22,7 +22,7 @@ public class Menu implements Serializable{
 		sc.nextLine();
 
 		for (int i = 0; i < numberToAdd; i++) {
-			MenuItem newItem = this.editMenu.addItems();
+			MenuItem newItem = this.editMenu.addItems(this.branchName);
 			if (this.addItems(newItem) == false) System.out.println("Failed to add " + newItem.getItemName());
 		}
 		return true;
@@ -46,8 +46,8 @@ public class Menu implements Serializable{
 	    int numberToDelete = sc.nextInt();
 		sc.nextLine();
 		
-		for (int i=0; i<numberToDelete; i++) {
-			menu = editMenu.deleteItems(menu);
+		for (int i=0; i < numberToDelete; i++) {
+			this.editMenu.deleteItems();
 		}
 	}
 

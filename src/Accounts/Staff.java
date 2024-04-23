@@ -54,8 +54,7 @@ public class Staff extends Employee implements IOrderProcess{
     public void viewOrder(Branch branch, int orderID) {
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
-            order.printOrder(); 
-            // TODO print status of order
+            order.printOrder();
         } else {
             System.out.println("Order ID " + orderID + " not found.");
         }

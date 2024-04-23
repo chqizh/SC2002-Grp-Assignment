@@ -122,6 +122,7 @@ public class Order implements Serializable{
 
     public void printOrder(){
         System.out.println("OrderID: " + orderID);
+        System.out.println("Status: " + this.getOrderStatus());
         System.out.printf("%-8s %-8s %-20s %-10s %-15s\n", "OrderID", "Item ID", "Name", "Price", "Category");
         System.out.println("--------------------------------------------------------------------");
 
