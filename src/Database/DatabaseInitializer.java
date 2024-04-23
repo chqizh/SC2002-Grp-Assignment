@@ -3,6 +3,7 @@ package Database;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import Accounts.*;
@@ -102,17 +103,25 @@ public class DatabaseInitializer {
     public void initializeMenuList(String filePath) {
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
+            HashMap<String, Integer> branchItemIDs = new HashMap<>();
             for (int i = 1; i < lines.size(); i++) {
                 String line = lines.get(i).trim();
                 if (line.isEmpty()) continue;
+                
                 String[] data = line.split(",");
+                if (data.length < 4) { // Now we check if there are at least 5 elements
+                    continue;
+                }
                 //System.out.println(data[2]);
                 String name = data[0].trim();
                 double price = Double.parseDouble(data[1].trim());
                 String branchName = data[2].trim();
                 String category = data[3].trim();
+
+                int itemID = branchItemIDs.getOrDefault(branchName, 0)+1;
+                branchItemIDs.put(branchName, itemID);
                 
-                MenuItem menuItem = new MenuItem(i, name, price, branchName, category);
+                MenuItem menuItem = new MenuItem(itemID, name, price, branchName, category);
                 
                 db.addMenuItem(branchName, menuItem);
             }
