@@ -47,7 +47,6 @@ public class FOMSApp{
             }
 
         //Menu Initializer
-        System.out.println(filePath);
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))){
             System.out.println("Menu_List was found.");
             DatabaseInitializer initializer = new DatabaseInitializer(app.db);
