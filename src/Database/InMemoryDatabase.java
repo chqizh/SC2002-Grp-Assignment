@@ -18,8 +18,8 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, Branch> branches;
     private Map<String, Staff> staffMap;
     private Map<String, BranchManager> branchManagerMap;
-    public Map<String, Admin> adminMap;
-    public Map<Payment, Boolean> paymentMethods;
+    private Map<String, Admin> adminMap;
+    private Map<Payment, Boolean> paymentMethods;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();
