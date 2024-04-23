@@ -304,7 +304,7 @@ public class FOMSApp{
         ArrayList<String> branchNames = db.getAllBranchNames();
         int i = 1;
         for (String branchName : branchNames){
-            System.out.printf("(%i) %s", i, branchName);
+            System.out.printf("(%d) %s%n", i, branchName);
             i++;
         }
 

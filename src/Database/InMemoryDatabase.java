@@ -11,6 +11,8 @@ import java.io.Serializable;
 import Accounts.*;
 import Branch.*;
 import Customer.*;
+import Menu.MenuItem;
+import Menu.MenuItems;
 
 public class InMemoryDatabase implements Serializable {
     private Map<String, Account> accounts;
@@ -180,5 +182,11 @@ public class InMemoryDatabase implements Serializable {
             }
         }
         return null;
+    }
+
+    public void addMenuItem(String branchName, MenuItem menuitem){
+        Branch branch = getBranchByBranchName(branchName);
+        ArrayList<MenuItem> menu_items = branch.getBranchMenu().getMenuItemsList();
+        menu_items.add(menuitem);   
     }
 }

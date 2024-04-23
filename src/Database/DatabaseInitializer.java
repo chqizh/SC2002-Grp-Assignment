@@ -99,7 +99,7 @@ public class DatabaseInitializer {
     }
 
     // TODO not sure of the current constructor. Update when Order class is finalised.
-/*     public void initializeMenuList(String filePath) {
+    public void initializeMenuList(String filePath) {
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             for (int i = 1; i < lines.size(); i++) {
@@ -108,14 +108,15 @@ public class DatabaseInitializer {
                 String[] data = line.split(",");
                 String name = data[0].trim();
                 double price = Double.parseDouble(data[1].trim());
-                String branchID = data[2].trim();
+                String branchName = data[2].trim();
                 String category = data[3].trim();
                 
-                MenuItem menuItem = new MenuItem(name, price, branchID, category);
-                db.addMenuItem(menuItem);
+                MenuItem menuItem = new MenuItem(i, name, price, branchName, category);
+                
+                db.addMenuItem(branchName, menuItem);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-    } */
+    }
 }
