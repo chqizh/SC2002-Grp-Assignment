@@ -7,6 +7,11 @@ import java.util.Scanner;
 import Menu.*;
 import Customer.*;
 
+/**
+ * Represents a branch of the fast food ordering and management system.
+ * This class encapsulates all the necessary attributes and methods 
+ * to manage a branch, including its staff, managers, menu, and orders.
+ */
 public class Branch implements Serializable {
     private String branchName;
     private String branchLocation;
@@ -20,6 +25,9 @@ public class Branch implements Serializable {
     private int maxOrderID;
     private transient Scanner sc;
 
+    /**
+     * Default constructor for creating a branch with no initial setup.
+     */
     public Branch(){
         this.branchManagerIDs = new ArrayList<>();
         this.maxNumManagers = 1;
@@ -31,6 +39,13 @@ public class Branch implements Serializable {
         this.sc = new Scanner(System.in);
     }
     
+    /**
+     * Constructs a branch with a specific name, location, and staff quota.
+     *
+     * @param branchName     The name of the branch.
+     * @param branchLocation The location of the branch.
+     * @param staffQuota     The maximum number of staff allowed in this branch.
+     */
     public Branch (String branchName, String branchLocation, int staffQuota){
         this.branchManagerIDs = new ArrayList<>();
         this.maxNumManagers = 1;
@@ -45,6 +60,11 @@ public class Branch implements Serializable {
         this.staffQuota = staffQuota;   
     }
 
+    /**
+     * Gets the name of the branch.
+     *
+     * @return The name of the branch.
+     */
     public String getBranchName() {
         return branchName;
     }
@@ -61,6 +81,13 @@ public class Branch implements Serializable {
         return branchManagerIDs;
     }
 
+    /**
+     * Adds a new branch manager to the branch if the maximum number
+     * of managers has not been reached and the manager is not already present.
+     *
+     * @param staffID The ID of the branch manager to be added to branch.
+     * @return True if the manager was added successfully, false otherwise.
+     */
     public boolean addBranchManager(String staffID){
         if (branchManagerIDs.contains(staffID)){
             System.out.printf("Branch already contains Branch Manager with staffID %s.", staffID);
@@ -76,6 +103,13 @@ public class Branch implements Serializable {
         }
     }
 
+    /**
+     * Removes a branch manager to the branch manager is not present in Branch.
+     * Prompts user to add back a manager to hit manager quota.
+     * 
+     * @param staffID The ID of the branch manager to be removed from branch.
+     * @return True if the manager was removed successfully, false otherwise.
+     */
     public boolean removeBranchManager(String staffID){
         if (branchManagerIDs.contains(staffID)){
             System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
