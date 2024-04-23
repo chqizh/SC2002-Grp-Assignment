@@ -124,6 +124,7 @@ public class Customer implements ICustomerOrderProcess{
                 
                 branch.addOrder(order);
                 System.out.println("Order placed successfully.");
+                System.out.println("Your Order ID is:"+ order.getOrderID());
                 cart.clear();
             }
             else {
