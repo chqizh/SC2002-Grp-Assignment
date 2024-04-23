@@ -335,7 +335,8 @@ public class FOMSApp{
             System.out.println("(4) View Cart");
             System.out.println("(5) Place Order");
             System.out.println("(6) Track Order");
-            System.out.println("(7) Exit System");
+            System.out.println("(7) Collect Order");
+            System.out.println("(8) Exit System");
             System.out.println("Please select your action:");
 
             int choice = sc.nextInt();
@@ -361,6 +362,9 @@ public class FOMSApp{
                     customer.trackOrder(branchName);
                     break;
                 case 7:
+                    customer.collectOrder(branchName);
+                    break;
+                case 8:
                     System.out.println("Exiting customer interface...");
                     keepRunning = false;
                     break;

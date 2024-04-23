@@ -17,4 +17,6 @@ public interface ICustomerOrderProcess {
     // void trackOrder(int branchID)throws IOException;
     void trackOrder(String branchName);
 
+    public void collectOrder(String branchName);
+
 }
