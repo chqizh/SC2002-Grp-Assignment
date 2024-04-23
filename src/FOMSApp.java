@@ -32,13 +32,24 @@ public class FOMSApp{
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
         printFOMSTitle();
-
+        
         Scanner sc = new Scanner(System.in);
+        app.staffInitialization();
+        app.menuInitialization();
+/*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
+        app.db.addAccount(new Account("KurtA")); */
+        
+        app.run();
+        sc.close();
+    }
+
+    public void staffInitialization(){
+        this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))){
             System.out.print("staff_list.csv file was found. Initialize using staff_list.csv (Y/N)? ");
             char choice = sc.nextLine().charAt(0);
             if (choice == 'Y'){
-                DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+                DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
             }
             else if (choice == 'N'){}
@@ -49,13 +60,15 @@ public class FOMSApp{
         else {
             System.out.println("Staff list not found");
         }
-        
+    }
+
+    public void menuInitialization(){
         //Menu Initializer
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
             System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
             char choice = sc.nextLine().charAt(0);
             if (choice == 'Y'){
-                DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+                DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeMenuList(filePath.concat("/Data/menu_list.csv"));
             }
             else if (choice == 'N'){}
@@ -66,12 +79,6 @@ public class FOMSApp{
         else {
             System.out.println("Menu list not found");
         }
-
-/*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
-        app.db.addAccount(new Account("KurtA")); */
-        
-        app.run();
-        sc.close();
     }
 
     public void run() {

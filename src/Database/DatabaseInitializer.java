@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 
 import Accounts.*;
@@ -99,6 +100,8 @@ public class DatabaseInitializer {
     }
 
     public void initializeMenuList(String filePath) {
+        int numItemsAdded = 0;
+        HashSet<String> uniqueBranchesAdded = new HashSet<>();
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             HashMap<String, Integer> branchItemIDs = new HashMap<>();
@@ -116,15 +119,19 @@ public class DatabaseInitializer {
                 String branchName = data[2].trim();
                 String category = data[3].trim();
 
-                int itemID = branchItemIDs.getOrDefault(branchName, 0)+1;
+                int itemID = branchItemIDs.getOrDefault(branchName, 0) + 1;
                 branchItemIDs.put(branchName, itemID);
                 
                 MenuItem menuItem = new MenuItem(itemID, name, price, branchName, category);
                 
-                db.addMenuItem(branchName, menuItem);
+                if (db.addMenuItem(branchName, menuItem) == true){
+                    numItemsAdded++;
+                    uniqueBranchesAdded.add(branchName);
+                };
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.printf("Added %d Menu Items to %d Branches.\n", numItemsAdded, uniqueBranchesAdded.size());
     }
 }
