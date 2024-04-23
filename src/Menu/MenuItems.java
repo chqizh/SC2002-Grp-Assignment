@@ -10,7 +10,7 @@ public class MenuItems implements Serializable{
 	private transient Scanner sc;
 	
 	public MenuItems() {
-		menu = new ArrayList<>();
+		menu = new ArrayList<MenuItem>();
 	}
 
 	public int getIntegerFromUser() {

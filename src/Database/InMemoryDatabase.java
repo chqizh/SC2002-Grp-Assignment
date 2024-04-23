@@ -185,8 +185,7 @@ public class InMemoryDatabase implements Serializable {
     }
 
     public void addMenuItem(String branchName, MenuItem menuitem){
-        Branch branch = getBranchByBranchName(branchName);
-        ArrayList<MenuItem> menu_items = branch.getBranchMenu().getMenuItemsList();
-        menu_items.add(menuitem);   
+        Branch branch = this.branches.get(branchName); 
+        branch.getBranchMenu().getMenuItemsList().add(menuitem);
     }
 }

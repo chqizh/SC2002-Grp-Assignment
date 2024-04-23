@@ -106,6 +106,7 @@ public class DatabaseInitializer {
                 String line = lines.get(i).trim();
                 if (line.isEmpty()) continue;
                 String[] data = line.split(",");
+                //System.out.println(data[2]);
                 String name = data[0].trim();
                 double price = Double.parseDouble(data[1].trim());
                 String branchName = data[2].trim();
