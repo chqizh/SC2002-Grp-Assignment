@@ -195,6 +195,9 @@ public class InMemoryDatabase implements Serializable {
         if (branch != null){
             return branch.getBranchMenu().addItems(menuItem);
         }
-        else return false;
+        else{
+            System.out.printf("Branch %s does not exist.\n", branchName);
+            return false;
+        }
     }
 }

@@ -98,7 +98,6 @@ public class DatabaseInitializer {
         }
     }
 
-    // TODO not sure of the current constructor. Update when Order class is finalised.
     public void initializeMenuList(String filePath) {
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
