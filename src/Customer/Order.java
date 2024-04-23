@@ -50,7 +50,7 @@ public class Order {
         return this.branchName;
     }
 
-    public List<MenuItem> getOrderItems() {
+    public ArrayList<MenuItem> getOrderItems() {
         return orderItems;
     }
 
@@ -94,14 +94,6 @@ public class Order {
         return dineIn;
     }
 
-    public void setCustomisation(String customisation){
-        this.customisation = customisation;
-    }
-
-    public String getCustomisation(){
-        return this.customisation;
-    }
-
     public void setDineIn(boolean value){
         this.dineIn = value;
     }
@@ -115,6 +107,17 @@ public class Order {
         this.orderStatus = orderStatusFlags.CANCELLED;
         this.orderListRef.removeOrder(this.orderID);
         return true;
+    }
+
+    public double calculateTotalPrice() {
+        double totalPrice = 0.0;
+        List<MenuItem> orderItems = getOrderItems();
+
+        for (MenuItem item : orderItems) {
+            totalPrice += item.getPrice();
+        }
+
+        return totalPrice;
     }
 
     public void printOrder(){

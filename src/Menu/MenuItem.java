@@ -9,6 +9,7 @@ public class MenuItem implements Serializable{
     private int itemID;
     private String category;
     private String branch;
+    private String customisation;
 
     public MenuItem(int itemID, String itemName, double price, String category, String branch){
         this.itemID = itemID;
@@ -16,6 +17,7 @@ public class MenuItem implements Serializable{
         this.price = price;
         this.category = category;
         this.branch = branch;
+        this.customisation = "-";
     }
 
     
@@ -61,6 +63,14 @@ public class MenuItem implements Serializable{
 
     public void setItemID(int itemID) {
         this.itemID = itemID;
+    }
+
+    public String getCustomisation() {
+        return customisation;
+    }
+
+    public void setCustomisation(String customisation) {
+        this.customisation = customisation;
     }
 
 }

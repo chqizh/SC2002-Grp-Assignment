@@ -4,7 +4,6 @@ import Menu.MenuItem;
 import Menu.MenuItems;
 import Branch.*;
 import Database.InMemoryDatabase;
-
 import java.util.Scanner;
 //import java.io.IOException;
 //import java.net.Inet4Address;
@@ -32,13 +31,13 @@ public class Customer implements ICustomerOrderProcess{
             System.out.println("Your cart is empty.");
         } else {
             System.out.println("Cart Contents:");
-            System.out.println("-------------------------------------------");
-            System.out.printf("%-5s %-20s %-10s\n", "ID", "Name", "Price");
-            System.out.println("-------------------------------------------");
+            System.out.println("---------------------------------------------------");
+            System.out.printf("%-5s %-20s %-15s %-10s\n", "ID", "Name", "Price", "Customizations");
+            System.out.println("---------------------------------------------------");
             for (MenuItem item : cart) {
-                System.out.printf("%-5d %-20s %-10s\n", item.getItemID() ,item.getItemName() ,item.getPrice());
+                System.out.printf("%-5d %-20s %-15s %-10s\n", item.getItemID() ,item.getItemName() ,item.getPrice(), item.getCustomisation());
             }
-            System.out.println("-------------------------------------------");
+            System.out.println("---------------------------------------------------");
         }
     }
 
@@ -60,8 +59,15 @@ public class Customer implements ICustomerOrderProcess{
         }
 
         if (menuItem != null) {
+            System.out.println("Do you have any customisations for this item? (Y/N)");
+            char choice = sc.nextLine().charAt(0);
+            if (choice == 'Y' || choice == 'y') {
+                System.out.println("Enter your customisations:");
+                String customisations = sc.nextLine();
+                menuItem.setCustomisation(customisations);
+            }
             cart.add(menuItem);
-            System.out.println("Item added to cart!");
+            System.out.println(menuItem.getItemName()+" added to cart!");
         }
         else {
             System.out.println("Item with ID "+itemID+" not found in the menu");
@@ -91,6 +97,7 @@ public class Customer implements ICustomerOrderProcess{
 
     //public void placeOrder(string branchName) throws IOException {
     public void placeOrder(String branchName){
+        int option;
         Branch branch = db.getBranchByBranchName(branchName);
         if (branch == null){
             System.out.println("Invalid branch entered.");
@@ -101,6 +108,14 @@ public class Customer implements ICustomerOrderProcess{
             System.out.println("Cannot place an empty order.");
             return;
         }
+        do {
+            System.out.println("(1) Dine-In");
+            System.out.println("(2) Takeaway");
+            System.out.println("Enter your choice [1 or 2]:");
+            option = sc.nextInt();
+            sc.nextLine();
+        } while ((option!=1) && (option!=2));
+        
 
         double totalPrice = calculateTotalPrice();
         System.out.println("Total Price: $" + totalPrice);
@@ -118,13 +133,23 @@ public class Customer implements ICustomerOrderProcess{
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {
                 Order order = new Order(branch);
+
+                if(option==1){
+                    order.setDineIn(true);
+                }
+                else{
+                    order.setDineIn(false);
+                }
+
                 for (MenuItem item : cart){
                     order.addOrderItems(item);
                 }
                 
                 branch.addOrder(order);
                 System.out.println("Order placed successfully.");
-                System.out.println("Your Order ID is:"+ order.getOrderID());
+                //System.out.println("Your Order ID is:"+ order.getOrderID());
+                ReceiptGenerator receipt = new ReceiptGenerator();
+                receipt.generateReceipt(order, paymentMethod.getPaymentMethodName());
                 cart.clear();
             }
             else {
