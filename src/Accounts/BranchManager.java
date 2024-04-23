@@ -59,6 +59,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
             System.out.println("(1) Processed");
             System.out.println("(2) Pickup");
             System.out.println("(3) Completed");
+            System.out.println("(4) Canclled");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -73,13 +74,16 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
                 case 3:
                     order.setOrderStatus(Order.orderStatusFlags.COMPLETED);
                     break;
+                case 4:
+                    order.setOrderStatus(Order.orderStatusFlags.CANCELLED);
+                    break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-            System.out.println("Order ID " + orderID + " has been updated to" + order.getOrderStatus());
+            System.out.println("OrderID " + orderID + " has been updated to " + order.getOrderStatus());
         } else {
-            System.out.println("Order ID " + orderID + " not found.");
+            System.out.println("OrderID " + orderID + " not found.");
         }
     }
 

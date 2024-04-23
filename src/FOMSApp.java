@@ -135,7 +135,9 @@ public class FOMSApp{
         Branch branch = db.getBranchByBranchName(staff.getBranchName());
 
         while (keepRunning) {
-            System.out.println("\n|| Welcome to STAFF Workspace || ");
+            System.out.println("================================");
+            System.out.println("|| Welcome to STAFF Workspace ||");
+            System.out.println("================================");
             System.out.println("(1) Display New Orders ");
             System.out.println("(2) View Order Details ");
             System.out.println("(3) Process Order ");
@@ -181,7 +183,9 @@ public class FOMSApp{
         Branch branch = db.getBranchByBranchName(manager.getBranchName());
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("\n|| Welcome to the BRANCH MANAGER Workspace ||");
+            System.out.println("=============================================");
+            System.out.println("|| Welcome to the BRANCH MANAGER Workspace ||");
+            System.out.println("=============================================");
             System.out.println("Please select your action:");
             System.out.println("(1) Display New Orders");
             System.out.println("(2) View Order Details");
@@ -191,7 +195,7 @@ public class FOMSApp{
             System.out.println("(6) Edit Menu Item");
             System.out.println("(7) Remove Menu Item");
             System.out.println("(8) Log Out");
-            System.out.println("Please select your action: ");
+            System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
             sc.nextLine();

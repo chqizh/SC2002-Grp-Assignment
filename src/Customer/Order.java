@@ -67,7 +67,7 @@ public class Order implements Serializable{
         if (this.orderStatus != flag){
             this.orderStatus = flag;
             if (flag == orderStatusFlags.PICKUP) this.scheduleAutoCancellation(15, TimeUnit.SECONDS);
-            if (flag == orderStatusFlags.COMPLETED) orderListRef.removeOrder(this.orderID);
+            //if (flag == orderStatusFlags.COMPLETED) orderListRef.removeOrder(this.orderID);
         }
         else {
             System.out.println("Order is currently"  + this.orderStatus + "already.");
@@ -101,12 +101,12 @@ public class Order implements Serializable{
 
     private void scheduleAutoCancellation(int delay, TimeUnit unit) {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.schedule(this::autoCancellation, delay, unit); // Schedule the autoCancellation task to run after 15 minutes
+        scheduler.schedule(this::autoCancellation, delay, unit);
     }
 
     private boolean autoCancellation() {
         this.orderStatus = orderStatusFlags.CANCELLED;
-        this.orderListRef.removeOrder(this.orderID);
+        //this.orderListRef.removeOrder(this.orderID);
         return true;
     }
 
@@ -126,8 +126,6 @@ public class Order implements Serializable{
         System.out.printf("%-8s %-8s %-20s %-10s %-15s\n", "OrderID", "Item ID", "Name", "Price", "Category");
         System.out.println("--------------------------------------------------------------------");
 
-        // Display menu items
-        //ArrayList<MenuItem> menuItems = menu.getMenuItems();
         for (MenuItem orderItem : orderItems) {
             System.out.printf("%-8d %-8d %-20s $%-10.2f %-15s\n",
                                 this.orderID,

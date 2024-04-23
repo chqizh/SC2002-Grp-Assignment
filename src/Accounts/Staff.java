@@ -10,6 +10,7 @@ import Database.InMemoryDatabase;
  */
 public class Staff extends Employee implements IOrderProcess{
     private String branchName;
+    private transient Scanner sc;
 
     /**
      * Constructs a new Staff member with the specified details.
@@ -47,7 +48,7 @@ public class Staff extends Employee implements IOrderProcess{
         System.out.println("New Orders:");
         branch.getBranchOrders().getOrderList().stream()
                 .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
-                .forEach(System.out::println); // Print each order (implement toString in Order for better output)
+                .forEach(order -> order.printOrder()); // Print each order
     }
 
     public void viewOrder(Branch branch, int orderID) {
@@ -60,8 +61,7 @@ public class Staff extends Employee implements IOrderProcess{
     }
 
     public void processOrders(Branch branch, int orderID) {
-        Scanner sc = new Scanner(System.in);
-        // NEED TO PRINT ALL ORDERS OUT
+        sc = new Scanner(System.in);
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
             System.out.println("Current status is " + order.getOrderStatus());
@@ -69,6 +69,7 @@ public class Staff extends Employee implements IOrderProcess{
             System.out.println("(1) Processed");
             System.out.println("(2) Pickup");
             System.out.println("(3) Completed");
+            System.out.println("(4) Canclled");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -83,15 +84,16 @@ public class Staff extends Employee implements IOrderProcess{
                 case 3:
                     order.setOrderStatus(Order.orderStatusFlags.COMPLETED);
                     break;
+                case 4:
+                    order.setOrderStatus(Order.orderStatusFlags.CANCELLED);
+                    break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-            System.out.println("Order ID " + orderID + " has been updated to" + order.getOrderStatus());
+            System.out.println("OrderID " + orderID + " has been updated to " + order.getOrderStatus());
         } else {
-            System.out.println("Order ID " + orderID + " not found.");
+            System.out.println("OrderID " + orderID + " not found.");
         }
-        sc.close();
     }
-
 }
