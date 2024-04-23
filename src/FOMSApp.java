@@ -34,6 +34,7 @@ public class FOMSApp{
         printFOMSTitle();
         
         Scanner sc = new Scanner(System.in);
+        //app.branchInitialization();
         //app.staffInitialization();
         //app.menuInitialization();
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
@@ -41,6 +42,25 @@ public class FOMSApp{
 
         app.run();
         sc.close();
+    }
+
+    public void branchInitialization(){
+        this.sc = new Scanner(System.in);
+        if (Files.exists(Paths.get(filePath.concat("/Data/branch_list.csv")))){
+            System.out.print("branch_list.csv file was found. Initialize using branch_list.csv (Y/N)? ");
+            char choice = sc.nextLine().charAt(0);
+            if (choice == 'Y'){
+                DatabaseInitializer initializer = new DatabaseInitializer(this.db);
+                initializer.initializeBranchList(filePath.concat("/Data/branch_list.csv"));
+            }
+            else if (choice == 'N'){}
+            else {
+                System.out.println("Invalid choice entered. branch_list.csv will not be imported.");
+            }
+        }
+        else {
+            System.out.println("Branch list not found");
+        }
     }
 
     public void staffInitialization(){
