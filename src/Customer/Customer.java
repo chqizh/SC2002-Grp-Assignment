@@ -31,13 +31,13 @@ public class Customer implements ICustomerOrderProcess{
             System.out.println("Your cart is empty.");
         } else {
             System.out.println("Cart Contents:");
-            System.out.println("---------------------------------------------------");
+            System.out.println("--------------------------------------------------------");
             System.out.printf("%-5s %-20s %-15s %-10s\n", "ID", "Name", "Price", "Customizations");
-            System.out.println("---------------------------------------------------");
+            System.out.println("--------------------------------------------------------");
             for (MenuItem item : cart) {
                 System.out.printf("%-5d %-20s %-15s %-10s\n", item.getItemID() ,item.getItemName() ,item.getPrice(), item.getCustomisation());
             }
-            System.out.println("---------------------------------------------------");
+            System.out.println("--------------------------------------------------------");
         }
     }
 
