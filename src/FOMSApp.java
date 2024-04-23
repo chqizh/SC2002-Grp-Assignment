@@ -73,7 +73,7 @@ public class FOMSApp{
             }
             else if (choice == 'N'){}
             else {
-                System.out.println("Invalid choice entered. emnu_list.csv will not be imported.");
+                System.out.println("Invalid choice entered. menu_list.csv will not be imported.");
             }
         }
         else {
