@@ -32,7 +32,7 @@ public class EditMenu implements Serializable{
 		sc = new Scanner(System.in);
 		System.out.print("Enter item ID:");
 		
-		int itemId = this.getIntegerFromUser();
+		int itemId = sc.nextInt();
 		sc.nextLine();
 
         while (true) {
@@ -51,7 +51,7 @@ public class EditMenu implements Serializable{
 
             if (!duplicateFound) {
                 System.out.println("Enter menu item price:");
-                float price = sc.nextFloat();
+                double price = sc.nextDouble();
                 sc.nextLine();
 
                 System.out.println("Enter menu item branch:");

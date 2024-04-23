@@ -3,7 +3,7 @@ package Menu;
 import java.io.*;
 import java.util.*;
 
-
+// TODO change name to menu
 public class MenuItems implements Serializable{
 	private ArrayList<MenuItem> menu;
 	private EditMenu editmenu;
@@ -34,7 +34,8 @@ public class MenuItems implements Serializable{
 	public boolean addItems() throws IOException {		
 		sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to add?");
-	    int numberToAdd = this.getIntegerFromUser();
+	    int numberToAdd = sc.nextInt();
+		sc.nextLine();
 
 		for (int i=0; i<numberToAdd; i++) {
 			MenuItem newItem = this.editmenu.addItems();
@@ -49,8 +50,10 @@ public class MenuItems implements Serializable{
 				return false;
 			}
 		}
-		return this.menu.add(menuItem);
-	}
+				/* if (currentItem.getItemID() == menuItem.getItemID()) {System.out.println("fail1");return false;}
+				if (currentItem.getItemName().equals(menuItem.getItemName())) { System.out.println("fail2");return false;}*/
+	return this.menu.add(menuItem);
+}
 	
 	public void deleteItems() throws IOException {
 		sc = new Scanner(System.in);
