@@ -7,6 +7,7 @@ import java.util.List;
 import Branch.*;
 import Customer.*;
 import Database.InMemoryDatabase;
+import Menu.MenuItem;
 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
@@ -254,15 +255,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
         switch(choice){
             case 1:
+                System.out.println("--------------------------------------------------------------");
+                System.out.printf("%-20s %-10s %-8s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
+                System.out.println("--------------------------------------------------------------");
                 for (String staffID : staffIDsList){
                     Staff staff = db.getStaff(staffID);
-                    System.out.println("Name: " + staff.getName());
-                    System.out.println("StaffID: " + staff.getStaffID());
-                    System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                    System.out.println("Gender: " + staff.getGender());
-                    System.out.println("Age: " + staff.getAge());
-                    System.out.println("Branch: " + staff.getBranchName());
-                    System.out.println();
+                    System.out.printf("%-20s %-10s %-8s %-8s %-5s %-15s\n", staff.getName(), staff.getStaffID(), staff.getUserType().stringFromUserType(), staff.getGender(), staff.getAge(), staff.getBranchName());
                 }
                 break;
             case 2: 
