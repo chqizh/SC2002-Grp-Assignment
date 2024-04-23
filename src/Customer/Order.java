@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 import Menu.MenuItem;
 import Branch.Branch;
-import Branch.OrderList;
+//import Branch.OrderList;
 
 public class Order implements Serializable{
     public enum orderStatusFlags {
@@ -23,16 +23,15 @@ public class Order implements Serializable{
     private orderStatusFlags orderStatus;
     private String branchName;
     private ArrayList<MenuItem> orderItems;
-    private String customisation;
     private boolean dineIn;
-    private OrderList orderListRef;
+    //private OrderList orderListRef;
 
     public Order(Branch branch){ 
         this.orderID = branch.nextOrderID();
         this.orderStatus = orderStatusFlags.NEW;
         this.branchName = branch.getBranchName(); 
         this.orderItems = new ArrayList<>(); 
-        this.orderListRef = branch.getBranchOrders();
+        //this.orderListRef = branch.getBranchOrders();
     }
 
     public int getOrderID() {

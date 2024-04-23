@@ -181,7 +181,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             return;
         }
 
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         System.out.println("Enter Order ID:");
         int orderID = sc.nextInt();
         sc.nextLine();

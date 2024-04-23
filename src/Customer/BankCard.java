@@ -18,6 +18,7 @@ public class BankCard extends Payment {
 
     @Override
     public boolean processPayment(double amount) {
+        if (this.cardNumber != null && this.expiryDate != null && this.cvv !=null) System.out.println("Processing payment...");
         System.out.println("Bank Card Payment of $" + amount + " processed successfully.");
         return true; 
     }

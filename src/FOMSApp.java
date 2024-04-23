@@ -143,8 +143,7 @@ public class FOMSApp{
             System.out.println("(3) Process Order ");
             System.out.println("(4) Change Password ");
             System.out.println("(5) Log Out ");
-            System.out.println("Please select your action: ");
-
+            System.out.print("Please select your action: ");
             int choice = sc.nextInt();
             sc.nextLine();
 
@@ -241,9 +240,8 @@ public class FOMSApp{
     private void displayAdminInterface(Admin admin) {
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("");
             System.out.println("====================================");
-            System.out.println("|| Welcome to the ADMIN Workspace ||");
+            System.out.println("|  Welcome to the ADMIN Workspace  |");
             System.out.println("====================================");
             System.out.println("(1) Add Staff");
             System.out.println("(2) Remove Staff");
@@ -345,7 +343,6 @@ public class FOMSApp{
         } while (branch == null);
 
         while (keepRunning) {
-            System.out.println("");
             System.out.println("============================");
             System.out.println("|| Welcome to MadDonkeys! ||");
             System.out.println("============================");
@@ -358,7 +355,6 @@ public class FOMSApp{
             System.out.println("(7) Collect Order");
             System.out.println("(8) Exit System");
             System.out.print("Please select your action: ");
-
             int choice = sc.nextInt();
             sc.nextLine();
 
