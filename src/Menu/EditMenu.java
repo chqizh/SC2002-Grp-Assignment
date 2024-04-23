@@ -35,22 +35,35 @@ public class EditMenu implements Serializable{
 		int itemId = this.getIntegerFromUser();
 		sc.nextLine();
 
-	    System.out.println("Enter menu item name:");
-	    String name = sc.nextLine();
-		
-		System.out.println("Enter menu item price:");
-	   	float price = sc.nextFloat();
-		sc.nextLine();
-		
-		System.out.println("Enter menu item branch:");
-	    String branch = sc.nextLine();
-		
-		System.out.println("Enter menu item category:");
-	    String category = sc.nextLine();
-		
-		MenuItem menu_item = new MenuItem(itemId, name, price, category, branch);
-		return menu_item;
+        while (true) {
+            System.out.println("Enter menu item name:");
+            String name = sc.nextLine();
 
+            // Check for duplicate names
+            boolean duplicateFound = false;
+            for (MenuItem item : menu) {
+                if (item.getItemName().equalsIgnoreCase(name)) {
+                    System.out.println("Error! Menu item with the same name already exists.");
+                    duplicateFound = true;
+                    break;
+                }
+            }
+
+            if (!duplicateFound) {
+                System.out.println("Enter menu item price:");
+                float price = sc.nextFloat();
+                sc.nextLine();
+
+                System.out.println("Enter menu item branch:");
+                String branch = sc.nextLine();
+
+                System.out.println("Enter menu item category:");
+                String category = sc.nextLine();
+
+                MenuItem menu_item = new MenuItem(itemId, name, price, category, branch);
+                return menu_item;
+            }
+        }
 	}
 
 	public ArrayList<MenuItem> deleteItems(ArrayList<MenuItem>menu) {

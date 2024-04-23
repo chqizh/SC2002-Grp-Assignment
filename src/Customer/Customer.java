@@ -3,6 +3,7 @@ import Menu.MenuDisplay;
 import Menu.MenuItem;
 import Menu.MenuItems;
 import Branch.*;
+import Customer.Order.orderStatusFlags;
 import Database.InMemoryDatabase;
 import java.util.Scanner;
 //import java.io.IOException;
@@ -173,6 +174,29 @@ public class Customer implements ICustomerOrderProcess{
             System.out.println(order.getOrderStatusString());
         }
         else System.out.println("Invalid branch entered.");
+    }
+
+    public void collectOrder(String branchName){
+        Branch branch = db.getBranchByBranchName(branchName);
+        if(branch==null){
+            System.out.println("Invalid branch entered.");
+            return;
+        }
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Order ID:");
+        int orderID = sc.nextInt();
+        sc.nextLine();
+        Order order = branch.getBranchOrders().getOrder(orderID);
+        if(order == null){
+            System.out.println("Order not found.");
+            return;
+        }
+        if(order.getOrderStatus()!=Order.orderStatusFlags.PICKUP){
+            System.out.println("Your order cannot be collected at this time. Your order is still being prepared...");
+            return;
+        }
+        order.setOrderStatus(orderStatusFlags.COMPLETED);
     }
 
     private double calculateTotalPrice() {
