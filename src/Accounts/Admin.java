@@ -28,13 +28,17 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String name = sc.nextLine();
             System.out.print("Enter their Staff ID: ");
             String staffID = sc.nextLine();
-            System.out.print("Enter their gender (M/F/N): ");
+            System.out.print("Enter their gender (M/F): ");
             char gender = sc.nextLine().charAt(0);
             System.out.print("Enter their age: ");
             int age = sc.nextInt();
             sc.nextLine();
             System.out.print("Enter their assigned Branch: ");
             String branchName = sc.nextLine();
+            if (db.getBranchByBranchName(branchName) == null) {
+                System.out.println("Branch does not exist.");
+                return false;
+            }
             Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
             Account newAccount = new Account(staffID);
             db.addStaff(newStaff);
@@ -146,7 +150,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         String staffID = sc.nextLine();
         System.out.print("Enter employee's new Branch: ");
         String branchName = sc.nextLine();
-        if (db.getStaff(staffID) == null) {
+        if (db.getEmployee(staffID) == null ) {
             System.out.print("Staff/Manager does not exist.");
             return false;
         }
@@ -181,7 +185,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             }
             else if (db.getBranchByBranchName(branchName).addBranchManager(staffID)){
                 manager.setBranchName(branchName);
-                System.out.printf("%s transferred to new branch %s", staffID, branchName);
+                System.out.printf("%s transferred to new branch %s. ", staffID, branchName);
                 return true;
             }
             else return false;

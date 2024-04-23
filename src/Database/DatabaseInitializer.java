@@ -122,7 +122,7 @@ public class DatabaseInitializer {
                 int itemID = branchItemIDs.getOrDefault(branchName, 0) + 1;
                 branchItemIDs.put(branchName, itemID);
                 
-                MenuItem menuItem = new MenuItem(itemID, name, price, branchName, category);
+                MenuItem menuItem = new MenuItem(itemID, name, price, category, branchName);
                 
                 if (db.addMenuItem(branchName, menuItem) == true){
                     numItemsAdded++;

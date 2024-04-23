@@ -68,7 +68,7 @@ public class MenuItems implements Serializable{
 	public void updateName() throws IOException{
 		sc = new Scanner(System.in);
 		System.out.println("Enter ID of item:");
-		int itemId = this.getIntegerFromUser();
+		int itemId = sc.nextInt();
 		sc.nextLine();
 		System.out.println("Enter new Name:");
 		String newName = sc.nextLine();

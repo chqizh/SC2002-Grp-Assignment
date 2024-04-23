@@ -52,7 +52,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         MenuItem menuItem = null;
         for(MenuItem item : menu_items){
             if(item.getItemID() == itemID){
-                menuItem = item;
+                menuItem = new MenuItem(item.getItemID(), item.getItemName(),item.getPrice(),item.getCategory(),item.getBranch());
                 break;
             }
         }

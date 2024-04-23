@@ -54,6 +54,7 @@ public class EditMenu implements Serializable{
                 double price = sc.nextDouble();
                 sc.nextLine();
 
+                // TODO remove line
                 System.out.println("Enter menu item branch:");
                 String branch = sc.nextLine();
 
@@ -92,7 +93,7 @@ public class EditMenu implements Serializable{
 	public void updateName(int id, String newName, ArrayList<MenuItem> menu) {
         boolean found = false;
         for (MenuItem menuItem : menu) {
-			System.out.println("Current ID: "+menuItem.getItemID());
+			// System.out.println("Current ID: "+menuItem.getItemID());
             if (menuItem.getItemID() == id) {
                 menuItem.setItemName(newName);
                 found = true;

@@ -34,11 +34,11 @@ public class FOMSApp{
         printFOMSTitle();
         
         Scanner sc = new Scanner(System.in);
-        app.staffInitialization();
-        app.menuInitialization();
+        //app.staffInitialization();
+        //app.menuInitialization();
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
-        
+
         app.run();
         sc.close();
     }
