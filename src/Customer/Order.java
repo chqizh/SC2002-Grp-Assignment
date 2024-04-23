@@ -27,7 +27,7 @@ public class Order implements Serializable{
     //private OrderList orderListRef;
 
     public Order(Branch branch){ 
-        this.orderID = branch.nextOrderID();
+        this.orderID = branch.getBranchOrders().nextOrderID();
         this.orderStatus = orderStatusFlags.NEW;
         this.branchName = branch.getBranchName(); 
         this.orderItems = new ArrayList<>(); 

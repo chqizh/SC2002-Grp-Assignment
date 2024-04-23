@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import Customer.Order;
 
 public class OrderList implements Serializable{
-    // <orderID, order>
-    private HashMap<Integer, Order> orderMap;
+    private HashMap<Integer, Order> orderMap; // <orderID, order>
+    private int maxOrderID;
 
     public OrderList (){
-        orderMap = new HashMap<Integer, Order>();
+        this.orderMap = new HashMap<Integer, Order>();
+        this.maxOrderID = 0;
     }
 
     public void addOrder(Order order){
@@ -28,5 +29,9 @@ public class OrderList implements Serializable{
     public ArrayList<Order> getOrderList(){
         ArrayList<Order> orderList = new ArrayList<Order>(orderMap.values());
         return orderList;
+    }
+
+    public int nextOrderID(){
+        return ++this.maxOrderID;
     }
 }

@@ -22,7 +22,6 @@ public class Branch implements Serializable {
     private int staffQuota;
     private MenuItems branchMenu;
     private OrderList branchOrders;
-    private int maxOrderID;
     private transient Scanner sc;
 
     /**
@@ -35,7 +34,6 @@ public class Branch implements Serializable {
         this.currentNumStaff = 0;
         this.branchMenu = new MenuItems();
         this.branchOrders = new OrderList();
-        this.maxOrderID = 0;
         this.sc = new Scanner(System.in);
     }
     
@@ -53,7 +51,6 @@ public class Branch implements Serializable {
         this.currentNumStaff = 0;
         this.branchMenu = new MenuItems();
         this.branchOrders = new OrderList();
-        this.maxOrderID = 0;
         this.sc = new Scanner(System.in);
         this.branchName = branchName;
         this.branchLocation = branchLocation;
@@ -202,9 +199,5 @@ public class Branch implements Serializable {
 
     public void removeOrder(int orderID){
         this.branchOrders.removeOrder(orderID);
-    }
-
-    public int nextOrderID(){
-        return ++maxOrderID;
     }
 }
