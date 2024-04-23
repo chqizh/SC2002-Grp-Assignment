@@ -30,7 +30,7 @@ public class Staff extends Employee implements IOrderProcess{
      * @return The branch name.
      */
     public String getBranchName() {
-        return branchName;
+        return this.branchName;
     }
 
     /**

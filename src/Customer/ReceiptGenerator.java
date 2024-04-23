@@ -1,7 +1,6 @@
 package Customer;
 import Menu.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ReceiptGenerator {
     public void generateReceipt(Order order, String paymentMethod) {

@@ -6,7 +6,7 @@ import Database.InMemoryDatabase;
 /**
 * This class represents an employee with a name, staff ID, user type, gender, and age.
 */
-public class Employee implements Serializable {
+public abstract class Employee implements Serializable {
     private String name;
     private String staffID; // New attribute for staff ID
     private UserType userType; // Uses UserType enum
@@ -76,4 +76,6 @@ public class Employee implements Serializable {
     public void setAge(int age) {
         this.age = age;
     }
+
+    public abstract String getBranchName();
 }

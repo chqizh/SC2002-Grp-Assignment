@@ -7,7 +7,6 @@ import java.util.List;
 import Branch.*;
 import Customer.*;
 import Database.InMemoryDatabase;
-import Menu.MenuItem;
 
 
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
@@ -15,6 +14,10 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
     public Admin(String name, String staffID, char gender, int age, InMemoryDatabase db){
         super(name, staffID, UserType.ADMIN, gender, age, db);
+    }
+    
+    public String getBranchName(){
+        return "";
     }
 
     // From IAdminManagement
@@ -243,7 +246,6 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     // From IStaffManagement
     public void displayStaffList(){
         sc = new Scanner(System.in);
-        ArrayList<String> staffIDsList = db.getStaffIDs();
         System.out.println("Choose filter for staff list display: ");
         System.out.println("(1) Display all ");
         System.out.println("(2) Filter by Branch ");
@@ -253,77 +255,92 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         int choice = sc.nextInt();
         sc.nextLine();
 
+        ArrayList<String> employeesIDsList = db.getAllEmployeeIDs();
+        ArrayList<Employee> employeesList = new ArrayList<>();
+        for (String employeeID : employeesIDsList) {
+            Employee employee = db.getEmployee(employeeID);
+            if (employee != null) employeesList.add(employee);
+        }
+
         switch(choice){
             case 1:
-                System.out.println("--------------------------------------------------------------");
-                System.out.printf("%-20s %-10s %-8s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
-                System.out.println("--------------------------------------------------------------");
-                for (String staffID : staffIDsList){
-                    Staff staff = db.getStaff(staffID);
-                    System.out.printf("%-20s %-10s %-8s %-8s %-5s %-15s\n", staff.getName(), staff.getStaffID(), staff.getUserType().stringFromUserType(), staff.getGender(), staff.getAge(), staff.getBranchName());
+                System.out.println("Displaying all.");
+                System.out.println("----------------------------------------------------------------------");
+                System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
+                System.out.println("----------------------------------------------------------------------");
+                for (Employee employee : employeesList){
+                    System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge(), employee.getBranchName());
                 }
+                System.out.println("----------------------------------------------------------------------");
+                System.out.print("Press any key to continue.");
+                sc.nextLine();
                 break;
             case 2: 
-                System.out.println("Branch: ");
+                System.out.print("Filter by Branch: ");
                 String branch = sc.nextLine();
-                for (String staffID : staffIDsList){
-                    Staff staff = db.getStaff(staffID);
-                    if (staff.getBranchName().equals(branch)){
-                        System.out.println("Name: " + staff.getName());
-                        System.out.println("StaffID: " + staff.getStaffID());
-                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Gender: "+ staff.getGender());
-                        System.out.println("Age: " + staff.getAge());   
+                System.out.println("----------------------------------------------------------------------");
+                System.out.printf("%-20s %-10s %-16s %-8s %-5s\n", "Name", "staffID", "Role", "Gender", "Age");
+                System.out.println("----------------------------------------------------------------------");
+                for (Employee employee : employeesList){
+                    if (employee.getBranchName().equals(branch)){
+                        System.out.printf("%-20s %-10s %-16s %-8s %-5s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge());
                     }
                 }
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("Press any key to continue.");
+                sc.nextLine();
                 break;
             case 3:
-                System.out.println("Role: S/M/A");
-                char roleInput = sc.next().charAt(0);
+                System.out.print("Filter by role (S/M/A): ");
+                char roleInput = sc.nextLine().charAt(0);
+                System.out.println("----------------------------------------------------------------------");
+                System.out.printf("%-20s %-10s %-8s %-5s %-15s\n", "Name", "staffID", "Gender", "Age", "Branch");
+                System.out.println("----------------------------------------------------------------------");
                 try {
                     UserType role = UserType.fromCode(roleInput);
-                    for (String staffID : staffIDsList){
-                        Staff staff = db.getStaff(staffID);
-                        if (staff.getUserType() == role){
-                            System.out.println("Name: " + staff.getName());
-                            System.out.println("StaffID: " + staff.getStaffID());
-                            System.out.println("Gender: "+ staff.getGender());
-                            System.out.println("Age: " + staff.getAge());
-                            System.out.println("Branch: " + staff.getBranchName());
+                    for (Employee employee : employeesList){
+                        if (employee.getUserType() == role){
+                            System.out.printf("%-20s %-10s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getGender(), employee.getAge(), employee.getBranchName());
                         }
                     }
                 }
                 catch (Exception e){
                     System.out.println("Invalid role chosen.");
                 }
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("Press any key to continue.");
+                sc.nextLine();
                 break;
             case 4: 
-                System.out.println("Gender: M/F");
-                char gender = sc.next().charAt(0);
-                for (String staffID : staffIDsList){
-                    Staff staff = db.getStaff(staffID);
-                    if (staff.getGender() == gender){
-                        System.out.println("Name: " + staff.getName());
-                        System.out.println("StaffID: " + staff.getStaffID());
-                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Age: " + staff.getAge());
-                        System.out.println("Branch: " + staff.getBranchName());
+                System.out.print("Filter by gender (M/F/N): ");
+                char gender = sc.nextLine().charAt(0);
+                System.out.println("----------------------------------------------------------------------");
+                System.out.printf("%-20s %-10s %-16s %-5s %-15s\n", "Name", "staffID", "Role", "Age", "Branch");
+                System.out.println("----------------------------------------------------------------------");
+                for (Employee employee : employeesList){
+                    if (employee.getGender() == gender){
+                        System.out.printf("%-20s %-10s %-16s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getAge(), employee.getBranchName());
                     }
                 }
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("Press any key to continue.");
+                sc.nextLine();
                 break;
             case 5:
-                System.out.println("Age: ");
+                System.out.print("Filter by age: ");
                 int age = sc.nextInt();
-                for (String staffID : staffIDsList){
-                    Staff staff = db.getStaff(staffID);
-                    if (staff.getAge() == age){
-                        System.out.println("Name: " + staff.getName());
-                        System.out.println("StaffID: " + staff.getStaffID());
-                        System.out.println("Role: " + staff.getUserType().stringFromUserType());
-                        System.out.println("Gender: "+ staff.getGender());
-                        System.out.println("Branch: " + staff.getBranchName());
+                sc.nextLine();
+                System.out.println("----------------------------------------------------------------------");
+                System.out.printf("%-20s %-10s %-16s %-8s %-15s\n", "Name", "staffID", "Role", "Gender", "Branch");
+                System.out.println("----------------------------------------------------------------------");
+                for (Employee employee : employeesList){
+                    if (employee.getAge() == age){
+                        System.out.printf("%-20s %-10s %-16s %-8s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getBranchName());
                     }
                 }
+                System.out.println("----------------------------------------------------------------------");
+                System.out.println("Press any key to continue.");
+                sc.nextLine();
                 break;
             default:
                 break;

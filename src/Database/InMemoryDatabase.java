@@ -12,7 +12,6 @@ import Accounts.*;
 import Branch.*;
 import Customer.*;
 import Menu.MenuItem;
-import Menu.MenuItems;
 
 public class InMemoryDatabase implements Serializable {
     private Map<String, Account> accounts;
@@ -158,6 +157,13 @@ public class InMemoryDatabase implements Serializable {
     public ArrayList<String> getStaffIDs(){
         ArrayList<String> staffIDsList = new ArrayList<String>(staffMap.keySet());
         return staffIDsList;
+    }
+
+    public ArrayList<String> getAllEmployeeIDs(){
+        ArrayList<String> employeeIDsList = new ArrayList<String>(this.staffMap.keySet());
+        employeeIDsList.addAll(this.branchManagerMap.keySet());
+        employeeIDsList.addAll(this.adminMap.keySet());
+        return employeeIDsList;
     }
 
     public BranchManager getBranchManager(String staffID) {

@@ -148,7 +148,7 @@ public class Branch implements Serializable {
 
     public boolean addStaff(String staffID){
         if (staffIDs.contains(staffID)){
-            System.out.printf("Branch already contains Staff with staffID %s", staffID);
+            System.out.printf("Branch already contains staff with staffID %s.\n", staffID);
             return false;
         }
         else if (staffIDs.size() >= staffQuota){

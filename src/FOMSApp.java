@@ -46,12 +46,22 @@ public class FOMSApp{
                 System.out.println("Invalid choice entered. staff_list.csv will not be imported.");
             }
         }
+        else {
+            System.out.println("Staff list not found");
+        }
         
         //Menu Initializer
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
-            //System.out.println("Menu_List was found.");
-            DatabaseInitializer initializer = new DatabaseInitializer(app.db);
-            initializer.initializeMenuList(filePath.concat("/Data/menu_list.csv"));
+            System.out.println("menu_list.csv file was found. Initialize using menu_list.csv? (Y/N)");
+            char choice = sc.nextLine().charAt(0);
+            if (choice == 'Y'){
+                DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+                initializer.initializeMenuList(filePath.concat("/Data/menu_list.csv"));
+            }
+            else if (choice == 'N'){}
+            else {
+                System.out.println("Invalid choice entered. emnu_list.csv will not be imported.");
+            }
         }
         else {
             System.out.println("Menu list not found");
@@ -227,7 +237,7 @@ public class FOMSApp{
     private void displayAdminInterface(Admin admin) {
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("\n|| Welcome to the ADMIN Workspace ||");
+            System.out.println("\n|| Welcome to the ADMIN Workspace ||\n");
             System.out.println("(1) Add Staff");
             System.out.println("(2) Remove Staff");
             System.out.println("(3) Edit Staff");
@@ -240,8 +250,8 @@ public class FOMSApp{
             System.out.println("(10) Close Branch");
             System.out.println("(11) Export Staff List");
             System.out.println("(12) Log Out");
-
-            System.out.println("Please select your action: ");
+            System.out.println("");
+            System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
             sc.nextLine();

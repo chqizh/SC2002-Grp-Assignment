@@ -21,7 +21,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
      * @return The branch name.
      */
     public String getBranchName() {
-        return branchName;
+        return this.branchName;
     }
 
     /**
