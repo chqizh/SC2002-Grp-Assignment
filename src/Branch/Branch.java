@@ -25,19 +25,6 @@ public class Branch implements Serializable {
     private transient Scanner sc;
 
     /**
-     * Default constructor for creating a branch with no initial setup.
-     */
-    public Branch(){
-        this.branchManagerIDs = new ArrayList<>();
-        this.maxNumManagers = 1;
-        this.staffIDs = new ArrayList<>();
-        this.currentNumStaff = 0;
-        this.branchMenu = new Menu(this.branchName);
-        this.branchOrders = new OrderList();
-        this.sc = new Scanner(System.in);
-    }
-    
-    /**
      * Constructs a branch with a specific name, location, and staff quota.
      *
      * @param branchName     The name of the branch.
@@ -74,7 +61,7 @@ public class Branch implements Serializable {
         return branchLocation;
     }
 
-    public ArrayList<String> getBranchManagers() {
+    public ArrayList<String> getBranchManagerIDs() {
         return branchManagerIDs;
     }
 
@@ -141,10 +128,6 @@ public class Branch implements Serializable {
 
     public ArrayList<String> getStaffIDs() {
         return staffIDs;
-    }
-
-    public ArrayList<String> getBranchManagerIDs() {
-        return branchManagerIDs;
     }
 
     public boolean addStaff(String staffID){
