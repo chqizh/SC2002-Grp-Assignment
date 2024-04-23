@@ -39,7 +39,7 @@ public class MenuItems implements Serializable{
 
 		for (int i=0; i<numberToAdd; i++) {
 			MenuItem newItem = this.editmenu.addItems();
-			if (this.addItems(newItem) ==  false) System.out.println("Failed to add " + newItem.getItemName());
+			if (this.addItems(newItem) == false) System.out.println("Failed to add " + newItem.getItemName());
 		}
 		return true;
 	}
