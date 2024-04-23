@@ -108,7 +108,7 @@ public class DatabaseInitializer {
                 if (line.isEmpty()) continue;
                 
                 String[] data = line.split(",");
-                if (data.length < 4) { // Now we check if there are at least 5 elements
+                if (data.length < 4) { // Check if there are at least 5 elements
                     continue;
                 }
                 //System.out.println(data[2]);

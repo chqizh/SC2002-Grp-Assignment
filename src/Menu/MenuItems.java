@@ -6,11 +6,12 @@ import java.util.*;
 
 public class MenuItems implements Serializable{
 	private ArrayList<MenuItem> menu;
-	private EditMenu editmenu = new EditMenu(menu);
+	private EditMenu editmenu;
 	private transient Scanner sc;
 	
 	public MenuItems() {
 		menu = new ArrayList<MenuItem>();
+		editmenu = new EditMenu(this.menu);
 	}
 
 	public int getIntegerFromUser() {
@@ -30,17 +31,26 @@ public class MenuItems implements Serializable{
 		return userInput;
 	}
 	
-	public void addItems() throws IOException {		
+	public boolean addItems() throws IOException {		
 		sc = new Scanner(System.in);
 		System.out.println("How many menu items would you like to add?");
 	    int numberToAdd = this.getIntegerFromUser();
 
 		for (int i=0; i<numberToAdd; i++) {
-			MenuItem newItem = editmenu.addItems();
-			menu.add(newItem);
+			MenuItem newItem = this.editmenu.addItems();
+			if (this.addItems(newItem) ==  false) System.out.println("Failed to add " + newItem.getItemName());
 		}
+		return true;
 	}
 
+	public boolean addItems(MenuItem menuItem){		
+		for (MenuItem currentItem : this.menu){
+			if (currentItem.getItemID() == menuItem.getItemID() || currentItem.getItemName().equals(menuItem.getItemName())){
+				return false;
+			}
+		}
+		return this.menu.add(menuItem);
+	}
 	
 	public void deleteItems() throws IOException {
 		sc = new Scanner(System.in);

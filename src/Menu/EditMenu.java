@@ -30,7 +30,7 @@ public class EditMenu implements Serializable{
 
 	public MenuItem addItems(){
 		sc = new Scanner(System.in);
-		System.out.println("Enter item ID:");
+		System.out.print("Enter item ID:");
 		
 		int itemId = this.getIntegerFromUser();
 		sc.nextLine();

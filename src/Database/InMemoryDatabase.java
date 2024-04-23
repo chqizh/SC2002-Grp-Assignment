@@ -190,8 +190,11 @@ public class InMemoryDatabase implements Serializable {
         return null;
     }
 
-    public void addMenuItem(String branchName, MenuItem menuitem){
+    public boolean addMenuItem(String branchName, MenuItem menuItem){
         Branch branch = this.branches.get(branchName); 
-        branch.getBranchMenu().getMenuItemsList().add(menuitem);
+        if (branch != null){
+            return branch.getBranchMenu().addItems(menuItem);
+        }
+        else return false;
     }
 }
