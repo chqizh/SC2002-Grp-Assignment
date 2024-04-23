@@ -132,6 +132,6 @@ public class DatabaseInitializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.printf("Added %d Menu Items to %d Branches.", numItemsAdded, uniqueBranchesAdded.size());
+        System.out.printf("Added %d Menu Items to %d Branches.\n", numItemsAdded, uniqueBranchesAdded.size());
     }
 }
