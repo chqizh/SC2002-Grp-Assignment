@@ -45,6 +45,17 @@ public class FOMSApp{
             else {
                 System.out.println("Invalid choice entered. staff_list.csv will not be imported.");
             }
+
+        //Menu Initializer
+        System.out.println(filePath);
+        if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))){
+            System.out.println("Menu_List was found.");
+            DatabaseInitializer initializer = new DatabaseInitializer(app.db);
+            initializer.initializeMenuList(filePath.concat("/Data/menu_list.csv"));
+            }
+        else{
+            System.out.println("Menu list not found");
+        }
         }
 
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));

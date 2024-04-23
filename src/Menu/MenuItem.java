@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 public class MenuItem implements Serializable{
     
-    public String itemName;
-    public float price;
-    public int itemID;
-    public String category;
-    public String branch;
+    private String itemName;
+    private double price;
+    private int itemID;
+    private String category;
+    private String branch;
 
-    public MenuItem(int itemID, String itemName, float price, String category, String branch){
+    public MenuItem(int itemID, String itemName, double price, String category, String branch){
         this.itemID = itemID;
         this.itemName = itemName;
         this.price = price;
@@ -51,7 +51,7 @@ public class MenuItem implements Serializable{
         this.price = price;
     }
     
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
