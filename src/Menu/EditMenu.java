@@ -5,38 +5,22 @@ import java.util.*;
 
 public class EditMenu implements Serializable{
 	private ArrayList<MenuItem> menu;
+    private String branchName;
     private transient Scanner sc;
 
-	public EditMenu(ArrayList<MenuItem> menu) {
+	public EditMenu(ArrayList<MenuItem> menu, String branchName) {
 		this.menu = menu;
-	}
-
-	public int getIntegerFromUser() {
-		sc = new Scanner(System.in);
-		int userInput = 0;
-		
-		boolean integerUserInput = false;
-		while (!integerUserInput) {
-		    try {
-		    	userInput = Integer.parseInt(sc.nextLine());
-		    	integerUserInput = true;
-		    } catch (NumberFormatException e) {
-		    	System.out.println("Error! Please enter a number. Try again.");
-		    }
-		}		
-		
-		return userInput;
+        this.branchName = branchName;
 	}
 
 	public MenuItem addItems(){
 		sc = new Scanner(System.in);
-		System.out.print("Enter item ID:");
-		
+		System.out.print("Enter item ID: ");
 		int itemId = sc.nextInt();
 		sc.nextLine();
 
         while (true) {
-            System.out.println("Enter menu item name:");
+            System.out.print("Enter menu item name: ");
             String name = sc.nextLine();
 
             // Check for duplicate names
@@ -50,19 +34,15 @@ public class EditMenu implements Serializable{
             }
 
             if (!duplicateFound) {
-                System.out.println("Enter menu item price:");
+                System.out.print("Enter menu item price: ");
                 double price = sc.nextDouble();
                 sc.nextLine();
 
-                // TODO remove line
-                System.out.println("Enter menu item branch:");
-                String branch = sc.nextLine();
-
-                System.out.println("Enter menu item category:");
+                System.out.print("Enter menu item category: ");
                 String category = sc.nextLine();
 
-                MenuItem menu_item = new MenuItem(itemId, name, price, category, branch);
-                return menu_item;
+                MenuItem menuItem = new MenuItem(itemId, name, price, category, this.branchName);
+                return menuItem;
             }
         }
 	}
@@ -70,7 +50,7 @@ public class EditMenu implements Serializable{
 	public ArrayList<MenuItem> deleteItems(ArrayList<MenuItem>menu) {
         sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
-        int id = this.getIntegerFromUser();
+        int id = sc.nextInt();
 		sc.nextLine();
         
         boolean found = false;

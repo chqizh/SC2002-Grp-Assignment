@@ -145,6 +145,8 @@ public class FOMSApp{
             System.out.println("================================");
             System.out.println("|| Welcome to STAFF Workspace ||");
             System.out.println("================================");
+            System.out.println("Branch: " + branch.getBranchName());
+            System.out.println("================================");
             System.out.println("(1) Display New Orders ");
             System.out.println("(2) View Order Details ");
             System.out.println("(3) Process Order ");
@@ -191,6 +193,8 @@ public class FOMSApp{
         while (keepRunning) {
             System.out.println("=============================================");
             System.out.println("|| Welcome to the BRANCH MANAGER Workspace ||");
+            System.out.println("=============================================");
+            System.out.println("Branch: " + branch.getBranchName());
             System.out.println("=============================================");
             System.out.println("Please select your action:");
             System.out.println("(1) Display New Orders");
@@ -352,6 +356,8 @@ public class FOMSApp{
         while (keepRunning) {
             System.out.println("============================");
             System.out.println("|| Welcome to MadDonkeys! ||");
+            System.out.println("============================");
+            System.out.println("Branch: " + branch.getBranchName());
             System.out.println("============================");
             System.out.println("(1) Browse Menu");
             System.out.println("(2) Add to Cart");

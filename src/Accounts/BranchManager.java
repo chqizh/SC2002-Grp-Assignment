@@ -110,9 +110,11 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     public void editMenuItem(Branch branch){
         System.out.println("What would you like to edit?");
         System.out.println("(1) Update name of menu item.");
-        System.out.println("(1) Update price of menu item.");
+        System.out.println("(2) Update price of menu item.");
+        System.out.print("Enter your choice: ");
         sc = new Scanner(System.in);
         int choice = sc.nextInt();
+        sc.nextLine();
         switch (choice){
             case 1:
                 try {

@@ -4,7 +4,7 @@ public class Paypal extends Payment {
     private String email;
     private String password;
 
-    Paypal(){
+    public Paypal(){
         super("Paypal");
     }
 

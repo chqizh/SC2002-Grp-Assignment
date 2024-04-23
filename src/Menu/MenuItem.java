@@ -3,7 +3,6 @@ package Menu;
 import java.io.Serializable;
 
 public class MenuItem implements Serializable{
-    
     private String itemName;
     private double price;
     private int itemID;

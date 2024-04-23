@@ -5,7 +5,7 @@ public class BankCard extends Payment {
     private String expiryDate;
     private String cvv;
 
-    BankCard(){
+    public BankCard(){
         super("Bank Card");
     }
 

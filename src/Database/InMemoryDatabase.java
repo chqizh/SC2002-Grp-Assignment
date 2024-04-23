@@ -28,6 +28,9 @@ public class InMemoryDatabase implements Serializable {
         this.branchManagerMap = new HashMap<>();
         this.adminMap = new HashMap<>();
         this.paymentMethods = new HashMap<>();
+        this.paymentMethods.put(new BankCard(), true);
+        this.paymentMethods.put(new PayNow(), true);
+        this.paymentMethods.put(new Paypal(), true);
     }
 
     public Map<String, Account> getAccountsMap() {
@@ -76,7 +79,15 @@ public class InMemoryDatabase implements Serializable {
     }
 
     public boolean removeBranch(String branchName) {
-        if (this.branches.remove(branchName) != null) return true;
+        if (this.branches.containsKey(branchName)) {
+            Branch branch = this.branches.get(branchName);
+            ArrayList<String> staffIDs = branch.getStaffIDs();
+            ArrayList<String> branchManagerIDs = branch.getBranchManagerIDs();
+            for (String staffID : staffIDs) this.staffMap.remove(staffID);
+            for (String branchManagerID : branchManagerIDs) this.branchManagerMap.remove(branchManagerID);
+            this.branches.remove(branchName);
+            return true;
+        }
         else {
             System.out.printf("%s branch does not exist.\n", branchName);
             return false;
