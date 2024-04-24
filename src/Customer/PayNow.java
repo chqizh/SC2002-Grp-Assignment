@@ -37,7 +37,6 @@ public class PayNow extends Payment {
             return false;
         }
         System.out.println("Processing payment...");
-        System.out.println("Connecting to PayNow service...");
         printQRCode();
         simulateNetworkLatency();
         System.out.println("PayNow Payment of $" + amount + " processed successfully.");
@@ -49,8 +48,8 @@ public class PayNow extends Payment {
      */
     private void simulateNetworkLatency() {
         try {
-            Thread.sleep(8000);  // Simulate 8 seconds of network delay
-            System.out.println("Connected to PayNow.");
+            Thread.sleep(4000);  // Simulate 8 seconds of network delay
+            System.out.println("Connecting to PayNow service...");
             Thread.sleep(2000);  // Simulate 2 seconds of network delay
 
         } catch (InterruptedException e) {

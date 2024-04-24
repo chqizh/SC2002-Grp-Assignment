@@ -156,14 +156,43 @@ public class Customer implements ICustomerOrderProcess, Serializable{
 
         sc = new Scanner(System.in);
         boolean keepLooping = true;
-        Payment paymentMethod;
+        Payment paymentMethod = null;
         do {
+            System.out.println("Payment Methods Available:");
+            ArrayList<String> paymentMethodsNamesList = db.getPaymentMethods();
+            int counter = 0;
+            ArrayList<String> activePaymentMethods = new ArrayList<>();
+
+            for (String paymentMethodName : paymentMethodsNamesList) {
+                if (db.getPaymentMethodsStatus(paymentMethodName)) {
+                    activePaymentMethods.add(paymentMethodName);
+                    System.out.printf("(%d) %s\n", ++counter, paymentMethodName);
+                }
+            }
+
+            System.out.print("Select payment method (by number): ");
+            int choice = sc.nextInt();  // Read the integer input
+            sc.nextLine();  // Consume newline left-over
+            
+            if (choice > 0 && choice <= activePaymentMethods.size()) {
+                String selectedMethodName = activePaymentMethods.get(choice - 1);
+                paymentMethod = selectPaymentMethod(selectedMethodName);
+                if (paymentMethod != null) {
+                    keepLooping = false;
+                } else {
+                    System.out.println("Invalid payment method selected.");
+                }
+            } else {
+                System.out.println("Invalid number selected. Please choose a valid number.");
+            }
+        } while (keepLooping);
+/*         do {
             System.out.println("Payment Methods Available");
             ArrayList<String> paymentMethodsNamesList= db.getPaymentMethods();
             int counter = 0;
             for (int i = 0; i < db.getPaymentMethods().size(); i++){
                 String paymentMethodName = paymentMethodsNamesList.get(i);
-                if (db.getPaymentMethodsStatus(paymentMethodName) == true) System.out.printf("(%d) %s", ++counter, paymentMethodName);
+                if (db.getPaymentMethodsStatus(paymentMethodName) == true) System.out.printf("(%d) %s\n", ++counter, paymentMethodName);
             }
             System.out.print("Select payment method: ");
             String choice = sc.nextLine();
@@ -172,7 +201,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
                 keepLooping = false;
             }
             else System.out.println("Invalid payment method selected.");
-        } while (keepLooping);
+        } while (keepLooping); */
 
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {
