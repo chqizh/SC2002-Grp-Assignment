@@ -89,11 +89,11 @@ public class Branch implements Serializable {
      */
     public boolean addBranchManager(String staffID){
         if (branchManagerIDs.contains(staffID)){
-            System.out.printf("Branch already contains Branch Manager with staffID %s.", staffID);
+            System.out.printf("Branch already contains Branch Manager with staffID %s. \n", staffID);
             return false;            
         }
         else if (branchManagerIDs.size() >= maxNumManagers){
-            System.out.printf("Branch already maximum number of Branch Managers.", staffID);
+            System.out.printf("Branch already maximum number of Branch Managers and %s could not be added. \n", staffID);
             return false;
         }
         else {

@@ -180,7 +180,6 @@ public class Customer implements ICustomerOrderProcess, Serializable{
                 
                 branch.addOrder(order);
                 System.out.println("Order placed successfully.");
-                //System.out.println("Your Order ID is:"+ order.getOrderID());
                 ReceiptGenerator receipt = new ReceiptGenerator();
                 receipt.generateReceipt(order, paymentMethod.getPaymentMethodName());
                 cart.clear();

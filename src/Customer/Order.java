@@ -43,7 +43,6 @@ public class Order implements Serializable{
         this.orderStatus = orderStatusFlags.NEW;
         this.branchName = branch.getBranchName(); 
         this.orderItems = new ArrayList<>(); 
-        //this.orderListRef = branch.getBranchOrders();
     }
 
     /**
