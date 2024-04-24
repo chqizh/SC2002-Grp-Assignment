@@ -18,6 +18,9 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, BranchManager> branchManagerMap;
     private Map<String, Admin> adminMap;
     private Map<String, Boolean> paymentMethods;
+    private boolean branchesInitialized;
+    private boolean staffInitialized;
+    private boolean menuInitialized;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();
@@ -29,8 +32,35 @@ public class InMemoryDatabase implements Serializable {
         this.paymentMethods.put("Bank Card", true);
         this.paymentMethods.put("PayPal", true);
         this.paymentMethods.put("PayNow", true);
+        branchesInitialized = false;
+        staffInitialized = false;
+        menuInitialized = false;
     }
 
+    public boolean getBranchesInitialized() {
+        return this.branchesInitialized;
+    } 
+
+    public void setBranchesInitialized(Boolean bool) {
+        this.branchesInitialized = bool;
+    } 
+
+    public boolean getStaffInitialized() {
+        return this.staffInitialized;
+    } 
+
+    public void setStaffInitialized(Boolean bool) {
+        this.staffInitialized = bool;
+    } 
+
+    public boolean getMenuInitialized() {
+        return this.menuInitialized;
+    } 
+
+    public void setMenuInitialized(Boolean bool) {
+        this.menuInitialized = bool;
+    } 
+    
     public Map<String, Account> getAccountsMap() {
         return accounts;
     }

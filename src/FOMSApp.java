@@ -45,6 +45,8 @@ public class FOMSApp implements Serializable{
     }
 
     public void branchInitialization() {
+        if (db.getBranchesInitialized() == true) return;
+        db.setBranchesInitialized(true);
         this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/branch_list.csv")))) {
             System.out.print("branch_list.csv file was found. Initialize using branch_list.csv (Y/N)? ");
@@ -63,6 +65,8 @@ public class FOMSApp implements Serializable{
     }
 
     public void staffInitialization() {
+        if (db.getStaffInitialized() == true) return;
+        db.setStaffInitialized(true);
         this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))) {
             System.out.print("staff_list.csv file was found. Initialize using staff_list.csv (Y/N)? ");
@@ -81,6 +85,8 @@ public class FOMSApp implements Serializable{
     }
 
     public void menuInitialization() {
+        if (db.getMenuInitialized() == true) return;
+        db.setMenuInitialized(true);
         this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
             System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
