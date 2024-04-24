@@ -36,14 +36,15 @@ public class Menu implements Serializable{
 		// Checks if any current menu items have the same itemID or same name (case insensitive).
 		for (MenuItem currentItem : this.menu){
 			if (currentItem.getItemID() == menuItem.getItemID() || currentItem.getItemName().equalsIgnoreCase(menuItem.getItemName())){
-				System.out.println("Duplicate item found in menu.");
+				System.out.printf("Duplicate item name or itemID found in menu.");
 				return false;
 			}
 		}
-		// Debug
-		/* if (currentItem.getItemID() == menuItem.getItemID()) {System.out.println("fail1");return false;}
-		if (currentItem.getItemName().equals(menuItem.getItemName())) { System.out.println("fail2");return false;}*/
-		return this.menu.add(menuItem);
+		if (this.menu.add(menuItem) == true){
+			this.maxItemID = menuItem.getItemID();
+			return true;
+		}
+		else return false;
 	}
 	
 	public void deleteItems() throws IOException {

@@ -85,16 +85,16 @@ public class Branch implements Serializable {
      * @return True if the manager was added successfully, false otherwise.
      */
     public boolean addBranchManager(String staffID){
-        if (branchManagerIDs.contains(staffID)){
+        if (this.branchManagerIDs.contains(staffID)){
             System.out.printf("Branch already contains Branch Manager with staffID %s. \n", staffID);
             return false;            
         }
-        else if (branchManagerIDs.size() >= maxNumManagers){
+        else if (this.branchManagerIDs.size() >= maxNumManagers){
             System.out.printf("Branch already maximum number of Branch Managers and %s could not be added. \n", staffID);
             return false;
         }
         else {
-            branchManagerIDs.add(staffID);
+            this.branchManagerIDs.add(staffID);
             return true;
         }
     }
@@ -107,9 +107,9 @@ public class Branch implements Serializable {
      * @return True if the manager was removed successfully, false otherwise.
      */
     public boolean removeBranchManager(String staffID){
-        if (branchManagerIDs.contains(staffID)){
+        if (this.branchManagerIDs.contains(staffID)){
             System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
-            branchManagerIDs.remove(staffID);
+            this.branchManagerIDs.remove(staffID);
             System.out.println("Number of Branch Managers is below required amount. Please add another Branch Manager.");
             return true;
         }
@@ -160,16 +160,16 @@ public class Branch implements Serializable {
      * @return True if the staff member was added successfully, false otherwise.
      */
     public boolean addStaff(String staffID){
-        if (staffIDs.contains(staffID)){
+        if (this.staffIDs.contains(staffID)){
             System.out.printf("Branch already contains staff with staffID %s.\n", staffID);
             return false;
         }
-        else if (staffIDs.size() >= staffQuota){
+        else if (this.staffIDs.size() >= staffQuota){
             System.out.println("Staff quota is already filled.");
             return false;
         }
         else {
-            staffIDs.add(staffID);
+            this.staffIDs.add(staffID);
             currentNumStaff++;
             setMaxNumManagers();
             return true;
@@ -183,12 +183,12 @@ public class Branch implements Serializable {
      * @return True if the staff member was removed successfully, false otherwise.
      */
     public boolean removeStaff(String staffID){
-        if (!staffIDs.contains(staffID)){
+        if (!this.staffIDs.contains(staffID)){
             System.out.printf("Branch does not contain Staff with staffID %s", staffID);
             return false;
         }
         else {
-            staffIDs.remove(staffID);
+            this.staffIDs.remove(staffID);
             currentNumStaff--;
             setMaxNumManagers();
             return true;
