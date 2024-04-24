@@ -34,9 +34,9 @@ public class FOMSApp{
         printFOMSTitle();
         
         Scanner sc = new Scanner(System.in);
-        //app.branchInitialization();
-        //app.staffInitialization();
-        //app.menuInitialization();
+        app.branchInitialization();
+        app.staffInitialization();
+        app.menuInitialization();
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
 

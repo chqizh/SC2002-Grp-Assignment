@@ -13,9 +13,7 @@ public class MenuEditor implements Serializable{
 
 	public MenuItem addItems(String branchName){
 		sc = new Scanner(System.in);
-		System.out.print("Enter item ID: ");
-		int itemId = sc.nextInt();
-		sc.nextLine();
+        int itemId = this.menu.size()+1;
 
         while (true) {
             System.out.print("Enter menu item name: ");
@@ -35,9 +33,33 @@ public class MenuEditor implements Serializable{
                 System.out.print("Enter menu item price: ");
                 double price = sc.nextDouble();
                 sc.nextLine();
-
+                System.out.println("Categories:");
+                System.out.println("(1) Ala carte");
+                System.out.println("(2) Set Meal");
+                System.out.println("(3) Sides");
+                System.out.println("(4) Drinks");
                 System.out.print("Enter menu item category: ");
-                String category = sc.nextLine();
+                int categoryChoice = sc.nextInt();
+                sc.nextLine();
+
+                String category;
+                switch (categoryChoice) {
+                    case 1:
+                        category = "Ala carte";
+                        break;
+                    case 2:
+                        category = "Set Meal";
+                        break;
+                    case 3:
+                        category = "Sides";
+                        break;
+                    case 4:
+                        category = "Drinks";
+                        break;
+                    default:
+                        System.out.println("Invalid category choice. Please enter a number between 1 and 4.");
+                        continue;
+                }
 
                 MenuItem menuItem = new MenuItem(itemId, name, price, category, branchName);
                 return menuItem;

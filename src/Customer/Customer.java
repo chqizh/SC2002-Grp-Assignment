@@ -31,10 +31,12 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         } else {
             System.out.println("Cart Contents:");
             System.out.println("--------------------------------------------------------");
-            System.out.printf("%-5s %-20s %-15s %-10s\n", "ID", "Name", "Price", "Customizations");
+            System.out.printf("%-5s %-25s %-15s %-10s\n", "ID", "Name", "Price", "Customizations");
             System.out.println("--------------------------------------------------------");
+            int i = 1;
             for (MenuItem item : cart) {
-                System.out.printf("%-5d %-20s %-15s %-10s\n", item.getItemID() ,item.getItemName() ,item.getPrice(), item.getCustomisation());
+                System.out.printf("%-5d %-25s %-15s %-10s\n", i ,item.getItemName() ,item.getPrice(), item.getCustomisation());
+                i++;
             }
             System.out.println("--------------------------------------------------------");
         }
@@ -76,21 +78,19 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     public void deleteFromCart() {
         sc = new Scanner(System.in);
         System.out.println("Enter Item ID that you would like to remove:");
-        int itemID = sc.nextInt();
+        int index = sc.nextInt();
         sc.nextLine();
-
-        boolean removed = false;
-        for (int i = 0; i < cart.size(); i++) {
-            MenuItem item = cart.get(i);
-            if (item.getItemID() == itemID) {
-                cart.remove(i);
-                removed = true;
-                System.out.println("Item with ID "+itemID+" removed from cart.");
-                break;
-            }
+        index= index-1;
+        if (index < 0 || index >= cart.size()) {
+            System.out.println("Invalid index. Please enter a valid index within the range of items in the cart.");
+            return;
         }
-        if (!removed) {
-            System.out.println("Item with ID "+itemID+" not found in cart.");
+    
+        MenuItem removedItem = cart.remove(index);
+        if (removedItem != null) {
+            System.out.println("Item with ID " + index+1 + " removed from cart.");
+        } else {
+            System.out.println("Failed to remove item from cart.");
         }
     }
 
