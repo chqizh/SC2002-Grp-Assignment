@@ -13,7 +13,7 @@ import Customer.*;
 import Database.*;
 import DataPersistence.*;
 
-public class FOMSApp{
+public class FOMSApp implements Serializable{
     private static String filePath = new File("").getAbsolutePath();
     private static final String DATA_STORE = "Data/data_store.ser";
     private transient Scanner sc;
@@ -36,9 +36,9 @@ public class FOMSApp{
         printFOMSTitle();
         
         Scanner sc = new Scanner(System.in);
-        //app.branchInitialization();
-        //app.staffInitialization();
-        //app.menuInitialization();
+        app.branchInitialization();
+        app.staffInitialization();
+        app.menuInitialization();
 
         app.run();
         sc.close();
@@ -81,7 +81,6 @@ public class FOMSApp{
     }
 
     public void menuInitialization() {
-        //Menu Initializer
         this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
             System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
@@ -366,7 +365,7 @@ public class FOMSApp{
         int i = 1;
         Map<Integer, String> branchNumberMap = new HashMap<>();
         for (String branchName : branchNames) {
-            System.out.printf("(%d) %s%n", i, branchName);
+            System.out.printf("(%d) %s \n", i, branchName);
             branchNumberMap.put(i, branchName); // Map the number to branch name
             i++;
         }
