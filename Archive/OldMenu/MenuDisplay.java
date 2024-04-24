@@ -34,7 +34,7 @@ public class MenuDisplay {
 			String line;
 			int lineCount = 0;
 			while ((line = reader.readLine()) != null)  {
-				if (menu.menu[lineCount].branch.equals("b")) {
+				if (menu.menu[lineCount].branch.equals(branch)) {
 					System.out.println(line);
 				}
 				lineCount++;
