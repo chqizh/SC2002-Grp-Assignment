@@ -262,7 +262,7 @@ public class FOMSApp{
                 case 8:
                     manager.removeMenuItem(branch);
                     break;
-                case 19:
+                case 9:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;

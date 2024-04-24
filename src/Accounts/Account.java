@@ -15,11 +15,10 @@ public class Account implements Serializable {
     private String passwordHash;
 
     /**
-     * Constructor that initializes an account with a specified staff ID, password, and user type.
+     * Constructor that initializes an account with a specified staff ID, and password.
      * 
      * @param staffID The staff ID to be set for this account.
      * @param password The password for this account.
-     * @param userType The UserType representing the role of the user.
      */
     public Account(String staffID){
         this.staffID = staffID;

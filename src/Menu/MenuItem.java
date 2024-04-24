@@ -3,19 +3,20 @@ package Menu;
 import java.io.Serializable;
 
 public class MenuItem implements Serializable{
+    
     private String itemName;
     private double price;
     private int itemID;
     private String category;
-    private String branchName;
+    private String branch;
     private String customisation;
 
-    public MenuItem(int itemID, String itemName, double price, String category, String branchName){
+    public MenuItem(int itemID, String itemName, double price, String category, String branch){
         this.itemID = itemID;
         this.itemName = itemName;
         this.price = price;
         this.category = category;
-        this.branchName = branchName;
+        this.branch = branch;
         this.customisation = "-";
     }
 
@@ -31,12 +32,12 @@ public class MenuItem implements Serializable{
 
 
     public String getBranchName() {
-        return branchName;
+        return branch;
     }
 
 
     public void setBranchName(String branch) {
-        this.branchName = branch;
+        this.branch = branch;
     }
 
 
@@ -71,5 +72,7 @@ public class MenuItem implements Serializable{
     public void setCustomisation(String customisation) {
         this.customisation = customisation;
     }
+
+    
 
 }
