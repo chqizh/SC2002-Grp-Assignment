@@ -3,6 +3,8 @@ package Menu;
 import java.io.*;
 import java.util.*;
 
+import Branch.Branch;
+
 public class Menu implements Serializable{
 	private ArrayList<MenuItem> menu;
 	private MenuEditor editMenu;
@@ -78,8 +80,8 @@ public class Menu implements Serializable{
         return menu;
     }
 
-	public void displayMenu(){
-		MenuDisplay display = new MenuDisplay();
+	public void displayMenu(Branch branch){
+		MenuDisplay display = new MenuDisplay(branch.getBranchMenu());
 		display.displayMenu();
 	}
 
