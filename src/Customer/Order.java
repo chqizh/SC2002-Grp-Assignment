@@ -200,6 +200,9 @@ public class Order implements Serializable{
             totalPrice += item.getPrice();
         }
 
+        int temp = (int)(totalPrice*100.0);
+        totalPrice = ((double)temp)/100.0;    
+
         return totalPrice;
     }
 
