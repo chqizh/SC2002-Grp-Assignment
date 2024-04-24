@@ -2,7 +2,6 @@ package Branch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import Menu.*;
 import Customer.*;
@@ -22,7 +21,6 @@ public class Branch implements Serializable {
     private int staffQuota;
     private Menu branchMenu;
     private OrderList branchOrders;
-    private transient Scanner sc;
 
     /**
      * Constructs a branch with a specific name, location, and staff quota.
@@ -38,7 +36,6 @@ public class Branch implements Serializable {
         this.currentNumStaff = 0;
         this.branchMenu = new Menu(branchName);
         this.branchOrders = new OrderList();
-        this.sc = new Scanner(System.in);
         this.branchName = branchName;
         this.branchLocation = branchLocation;
         this.staffQuota = staffQuota;   
@@ -114,8 +111,6 @@ public class Branch implements Serializable {
             System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
             branchManagerIDs.remove(staffID);
             System.out.println("Number of Branch Managers is below required amount. Please add another Branch Manager.");
-            //String newBranchManager = sc.next();
-            //addBranchManager(newBranchManager);
             return true;
         }
         else {

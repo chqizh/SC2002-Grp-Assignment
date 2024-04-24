@@ -196,27 +196,28 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     /**
      * Displays a list of staff members within the branch being managed.
      */
-	public void displayStaffList(){
-        ArrayList<String> managerIDsList = db.getBranchByBranchName(this.branchName).getBranchManagerIDs();
-        ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();
+	public void displayStaffList(boolean displayAll){
+        sc = new Scanner(System.in);
+        
+        ArrayList<String> employeesIDsList = new ArrayList<>();
+        employeesIDsList.addAll(db.getBranchByBranchName(this.branchName).getBranchManagerIDs());
+        employeesIDsList.addAll(db.getBranchByBranchName(this.branchName).getStaffIDs()); 
 
-        System.out.println("Staff List for Branch: " + this.branchName);
-
-        for (String managerID : managerIDsList) {
-            BranchManager manager = db.getBranchManager(managerID);
-            System.out.println("StaffID: " + manager.getStaffID());
-            System.out.println("Name: " + manager.getName());
-            System.out.println("Role: " + manager.getUserType().stringFromUserType());
-            System.out.println("Age: " + manager.getAge()); // Use getter to retrieve age
-            System.out.println("Gender: " + manager.getGender()); // Use getter to retrieve gender
-        }        
-        for (String staffID : staffIDsList){
-            Staff staff = db.getStaff(staffID);
-            System.out.println("StaffID: " + staff.getStaffID());
-            System.out.println("Name: " + staff.getName());
-            System.out.println("Role: " + staff.getUserType().stringFromUserType());
-            System.out.println("Age: " + staff.getAge());
-            System.out.println("Gender: "+ staff.getGender());
+        ArrayList<Employee> employeesList = new ArrayList<>();
+        for (String employeeID : employeesIDsList) {
+            Employee employee = db.getEmployee(employeeID);
+            if (employee != null) employeesList.add(employee);
         }
+
+        System.out.println("Displaying Staff List for Branch: " + this.branchName);
+        System.out.println("----------------------------------------------------------------------");
+        System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
+        System.out.println("----------------------------------------------------------------------");
+        for (Employee employee : employeesList){
+            System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge(), employee.getBranchName());
+        }
+        System.out.println("----------------------------------------------------------------------");
+        System.out.print("Press any key to continue.");
+        sc.nextLine();
     }
 }
