@@ -6,14 +6,21 @@ import java.util.*;
 public class MenuEditor implements Serializable{
 	private ArrayList<MenuItem> menu;
     private transient Scanner sc;
+    private Menu menuClass;
 
 	public MenuEditor(ArrayList<MenuItem> menu) {
 		this.menu = menu;
 	}
 
+    //YH Changes
+    public MenuEditor(Menu menuClass){
+        this.menuClass = menuClass;
+    }
+
 	public boolean addItems(String branchName){
 		sc = new Scanner(System.in);
-        int itemId = this.menu.size() + 1;
+        //int itemId = this.menu.size() + 1;
+        int itemId = menuClass.getMaxItemID();
 
         while (true) {
             System.out.print("Enter menu item name: ");
