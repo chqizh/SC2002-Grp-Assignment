@@ -196,7 +196,6 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
      * Displays a list of staff members within the branch being managed.
      */
 	public void displayStaffList(){
-        String branch = this.branchName;
         ArrayList<String> managerIDsList = db.getBranchByBranchName(this.branchName).getBranchManagerIDs();
         ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();
 
