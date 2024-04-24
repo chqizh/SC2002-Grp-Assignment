@@ -132,13 +132,11 @@ public class Branch implements Serializable {
         if (this.currentNumStaff >= 1 && this.currentNumStaff <= 4){
             this.maxNumManagers = 1;
         }
-
         else if (this.currentNumStaff >= 5 && this.currentNumStaff <= 8){
             this.maxNumManagers = 2;
         }
-
         else if (this.currentNumStaff >= 9 && this.currentNumStaff <= 15){
-            this.maxNumManagers = 4;
+            this.maxNumManagers = 3;
         }
     }
     /**
