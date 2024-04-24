@@ -7,6 +7,7 @@ import Database.InMemoryDatabase;
 
 /**
  * This class represents a staff member, which is a specific type of employee with a branch association.
+ * Inherits from Employee and implements interfaces for order processing.
  */
 public class Staff extends Employee implements IOrderProcess{
     private String branchName;

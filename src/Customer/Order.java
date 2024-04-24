@@ -10,7 +10,14 @@ import Menu.MenuItem;
 import Branch.Branch;
 //import Branch.OrderList;
 
+/**
+ * Represents an order placed by a customer.
+ */
 public class Order implements Serializable{
+
+    /**
+     * Enum representing the status of the order.
+     */
     public enum orderStatusFlags {
         NEW,
         PROCESSED,
@@ -25,43 +32,87 @@ public class Order implements Serializable{
     private ArrayList<MenuItem> orderItems;
     private boolean dineIn;
     //private OrderList orderListRef;
-
+    
+    /**
+     * Constructs an order for a specified branch.
+     *
+     * @param branch The branch for which the order is being placed.
+     */
     public Order(Branch branch){ 
         this.orderID = branch.getBranchOrders().nextOrderID();
         this.orderStatus = orderStatusFlags.NEW;
         this.branchName = branch.getBranchName(); 
         this.orderItems = new ArrayList<>(); 
-        //this.orderListRef = branch.getBranchOrders();
     }
 
+    /**
+     * Gets the order ID.
+     *
+     * @return The order ID.
+     */
     public int getOrderID() {
         return orderID;
     }
 
+    /**
+     * Sets the order ID.
+     *
+     * @param orderID The order ID to set.
+     */
     public void setOrderID(int orderID){
         this.orderID = orderID;
     }
 
+    /**
+     * Sets the branch name associated with the order.
+     *
+     * @param branchName The branch name to set.
+     */
     public void setBranchName(String branchName){
         this.branchName = branchName;
     }
 
+    /**
+     * Gets the branch name associated with the order.
+     *
+     * @return The branch name.
+     */
     public String getBranchName(){
         return this.branchName;
     }
 
+    /**
+     * Gets the list of items in the order.
+     *
+     * @return The list of order items.
+     */
     public ArrayList<MenuItem> getOrderItems() {
         return orderItems;
     }
 
+    /**
+     * Adds an item to the order.
+     *
+     * @param item The item to add to the order.
+     */
     public void addOrderItems(MenuItem item){
         this.orderItems.add(item);
     }
 
+    /**
+     * Gets the status of the order.
+     *
+     * @return The status of the order.
+     */
     public orderStatusFlags getOrderStatus(){
         return this.orderStatus;
     }
 
+    /**
+     * Sets the status of the order.
+     *
+     * @param flag The status to set.
+     */
     public void setOrderStatus(orderStatusFlags flag){
         if (this.orderStatus != flag){
             this.orderStatus = flag;
@@ -73,6 +124,11 @@ public class Order implements Serializable{
         }
     }
 
+    /**
+     * Gets the status of the order as a string.
+     *
+     * @return The status of the order as a string.
+     */
     public String getOrderStatusString(){
         switch (this.orderStatus){
             case NEW:
@@ -90,25 +146,51 @@ public class Order implements Serializable{
         }
     }
 
+    /**
+     * Checks if the order is for dine-in.
+     *
+     * @return True if the order is for dine-in, false otherwise.
+     */
     public boolean getDineIn(){
         return dineIn;
     }
 
+    /**
+     * Sets whether the order is for dine-in or not.
+     *
+     * @param value True if the order is for dine-in, false otherwise.
+     */
     public void setDineIn(boolean value){
         this.dineIn = value;
     }
 
+    /**
+     * Schedules automatic order cancellation after a specified delay.
+     *
+     * @param delay The delay before cancellation.
+     * @param unit The time unit of the delay.
+     */
     private void scheduleAutoCancellation(int delay, TimeUnit unit) {
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
         scheduler.schedule(this::autoCancellation, delay, unit);
     }
 
+    /**
+     * Cancels the order automatically.
+     *
+     * @return True if the order was cancelled successfully, false otherwise.
+     */
     private boolean autoCancellation() {
         this.orderStatus = orderStatusFlags.CANCELLED;
         //this.orderListRef.removeOrder(this.orderID);
         return true;
     }
 
+    /**
+     * Calculates the total price of the order.
+     *
+     * @return The total price of the order.
+     */
     public double calculateTotalPrice() {
         double totalPrice = 0.0;
         List<MenuItem> orderItems = getOrderItems();
@@ -120,6 +202,9 @@ public class Order implements Serializable{
         return totalPrice;
     }
 
+    /**
+     * Prints details of the order.
+     */
     public void printOrder(){
         System.out.println("OrderID: " + orderID);
         System.out.println("Status: " + this.getOrderStatus());

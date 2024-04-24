@@ -9,6 +9,7 @@ import Database.*;
 /**
  * Represents a manager of a branch with capabilities to manage orders,
  * menus, and staff within the branch.
+ * Inherits from Employee and implements interfaces for order, menu and staff management.
  */
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchName;
