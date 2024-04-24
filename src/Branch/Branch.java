@@ -113,9 +113,9 @@ public class Branch implements Serializable {
         if (branchManagerIDs.contains(staffID)){
             System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
             branchManagerIDs.remove(staffID);
-            System.out.printf("Number of Branch Managers is below required amount. Please add another Branch Manager.", staffID);
-            String newBranchManager = sc.next();
-            addBranchManager(newBranchManager);
+            System.out.println("Number of Branch Managers is below required amount. Please add another Branch Manager.");
+            //String newBranchManager = sc.next();
+            //addBranchManager(newBranchManager);
             return true;
         }
         else {
@@ -128,17 +128,17 @@ public class Branch implements Serializable {
      *
      * @param currentNumStaff The current number of staff members in the branch.
      */
-    public void setMaxNumManagers(int currentNumStaff){
-        if (currentNumStaff>=1 && currentNumStaff<=4){
-            this.maxNumManagers=1;
+    public void setMaxNumManagers()){
+        if (this.currentNumStaff >= 1 && this.currentNumStaff <= 4){
+            this.maxNumManagers = 1;
         }
 
-        else if (currentNumStaff>=5 && currentNumStaff<=8){
-            this.maxNumManagers=2;
+        else if (this.currentNumStaff >= 5 && this.currentNumStaff <= 8){
+            this.maxNumManagers = 2;
         }
 
-        else if (currentNumStaff>=9 && currentNumStaff<=15){
-            this.maxNumManagers=4;
+        else if (this.currentNumStaff >= 9 && this.currentNumStaff <= 15){
+            this.maxNumManagers = 4;
         }
     }
     /**
@@ -178,7 +178,7 @@ public class Branch implements Serializable {
         else {
             staffIDs.add(staffID);
             currentNumStaff++;
-            setMaxNumManagers(currentNumStaff);
+            setMaxNumManagers();
             return true;
         }
     }
@@ -197,7 +197,7 @@ public class Branch implements Serializable {
         else {
             staffIDs.remove(staffID);
             currentNumStaff--;
-            setMaxNumManagers(currentNumStaff);
+            setMaxNumManagers();
             return true;
         }
     }

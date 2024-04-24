@@ -279,15 +279,15 @@ public class FOMSApp{
             System.out.println("====================================");
             System.out.println("|  Welcome to the ADMIN Workspace  |");
             System.out.println("====================================");
-            System.out.println("(1) Add Staff");
-            System.out.println("(2) Remove Staff");
-            System.out.println("(3) Edit Staff");
-            System.out.println("(4) Display Staff List");
-            System.out.println("(5) Assign Manager");
-            System.out.println("(6) Promote Staff to Manager");
-            System.out.println("(7) Transfer Staff/Manager");
-            System.out.println("(8) Edit Payment Method");
-            System.out.println("(9) Open Branch");
+            System.out.println(" (1) Add Staff");
+            System.out.println(" (2) Remove Staff");
+            System.out.println(" (3) Edit Staff");
+            System.out.println(" (4) Display Staff List");
+            System.out.println(" (5) Assign (i.e. Add) Manager");
+            System.out.println(" (6) Promote Staff to Manager");
+            System.out.println(" (7) Transfer Staff/Manager");
+            System.out.println(" (8) Edit Payment Method");
+            System.out.println(" (9) Open Branch");
             System.out.println("(10) Close Branch");
             System.out.println("(11) Export Staff List");
             System.out.println("(12) Log Out");
@@ -312,7 +312,7 @@ public class FOMSApp{
                     admin.displayStaffList();
                     break;
                 case 5:
-                    if (admin.assignManager()) System.out.println("Successfully assigned manager.");
+                    if (admin.addManager()) System.out.println("Successfully assigned manager.");
                     else System.out.println("Failed to assign manager.");
                     break;
                 case 6:
