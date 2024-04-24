@@ -120,6 +120,7 @@ public class FOMSApp{
                 
                 if (account.validateLogin(password)) {
                     if (account.isUsingDefaultPassword()){
+                        System.out.println("The default password is currently in use. Please change your password.");
                         account.changePassword(console);
                     };
                     loginSuccessful = true;
@@ -306,7 +307,7 @@ public class FOMSApp{
                     else System.out.println("Failed to edit staff.");
                     break;
                 case 4:
-                    admin.displayStaffList();
+                    admin.displayStaffList(false);
                     break;
                 case 5:
                     if (admin.addManager()) System.out.println("Successfully assigned manager.");

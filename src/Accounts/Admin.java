@@ -78,8 +78,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
      * @return true if the staff was removed successfully, false otherwise.
      */
     public boolean removeStaff(){
+        displayStaffList(true);
         System.out.print("Enter a staffID to remove: ");
-        displayStaffList(); // Find someway to disply all instead of filtering
         String staffID = sc.nextLine();
         if (db.getAccountByStaffID(staffID) != null){
             db.removeStaff(staffID);
@@ -95,15 +95,16 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
      */
     public boolean editStaff(){
         sc = new Scanner(System.in);
-        displayStaffList();
+        displayStaffList(true);
         System.out.print("Enter the staffID would you like to edit: ");
         String staffID = sc.nextLine();
-        Staff staff = db.getStaff(staffID);
-        if (staff == null) return false;
-        System.out.print("What would you like to edit? Enter the numerical option: ");
+        Employee employee = db.getEmployee(staffID);
+        if (employee == null) return false;
+        System.out.println("Employee Editing Options");
         System.out.println("(1) Name");
         System.out.println("(2) Gender");
         System.out.println("(3) Age");
+        System.out.print("Enter the numerical option: ");
         try {
             int choice = sc.nextInt();
             sc.nextLine();
@@ -111,18 +112,18 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 case 1:
                     System.out.print("Please enter a new name: ");
                     String name = sc.nextLine();
-                    staff.setName(name);
+                    employee.setName(name);
                     break;
                 case 2:
                     System.out.print("Please enter a new gender: ");
                     char gender = sc.nextLine().charAt(0);
-                    staff.setGender(gender);
+                    employee.setGender(gender);
                     break;
                 case 3:
                     System.out.print("Please enter a new age: ");
                     int age = sc.nextInt();
                     sc.nextLine();
-                    staff.setAge(age);
+                    employee.setAge(age);
                     break;
                 default:
                     System.out.println("Invalid integer entered.");
@@ -340,24 +341,33 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     /**
      * Displays a list of staff members with filtering options.
      */
-    public void displayStaffList(){
+    public void displayStaffList(boolean displayAll){
+        int choice;
         sc = new Scanner(System.in);
-        System.out.println("Choose filter for staff list display: ");
-        System.out.println("(1) Display all");
-        System.out.println("(2) Filter by Branch");
-        System.out.println("(3) Filter by Role");
-        System.out.println("(4) Filter by Gender");
-        System.out.println("(5) Filter by Age");
-        int choice = sc.nextInt();
-        sc.nextLine();
 
+        if (displayAll){
+            System.out.println("---------------------");
+            System.out.println("Staff List Display");
+            System.out.println("---------------------");
+            System.out.println("(1) Display all");
+            System.out.println("(2) Filter by Branch");
+            System.out.println("(3) Filter by Role");
+            System.out.println("(4) Filter by Gender");
+            System.out.println("(5) Filter by Age");
+            System.out.print("Choose filter for staff list display: ");
+            choice = sc.nextInt();
+            sc.nextLine();
+            System.out.println("");
+        }
+        else choice = 1;
+        
         ArrayList<String> employeesIDsList = db.getAllEmployeeIDs();
         ArrayList<Employee> employeesList = new ArrayList<>();
         for (String employeeID : employeesIDsList) {
             Employee employee = db.getEmployee(employeeID);
             if (employee != null) employeesList.add(employee);
         }
-
+        
         switch(choice){
             case 1:
                 System.out.println("Displaying all.");
