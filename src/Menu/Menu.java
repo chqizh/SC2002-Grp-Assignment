@@ -36,7 +36,7 @@ public class Menu implements Serializable{
 		// Checks if any current menu items have the same itemID or same name (case insensitive).
 		for (MenuItem currentItem : this.menu){
 			if (currentItem.getItemID() == menuItem.getItemID() || currentItem.getItemName().equalsIgnoreCase(menuItem.getItemName())){
-				System.out.printf("Duplicate item name or itemID found in menu.");
+				System.out.println("Duplicate item name or itemID found in menu.");
 				return false;
 			}
 		}

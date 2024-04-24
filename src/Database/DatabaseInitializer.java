@@ -48,6 +48,7 @@ public class DatabaseInitializer {
                     case "M":
                         BranchManager manager = new BranchManager(name, staffID, gender, age, branchName, db);
                         if (db.addBranchManager(manager)) managerCount++;
+                        //System.out.printf("Added %s\n", name);
                         break;
                     case "A":
                         Admin admin = new Admin(name, staffID, gender, age, db);

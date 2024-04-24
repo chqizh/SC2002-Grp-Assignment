@@ -96,20 +96,17 @@ public class InMemoryDatabase implements Serializable {
         String branchName = staff.getBranchName();
         String staffID = staff.getStaffID();
         Branch branch = getBranchByBranchName(branchName);
-        // Create branch if referenced branch does not exist yet.
-        // if (branch == null){
-        //     branch = new Branch(branchName, branchName, 15);
-        //     this.addBranch(branch);
-        // }
 
         // Does not add staff if branch does not exist yet
         if (branch == null){
             return false;
         }
         else {
-            branch.addStaff(staffID);
-            this.staffMap.put(staffID, staff);
-            return true;
+            if (branch.addStaff(staffID)){
+                this.staffMap.put(staffID, staff);
+                return true;
+            }
+            else return false;
         }
     }
 
@@ -124,6 +121,7 @@ public class InMemoryDatabase implements Serializable {
         String branchName = branchManager.getBranchName();
         String staffID = branchManager.getStaffID();
         Branch branch = getBranchByBranchName(branchName);
+
         if (branch == null) return false;
         else {
             if (branch.addBranchManager(staffID)){

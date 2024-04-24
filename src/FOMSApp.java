@@ -316,9 +316,7 @@ public class FOMSApp implements Serializable{
                     break;
                 case 6:
                     if (admin.removeManager()) System.out.println("Successfully removed manager.");
-                    else{
-                        
-                    }
+                    else System.out.println("Failed to remove manager. ");
                     break;
                 case 7:
                     if (admin.promoteStaff()) System.out.println("Successfully promoted staff.");
