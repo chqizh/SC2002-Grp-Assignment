@@ -117,7 +117,8 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     
         MenuItem removedItem = cart.remove(index);
         if (removedItem != null) {
-            System.out.println("Item with ID " + index+1 + " removed from cart.");
+            index=index+1;
+            System.out.println("Item with ID " + index + " removed from cart.");
         } else {
             System.out.println("Failed to remove item from cart.");
         }
@@ -237,7 +238,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             return;
         }
         if(order.getOrderStatus()!=Order.orderStatusFlags.PICKUP){
-            System.out.println("Your order cannot be collected at this time. Your order is still being prepared...");
+            System.out.println("Your order cannot be collected at this time. Your order is still being prepared or has been cancelled.");
             return;
         }
         order.setOrderStatus(orderStatusFlags.COMPLETED);
