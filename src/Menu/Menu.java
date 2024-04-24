@@ -24,21 +24,22 @@ public class Menu implements Serializable{
 		sc.nextLine();
 
 		for (int i = 0; i < numberToAdd; i++) {
-			MenuItem newItem = this.editMenu.addItems(this.branchName);
-			if (this.addItems(newItem) == false) System.out.println("Failed to add " + newItem.getItemName());
+			(this.editMenu).addItems(this.branchName);
 		}
 		return true;
 	}
 
 	public boolean addItems(MenuItem menuItem){		
+		// Checks if any current menu items have the same itemID or same name (case insensitive).
 		for (MenuItem currentItem : this.menu){
-			if (currentItem.getItemID() == menuItem.getItemID() || currentItem.getItemName().equals(menuItem.getItemName())){
+			if (currentItem.getItemID() == menuItem.getItemID() || currentItem.getItemName().equalsIgnoreCase(menuItem.getItemName())){
+				System.out.println("Duplicate item found in menu.");
 				return false;
 			}
 		}
-		//TODO
-			/* if (currentItem.getItemID() == menuItem.getItemID()) {System.out.println("fail1");return false;}
-			if (currentItem.getItemName().equals(menuItem.getItemName())) { System.out.println("fail2");return false;}*/
+		// Debug
+		/* if (currentItem.getItemID() == menuItem.getItemID()) {System.out.println("fail1");return false;}
+		if (currentItem.getItemName().equals(menuItem.getItemName())) { System.out.println("fail2");return false;}*/
 		return this.menu.add(menuItem);
 	}
 	
