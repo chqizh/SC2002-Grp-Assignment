@@ -88,7 +88,8 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     
         MenuItem removedItem = cart.remove(index);
         if (removedItem != null) {
-            System.out.println("Item with ID " + index+1 + " removed from cart.");
+            index=index+1;
+            System.out.println("Item with ID " + index + " removed from cart.");
         } else {
             System.out.println("Failed to remove item from cart.");
         }
