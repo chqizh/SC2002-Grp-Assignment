@@ -49,8 +49,10 @@ public class PayNow extends Payment {
      */
     private void simulateNetworkLatency() {
         try {
-            Thread.sleep(2000);  // Simulate 2 seconds of network delay
+            Thread.sleep(8000);  // Simulate 8 seconds of network delay
             System.out.println("Connected to PayNow.");
+            Thread.sleep(2000);  // Simulate 2 seconds of network delay
+
         } catch (InterruptedException e) {
             System.out.println("Network error during PayNow connection.");
         }

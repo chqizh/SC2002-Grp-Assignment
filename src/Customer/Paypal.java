@@ -53,6 +53,7 @@ public class Paypal extends Payment {
         try {
             Thread.sleep(2000);  // Simulate 2 seconds of network delay
             System.out.println("Connected to PayPal.");
+            Thread.sleep(2000);  // Simulate 2 seconds of delay
         } catch (InterruptedException e) {
             System.out.println("Network error during PayPal connection.");
         }
