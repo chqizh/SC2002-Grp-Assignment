@@ -5,7 +5,6 @@ import java.util.Scanner;
 import java.util.List; 
 
 import Branch.*;
-import Customer.*;
 import Database.InMemoryDatabase;
 /**
  * Represents an administrator with specific management privileges.
@@ -270,18 +269,18 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
      */
     public boolean editPaymentMethod(){
         sc = new Scanner(System.in);
-        List<Payment> paymentMethods = new ArrayList<>(db.getPaymentMethods());
+        List<String> paymentMethods = db.getPaymentMethods();
         
         System.out.println("Enter which payment method you would like to enable/disable:");
-        int i = 0;
-        for (Payment paymentMethod : paymentMethods){
+        int i = 1;
+        for (String paymentMethod : paymentMethods){
+            if (db.getPaymentMethodsStatus(paymentMethod)) System.out.printf("(%d) %s : Enabled\n", i, paymentMethod);
+            else System.out.printf("(%d) %s : Disabled\n", i, paymentMethod);
             i++;
-            if (db.getPaymentMethodsStatus(paymentMethod)) System.out.println("(" + i + ") " + paymentMethod.getPaymentMethodName() + ": Enabled");
-            else System.out.println("(" + i + ") " + paymentMethod.getPaymentMethodName() + ": Disabled");
         }
         int choice = sc.nextInt();
         sc.nextLine();
-        return db.togglePaymentMethod(paymentMethods.get(choice));
+        return db.togglePaymentMethod(paymentMethods.get(choice - 1));
     }
 
     /**

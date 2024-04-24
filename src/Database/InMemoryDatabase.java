@@ -166,7 +166,7 @@ public class InMemoryDatabase implements Serializable {
         return this.paymentMethods.get(paymentMethod);
     }
 
-    public boolean togglePaymentMethod(Payment paymentMethod) {
+    public boolean togglePaymentMethod(String paymentMethod) {
         if (this.paymentMethods.containsKey(paymentMethod)){
             if (this.paymentMethods.get(paymentMethod) == true) this.paymentMethods.replace(paymentMethod, false);
             else this.paymentMethods.replace(paymentMethod, true);
