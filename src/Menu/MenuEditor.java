@@ -11,9 +11,9 @@ public class MenuEditor implements Serializable{
 		this.menu = menu;
 	}
 
-	public MenuItem addItems(String branchName){
+	public boolean addItems(String branchName){
 		sc = new Scanner(System.in);
-        int itemId = this.menu.size()+1;
+        int itemId = this.menu.size() + 1;
 
         while (true) {
             System.out.print("Enter menu item name: ");
@@ -61,8 +61,13 @@ public class MenuEditor implements Serializable{
                         continue;
                 }
 
-                MenuItem menuItem = new MenuItem(itemId, name, price, category, branchName);
-                return menuItem;
+                this.menu.add(new MenuItem(itemId, name, price, category, branchName));
+                System.out.printf("Successfully added %s item to menu.\n", name);
+                return true;
+            }
+            else {
+                System.out.printf("Failed to add %s item to menu.\n", name);
+                return false;
             }
         }
 	}
