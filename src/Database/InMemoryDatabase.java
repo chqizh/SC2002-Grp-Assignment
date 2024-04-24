@@ -142,8 +142,12 @@ public class InMemoryDatabase implements Serializable {
         else return false;
     }
 
-    public void addAdmin(Admin admin) {
-        this.adminMap.put(admin.getStaffID(), admin);
+    public boolean addAdmin(Admin admin) {
+        if (this.adminMap.containsKey(admin.getStaffID()) == false){
+            this.adminMap.put(admin.getStaffID(), admin);
+            return true;
+        }
+        else return false;
     }
 
     public void removeAdmin(String staffID) {

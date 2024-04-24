@@ -3,6 +3,7 @@ package Database;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,6 +27,7 @@ public class DatabaseInitializer {
         
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
+            ArrayList<BranchManager> branchManagers = new ArrayList<>();
             for (int i = 1; i < lines.size(); i++) {
                 String line = lines.get(i).trim();
                 if (line.isEmpty()) continue; // Skip empty lines
@@ -43,25 +45,36 @@ public class DatabaseInitializer {
                 switch (role) {
                     case "S":
                         Staff staff = new Staff(name, staffID, gender, age, branchName, db);
-                        if (db.addStaff(staff)) staffCount++;
+                        if (db.addStaff(staff)) { 
+                            staffCount++;
+                            Account account = new Account(staffID);
+                            db.addAccount(account);
+                        }
                         break;
                     case "M":
                         BranchManager manager = new BranchManager(name, staffID, gender, age, branchName, db);
-                        if (db.addBranchManager(manager)) managerCount++;
-                        //System.out.printf("Added %s\n", name);
+                        branchManagers.add(manager);
                         break;
                     case "A":
                         Admin admin = new Admin(name, staffID, gender, age, db);
-                        db.addAdmin(admin);
-                        adminCount++;
+                        if (db.addAdmin(admin)){
+                            adminCount++;
+                            Account account = new Account(staffID);
+                            db.addAccount(account);
+                        }
                         break;
                     default:
                         System.out.println("Unknown role: " + role);
                         break;
                 }
+            }
 
-                Account account = new Account(staffID);
-                db.addAccount(account);
+            for (BranchManager manager : branchManagers){
+                if (db.addBranchManager(manager)){
+                    managerCount++;
+                    Account account = new Account(manager.getStaffID());
+                    db.addAccount(account);
+                }
             }
 
             System.out.println("Added " + staffCount + " Staff members, " + managerCount + " Managers, and " + adminCount + " Admins.");
