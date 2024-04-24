@@ -16,7 +16,6 @@ public class Menu implements Serializable{
 		this.editMenu = new MenuEditor(this.menu);
 	}
 	
-	//TODO REFACTOR MENU, editMenu already has the a reference to menu. No need to return values back and forth. NEED TO ADD addITEMS TO UML ALSO.
 	public boolean addItems() throws IOException {		
 		sc = new Scanner(System.in);
 		System.out.print("Enter the number of items you would like to add: ");

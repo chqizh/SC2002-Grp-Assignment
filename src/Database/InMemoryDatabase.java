@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.Set;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.io.Serializable;
 
@@ -19,7 +21,7 @@ public class InMemoryDatabase implements Serializable {
     private Map<String, Staff> staffMap;
     private Map<String, BranchManager> branchManagerMap;
     private Map<String, Admin> adminMap;
-    private Map<Payment, Boolean> paymentMethods;
+    private Map<String, Boolean> paymentMethods;
 
     public InMemoryDatabase() {
         this.accounts = new HashMap<>();
@@ -28,9 +30,9 @@ public class InMemoryDatabase implements Serializable {
         this.branchManagerMap = new HashMap<>();
         this.adminMap = new HashMap<>();
         this.paymentMethods = new HashMap<>();
-        this.paymentMethods.put(new BankCard(), true);
-        this.paymentMethods.put(new PayNow(), true);
-        this.paymentMethods.put(new Paypal(), true);
+        this.paymentMethods.put("Bank Card", true);
+        this.paymentMethods.put("PayPal", true);
+        this.paymentMethods.put("PayNow", true);
     }
 
     public Map<String, Account> getAccountsMap() {
@@ -145,17 +147,22 @@ public class InMemoryDatabase implements Serializable {
         this.adminMap.remove(staffID);
     }
 
-    public Set<Payment> getPaymentMethods() {
-        Set<Payment> paymentMethodNames = this.paymentMethods.keySet();
+    public ArrayList<String> getPaymentMethods() {
+        ArrayList<String> paymentMethodNames = new ArrayList<>(this.paymentMethods.keySet());
+        Collections.sort(paymentMethodNames, new Comparator<String>() {
+            @Override
+            public int compare(String p1, String p2) {
+                return p1.compareTo(p2);
+            }
+        });
+
+        // Java 8 only
+        // paymentMethodNames.sort(Comparator.comparing(Payment::getPaymentMethodName));
+
         return paymentMethodNames;
     }
 
-    public List<String> getPaymentMethodsNames() {
-        List<String> paymentMethodNames = this.paymentMethods.keySet().stream().map(Payment::getPaymentMethodName).collect(Collectors.toList());
-        return paymentMethodNames;
-    }
-
-    public boolean getPaymentMethodsStatus(Payment paymentMethod) {
+    public boolean getPaymentMethodsStatus(String paymentMethod) {
         return this.paymentMethods.get(paymentMethod);
     }
 

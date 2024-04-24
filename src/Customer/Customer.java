@@ -155,21 +155,30 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         System.out.println("Total Price: $" + totalPrice);
 
         sc = new Scanner(System.in);
-        System.out.println("Select Payment Method:");
-        // TODO loop to check for boolean first. 
-        System.out.println("1. Bank Card");
-        System.out.println("2. PayPal");
-        System.out.println("3. PayNow");
-        int choice = sc.nextInt();
-        sc.nextLine(); 
-
-        Payment paymentMethod = selectPaymentMethod(choice);
+        boolean keepLooping = true;
+        Payment paymentMethod;
+        do {
+            System.out.println("Payment Methods Available");
+            ArrayList<String> paymentMethodsNamesList= db.getPaymentMethods();
+            int counter = 0;
+            for (int i = 0; i < db.getPaymentMethods().size(); i++){
+                String paymentMethodName = paymentMethodsNamesList.get(i);
+                if (db.getPaymentMethodsStatus(paymentMethodName) == true) System.out.printf("(%d) %s", ++counter, paymentMethodName);
+            }
+            System.out.print("Select payment method: ");
+            String choice = sc.nextLine();
+            paymentMethod = selectPaymentMethod(choice);
+            if (paymentMethod != null){
+                keepLooping = false;
+            }
+            else System.out.println("Invalid payment method selected.");
+        } while (keepLooping);
 
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {
                 Order order = new Order(branch);
 
-                if(option==1){
+                if(option == 1){
                     order.setDineIn(true);
                 }
                 else{
@@ -193,6 +202,36 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         else {
             System.out.println("Invalid payment method selected.");
         }
+    }
+
+    /**
+     * Selects a payment method based on the customer's choice.
+     *
+     * @param choice The customer's choice of payment method.
+     * @return The selected payment method.
+     */
+    private Payment selectPaymentMethod(String choice) {
+        if (choice.equalsIgnoreCase("Bank Card") && db.getPaymentMethodsStatus("Bank Card")){
+            return new BankCard("1234567890123456", "12/25", "123");
+        }
+        else if (choice.equalsIgnoreCase("PayPal") && db.getPaymentMethodsStatus("PayPal")){
+            return new PayPal("example@example.com", "password");
+        }
+        else if (choice.equalsIgnoreCase("PayNow") && db.getPaymentMethodsStatus("PayNow")){
+            return new PayNow("12345678");
+        }
+        else return null;
+    }
+
+    /**
+     * Processes the payment for the order using the selected payment method.
+     *
+     * @param paymentMethod The selected payment method.
+     * @param amount        The total amount to be paid.
+     * @return True if the payment was successful, false otherwise.
+     */
+    private boolean processPayment(Payment paymentMethod, double amount) {
+        return paymentMethod.processPayment(amount);
     }
 
     /**
@@ -267,35 +306,6 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             totalPrice += item.getPrice();
         }
         return totalPrice;
-    }
-
-    /**
-     * Selects a payment method based on the customer's choice.
-     *
-     * @param choice The customer's choice of payment method.
-     * @return The selected payment method.
-     */
-    private Payment selectPaymentMethod(int choice) {
-        switch (choice) {
-            case 1:
-                return new BankCard("1234567890123456", "12/25", "123");
-            case 2:
-                return new Paypal("example@example.com", "password");
-            case 3:
-                return new PayNow("12345678");
-            default:
-                return null;
-        }
-    }
-    /**
-     * Processes the payment for the order using the selected payment method.
-     *
-     * @param paymentMethod The selected payment method.
-     * @param amount        The total amount to be paid.
-     * @return True if the payment was successful, false otherwise.
-     */
-    private boolean processPayment(Payment paymentMethod, double amount) {
-        return paymentMethod.processPayment(amount);
     }
 
 }

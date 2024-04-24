@@ -286,7 +286,8 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
     /**
      * Adds a new branch to the system.
-     *
+     * @param displayAll A true or false value to display all staff without filtering or not.
+     * *
      * @return true if the branch was added successfully, false otherwise.
      */
     public boolean addBranch(){
