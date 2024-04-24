@@ -43,13 +43,11 @@ public class DatabaseInitializer {
                 switch (role) {
                     case "S":
                         Staff staff = new Staff(name, staffID, gender, age, branchName, db);
-                        db.addStaff(staff);
-                        staffCount++;
+                        if (db.addStaff(staff)) staffCount++;
                         break;
                     case "M":
                         BranchManager manager = new BranchManager(name, staffID, gender, age, branchName, db);
-                        db.addBranchManager(manager);
-                        managerCount++;
+                        if (db.addBranchManager(manager)) managerCount++;
                         break;
                     case "A":
                         Admin admin = new Admin(name, staffID, gender, age, db);

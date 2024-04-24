@@ -59,7 +59,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
             System.out.println("(1) Processed");
             System.out.println("(2) Pickup");
             System.out.println("(3) Completed");
-            System.out.println("(4) Canclled");
+            System.out.println("(4) Cancelled");
 
             int choice = sc.nextInt();
             sc.nextLine();
@@ -89,6 +89,10 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
 
 
 // From IMenuManagement
+    public void viewMenu(Branch branch){
+        branch.getBranchMenu().displayMenu();
+    }
+
     public void addMenuItem(Branch branch){
         try {
             branch.getBranchMenu().addItems();

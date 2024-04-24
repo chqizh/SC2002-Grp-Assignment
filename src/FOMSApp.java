@@ -84,6 +84,7 @@ public class FOMSApp{
 
     public void menuInitialization(){
         //Menu Initializer
+        this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
             System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
             char choice = sc.nextLine().charAt(0);
@@ -221,10 +222,11 @@ public class FOMSApp{
             System.out.println("(2) View Order Details");
             System.out.println("(3) Process Order");
             System.out.println("(4) Display Staff List");
-            System.out.println("(5) Add Menu Item");
-            System.out.println("(6) Edit Menu Item");
-            System.out.println("(7) Remove Menu Item");
-            System.out.println("(8) Log Out");
+            System.out.println("(5) View Branch Menu");
+            System.out.println("(6) Add Menu Item");
+            System.out.println("(7) Edit Menu Item");
+            System.out.println("(8) Remove Menu Item");
+            System.out.println("(9) Log Out");
             System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
@@ -236,28 +238,31 @@ public class FOMSApp{
                 case 2:
                     System.out.println("Enter order ID: ");
                     int orderID = sc.nextInt();
-                    sc.nextLine(); // Consume the newline
+                    sc.nextLine();
                     manager.viewOrder(branch,orderID);
                     break;
                 case 3:
                     System.out.println("Enter order ID to process: ");
                     int orderIdToProcess = sc.nextInt();
-                    sc.nextLine(); // Consume the newline
+                    sc.nextLine();
                     manager.processOrders(branch,orderIdToProcess);
                     break;
                 case 4:
                     manager.displayStaffList();
                     break;
                 case 5:
-                    manager.addMenuItem(branch);
+                    manager.viewMenu(branch);
                     break;
                 case 6:
-                    manager.editMenuItem(branch);
+                    manager.addMenuItem(branch);
                     break;
                 case 7:
-                    manager.removeMenuItem(branch);
+                    manager.editMenuItem(branch);
                     break;
                 case 8:
+                    manager.removeMenuItem(branch);
+                    break;
+                case 19:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;

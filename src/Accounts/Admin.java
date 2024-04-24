@@ -41,9 +41,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             }
             Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
             Account newAccount = new Account(staffID);
-            db.addStaff(newStaff);
-            db.addAccount(newAccount);
-            return true;
+            if (db.addStaff(newStaff)){
+                db.addAccount(newAccount);
+                return true;
+            }
+            else return false;
         }
         catch (Exception e){
             e.printStackTrace();
@@ -134,9 +136,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         if (db.getEmployee(staffID).getUserType() == UserType.STAFF){
             Staff staff = db.getStaff(staffID);
             BranchManager newBranchManager = new BranchManager(staff.getName(), staffID, staff.getGender(), staff.getAge(), staff.getBranchName(), db);
-            db.addBranchManager(newBranchManager);
-            db.removeStaff(staffID);
-            return true;
+            if (db.addBranchManager(newBranchManager)){
+                db.removeStaff(staffID);
+                return true;
+            }
+            else return false;
         }
         else {
             System.out.println("Employee with chosen staffID is already a Branch Manager.");

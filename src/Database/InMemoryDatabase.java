@@ -94,17 +94,25 @@ public class InMemoryDatabase implements Serializable {
         }
     }
 
-    public void addStaff(Staff staff) {
+    public boolean addStaff(Staff staff) {
         String branchName = staff.getBranchName();
         String staffID = staff.getStaffID();
         Branch branch = getBranchByBranchName(branchName);
         // Create branch if referenced branch does not exist yet.
+        // if (branch == null){
+        //     branch = new Branch(branchName, branchName, 15);
+        //     this.addBranch(branch);
+        // }
+
+        // Does not add staff if branch does not exist yet
         if (branch == null){
-            branch = new Branch(branchName, branchName, 15);
-            this.addBranch(branch);
+            return false;
         }
-        branch.addStaff(staff.getStaffID());
-        this.staffMap.put(staffID, staff);
+        else {
+            branch.addStaff(staffID);
+            this.staffMap.put(staffID, staff);
+            return true;
+        }
     }
 
     public void removeStaff(String staffID) {
@@ -114,9 +122,16 @@ public class InMemoryDatabase implements Serializable {
         this.staffMap.remove(staffID);
     }
 
-    public void addBranchManager(BranchManager branchManager) {
-        this.branchManagerMap.put(branchManager.getStaffID(), branchManager);
-
+    public boolean addBranchManager(BranchManager branchManager) {
+        String branchName = branchManager.getBranchName();
+        String staffID = branchManager.getStaffID();
+        Branch branch = getBranchByBranchName(branchName);
+        if (branch == null) return false;
+        else {
+            branch.addBranchManager(staffID);
+            this.branchManagerMap.put(staffID, branchManager);
+            return true;
+        }
     }
     public void removeBranchManager(String staffID) {
         this.branchManagerMap.remove(staffID);
