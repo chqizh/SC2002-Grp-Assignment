@@ -138,7 +138,7 @@ public class Branch implements Serializable {
         }
 
         else if (this.currentNumStaff >= 9 && this.currentNumStaff <= 15){
-            this.maxNumManagers = 4;
+            this.maxNumManagers = 3;
         }
     }
     /**

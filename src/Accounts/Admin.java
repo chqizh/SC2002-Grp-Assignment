@@ -229,13 +229,13 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String oldBranchName = staff.getBranchName();
             // Removes staff from their old branch.
             if (db.getBranchByBranchName(oldBranchName).removeStaff(staffID) == false){
-                System.out.printf("Failed to remove %s from old branch %s.", staffID, oldBranchName);
+                System.out.printf("Failed to remove %s from old branch %s. ", staffID, oldBranchName);
                 return false;
             }
             // Transfers staff to new branch.
             else if (db.getBranchByBranchName(branchName).addStaff(staffID)){
                 staff.setBranchName(branchName);
-                System.out.printf("%s transferred to new branch %s", staffID, branchName);
+                System.out.printf("%s transferred to new branch %s. ", staffID, branchName);
                 return true;
             }
             else return false;
@@ -274,9 +274,9 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         System.out.println("Enter which payment method you would like to enable/disable:");
         int i = 0;
         for (Payment paymentMethod : paymentMethods){
+            ++i;
             if (db.getPaymentMethodsStatus(paymentMethod)) System.out.println("(" + i + ") " + paymentMethod.getPaymentMethodName() + ": Enabled");
             else System.out.println("(" + i + ") " + paymentMethod.getPaymentMethodName() + ": Disabled");
-            i++;
         }
         int choice = sc.nextInt();
         sc.nextLine();
@@ -334,8 +334,13 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         ArrayList<String> branchesList = db.getAllBranchNames();
         //int i = 0;
         for (String branchName : branchesList){
+<<<<<<< Updated upstream
             //i++;
             System.out.printf(" - %s \n", branchName);
+=======
+            i++;
+            System.out.printf("(%d) %s", i, branchName);
+>>>>>>> Stashed changes
         }
     }
 
