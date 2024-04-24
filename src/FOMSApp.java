@@ -276,18 +276,18 @@ public class FOMSApp implements Serializable{
             System.out.println("╔═══════════════════════════════════╗");
             System.out.println("║  Welcome to the ADMIN Workspace.  ║");
             System.out.println("╠═══════════════════════════════════╣");
-            System.out.println("║ (1) Add Staff                     ║");
-            System.out.println("║ (2) Remove Staff                  ║");
-            System.out.println("║ (3) Edit Staff                    ║");
-            System.out.println("║ (4) Display Staff List            ║");
-            System.out.println("║ (5) Add Manager                   ║");
-            System.out.println("║ (6) Promote Staff to Manager      ║");
-            System.out.println("║ (7) Transfer Staff/Manager        ║");
-            System.out.println("║ (8) Edit Payment Method           ║");
-            System.out.println("║ (9) Open Branch                   ║");
-            System.out.println("║ (10) Close Branch                 ║");
-            System.out.println("║ (11) Export Staff List            ║");
-            System.out.println("║ (12) Log Out                      ║");
+            System.out.println("║ (1)  Add Staff                    ║");
+            System.out.println("║ (2)  Remove Staff                 ║");
+            System.out.println("║ (3)  Edit Staff                   ║");
+            System.out.println("║ (4)  Display Staff List           ║");
+            System.out.println("║ (5)  Add Manager                  ║");
+            System.out.println("║ (7)  Promote Staff to Manager     ║");
+            System.out.println("║ (8)  Transfer Staff/Manager       ║");
+            System.out.println("║ (9)  Edit Payment Method          ║");
+            System.out.println("║ (10) Open Branch                  ║");
+            System.out.println("║ (11) Close Branch                 ║");
+            System.out.println("║ (12) Export Staff List            ║");
+            System.out.println("║ (13) Log Out                      ║");
             System.out.println("╚═══════════════════════════════════╝");
 
             System.out.print("Please select your action: ");
@@ -315,26 +315,32 @@ public class FOMSApp implements Serializable{
                     else System.out.println("Failed to assign manager.");
                     break;
                 case 6:
+                    if (admin.removeManager()) System.out.println("Successfully removed manager.");
+                    else{
+                        
+                    }
+                    break;
+                case 7:
                     if (admin.promoteStaff()) System.out.println("Successfully promoted staff.");
                     else System.out.println("Failed to promote staff.");
                     break;
-                case 7:
+                case 8:
                     if (admin.transferEmployee()) System.out.println("Successfully transferred employee.");
                     else System.out.println("Failed to transfer employee.");
                     break;
-                case 8:
+                case 9:
                     if (admin.editPaymentMethod()) System.out.println("Successfully edited payment method.");
                     else System.out.println("Failed to edit payment method.");
                     break;
-                case 9:
+                case 10:
                     if (admin.addBranch()) System.out.println("Successfully added branch.");
                     else System.out.println("Failed to add branch.");
                     break;
-                case 10:
+                case 11:
                     if (admin.removeBranch()) System.out.println("Successfully removed branch.");
                     else System.out.println("Failed to remove branch.");
                     break;
-                case 11:
+                case 12:
                     try {
                         String csvFilePath = filePath.concat("/Data/staff_list_export.csv");
                         DatabaseExporter exporter = new DatabaseExporter(db);
@@ -345,7 +351,7 @@ public class FOMSApp implements Serializable{
                         e.printStackTrace();
                     }        
                     break;
-                case 12:
+                case 13:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;

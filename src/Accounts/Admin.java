@@ -177,6 +177,38 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     /**
+     * Removes a manager to a branch.
+     *
+     * @return true if the manager was remod successfully, false otherwise.
+     */
+    public boolean removeManager(){
+        sc = new Scanner(System.in);
+        try {
+            System.out.print("Enter their Staff ID: ");
+            String staffID = sc.nextLine();
+            BranchManager branchManager = db.getBranchManager(staffID);
+            if (branchManager == null) {
+                System.out.printf("No branch manager found with staffID %s.\n", staffID);
+                return false;
+            }
+            String name = branchManager.getName();
+            String branchName = branchManager.getBranchName();
+
+            if (db.removeBranchManager(staffID)){
+                db.removeAccount(staffID);
+                System.out.printf("Branch Manager %s (%s) successfully removed from %s.\n", name, staffID, branchName);
+                System.out.println("Number of Branch Managers is now below required amount. Please add another Branch Manager.");
+                return true;
+            }
+            else return false;
+        }
+        catch (Exception e){
+            //e.printStackTrace();
+            return false;
+        }
+    };
+
+    /**
      * Promotes an existing staff member to a branch manager.
      *
      * @return true if the staff was promoted successfully, false otherwise.
@@ -325,7 +357,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     /**
-     * Removes a branch from the system.
+     * çs a branch from the system.
      *
      * @return true if the branch was removed successfully, false otherwise.
      */

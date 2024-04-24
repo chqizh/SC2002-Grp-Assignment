@@ -172,7 +172,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
 
             System.out.print("Select payment method (by number): ");
             int choice = sc.nextInt();  // Read the integer input
-            sc.nextLine();  // Consume newline left-over
+            sc.nextLine();
             
             if (choice > 0 && choice <= activePaymentMethods.size()) {
                 String selectedMethodName = activePaymentMethods.get(choice - 1);

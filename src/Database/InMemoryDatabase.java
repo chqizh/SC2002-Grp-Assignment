@@ -133,8 +133,15 @@ public class InMemoryDatabase implements Serializable {
             else return false;
         }
     }
-    public void removeBranchManager(String staffID) {
-        this.branchManagerMap.remove(staffID);
+
+    public boolean removeBranchManager(String staffID) {
+        BranchManager manager = this.getBranchManager(staffID);
+        String branchName = manager.getBranchName();
+        if (this.getBranchByBranchName(branchName).removeBranchManager(staffID)){
+            this.branchManagerMap.remove(staffID);
+            return true;
+        }
+        else return false;
     }
 
     public void addAdmin(Admin admin) {
