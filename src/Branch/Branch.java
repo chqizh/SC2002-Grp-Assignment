@@ -53,14 +53,29 @@ public class Branch implements Serializable {
         return branchName;
     }
 
+    /**
+     * Sets the location of the branch.
+     *
+     * @param branchLocation The new location of the branch.
+     */
     public void setBranchLocation(String branchLocation){
         this.branchLocation = branchLocation;
     }
 
+    /**
+     * Gets the location of the branch.
+     *
+     * @return The location of the branch.
+     */
     public String getBranchLocation() {
         return branchLocation;
     }
 
+    /**
+     * Gets a list of branch manager IDs.
+     *
+     * @return An ArrayList of Strings containing the IDs of branch managers.
+     */
     public ArrayList<String> getBranchManagerIDs() {
         return branchManagerIDs;
     }
@@ -108,6 +123,11 @@ public class Branch implements Serializable {
         }
     }
 
+    /**
+     * Sets the maximum number of managers for the branch based on the current number of staff.
+     *
+     * @param currentNumStaff The current number of staff members in the branch.
+     */
     public void setMaxNumManagers(int currentNumStaff){
         if (currentNumStaff>=1 && currentNumStaff<=4){
             this.maxNumManagers=1;
@@ -121,15 +141,31 @@ public class Branch implements Serializable {
             this.maxNumManagers=4;
         }
     }
-
+    /**
+     * Gets the number of managers in the branch.
+     *
+     * @return The maximum number of managers allowed in the branch.
+     */
     public int getnumManagers(){
         return maxNumManagers;
     }
 
+    /**
+     * Gets a list of staff IDs for the branch.
+     *
+     * @return An ArrayList of Strings containing the IDs of staff members.
+     */
     public ArrayList<String> getStaffIDs() {
         return staffIDs;
     }
 
+    /**
+     * Adds a staff member to the branch if the staff quota has not been reached
+     * and the staff ID is not already present.
+     *
+     * @param staffID The ID of the staff member to be added to the branch.
+     * @return True if the staff member was added successfully, false otherwise.
+     */
     public boolean addStaff(String staffID){
         if (staffIDs.contains(staffID)){
             System.out.printf("Branch already contains staff with staffID %s.\n", staffID);
@@ -147,6 +183,12 @@ public class Branch implements Serializable {
         }
     }
 
+    /**
+     * Removes a staff member from the branch if the staff ID is present.
+     *
+     * @param staffID The ID of the staff member to be removed from the branch.
+     * @return True if the staff member was removed successfully, false otherwise.
+     */
     public boolean removeStaff(String staffID){
         if (!staffIDs.contains(staffID)){
             System.out.printf("Branch does not contain Staff with staffID %s", staffID);
@@ -160,30 +202,65 @@ public class Branch implements Serializable {
         }
     }
 
+    /**
+     * Gets the current number of staff members in the branch.
+     *
+     * @return The current number of staff members.
+     */
     public int getCurNumStaff(){
         return currentNumStaff;
     }
-
+    
+    /**
+     * Sets the staff quota for the branch.
+     *
+     * @param staffQuota The new staff quota.
+     */
     public void setStaffQuota(int staffQuota){
         this.staffQuota = staffQuota;
     }
 
+    /**
+     * Gets the staff quota for the branch.
+     *
+     * @return The staff quota.
+     */
     public int getStaffQuota(){
         return staffQuota;
     }
-
+    
+    /**
+     * Gets the menu of the branch.
+     *
+     * @return The Menu object for the branch.
+     */
     public Menu getBranchMenu() {
         return branchMenu;
     }
 
+    /**
+     * Gets the orders list of the branch.
+     *
+     * @return The OrderList object containing the orders for the branch.
+     */
     public OrderList getBranchOrders() {
         return branchOrders;
     }
 
+    /**
+     * Adds an order to the branch's list of orders.
+     *
+     * @param order The order to be added to the list.
+     */
     public void addOrder(Order order){
         this.branchOrders.addOrder(order);
     }
 
+    /**
+     * Removes an order from the branch's list of orders by order ID.
+     *
+     * @param orderID The ID of the order to be removed.
+     */
     public void removeOrder(int orderID){
         this.branchOrders.removeOrder(orderID);
     }

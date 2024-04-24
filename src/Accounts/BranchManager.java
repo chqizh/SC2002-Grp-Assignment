@@ -6,10 +6,24 @@ import Branch.*;
 import Customer.*;
 import Database.*;
 
+/**
+ * Represents a manager of a branch with capabilities to manage orders,
+ * menus, and staff within the branch.
+ */
 public class BranchManager extends Employee implements IOrderProcess, IMenuManagement, IStaffManagement {
     private String branchName;
     private transient Scanner sc;
 
+    /**
+     * Constructs a BranchManager with specified details and initializes the database.
+     * 
+     * @param name The name of the branch manager.
+     * @param staffID The unique ID of the branch manager.
+     * @param gender The gender of the branch manager.
+     * @param age The age of the branch manager.
+     * @param branchName The name of the branch being managed.
+     * @param db The database connection for the branch manager operations.
+     */
 	public BranchManager(String name, String staffID, char gender, int age, String branchName, InMemoryDatabase db) {
         super(name, staffID, UserType.BRANCH_MANAGER, gender, age, db);
         this.branchName = branchName;
@@ -33,7 +47,11 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         this.branchName = branchName;
     }
 
-    // From IOrderProcess
+    /**
+     * Views new orders for a given branch.
+     * 
+     * @param branch The branch whose orders are to be viewed.
+     */
     public void viewNewOrders(Branch branch) {
         System.out.println("New Orders:");
         branch.getBranchOrders().getOrderList().stream()
@@ -41,6 +59,12 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
                 .forEach(order -> order.printOrder()); // Print each order
     }
 
+    /**
+     * Views a specific order by order ID within a branch.
+     * 
+     * @param branch The branch where the order is located.
+     * @param orderID The ID of the order to view.
+     */
     public void viewOrder(Branch branch, int orderID) {
         Order order = branch.getBranchOrders().getOrder(orderID);
         if (order != null) {
@@ -50,6 +74,13 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         }
     }
 
+    /**
+     * Processes orders within a branch, allowing status updates such as Processed,
+     * Pickup, Completed, or Cancelled.
+     * 
+     * @param branch The branch where the order is located.
+     * @param orderID The ID of the order to process.
+     */
     public void processOrders(Branch branch, int orderID) {
         sc = new Scanner(System.in);
         Order order = branch.getBranchOrders().getOrder(orderID);
@@ -88,11 +119,20 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
     }
 
 
-// From IMenuManagement
+    /**
+     * Views the menu for a given branch.
+     * 
+     * @param branch The branch whose menu is to be viewed.
+     */
     public void viewMenu(Branch branch){
         branch.getBranchMenu().displayMenu();
     }
 
+    /**
+     * Adds a menu item to the branch's menu.
+     * 
+     * @param branch The branch to which the menu item is to be added.
+     */
     public void addMenuItem(Branch branch){
         try {
             branch.getBranchMenu().addItems();
@@ -102,6 +142,11 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         }
     }
 
+    /**
+     * Removes a menu item from the branch's menu.
+     * 
+     * @param branch The branch from which the menu item is to be removed.
+     */
     public void removeMenuItem(Branch branch){
         try {
             branch.getBranchMenu().deleteItems();
@@ -111,6 +156,11 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         }
     }
 
+    /**
+     * Edits a menu item in the branch's menu.
+     * 
+     * @param branch The branch whose menu item is to be edited.
+     */
     public void editMenuItem(Branch branch){
         System.out.println("What would you like to edit?");
         System.out.println("(1) Update name of menu item.");
@@ -142,7 +192,9 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
         }   
     }
 
-// From IStaffManagement
+    /**
+     * Displays a list of staff members within the branch being managed.
+     */
 	public void displayStaffList(){
         //TODO: ADD BRANCH MANAGERS ABLE TO SEE
         ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();

@@ -7,20 +7,39 @@ import java.util.List;
 import Branch.*;
 import Customer.*;
 import Database.InMemoryDatabase;
-
-
+/**
+ * Represents an administrator with specific management privileges.
+ * Inherits from Employee and implements interfaces for admin and staff management.
+ */
 public class Admin extends Employee implements IAdminManagement, IStaffManagement {
     private transient Scanner sc;
-
+    /**
+     * Constructs an Admin with specified details and initializes the database.
+     *
+     * @param name  The name of the admin.
+     * @param staffID The unique ID of the admin.
+     * @param gender The gender of the admin.
+     * @param age The age of the admin.
+     * @param db The database connection for the admin operations.
+     */
     public Admin(String name, String staffID, char gender, int age, InMemoryDatabase db){
         super(name, staffID, UserType.ADMIN, gender, age, db);
     }
-    
+    /**
+     * Gets the name of the branch associated with the admin.
+     * This implementation always returns an empty string as admins do not have an associated branch.
+     *
+     * @return The branch name, which is always an empty string.
+     */
     public String getBranchName(){
         return "";
     }
 
-    // From IAdminManagement
+    /**
+     * Adds a new staff member to the system after collecting their information.
+     *
+     * @return true if staff was added successfully, false otherwise.
+     */
     public boolean addStaff(){
         sc = new Scanner(System.in);
         try {
@@ -53,6 +72,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
+    /**
+     * Removes a staff member from the system based on their staff ID.
+     *
+     * @return true if the staff was removed successfully, false otherwise.
+     */
     public boolean removeStaff(){
         System.out.print("Enter a staffID to remove: ");
         displayStaffList(); // Find someway to disply all instead of filtering
@@ -64,6 +88,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         else return false;
     };
 
+    /**
+     * Edits the information of an existing staff member.
+     *
+     * @return true if the staff was edited successfully, false otherwise.
+     */
     public boolean editStaff(){
         sc = new Scanner(System.in);
         displayStaffList();
@@ -107,6 +136,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         return true;
     };
 
+    /**
+     * Assigns a manager to a branch.
+     *
+     * @return true if the manager was assigned successfully, false otherwise.
+     */
     public boolean assignManager(){
         sc = new Scanner(System.in);
         System.out.print("Enter Branch to assign Manager to: ");
@@ -129,6 +163,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     };
 
+    /**
+     * Promotes an existing staff member to a branch manager.
+     *
+     * @return true if the staff was promoted successfully, false otherwise.
+     */
     public boolean promoteStaff(){
         sc = new Scanner(System.in);
         System.out.print("Enter staffID to promote: ");
@@ -148,6 +187,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     }
 
+    /**
+     * Transfers an employee from one branch to another.
+     *
+     * @return true if the transfer was successful, false otherwise.
+     */
     public boolean transferEmployee(){
         sc = new Scanner(System.in);
         System.out.print("Enter employee's staffID: ");
@@ -201,6 +245,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         else return false;
     };
 
+    /**
+     * Edits the payment methods available in the system.
+     *
+     * @return true if the payment method was edited successfully, false otherwise.
+     */
     public boolean editPaymentMethod(){
         sc = new Scanner(System.in);
         List<Payment> paymentMethods = new ArrayList<>(db.getPaymentMethods());
@@ -217,6 +266,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         return db.togglePaymentMethod(paymentMethods.get(choice));
     }
 
+    /**
+     * Adds a new branch to the system.
+     *
+     * @return true if the branch was added successfully, false otherwise.
+     */
     public boolean addBranch(){
         try {
             sc = new Scanner(System.in);
@@ -242,6 +296,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         
     };
 
+    /**
+     * Removes a branch from the system.
+     *
+     * @return true if the branch was removed successfully, false otherwise.
+     */
     public boolean removeBranch(){
         displayAllBranches();
         sc = new Scanner(System.in);
@@ -251,6 +310,9 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         else return false;
     };
 
+    /**
+     * Displays all branches in the system.
+     */
     public void displayAllBranches(){
         ArrayList<String> branchesList = db.getAllBranchNames();
         int i = 0;
@@ -260,7 +322,9 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         }
     }
 
-    // From IStaffManagement
+    /**
+     * Displays a list of staff members with filtering options.
+     */
     public void displayStaffList(){
         sc = new Scanner(System.in);
         System.out.println("Choose filter for staff list display: ");

@@ -1,5 +1,9 @@
 package Accounts;
 
+/**
+ * Enumeration defining different types of users within the system.
+ * Each enum constant represents a different user role.
+ */
 public enum UserType {
     /**
      * Represents a staff member with code 'S'.
@@ -44,7 +48,7 @@ public enum UserType {
      * @return The UserType corresponding to the given code.
      * @throws IllegalArgumentException if the given code does not match any UserType.
      */
-    public static UserType fromCode(char code) throws IllegalArgumentException{
+    public static UserType fromCode(char code) {
         for (UserType userType : UserType.values()) {
             if (userType.getCode() == code) {
                 return userType;
@@ -62,13 +66,13 @@ public enum UserType {
      *
      * @return A string description of this UserType.
      */
-    public String stringFromUserType(){
-        switch (this.code) {
-            case 'S':
+    public String stringFromUserType() {
+        switch (this) {
+            case STAFF:
                 return "Staff";
-            case 'M':
+            case BRANCH_MANAGER:
                 return "Branch Manager";
-            case 'A':
+            case ADMIN:
                 return "Admin";
             default:
                 return "Role not found.";
