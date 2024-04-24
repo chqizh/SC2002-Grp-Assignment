@@ -246,7 +246,7 @@ public class FOMSApp{
                     manager.processOrders(branch,orderIdToProcess);
                     break;
                 case 4:
-                    manager.displayStaffList();
+                    manager.displayStaffList(true);
                     break;
                 case 5:
                     manager.viewMenu(branch);
