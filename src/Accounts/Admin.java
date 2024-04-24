@@ -28,13 +28,17 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String name = sc.nextLine();
             System.out.print("Enter their Staff ID: ");
             String staffID = sc.nextLine();
-            System.out.print("Enter their gender (M/F/N): ");
+            System.out.print("Enter their gender (M/F): ");
             char gender = sc.nextLine().charAt(0);
             System.out.print("Enter their age: ");
             int age = sc.nextInt();
             sc.nextLine();
             System.out.print("Enter their assigned Branch: ");
             String branchName = sc.nextLine();
+            if (db.getBranchByBranchName(branchName) == null) {
+                System.out.println("Branch does not exist.");
+                return false;
+            }
             Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
             Account newAccount = new Account(staffID);
             db.addStaff(newStaff);
@@ -146,7 +150,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         String staffID = sc.nextLine();
         System.out.print("Enter employee's new Branch: ");
         String branchName = sc.nextLine();
-        if (db.getStaff(staffID) == null) {
+        if (db.getEmployee(staffID) == null ) {
             System.out.print("Staff/Manager does not exist.");
             return false;
         }
@@ -155,7 +159,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             return false;
         }
         
-        if (db.getStaff(staffID).getUserType() == UserType.STAFF){
+        if (db.getEmployee(staffID).getUserType() == UserType.STAFF){
             Staff staff = db.getStaff(staffID);
             String oldBranchName = staff.getBranchName();
             // Removes staff from their old branch.
@@ -171,7 +175,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             }
             else return false;
         }
-        else if (db.getStaff(staffID).getUserType() == UserType.BRANCH_MANAGER){
+        else if (db.getEmployee(staffID).getUserType() == UserType.BRANCH_MANAGER){
             BranchManager manager = db.getBranchManager(staffID);
             String oldBranchName = manager.getBranchName();
 
@@ -181,12 +185,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             }
             else if (db.getBranchByBranchName(branchName).addBranchManager(staffID)){
                 manager.setBranchName(branchName);
-                System.out.printf("%s transferred to new branch %s", staffID, branchName);
+                System.out.printf("%s transferred to new branch %s. ", staffID, branchName);
                 return true;
             }
             else return false;
         }
-        else if (db.getStaff(staffID).getUserType() == UserType.ADMIN){
+        else if (db.getEmployee(staffID).getUserType() == UserType.ADMIN){
             System.out.print("Employee is an Admin.");
             return false;
         }
@@ -212,11 +216,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     public boolean addBranch(){
         try {
             sc = new Scanner(System.in);
-            System.out.println("Enter branch name: ");
-            String branchName=sc.nextLine();
-            System.out.println("Enter branch location: ");
-            String branchLocation=sc.nextLine();
-            System.out.println("Enter staff quota: ");
+            System.out.print("Enter branch name: ");
+            String branchName = sc.nextLine();
+            System.out.print("Enter branch location: ");
+            String branchLocation = sc.nextLine();
+            System.out.print("Enter staff quota: ");
             int staffQuota = sc.nextInt();
             sc.nextLine();
     
@@ -235,23 +239,32 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     public boolean removeBranch(){
+        displayAllBranches();
         sc = new Scanner(System.in);
-        System.out.println("Enter branch name: ");
+        System.out.print("Enter branch name: ");
         String branchName = sc.nextLine();
         if (db.removeBranch(branchName)) return true;
         else return false;
     };
 
+    public void displayAllBranches(){
+        ArrayList<String> branchesList = db.getAllBranchNames();
+        int i = 0;
+        for (String branchName : branchesList){
+            i++;
+            System.out.printf("(%i) %s", i, branchName);
+        }
+    }
 
     // From IStaffManagement
     public void displayStaffList(){
         sc = new Scanner(System.in);
         System.out.println("Choose filter for staff list display: ");
-        System.out.println("(1) Display all ");
-        System.out.println("(2) Filter by Branch ");
-        System.out.println("(3) Filter by Role ");
-        System.out.println("(4) Filter by Gender ");
-        System.out.println("(5) Filter by Age ");
+        System.out.println("(1) Display all");
+        System.out.println("(2) Filter by Branch");
+        System.out.println("(3) Filter by Role");
+        System.out.println("(4) Filter by Gender");
+        System.out.println("(5) Filter by Age");
         int choice = sc.nextInt();
         sc.nextLine();
 
@@ -279,11 +292,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 System.out.print("Filter by Branch: ");
                 String branch = sc.nextLine();
                 System.out.println("----------------------------------------------------------------------");
-                System.out.printf("%-20s %-10s %-16s %-8s %-5s\n", "Name", "staffID", "Role", "Gender", "Age");
+                System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
                 System.out.println("----------------------------------------------------------------------");
                 for (Employee employee : employeesList){
                     if (employee.getBranchName().equals(branch)){
-                        System.out.printf("%-20s %-10s %-16s %-8s %-5s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge());
+                        System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge(), employee.getBranchName());
                     }
                 }
                 System.out.println("----------------------------------------------------------------------");
@@ -294,13 +307,13 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 System.out.print("Filter by role (S/M/A): ");
                 char roleInput = sc.nextLine().charAt(0);
                 System.out.println("----------------------------------------------------------------------");
-                System.out.printf("%-20s %-10s %-8s %-5s %-15s\n", "Name", "staffID", "Gender", "Age", "Branch");
+                System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
                 System.out.println("----------------------------------------------------------------------");
                 try {
                     UserType role = UserType.fromCode(roleInput);
                     for (Employee employee : employeesList){
                         if (employee.getUserType() == role){
-                            System.out.printf("%-20s %-10s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getGender(), employee.getAge(), employee.getBranchName());
+                            System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge(), employee.getBranchName());
                         }
                     }
                 }
@@ -312,14 +325,14 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 sc.nextLine();
                 break;
             case 4: 
-                System.out.print("Filter by gender (M/F/N): ");
+                System.out.print("Filter by gender (M/F): ");
                 char gender = sc.nextLine().charAt(0);
                 System.out.println("----------------------------------------------------------------------");
-                System.out.printf("%-20s %-10s %-16s %-5s %-15s\n", "Name", "staffID", "Role", "Age", "Branch");
+                System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
                 System.out.println("----------------------------------------------------------------------");
                 for (Employee employee : employeesList){
                     if (employee.getGender() == gender){
-                        System.out.printf("%-20s %-10s %-16s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getAge(), employee.getBranchName());
+                        System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge(), employee.getBranchName());
                     }
                 }
                 System.out.println("----------------------------------------------------------------------");
@@ -331,11 +344,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 int age = sc.nextInt();
                 sc.nextLine();
                 System.out.println("----------------------------------------------------------------------");
-                System.out.printf("%-20s %-10s %-16s %-8s %-15s\n", "Name", "staffID", "Role", "Gender", "Branch");
+                System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
                 System.out.println("----------------------------------------------------------------------");
                 for (Employee employee : employeesList){
                     if (employee.getAge() == age){
-                        System.out.printf("%-20s %-10s %-16s %-8s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getBranchName());
+                        System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", employee.getName(), employee.getStaffID(), employee.getUserType().stringFromUserType(), employee.getGender(), employee.getAge(), employee.getBranchName());
                     }
                 }
                 System.out.println("----------------------------------------------------------------------");

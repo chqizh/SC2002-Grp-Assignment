@@ -26,6 +26,7 @@ public class ReceiptGenerator {
         System.out.println("Total Price: $" + order.calculateTotalPrice());
         System.out.println("Payment Method: " + paymentMethod);
         System.out.println("Thank you for your order!");
+        System.out.println("");
     }
 }
 

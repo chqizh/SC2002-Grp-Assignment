@@ -10,7 +10,7 @@ public class MenuDisplay {
         menu = new ArrayList<>();
     }
 
-    public MenuDisplay(MenuItems branchMenu){
+    public MenuDisplay(Menu branchMenu){
         menu = branchMenu.getMenuItemsList();
     }
     

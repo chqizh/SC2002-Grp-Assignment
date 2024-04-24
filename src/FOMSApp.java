@@ -34,13 +34,33 @@ public class FOMSApp{
         printFOMSTitle();
         
         Scanner sc = new Scanner(System.in);
-        app.staffInitialization();
-        app.menuInitialization();
+        //app.branchInitialization();
+        //app.staffInitialization();
+        //app.menuInitialization();
 /*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
         app.db.addAccount(new Account("KurtA")); */
-        
+
         app.run();
         sc.close();
+    }
+
+    public void branchInitialization(){
+        this.sc = new Scanner(System.in);
+        if (Files.exists(Paths.get(filePath.concat("/Data/branch_list.csv")))){
+            System.out.print("branch_list.csv file was found. Initialize using branch_list.csv (Y/N)? ");
+            char choice = sc.nextLine().charAt(0);
+            if (choice == 'Y'){
+                DatabaseInitializer initializer = new DatabaseInitializer(this.db);
+                initializer.initializeBranchList(filePath.concat("/Data/branch_list.csv"));
+            }
+            else if (choice == 'N'){}
+            else {
+                System.out.println("Invalid choice entered. branch_list.csv will not be imported.");
+            }
+        }
+        else {
+            System.out.println("Branch list not found");
+        }
     }
 
     public void staffInitialization(){
@@ -73,7 +93,7 @@ public class FOMSApp{
             }
             else if (choice == 'N'){}
             else {
-                System.out.println("Invalid choice entered. emnu_list.csv will not be imported.");
+                System.out.println("Invalid choice entered. menu_list.csv will not be imported.");
             }
         }
         else {
@@ -145,6 +165,8 @@ public class FOMSApp{
             System.out.println("================================");
             System.out.println("|| Welcome to STAFF Workspace ||");
             System.out.println("================================");
+            System.out.println("Branch: " + branch.getBranchName());
+            System.out.println("================================");
             System.out.println("(1) Display New Orders ");
             System.out.println("(2) View Order Details ");
             System.out.println("(3) Process Order ");
@@ -191,6 +213,8 @@ public class FOMSApp{
         while (keepRunning) {
             System.out.println("=============================================");
             System.out.println("|| Welcome to the BRANCH MANAGER Workspace ||");
+            System.out.println("=============================================");
+            System.out.println("Branch: " + branch.getBranchName());
             System.out.println("=============================================");
             System.out.println("Please select your action:");
             System.out.println("(1) Display New Orders");
@@ -352,6 +376,8 @@ public class FOMSApp{
         while (keepRunning) {
             System.out.println("============================");
             System.out.println("|| Welcome to MadDonkeys! ||");
+            System.out.println("============================");
+            System.out.println("Branch: " + branch.getBranchName());
             System.out.println("============================");
             System.out.println("(1) Browse Menu");
             System.out.println("(2) Add to Cart");

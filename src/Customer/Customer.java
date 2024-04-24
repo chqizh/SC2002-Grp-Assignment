@@ -41,7 +41,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     }
 
     public void addToCart(String branchName){
-        MenuItems menu = db.getBranchByBranchName(branchName).getBranchMenu();
+        Menu menu = db.getBranchByBranchName(branchName).getBranchMenu();
         ArrayList<MenuItem> menu_items = menu.getMenuItemsList();
         
         sc = new Scanner(System.in);
@@ -52,7 +52,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         MenuItem menuItem = null;
         for(MenuItem item : menu_items){
             if(item.getItemID() == itemID){
-                menuItem = item;
+                menuItem = new MenuItem(item.getItemID(), item.getItemName(),item.getPrice(),item.getCategory(),item.getBranchName());
                 break;
             }
         }

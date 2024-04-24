@@ -11,6 +11,7 @@ public class MenuItems {
 	private String availability = null;
 	private String itemInfo = null;
 	private String id = null;
+	private transient Scanner sc;
 	
 	public MenuItems() {
 	    createMenuItem();

@@ -20,23 +20,10 @@ public class Branch implements Serializable {
     private ArrayList <String> staffIDs;
     private int currentNumStaff;
     private int staffQuota;
-    private MenuItems branchMenu;
+    private Menu branchMenu;
     private OrderList branchOrders;
     private transient Scanner sc;
 
-    /**
-     * Default constructor for creating a branch with no initial setup.
-     */
-    public Branch(){
-        this.branchManagerIDs = new ArrayList<>();
-        this.maxNumManagers = 1;
-        this.staffIDs = new ArrayList<>();
-        this.currentNumStaff = 0;
-        this.branchMenu = new MenuItems();
-        this.branchOrders = new OrderList();
-        this.sc = new Scanner(System.in);
-    }
-    
     /**
      * Constructs a branch with a specific name, location, and staff quota.
      *
@@ -44,12 +31,12 @@ public class Branch implements Serializable {
      * @param branchLocation The location of the branch.
      * @param staffQuota     The maximum number of staff allowed in this branch.
      */
-    public Branch (String branchName, String branchLocation, int staffQuota){
+    public Branch(String branchName, String branchLocation, int staffQuota){
         this.branchManagerIDs = new ArrayList<>();
         this.maxNumManagers = 1;
         this.staffIDs = new ArrayList<>();
         this.currentNumStaff = 0;
-        this.branchMenu = new MenuItems();
+        this.branchMenu = new Menu(branchName);
         this.branchOrders = new OrderList();
         this.sc = new Scanner(System.in);
         this.branchName = branchName;
@@ -74,7 +61,7 @@ public class Branch implements Serializable {
         return branchLocation;
     }
 
-    public ArrayList<String> getBranchManagers() {
+    public ArrayList<String> getBranchManagerIDs() {
         return branchManagerIDs;
     }
 
@@ -185,7 +172,7 @@ public class Branch implements Serializable {
         return staffQuota;
     }
 
-    public MenuItems getBranchMenu() {
+    public Menu getBranchMenu() {
         return branchMenu;
     }
 

@@ -3,40 +3,22 @@ package Menu;
 import java.io.Serializable;
 import java.util.*;
 
-public class EditMenu implements Serializable{
+public class MenuEditor implements Serializable{
 	private ArrayList<MenuItem> menu;
     private transient Scanner sc;
 
-	public EditMenu(ArrayList<MenuItem> menu) {
+	public MenuEditor(ArrayList<MenuItem> menu) {
 		this.menu = menu;
 	}
 
-	public int getIntegerFromUser() {
+	public MenuItem addItems(String branchName){
 		sc = new Scanner(System.in);
-		int userInput = 0;
-		
-		boolean integerUserInput = false;
-		while (!integerUserInput) {
-		    try {
-		    	userInput = Integer.parseInt(sc.nextLine());
-		    	integerUserInput = true;
-		    } catch (NumberFormatException e) {
-		    	System.out.println("Error! Please enter a number. Try again.");
-		    }
-		}		
-		
-		return userInput;
-	}
-
-	public MenuItem addItems(){
-		sc = new Scanner(System.in);
-		System.out.print("Enter item ID:");
-		
-		int itemId = this.getIntegerFromUser();
+		System.out.print("Enter item ID: ");
+		int itemId = sc.nextInt();
 		sc.nextLine();
 
         while (true) {
-            System.out.println("Enter menu item name:");
+            System.out.print("Enter menu item name: ");
             String name = sc.nextLine();
 
             // Check for duplicate names
@@ -50,32 +32,29 @@ public class EditMenu implements Serializable{
             }
 
             if (!duplicateFound) {
-                System.out.println("Enter menu item price:");
-                float price = sc.nextFloat();
+                System.out.print("Enter menu item price: ");
+                double price = sc.nextDouble();
                 sc.nextLine();
 
-                System.out.println("Enter menu item branch:");
-                String branch = sc.nextLine();
-
-                System.out.println("Enter menu item category:");
+                System.out.print("Enter menu item category: ");
                 String category = sc.nextLine();
 
-                MenuItem menu_item = new MenuItem(itemId, name, price, category, branch);
-                return menu_item;
+                MenuItem menuItem = new MenuItem(itemId, name, price, category, branchName);
+                return menuItem;
             }
         }
 	}
 
-	public ArrayList<MenuItem> deleteItems(ArrayList<MenuItem>menu) {
+	public void deleteItems() {
         sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
-        int id = this.getIntegerFromUser();
+        int id = sc.nextInt();
 		sc.nextLine();
         
         boolean found = false;
         for (int i = 0; i < menu.size(); i++) {
-            if (menu.get(i).getItemID() == id) {
-                menu.remove(i);
+            if (this.menu.get(i).getItemID() == id) {
+                this.menu.remove(i);
                 found = true;
                 break; 
             }
@@ -85,14 +64,12 @@ public class EditMenu implements Serializable{
         } else {
             System.out.println("Item with ID " + id + " not found.");
         }
-        
-        return menu; // Return the updated menu
     }
 
 	public void updateName(int id, String newName, ArrayList<MenuItem> menu) {
         boolean found = false;
         for (MenuItem menuItem : menu) {
-			System.out.println("Current ID: "+menuItem.getItemID());
+			// System.out.println("Current ID: "+menuItem.getItemID());
             if (menuItem.getItemID() == id) {
                 menuItem.setItemName(newName);
                 found = true;
