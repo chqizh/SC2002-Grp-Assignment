@@ -8,13 +8,10 @@ public class MenuEditor implements Serializable{
     private transient Scanner sc;
     private Menu menuClass;
 
-	public MenuEditor(ArrayList<MenuItem> menu) {
-		this.menu = menu;
-	}
-
     //YH Changes
     public MenuEditor(Menu menuClass){
         this.menuClass = menuClass;
+        this.menu = menuClass.getMenuItemsList();
     }
 
 	public boolean addItems(String branchName){
