@@ -196,16 +196,27 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
      * Displays a list of staff members within the branch being managed.
      */
 	public void displayStaffList(){
-        //TODO: ADD BRANCH MANAGERS ABLE TO SEE
-        ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();
         String branch = this.branchName;
+        ArrayList<String> managerIDsList = db.getBranchByBranchName(this.branchName).getBranchManagerIDs();
+        ArrayList<String> staffIDsList = db.getBranchByBranchName(this.branchName).getStaffIDs();
+
+        System.out.println("Staff List for Branch: " + this.branchName);
+
+        for (String managerID : managerIDsList) {
+            BranchManager manager = db.getBranchManager(managerID);
+            System.out.println("StaffID: " + manager.getStaffID());
+            System.out.println("Name: " + manager.getName());
+            System.out.println("Role: " + manager.getUserType().stringFromUserType());
+            System.out.println("Age: " + manager.getAge()); // Use getter to retrieve age
+            System.out.println("Gender: " + manager.getGender()); // Use getter to retrieve gender
+        }        
         for (String staffID : staffIDsList){
             Staff staff = db.getStaff(staffID);
             System.out.println("StaffID: " + staff.getStaffID());
             System.out.println("Name: " + staff.getName());
             System.out.println("Role: " + staff.getUserType().stringFromUserType());
-            System.out.println("Age: " + getAge());
-            System.out.println("Gender: "+ getGender());
+            System.out.println("Age: " + staff.getAge());
+            System.out.println("Gender: "+ staff.getGender());
         }
     }
 }
