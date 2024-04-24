@@ -221,10 +221,11 @@ public class FOMSApp{
             System.out.println("(2) View Order Details");
             System.out.println("(3) Process Order");
             System.out.println("(4) Display Staff List");
-            System.out.println("(5) Add Menu Item");
-            System.out.println("(6) Edit Menu Item");
-            System.out.println("(7) Remove Menu Item");
-            System.out.println("(8) Log Out");
+            System.out.println("(5) Display Menu");
+            System.out.println("(6) Add Menu Item");
+            System.out.println("(7) Edit Menu Item");
+            System.out.println("(8) Remove Menu Item");
+            System.out.println("(9) Log Out");
             System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
@@ -249,15 +250,18 @@ public class FOMSApp{
                     manager.displayStaffList();
                     break;
                 case 5:
-                    manager.addMenuItem(branch);
+                    manager.displayMenu(branch);
                     break;
                 case 6:
-                    manager.editMenuItem(branch);
+                    manager.addMenuItem(branch);
                     break;
                 case 7:
-                    manager.removeMenuItem(branch);
+                    manager.editMenuItem(branch);
                     break;
                 case 8:
+                    manager.removeMenuItem(branch);
+                    break;
+                case 9:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;
