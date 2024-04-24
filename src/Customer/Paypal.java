@@ -4,14 +4,14 @@ package Customer;
  * Represents a PayPal payment method.
  * This class extends the Payment class to handle PayPal-specific payment processing.
  */
-public class PayPal extends Payment {
+public class Paypal extends Payment {
     private String email;       // Email associated with the PayPal account
     private String password;    // Password for the PayPal account
 
     /**
      * Constructs a default PayPal payment method with the description set to "Paypal".
      */
-    public PayPal() {
+    public Paypal() {
         super("Paypal");
     }
 
@@ -21,7 +21,7 @@ public class PayPal extends Payment {
      * @param email The email associated with the PayPal account.
      * @param password The password for the PayPal account.
      */
-    public PayPal(String email, String password) {
+    public Paypal(String email, String password) {
         super("Paypal");
         this.email = email;
         this.password = password;
