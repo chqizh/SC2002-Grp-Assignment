@@ -1,6 +1,8 @@
 package Customer;
 
-public abstract class Payment {
+import java.io.Serializable;
+
+public abstract class Payment implements Serializable{
     public String paymentMethodName;
 
     public Payment(String name){

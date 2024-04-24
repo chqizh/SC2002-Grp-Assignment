@@ -3,6 +3,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 import java.io.*;
 
 import Accounts.*;
@@ -37,67 +39,62 @@ public class FOMSApp{
         app.branchInitialization();
         app.staffInitialization();
         app.menuInitialization();
-/*      app.db.addAdmin(new Admin("Kurt","KurtA",'M',40, app.db));
-        app.db.addAccount(new Account("KurtA")); */
 
         app.run();
         sc.close();
     }
 
-    public void branchInitialization(){
+    public void branchInitialization() {
         this.sc = new Scanner(System.in);
-        if (Files.exists(Paths.get(filePath.concat("/Data/branch_list.csv")))){
+        if (Files.exists(Paths.get(filePath.concat("/Data/branch_list.csv")))) {
             System.out.print("branch_list.csv file was found. Initialize using branch_list.csv (Y/N)? ");
-            char choice = sc.nextLine().charAt(0);
-            if (choice == 'Y'){
+            String choice = sc.nextLine().toUpperCase(); // Convert input to uppercase
+            if (choice.equals("Y")) {
                 DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeBranchList(filePath.concat("/Data/branch_list.csv"));
-            }
-            else if (choice == 'N'){}
-            else {
+            } else if (choice.equals("N")) {
+                // Do nothing
+            } else {
                 System.out.println("Invalid choice entered. branch_list.csv will not be imported.");
             }
-        }
-        else {
+        } else {
             System.out.println("Branch list not found");
         }
     }
 
-    public void staffInitialization(){
+    public void staffInitialization() {
         this.sc = new Scanner(System.in);
-        if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))){
+        if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))) {
             System.out.print("staff_list.csv file was found. Initialize using staff_list.csv (Y/N)? ");
-            char choice = sc.nextLine().charAt(0);
-            if (choice == 'Y'){
+            String choice = sc.nextLine().toUpperCase(); // Convert input to uppercase
+            if (choice.equals("Y")) {
                 DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
-            }
-            else if (choice == 'N'){}
-            else {
+            } else if (choice.equals("N")) {
+                // Do nothing
+            } else {
                 System.out.println("Invalid choice entered. staff_list.csv will not be imported.");
             }
-        }
-        else {
+        } else {
             System.out.println("Staff list not found");
         }
     }
 
-    public void menuInitialization(){
+    public void menuInitialization() {
         //Menu Initializer
         this.sc = new Scanner(System.in);
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
             System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
-            char choice = sc.nextLine().charAt(0);
-            if (choice == 'Y'){
+            String choice = sc.nextLine().toUpperCase(); // Convert input to uppercase
+            if (choice.equals("Y")) {
                 DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeMenuList(filePath.concat("/Data/menu_list.csv"));
-            }
-            else if (choice == 'N'){}
-            else {
+            } else if (choice.equals("N")) {
+                // Do nothing
+            } else {
                 System.out.println("Invalid choice entered. menu_list.csv will not be imported.");
             }
-        }
-        else {
+        } else {
             System.out.println("Menu list not found");
         }
     }
@@ -364,18 +361,27 @@ public class FOMSApp{
         ArrayList<String> branchNames = db.getAllBranchNames();
         System.out.println("Please select a Branch.");
         int i = 1;
-        for (String branchName : branchNames){
+        Map<Integer, String> branchNumberMap = new HashMap<>();
+        for (String branchName : branchNames) {
             System.out.printf("(%d) %s%n", i, branchName);
+            branchNumberMap.put(i, branchName); // Map the number to branch name
             i++;
         }
-
-        Branch branch;
+    
+        Branch branch = null;
         String branchName;
         do {
-            System.out.print("Enter Branch Name:");
-            branchName = sc.nextLine();
-            branch = db.getBranchByBranchName(branchName);
-            if (branch == null) System.out.println("You have entered an invalid Branch Name!");
+            System.out.print("Enter Branch Number:");
+            int branchNumber = Integer.parseInt(sc.nextLine());
+            branchName = branchNumberMap.get(branchNumber); // Get branch name using the number
+            if (branchName == null) {
+                System.out.println("You have entered an invalid Branch Number!");
+            } else {
+                branch = db.getBranchByBranchName(branchName);
+                if (branch == null) {
+                    System.out.println("You have entered an invalid Branch Name!");
+                }
+            }
         } while (branch == null);
 
         while (keepRunning) {
