@@ -237,7 +237,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             return;
         }
         if(order.getOrderStatus()!=Order.orderStatusFlags.PICKUP){
-            System.out.println("Your order cannot be collected at this time. Your order is still being prepared...");
+            System.out.println("Your order cannot be collected at this time. Your order is still being prepared or has been cancelled.");
             return;
         }
         order.setOrderStatus(orderStatusFlags.COMPLETED);
