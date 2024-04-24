@@ -4,9 +4,7 @@ import Branch.*;
 
 public interface IMenuManagement {
 
-	void viewMenu(Branch branch);
-
-	void viewMenu(Branch branch);
+	public void viewMenu(Branch branch);
 
 	public void addMenuItem(Branch branch);
 
