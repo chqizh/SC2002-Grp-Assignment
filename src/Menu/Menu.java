@@ -10,10 +10,14 @@ public class Menu implements Serializable{
 	private MenuEditor editMenu;
 	private String branchName;
 	private transient Scanner sc;
+	private int maxItemID;
 	
+
 	public Menu(String branchName) {
 		this.menu = new ArrayList<MenuItem>();
-		this.editMenu = new MenuEditor(this.menu);
+		//this.editMenu = new MenuEditor(this.menu);
+		this.editMenu = new MenuEditor(this);
+		this.maxItemID = 0;
 	}
 	
 	public boolean addItems() throws IOException {		
@@ -91,5 +95,9 @@ public class Menu implements Serializable{
 
 	public String getBranchName(){
 		return this.branchName;
+	}
+
+	public int getMaxItemID(){
+		return ++this.maxItemID;
 	}
 }
