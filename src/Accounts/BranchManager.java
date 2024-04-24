@@ -125,7 +125,7 @@ public class BranchManager extends Employee implements IOrderProcess, IMenuManag
      * @param branch The branch whose menu is to be viewed.
      */
     public void viewMenu(Branch branch){
-        branch.getBranchMenu().displayMenu();
+        branch.getBranchMenu().displayMenu(branch);
     }
 
     /**

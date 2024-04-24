@@ -44,34 +44,34 @@ public class Customer implements ICustomerOrderProcess, Serializable{
 
     public void addToCart(String branchName){
         Menu menu = db.getBranchByBranchName(branchName).getBranchMenu();
-        ArrayList<MenuItem> menu_items = menu.getMenuItemsList();
+        ArrayList<MenuItem> menuItems = menu.getMenuItemsList();
         
         sc = new Scanner(System.in);
-        System.out.println("Enter the item's ID you would like to order:");
+        System.out.print("Enter the item's ID you would like to order: ");
         int itemID = sc.nextInt();
         sc.nextLine();
 
-        MenuItem menuItem = null;
-        for(MenuItem item : menu_items){
+        MenuItem cartItem = null;
+        for (MenuItem item : menuItems){
             if(item.getItemID() == itemID){
-                menuItem = new MenuItem(item.getItemID(), item.getItemName(),item.getPrice(),item.getCategory(),item.getBranchName());
+                cartItem = new MenuItem(item.getItemID(), item.getItemName(), item.getPrice(), item.getCategory(), item.getBranchName());
                 break;
             }
         }
 
-        if (menuItem != null) {
+        if (cartItem != null) {
             System.out.println("Do you have any customisations for this item? (Y/N)");
             char choice = sc.nextLine().charAt(0);
             if (choice == 'Y' || choice == 'y') {
-                System.out.println("Enter your customisations:");
+                System.out.print("Enter your customisations: ");
                 String customisations = sc.nextLine();
-                menuItem.setCustomisation(customisations);
+                cartItem.setCustomisation(customisations);
             }
-            cart.add(menuItem);
-            System.out.println(menuItem.getItemName()+" added to cart!");
+            cart.add(cartItem);
+            System.out.printf("%s added to cart!\n", cartItem.getItemName());
         }
         else {
-            System.out.println("Item with ID "+itemID+" not found in the menu");
+            System.out.printf("Item with itemID %s not found in the menu.\n ", itemID);
         }
     }
 
