@@ -49,10 +49,10 @@ public class FOMSApp{
         if (Files.exists(Paths.get(filePath.concat("/Data/branch_list.csv")))) {
             System.out.print("branch_list.csv file was found. Initialize using branch_list.csv (Y/N)? ");
             String choice = sc.nextLine().toUpperCase(); // Convert input to uppercase
-            if (choice.equals("Y")) {
+            if (choice.equalsIgnoreCase("Y")) {
                 DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeBranchList(filePath.concat("/Data/branch_list.csv"));
-            } else if (choice.equals("N")) {
+            } else if (choice.equalsIgnoreCase("N")) {
                 // Do nothing
             } else {
                 System.out.println("Invalid choice entered. branch_list.csv will not be imported.");
@@ -67,10 +67,10 @@ public class FOMSApp{
         if (Files.exists(Paths.get(filePath.concat("/Data/staff_list.csv")))) {
             System.out.print("staff_list.csv file was found. Initialize using staff_list.csv (Y/N)? ");
             String choice = sc.nextLine().toUpperCase(); // Convert input to uppercase
-            if (choice.equals("Y")) {
+            if (choice.equalsIgnoreCase("Y")) {
                 DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeStaffList(filePath.concat("/Data/staff_list.csv"));
-            } else if (choice.equals("N")) {
+            } else if (choice.equalsIgnoreCase("N")) {
                 // Do nothing
             } else {
                 System.out.println("Invalid choice entered. staff_list.csv will not be imported.");
@@ -86,10 +86,10 @@ public class FOMSApp{
         if (Files.exists(Paths.get(filePath.concat("/Data/menu_list.csv")))) {
             System.out.print("menu_list.csv file was found. Initialize using menu_list.csv (Y/N)? ");
             String choice = sc.nextLine().toUpperCase(); // Convert input to uppercase
-            if (choice.equals("Y")) {
+            if (choice.equalsIgnoreCase("Y")) {
                 DatabaseInitializer initializer = new DatabaseInitializer(this.db);
                 initializer.initializeMenuList(filePath.concat("/Data/menu_list.csv"));
-            } else if (choice.equals("N")) {
+            } else if (choice.equalsIgnoreCase("N")) {
                 // Do nothing
             } else {
                 System.out.println("Invalid choice entered. menu_list.csv will not be imported.");

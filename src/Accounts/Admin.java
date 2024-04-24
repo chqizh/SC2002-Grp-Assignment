@@ -345,7 +345,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         int choice;
         sc = new Scanner(System.in);
 
-        if (displayAll){
+        if (displayAll == false){
             System.out.println("---------------------");
             System.out.println("Staff List Display");
             System.out.println("---------------------");
@@ -355,7 +355,13 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             System.out.println("(4) Filter by Gender");
             System.out.println("(5) Filter by Age");
             System.out.print("Choose filter for staff list display: ");
-            choice = sc.nextInt();
+            try {
+                choice = sc.nextInt();
+            }
+            catch (Exception e){
+                System.out.println("Invalid option entered.");
+                return;
+            }
             sc.nextLine();
             System.out.println("");
         }

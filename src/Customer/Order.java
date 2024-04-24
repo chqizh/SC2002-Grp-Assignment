@@ -23,7 +23,8 @@ public class Order implements Serializable{
         PROCESSED,
         PICKUP,
         COMPLETED,
-        CANCELLED
+        CANCELLED,
+        AUTO_CANCELLED
     }
 
     private int orderID;
@@ -117,11 +118,31 @@ public class Order implements Serializable{
         if (this.orderStatus != flag){
             this.orderStatus = flag;
             if (flag == orderStatusFlags.PICKUP) this.scheduleAutoCancellation(15, TimeUnit.SECONDS);
-            //if (flag == orderStatusFlags.COMPLETED) orderListRef.removeOrder(this.orderID);
         }
         else {
             System.out.println("Order is currently"  + this.orderStatus + "already.");
         }
+    }
+
+    /**
+     * Schedules automatic order cancellation after a specified delay.
+     *
+     * @param delay The delay before cancellation.
+     * @param unit The time unit of the delay.
+     */
+    private void scheduleAutoCancellation(int delay, TimeUnit unit) {
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.schedule(this::autoCancellation, delay, unit);
+    }
+
+    /**
+     * Cancels the order automatically.
+     *
+     * @return True if the order was cancelled successfully, false otherwise.
+     */
+    private boolean autoCancellation() {
+        this.orderStatus = orderStatusFlags.AUTO_CANCELLED;
+        return true;
     }
 
     /**
@@ -141,6 +162,8 @@ public class Order implements Serializable{
                 return "Order has been completed.";
             case CANCELLED:
                 return "Order has been cancelled.";
+            case AUTO_CANCELLED:
+                return "Order has been automatically cancelled after reaching time limit.";
             default:
                 return "Invalid.";
         }
@@ -162,28 +185,6 @@ public class Order implements Serializable{
      */
     public void setDineIn(boolean value){
         this.dineIn = value;
-    }
-
-    /**
-     * Schedules automatic order cancellation after a specified delay.
-     *
-     * @param delay The delay before cancellation.
-     * @param unit The time unit of the delay.
-     */
-    private void scheduleAutoCancellation(int delay, TimeUnit unit) {
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.schedule(this::autoCancellation, delay, unit);
-    }
-
-    /**
-     * Cancels the order automatically.
-     *
-     * @return True if the order was cancelled successfully, false otherwise.
-     */
-    private boolean autoCancellation() {
-        this.orderStatus = orderStatusFlags.CANCELLED;
-        //this.orderListRef.removeOrder(this.orderID);
-        return true;
     }
 
     /**

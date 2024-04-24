@@ -203,9 +203,9 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     @Override
     public void trackOrder(String branchName) {
         sc = new Scanner(System.in);
-        System.out.println("Enter Order ID:");
+        System.out.print("Enter Order ID: ");
         int orderID = sc.nextInt();
-        sc.nextLine(); // Consume newline character
+        sc.nextLine();
         
         Branch branch = db.getBranchByBranchName(branchName);
         if (branch != null){
@@ -237,11 +237,23 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             System.out.println("Order not found.");
             return;
         }
-        if(order.getOrderStatus()!=Order.orderStatusFlags.PICKUP){
+        if (order.getOrderStatus() == Order.orderStatusFlags.PICKUP) {
+            System.out.println("Thank you for collecting your order. Have a nice day!");
+            order.setOrderStatus(orderStatusFlags.COMPLETED);
+            return;
+        }
+        else if (order.getOrderStatus() == Order.orderStatusFlags.COMPLETED) {
+            System.out.println("Your order has already been collected.");
+            return;
+        }
+        else if (order.getOrderStatus() == Order.orderStatusFlags.AUTO_CANCELLED){
+            System.out.println("Your order was not collected within the time limit and has been automatically cancelled.");
+            return;
+        }
+        else {
             System.out.println("Your order cannot be collected at this time. Your order is still being prepared or has been cancelled.");
             return;
         }
-        order.setOrderStatus(orderStatusFlags.COMPLETED);
     }
 
     /**
