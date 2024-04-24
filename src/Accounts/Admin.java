@@ -332,10 +332,10 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
      */
     public void displayAllBranches(){
         ArrayList<String> branchesList = db.getAllBranchNames();
-        int i = 0;
+        //int i = 0;
         for (String branchName : branchesList){
-            i++;
-            System.out.printf("(%i) %s", i, branchName);
+            //i++;
+            System.out.printf(" - %s \n", branchName);
         }
     }
 

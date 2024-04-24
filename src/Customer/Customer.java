@@ -155,6 +155,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
 
         sc = new Scanner(System.in);
         System.out.println("Select Payment Method:");
+        // TODO loop to check for boolean first. 
         System.out.println("1. Bank Card");
         System.out.println("2. PayPal");
         System.out.println("3. PayNow");
