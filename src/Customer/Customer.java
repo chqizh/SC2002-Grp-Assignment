@@ -244,7 +244,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             return new BankCard("1234567890123456", "12/25", "123");
         }
         else if (choice.equalsIgnoreCase("PayPal") && db.getPaymentMethodsStatus("PayPal")){
-            return new PayPal("example@example.com", "password");
+            return new Paypal("example@example.com", "password");
         }
         else if (choice.equalsIgnoreCase("PayNow") && db.getPaymentMethodsStatus("PayNow")){
             return new PayNow("12345678");
