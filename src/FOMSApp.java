@@ -36,9 +36,9 @@ public class FOMSApp{
         printFOMSTitle();
         
         Scanner sc = new Scanner(System.in);
-        app.branchInitialization();
-        app.staffInitialization();
-        app.menuInitialization();
+        //app.branchInitialization();
+        //app.staffInitialization();
+        //app.menuInitialization();
 
         app.run();
         sc.close();
@@ -161,16 +161,16 @@ public class FOMSApp{
         Branch branch = db.getBranchByBranchName(staff.getBranchName());
 
         while (keepRunning) {
-            System.out.println("================================");
-            System.out.println("|| Welcome to STAFF Workspace ||");
-            System.out.println("================================");
-            System.out.println("Branch: " + branch.getBranchName());
-            System.out.println("================================");
-            System.out.println("(1) Display New Orders ");
-            System.out.println("(2) View Order Details ");
-            System.out.println("(3) Process Order ");
-            System.out.println("(4) Change Password ");
-            System.out.println("(5) Log Out ");
+            System.out.println("\nUser: " + staff.getName() + "\nBranch: " + branch.getBranchName());
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║  Welcome to the STAFF Workspace.  ║");
+            System.out.println("╠═══════════════════════════════════╣");
+            System.out.println("║ (1) Display New Orders            ║");
+            System.out.println("║ (2) View Order Details            ║");
+            System.out.println("║ (3) Process Order                 ║");
+            System.out.println("║ (4) Change Password               ║");
+            System.out.println("║ (5) Log Out                       ║");
+            System.out.println("╚═══════════════════════════════════╝");
             System.out.print("Please select your action: ");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -210,21 +210,20 @@ public class FOMSApp{
         Branch branch = db.getBranchByBranchName(manager.getBranchName());
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("=============================================");
-            System.out.println("|| Welcome to the BRANCH MANAGER Workspace ||");
-            System.out.println("=============================================");
-            System.out.println("Branch: " + branch.getBranchName());
-            System.out.println("=============================================");
-            System.out.println("Please select your action:");
-            System.out.println("(1) Display New Orders");
-            System.out.println("(2) View Order Details");
-            System.out.println("(3) Process Order");
-            System.out.println("(4) Display Staff List");
-            System.out.println("(5) View Branch Menu");
-            System.out.println("(6) Add Menu Item");
-            System.out.println("(7) Edit Menu Item");
-            System.out.println("(8) Remove Menu Item");
-            System.out.println("(9) Log Out");
+            System.out.println("\nUser: " + manager.getName() + "\nBranch: " + branch.getBranchName());
+            System.out.println("╔════════════════════════════════════════════╗");
+            System.out.println("║  Welcome to the BRANCH MANAGER Workspace.  ║");
+            System.out.println("╠════════════════════════════════════════════╣");
+            System.out.println("║ (1) Display New Orders                     ║");
+            System.out.println("║ (2) View Order Details                     ║");
+            System.out.println("║ (3) Process Order                          ║");
+            System.out.println("║ (4) Display Staff List                     ║");
+            System.out.println("║ (5) View Branch Menu                       ║");
+            System.out.println("║ (6) Add Menu Item                          ║");
+            System.out.println("║ (7) Edit Menu Item                         ║");
+            System.out.println("║ (8) Remove Menu Item                       ║");
+            System.out.println("║ (9) Log Out                                ║");
+            System.out.println("╚════════════════════════════════════════════╝");
             System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
@@ -274,21 +273,24 @@ public class FOMSApp{
     private void displayAdminInterface(Admin admin) {
         boolean keepRunning = true;
         while (keepRunning) {
-            System.out.println("====================================");
-            System.out.println("|  Welcome to the ADMIN Workspace  |");
-            System.out.println("====================================");
-            System.out.println(" (1) Add Staff");
-            System.out.println(" (2) Remove Staff");
-            System.out.println(" (3) Edit Staff");
-            System.out.println(" (4) Display Staff List");
-            System.out.println(" (5) Assign (i.e. Add) Manager");
-            System.out.println(" (6) Promote Staff to Manager");
-            System.out.println(" (7) Transfer Staff/Manager");
-            System.out.println(" (8) Edit Payment Method");
-            System.out.println(" (9) Open Branch");
-            System.out.println("(10) Close Branch");
-            System.out.println("(11) Export Staff List");
-            System.out.println("(12) Log Out");
+            System.out.println("\nUser: " + admin.getName());
+            System.out.println("╔═══════════════════════════════════╗");
+            System.out.println("║  Welcome to the ADMIN Workspace.  ║");
+            System.out.println("╠═══════════════════════════════════╣");
+            System.out.println("║ (1) Add Staff                     ║");
+            System.out.println("║ (2) Remove Staff                  ║");
+            System.out.println("║ (3) Edit Staff                    ║");
+            System.out.println("║ (4) Display Staff List            ║");
+            System.out.println("║ (5) Add Manager                   ║");
+            System.out.println("║ (6) Promote Staff to Manager      ║");
+            System.out.println("║ (7) Transfer Staff/Manager        ║");
+            System.out.println("║ (8) Edit Payment Method           ║");
+            System.out.println("║ (9) Open Branch                   ║");
+            System.out.println("║ (10) Close Branch                 ║");
+            System.out.println("║ (11) Export Staff List            ║");
+            System.out.println("║ (12) Log Out                      ║");
+            System.out.println("╚═══════════════════════════════════╝");
+
             System.out.print("Please select your action: ");
             sc = new Scanner(System.in);
             int choice = sc.nextInt();
@@ -386,19 +388,19 @@ public class FOMSApp{
         } while (branch == null);
 
         while (keepRunning) {
-            System.out.println("============================");
-            System.out.println("|| Welcome to MadDonkeys! ||");
-            System.out.println("============================");
-            System.out.println("Branch: " + branch.getBranchName());
-            System.out.println("============================");
-            System.out.println("(1) Browse Menu");
-            System.out.println("(2) Add to Cart");
-            System.out.println("(3) Delete from Cart");
-            System.out.println("(4) View Cart");
-            System.out.println("(5) Place Order");
-            System.out.println("(6) Track Order");
-            System.out.println("(7) Collect Order");
-            System.out.println("(8) Exit System");
+            System.out.println("\nBranch: " + branch.getBranchName());
+            System.out.println("╔══════════════════════════╗");
+            System.out.println("║  Welcome to MadDonkeys!  ║");
+            System.out.println("╠══════════════════════════╣");
+            System.out.println("║ (1) Browse Menu          ║");
+            System.out.println("║ (2) Add to Cart          ║");
+            System.out.println("║ (3) Delete from Cart     ║"); 
+            System.out.println("║ (4) View Cart            ║");
+            System.out.println("║ (5) Place Order          ║");
+            System.out.println("║ (6) Track Order          ║");
+            System.out.println("║ (7) Collect Order        ║");
+            System.out.println("║ (8) Exit System          ║");
+            System.out.println("╚══════════════════════════╝");
             System.out.print("Please select your action: ");
             int choice = sc.nextInt();
             sc.nextLine();
