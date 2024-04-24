@@ -126,9 +126,11 @@ public class InMemoryDatabase implements Serializable {
         Branch branch = getBranchByBranchName(branchName);
         if (branch == null) return false;
         else {
-            branch.addBranchManager(staffID);
-            this.branchManagerMap.put(staffID, branchManager);
-            return true;
+            if (branch.addBranchManager(staffID)){
+                this.branchManagerMap.put(staffID, branchManager);
+                return true;
+            }
+            else return false;
         }
     }
     public void removeBranchManager(String staffID) {

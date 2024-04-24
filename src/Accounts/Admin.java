@@ -171,7 +171,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             else return false;
         }
         catch (Exception e){
-            e.printStackTrace();
+            //e.printStackTrace();
             return false;
         }
     };
@@ -235,17 +235,22 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             // Transfers staff to new branch.
             else if (db.getBranchByBranchName(branchName).addStaff(staffID)){
                 staff.setBranchName(branchName);
-                System.out.printf("%s transferred to new branch %s. ", staffID, branchName);
+                System.out.printf("Successfully %s transferred to new branch %s. ", staffID, branchName);
                 return true;
             }
-            else return false;
+            else {
+                // Since adding to new branch is unsuccessful, it will rever removing from old branch.
+                db.getBranchByBranchName(oldBranchName).addStaff(staffID);
+                System.out.printf("Failed to add %s to new branch %s. ", staffID, branchName);
+                return false;
+            }
         }
         else if (db.getEmployee(staffID).getUserType() == UserType.BRANCH_MANAGER){
             BranchManager manager = db.getBranchManager(staffID);
             String oldBranchName = manager.getBranchName();
 
             if (db.getBranchByBranchName(oldBranchName).removeBranchManager(staffID) ==  false){
-                System.out.printf("Failed to remove %s from old branch %s.", staffID, oldBranchName);
+                System.out.printf("Failed to remove %s from old branch %s. ", staffID, oldBranchName);
                 return false;
             }
             else if (db.getBranchByBranchName(branchName).addBranchManager(staffID)){
@@ -253,7 +258,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 System.out.printf("%s transferred to new branch %s. ", staffID, branchName);
                 return true;
             }
-            else return false;
+            else {
+                // Since adding to new branch is unsuccessful, it will rever removing from old branch.
+                db.getBranchByBranchName(oldBranchName).addBranchManager(staffID);
+                System.out.printf("Failed to add %s to new branch %s. ", staffID, branchName);
+                return false;
+            }
         }
         else if (db.getEmployee(staffID).getUserType() == UserType.ADMIN){
             System.out.print("Employee is an Admin.");

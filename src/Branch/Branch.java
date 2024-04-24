@@ -108,8 +108,8 @@ public class Branch implements Serializable {
      */
     public boolean removeBranchManager(String staffID){
         if (this.branchManagerIDs.contains(staffID)){
-            System.out.printf("Branch Manager with staffID %s successfully removed.", staffID);
             this.branchManagerIDs.remove(staffID);
+            System.out.printf("Branch Manager with staffID %s successfully removed. \n", staffID);
             System.out.println("Number of Branch Managers is below required amount. Please add another Branch Manager.");
             return true;
         }
