@@ -33,7 +33,7 @@ public interface IAdminManagement {
      *
      * @return true if the manager was successfully assigned, false otherwise.
      */
-    public boolean assignManager();
+    public boolean addManager();
 
     /**
      * Promotes a staff member to the role of branch manager.

@@ -137,29 +137,42 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
     };
 
     /**
-     * Assigns a manager to a branch.
+     * Adds a manager to a branch.
      *
-     * @return true if the manager was assigned successfully, false otherwise.
+     * @return true if the manager was added successfully, false otherwise.
      */
-    public boolean assignManager(){
+    public boolean addManager(){
         sc = new Scanner(System.in);
-        System.out.print("Enter Branch to assign Manager to: ");
-        String branchName = sc.nextLine();
-        System.out.print("Enter staffID of Manager: ");
-        String staffID = sc.nextLine();
-        
-        if (db.getStaff(staffID) == null) {
-            System.out.println("Manager does not exist.");
-            return false;
+        try {
+            System.out.print("Enter their name: ");
+            String name = sc.nextLine();
+            System.out.print("Enter their Staff ID: ");
+            String staffID = sc.nextLine();
+            System.out.print("Enter their gender (M/F): ");
+            char gender = sc.nextLine().charAt(0);
+            System.out.print("Enter their age: ");
+            int age = sc.nextInt();
+            sc.nextLine();
+            System.out.print("Enter their assigned Branch: ");
+            String branchName = sc.nextLine();
+
+            if (db.getBranchByBranchName(branchName) == null) {
+                System.out.println("Branch does not exist.");
+                return false;
+            }
+
+            BranchManager newBranchManager = new BranchManager(name, staffID, gender, age, branchName, this.db);
+            Account newAccount = new Account(staffID);
+            if (db.addBranchManager(newBranchManager)){
+                db.addAccount(newAccount);
+                System.out.printf("Manager %s (%s) assigned to %s.", name, staffID, branchName);
+                return true;
+            }
+            else return false;
         }
-        else if (db.getBranchByBranchName(branchName) == null) {
-            System.out.println("Branch does not exist.");
+        catch (Exception e){
+            e.printStackTrace();
             return false;
-        }
-        else {
-            db.getBranchByBranchName(branchName).addBranchManager(staffID);
-            System.out.printf("%s assigned to %s.", staffID, branchName);
-            return true;
         }
     };
 
@@ -172,6 +185,10 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         sc = new Scanner(System.in);
         System.out.print("Enter staffID to promote: ");
         String staffID = sc.nextLine();
+        if (db.getEmployee(staffID) == null){
+            System.out.print("Employee with chosen staffID does not exist. ");
+            return false;
+        }
         if (db.getEmployee(staffID).getUserType() == UserType.STAFF){
             Staff staff = db.getStaff(staffID);
             BranchManager newBranchManager = new BranchManager(staff.getName(), staffID, staff.getGender(), staff.getAge(), staff.getBranchName(), db);
@@ -182,7 +199,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             else return false;
         }
         else {
-            System.out.println("Employee with chosen staffID is already a Branch Manager.");
+            System.out.print("Employee with chosen staffID is a Branch Manager or Admin. ");
             return false;
         }
     }
