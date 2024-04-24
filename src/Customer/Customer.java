@@ -163,7 +163,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             int counter = 0;
             for (int i = 0; i < db.getPaymentMethods().size(); i++){
                 String paymentMethodName = paymentMethodsNamesList.get(i);
-                if (db.getPaymentMethodsStatus(paymentMethodName) == true) System.out.printf("(%d) %s", ++counter, paymentMethodName);
+                if (db.getPaymentMethodsStatus(paymentMethodName) == true) System.out.printf("(%d) %s\n", ++counter, paymentMethodName);
             }
             System.out.print("Select payment method: ");
             String choice = sc.nextLine();
@@ -215,7 +215,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             return new BankCard("1234567890123456", "12/25", "123");
         }
         else if (choice.equalsIgnoreCase("PayPal") && db.getPaymentMethodsStatus("PayPal")){
-            return new Paypal("example@example.com", "password");
+            return new PayPal("example@example.com", "password");
         }
         else if (choice.equalsIgnoreCase("PayNow") && db.getPaymentMethodsStatus("PayNow")){
             return new PayNow("12345678");
