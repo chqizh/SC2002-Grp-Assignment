@@ -38,6 +38,7 @@ public class PayNow extends Payment {
         }
         System.out.println("Processing payment...");
         System.out.println("Connecting to PayNow service...");
+        printQRCode();
         simulateNetworkLatency();
         System.out.println("PayNow Payment of $" + amount + " processed successfully.");
         return true;
@@ -53,5 +54,37 @@ public class PayNow extends Payment {
         } catch (InterruptedException e) {
             System.out.println("Network error during PayNow connection.");
         }
+    }
+
+    private void printQRCode(){
+        System.out.println("  ██████████████      ██████  ██    ████████  ██████████████  ");
+        System.out.println("  ██          ██  ██  ████  ██        ██████  ██          ██  ");
+        System.out.println("  ██  ██████  ██    ████  ██    ██      ██    ██  ██████  ██  ");
+        System.out.println("  ██  ██████  ██    ██    ████    ██  ████    ██  ██████  ██  ");
+        System.out.println("  ██  ██████  ██  ████  ██  ██    ██    ██    ██  ██████  ██  ");
+        System.out.println("  ██          ██    ████████  ██████    ████  ██          ██  ");
+        System.out.println("  ██████████████  ██  ██  ██  ██  ██  ██  ██  ██████████████  ");
+        System.out.println("                    ████████    ██  ████                      ");
+        System.out.println("  ██  ██  ██  ██    ██  ██        ████            ██    ██    ");
+        System.out.println("  ██            ████████    ██  ██████    ██████    ██    ██  ");
+        System.out.println("  ██  ██    ████    ██  ██    ██████████  ████        ██████  ");
+        System.out.println("  ██████          ██████████████  ██████  ██████  ██    ██    ");
+        System.out.println("    ██  ██    ██████████████  ████  ██  ████████    ██  ████  ");
+        System.out.println("  ████████  ██  ██      ████  ████  ████      ████  ██    ██  ");
+        System.out.println("      ██████  ██    ████    ██      ████    ██████  ██  ████  ");
+        System.out.println("  ██      ████  ████    ████    ██  ██████████      ██  ██    ");
+        System.out.println("  ██  ██      ██████████████      ████      ██████  ██  ████  ");
+        System.out.println("    ████  ██      ██  ██    ██  ██████    ██  ██    ████  ██  ");
+        System.out.println("  ██  ██      ██  ██  ██      ██████      ████████      ████  ");
+        System.out.println("    ████    ██  ████  ██    ████  ██████████        ██  ██    ");
+        System.out.println("  ██  ████████████    ██████  ████    ██  ██████████          ");
+        System.out.println("                  ██          ████      ████      ██  ██████  ");
+        System.out.println("  ██████████████    ██████  ██      ██  ████  ██  ████  ████  ");
+        System.out.println("  ██          ██      ██  ██    ██        ██      ████    ██  ");
+        System.out.println("  ██  ██████  ██  ██  ██          ██      ██████████          ");
+        System.out.println("  ██  ██████  ██    ██  ████    ██████      ██    ██  ██      ");
+        System.out.println("  ██  ██████  ██  ██  ██  ████  ████  ██████    ██████    ██  ");
+        System.out.println("  ██          ██          ████    ██████████  ██  ██    ██    ");
+        System.out.println("  ██████████████  ██████████  ████    ██████    ██████  ████  ");
     }
 }
