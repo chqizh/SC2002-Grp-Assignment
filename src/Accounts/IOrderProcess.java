@@ -8,15 +8,15 @@ public interface IOrderProcess {
 	 * 
 	 * @param orderID
 	 */
-	void processOrders(Branch branch, int orderID);
+	public void processOrders(Branch branch, int orderID);
 
-	void viewNewOrders(Branch branch);
+	public void viewNewOrders(Branch branch);
 
 	/**
 	 * 
 	 * @param orderID
 	 */
-	void viewOrder(Branch branch, int orderID);
+	public void viewOrder(Branch branch, int orderID);
 	
 
 
