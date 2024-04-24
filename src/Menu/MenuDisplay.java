@@ -1,10 +1,12 @@
 package Menu;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class MenuDisplay {
     //@SuppressWarnings("unchecked")
     private ArrayList<MenuItem> menu;
+    private transient Scanner sc;
 
     public MenuDisplay(){
         menu = new ArrayList<>();
@@ -15,6 +17,8 @@ public class MenuDisplay {
     }
     
 	public void displayMenu() {
+        sc = new Scanner(System.in);
+
         // Deserialize the menu from the file
         // try {
         //     menu = (ArrayList<MenuItem>) SerializationUtil.deserialize("menu.ser");
@@ -38,5 +42,8 @@ public class MenuDisplay {
                               menuItem.getPrice(), 
                               menuItem.getCategory());
         }
+        System.out.println("------------------------------------------------------------");
+        System.out.println("Press any key to continue.");
+        sc.nextLine();
     }
 }
