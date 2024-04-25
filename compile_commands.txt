@@ -1,0 +1,6 @@
+To Compile:
+jar cvfm bin/FOMS.jar bin/META-INF/MANIFEST.MF -C bin/ .
+
+To run FOMS.jar:
+cd bin
+java -jar FOMS.jar
