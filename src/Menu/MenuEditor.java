@@ -3,17 +3,32 @@ package Menu;
 import java.io.Serializable;
 import java.util.*;
 
+
+/**
+ * This class is responsible for editing menu items, including adding new items,
+ * deleting existing items, and updating item names and prices.
+ */
 public class MenuEditor implements Serializable{
 	private ArrayList<MenuItem> menu;
     private transient Scanner sc;
     private Menu menuClass;
 
-    //YH Changes
+    /**
+     * Constructor for the MenuEditor class that initializes it with the menu from the provided Menu class instance.
+     *
+     * @param menuClass The Menu class instance from which the menu items will be managed.
+     */
     public MenuEditor(Menu menuClass){
         this.menuClass = menuClass;
         this.menu = menuClass.getMenuItemsList();
     }
 
+    /**
+     * Adds a new item to the menu after taking input from the user. Ensures that no duplicate names exist.
+     *
+     * @param branchName The name of the branch for which the menu item is being added.
+     * @return true if the item was added successfully, false if a duplicate name was found.
+     */
 	public boolean addItems(String branchName){
 		sc = new Scanner(System.in);
         //int itemId = this.menu.size() + 1;
@@ -76,6 +91,9 @@ public class MenuEditor implements Serializable{
         }
 	}
 
+    /**
+     * Deletes an item from the menu by item ID.
+     */
 	public void deleteItems() {
         sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
@@ -97,6 +115,13 @@ public class MenuEditor implements Serializable{
         }
     }
 
+    /**
+     * Updates the name of a menu item.
+     *
+     * @param id The ID of the menu item to be updated.
+     * @param newName The new name for the menu item.
+     * @param menu The menu list where the item resides.
+     */
 	public void updateName(int id, String newName, ArrayList<MenuItem> menu) {
         boolean found = false;
         for (MenuItem menuItem : menu) {
@@ -114,6 +139,14 @@ public class MenuEditor implements Serializable{
             
         }
     }
+
+    /**
+     * Updates the price of a menu item.
+     *
+     * @param id The ID of the menu item to be updated.
+     * @param newPrice The new price for the menu item.
+     * @param menu The menu list where the item resides.
+     */
 	public void updatePrice(int id, float newPrice, ArrayList<MenuItem> menu) {
         boolean found = false;
         for (MenuItem menuItem : menu) {

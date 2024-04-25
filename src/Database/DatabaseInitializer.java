@@ -13,13 +13,26 @@ import Branch.*;
 import Menu.*;
 
 
+/**
+ * Class responsible for initializing database data from CSV files.
+ */
 public class DatabaseInitializer {
     private InMemoryDatabase db;
 
+    /**
+     * Constructs a DatabaseInitializer with the specified InMemoryDatabase.
+     *
+     * @param db The InMemoryDatabase to initialize data into.
+     */
     public DatabaseInitializer(InMemoryDatabase db) {
         this.db = db;
     }
 
+    /**
+     * Initializes the staff list from a CSV file.
+     *
+     * @param filePath The path to the CSV file containing staff data.
+     */
     public void initializeStaffList(String filePath) {
         int staffCount = 0;
         int managerCount = 0;
@@ -84,8 +97,11 @@ public class DatabaseInitializer {
         }
     }
     
-    // Function to initialize BranchList
-    public void initializeBranchList(String filePath) {
+    /**
+     * Initializes the branch list from a CSV file.
+     *
+     * @param filePath The path to the CSV file containing branch data.
+     */    public void initializeBranchList(String filePath) {
         int branchesCount = 0;
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
@@ -113,6 +129,11 @@ public class DatabaseInitializer {
         System.out.printf("Added %d Branches.\n", branchesCount);
     }
 
+    /**
+     * Initializes the menu list from a CSV file.
+     *
+     * @param filePath The path to the CSV file containing menu data.
+     */
     public void initializeMenuList(String filePath) {
         int numItemsAdded = 0;
         HashSet<String> uniqueBranchesAdded = new HashSet<>();

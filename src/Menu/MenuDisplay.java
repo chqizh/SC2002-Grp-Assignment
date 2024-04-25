@@ -3,30 +3,34 @@ package Menu;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class is responsible for displaying the menu items in a formatted manner.
+ */
 public class MenuDisplay {
-    //@SuppressWarnings("unchecked")
     private ArrayList<MenuItem> menu;
     private transient Scanner sc;
 
+    /**
+     * Default constructor that initializes the menu display with an empty list of menu items.
+     */
     public MenuDisplay(){
         menu = new ArrayList<>();
     }
 
+    /**
+     * Overloaded constructor that initializes the menu display with a specific branch's menu.
+     *
+     * @param branchMenu The menu object containing the list of menu items to display.
+     */
     public MenuDisplay(Menu branchMenu){
         menu = branchMenu.getMenuItemsList();
     }
     
+    /**
+     * Displays the menu items in a formatted table.
+     */
 	public void displayMenu() {
         sc = new Scanner(System.in);
-
-        // Deserialize the menu from the file
-        // try {
-        //     menu = (ArrayList<MenuItem>) SerializationUtil.deserialize("menu.ser");
-        //     //System.out.println("Menu deserialized successfully.");
-        // } catch (IOException | ClassNotFoundException e) {
-        //     //System.err.println("Deserialization failed: " + e.getMessage());
-        //     return; // Exit the method or handle the error accordingly
-        // }
         
         // Display header columns
         System.out.println("------------------------------------------------------------");

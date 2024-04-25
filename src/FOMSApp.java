@@ -13,12 +13,21 @@ import Customer.*;
 import Database.*;
 import DataPersistence.*;
 
+/**
+ * This class serves as the entry point for the Fastfood Ordering and Management System (FOMS).
+ * It handles the initialization of branches, staff, and menus, as well as providing interfaces
+ * for customer and staff interactions with the system.
+ */
 public class FOMSApp implements Serializable{
     private static String filePath = new File("").getAbsolutePath();
     private static final String DATA_STORE = "Data/data_store.ser";
     private transient Scanner sc;
     private InMemoryDatabase db;
 
+    /**
+     * The constructor initializes the application by setting up the scanner for input and attempting
+     * to deserialize the existing database from storage.
+     */
     public FOMSApp() {
         // Initialize scanner here to prevent resource leak
         sc = new Scanner(System.in);
@@ -31,6 +40,12 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * The main method is the entry point for the application. It sets up the application
+     * and runs the main interface loop.
+     * 
+     * @param args Command-line arguments (not used).
+     */
     public static void main(String[] args) {
         FOMSApp app = new FOMSApp();
         printFOMSTitle();
@@ -44,6 +59,9 @@ public class FOMSApp implements Serializable{
         sc.close();
     }
 
+    /**
+     * Initializes branch data from a CSV file if not already initialized.
+     */
     public void branchInitialization() {
         if (db.getBranchesInitialized() == true) return;
         db.setBranchesInitialized(true);
@@ -64,6 +82,9 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * Initializes staff data from a CSV file if not already initialized.
+     */
     public void staffInitialization() {
         if (db.getStaffInitialized() == true) return;
         db.setStaffInitialized(true);
@@ -84,6 +105,9 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * Initializes menu data from a CSV file if not already initialized.
+     */
     public void menuInitialization() {
         if (db.getMenuInitialized() == true) return;
         db.setMenuInitialized(true);
@@ -104,6 +128,10 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * The primary run loop for the application. It handles user type selection
+     * and redirects to the appropriate interface.
+     */
     public void run() {
         Console console = System.console();
         String userType = console.readLine("Are you a customer? (Y/N): ");
@@ -160,6 +188,11 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * Displays the staff interface and handles staff operations such as viewing and processing orders.
+     * 
+     * @param staff The staff member who is logged in.
+     */
     private void displayStaffInterface(Staff staff) {
         Console console = System.console();
         boolean keepRunning = true;
@@ -211,6 +244,11 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * Displays the branch manager interface and handles operations specific to a branch manager.
+     * 
+     * @param manager The branch manager who is logged in.
+     */
     private void displayBranchManagerInterface(BranchManager manager) {
         Branch branch = db.getBranchByBranchName(manager.getBranchName());
         boolean keepRunning = true;
@@ -275,6 +313,11 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * Displays the admin interface and handles administrative operations such as managing staff and branches.
+     * 
+     * @param admin The admin who is logged in.
+     */
     private void displayAdminInterface(Admin admin) {
         boolean keepRunning = true;
         while (keepRunning) {
@@ -367,7 +410,11 @@ public class FOMSApp implements Serializable{
         }
     }
     
-    //private void displayCustomerInterface() throws IOException {
+    /**
+     * Displays the customer interface and handles customer operations such as browsing menus and placing orders.
+     * 
+     * @param customer The customer using the system.
+     */
     private void displayCustomerInterface(Customer customer) {
         boolean keepRunning = true;
     
@@ -448,6 +495,9 @@ public class FOMSApp implements Serializable{
         }
     }
 
+    /**
+     * Prints the title and welcome message for the Fastfood Ordering and Management System.
+     */
     private static void printFOMSTitle() {
         System.out.println();
         System.out.println("╔═══════════════════════════════════════════════════════════════════════════════════════════════════╗");

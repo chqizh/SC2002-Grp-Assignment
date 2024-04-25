@@ -8,13 +8,27 @@ import java.util.ArrayList;
 
 import Accounts.*;
 
+/**
+ * Class responsible for exporting database data to CSV format.
+ */
 public class DatabaseExporter {
     private InMemoryDatabase db;
 
+    /**
+     * Constructs a DatabaseExporter with the specified InMemoryDatabase.
+     *
+     * @param db The InMemoryDatabase to export data from.
+     */
     public DatabaseExporter(InMemoryDatabase db) {
         this.db = db;
     }
 
+    /**
+     * Exports database data to a CSV file.
+     *
+     * @param filePath The path to the CSV file to export data to.
+     * @throws IOException If an I/O error occurs.
+     */
     public void exportDataToCSV(String filePath) throws IOException {
         List<String> lines = new ArrayList<>();
         StringBuilder sb = new StringBuilder();
