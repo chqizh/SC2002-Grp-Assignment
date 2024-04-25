@@ -40,7 +40,7 @@ public class Staff extends Employee implements IOrderProcess{
     /**
      * Sets the branch name for this staff member.
      *
-     * @param branchname The new branch name.
+     * @param branchName The new branch name.
      */
     public void setBranchName(String branchName) {
         this.branchName = branchName;

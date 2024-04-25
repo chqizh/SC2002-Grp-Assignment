@@ -119,7 +119,6 @@ public class Branch implements Serializable {
     /**
      * Sets the maximum number of managers for the branch based on the current number of staff.
      *
-     * @param currentNumStaff The current number of staff members in the branch.
      */
     public void setMaxNumManagers(){
         if (this.currentNumStaff >= 1 && this.currentNumStaff <= 4){
