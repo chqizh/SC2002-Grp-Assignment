@@ -229,6 +229,7 @@ public class InMemoryDatabase implements Serializable {
         this.getBranchByBranchName(branchName).removeStaff(staffID);
         this.staffMap.remove(staffID);
     }
+    
     /**
      * Adds a branch manager to the database.
      * @param branchManager The branch manager to be added.

@@ -101,7 +101,8 @@ public class DatabaseInitializer {
      * Initializes the branch list from a CSV file.
      *
      * @param filePath The path to the CSV file containing branch data.
-     */    public void initializeBranchList(String filePath) {
+     */
+    public void initializeBranchList(String filePath) {
         int branchesCount = 0;
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
