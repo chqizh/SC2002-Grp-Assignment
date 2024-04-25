@@ -1,4 +1,4 @@
-<h1> SC2002 Group Assignment </h1>
+<h1> SC2002 Group Assignment:FOMS </h1>
 
 <h2> About </h2>
 The group assignment involves designing and developing a: Fastfood ordering and management System (FOMS).
