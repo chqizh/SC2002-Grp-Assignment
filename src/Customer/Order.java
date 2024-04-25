@@ -32,7 +32,6 @@ public class Order implements Serializable{
     private String branchName;
     private ArrayList<MenuItem> orderItems;
     private boolean dineIn;
-    //private OrderList orderListRef;
     
     /**
      * Constructs an order for a specified branch.

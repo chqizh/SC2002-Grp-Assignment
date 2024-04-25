@@ -186,22 +186,6 @@ public class Customer implements ICustomerOrderProcess, Serializable{
                 System.out.println("Invalid number selected. Please choose a valid number.");
             }
         } while (keepLooping);
-/*         do {
-            System.out.println("Payment Methods Available");
-            ArrayList<String> paymentMethodsNamesList= db.getPaymentMethods();
-            int counter = 0;
-            for (int i = 0; i < db.getPaymentMethods().size(); i++){
-                String paymentMethodName = paymentMethodsNamesList.get(i);
-                if (db.getPaymentMethodsStatus(paymentMethodName) == true) System.out.printf("(%d) %s\n", ++counter, paymentMethodName);
-            }
-            System.out.print("Select payment method: ");
-            String choice = sc.nextLine();
-            paymentMethod = selectPaymentMethod(choice);
-            if (paymentMethod != null){
-                keepLooping = false;
-            }
-            else System.out.println("Invalid payment method selected.");
-        } while (keepLooping); */
 
         if (paymentMethod != null) {
             if (processPayment(paymentMethod, totalPrice)) {

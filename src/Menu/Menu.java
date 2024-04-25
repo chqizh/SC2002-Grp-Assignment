@@ -21,6 +21,7 @@ public class Menu implements Serializable{
      * @param branchName the name of the branch this menu belongs to.
      */
     public Menu(String branchName) {
+        this.branchName = branchName;
         this.menu = new ArrayList<MenuItem>();
         this.editMenu = new MenuEditor(this);
         this.maxItemID = 0;

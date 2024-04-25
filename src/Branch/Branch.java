@@ -132,6 +132,7 @@ public class Branch implements Serializable {
         }
         else this.maxNumManagers = 4;
     }
+    
     /**
      * Gets the number of managers in the branch.
      *
