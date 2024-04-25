@@ -49,15 +49,15 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             System.out.println("Your cart is empty.");
         } else {
             System.out.println("Cart Contents:");
-            System.out.println("--------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------");
             System.out.printf("%-5s %-25s %-15s %-10s\n", "ID", "Name", "Price", "Customizations");
-            System.out.println("--------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------");
             int i = 1;
             for (MenuItem item : cart) {
                 System.out.printf("%-5d %-25s %-15s %-10s\n", i ,item.getItemName() ,item.getPrice(), item.getCustomisation());
                 i++;
             }
-            System.out.println("--------------------------------------------------------");
+            System.out.println("--------------------------------------------------------------");
         }
     }
 
@@ -132,6 +132,8 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     @Override
     public void placeOrder(String branchName){
         int option;
+        sc = new Scanner(System.in);
+
         Branch branch = db.getBranchByBranchName(branchName);
         if (branch == null){
             System.out.println("Invalid branch entered.");
@@ -145,16 +147,14 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         do {
             System.out.println("(1) Dine-In");
             System.out.println("(2) Takeaway");
-            System.out.println("Enter your choice [1 or 2]:");
+            System.out.print("Enter your choice [1 or 2]: ");
             option = sc.nextInt();
             sc.nextLine();
         } while ((option!=1) && (option!=2));
-        
 
         double totalPrice = calculateTotalPrice();
-        System.out.println("Total Price: $" + totalPrice);
+        System.out.printf("Total Price: $%.2f \n", totalPrice);
 
-        sc = new Scanner(System.in);
         boolean keepLooping = true;
         Payment paymentMethod = null;
         do {
@@ -220,9 +220,12 @@ public class Customer implements ICustomerOrderProcess, Serializable{
                 
                 branch.addOrder(order);
                 System.out.println("Order placed successfully.");
+                System.out.println("");
                 ReceiptGenerator receipt = new ReceiptGenerator();
                 receipt.generateReceipt(order, paymentMethod.getPaymentMethodName());
                 cart.clear();
+                System.out.println("Press any key to continue.");
+                sc.nextLine();
             }
             else {
                 System.out.println("Payment failed. Order not placed.");
@@ -278,7 +281,11 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         Branch branch = db.getBranchByBranchName(branchName);
         if (branch != null){
             Order order = branch.getBranchOrders().getOrder(orderID); // Retrieve the order from the branch's order list
-            System.out.println(order.getOrderStatusString());
+            if (order != null) System.out.println(order.getOrderStatusString());
+            else {
+                System.out.println("Invalid Order ID entered.");
+                return;
+            }
         }
         else System.out.println("Invalid branch entered.");
     }

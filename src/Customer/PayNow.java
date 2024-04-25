@@ -58,6 +58,7 @@ public class PayNow extends Payment {
     }
 
     private void printQRCode(){
+        System.out.println("");
         System.out.println("  ██████████████      ██████  ██    ████████  ██████████████  ");
         System.out.println("  ██          ██  ██  ████  ██        ██████  ██          ██  ");
         System.out.println("  ██  ██████  ██    ████  ██    ██      ██    ██  ██████  ██  ");
@@ -87,5 +88,6 @@ public class PayNow extends Payment {
         System.out.println("  ██  ██████  ██  ██  ██  ████  ████  ██████    ██████    ██  ");
         System.out.println("  ██          ██          ████    ██████████  ██  ██    ██    ");
         System.out.println("  ██████████████  ██████████  ████    ██████    ██████  ████  ");
+        System.out.println("");
     }
 }

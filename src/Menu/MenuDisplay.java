@@ -30,13 +30,13 @@ public class MenuDisplay {
         
         // Display header columns
         System.out.println("------------------------------------------------------------");
-        System.out.printf("%-8s %-20s %-10s %-15s\n", "Item ID", "Name", "Price", "Category");
+        System.out.printf("%-8s %-25s %-11s %-15s\n", "Item ID", "Name", "Price", "Category");
         System.out.println("------------------------------------------------------------");
 
         // Display menu items
         //ArrayList<MenuItem> menuItems = menu.getMenuItems();
         for (MenuItem menuItem : menu) {
-            System.out.printf("%-8d %-20s $%-10.2f %-15s\n", 
+            System.out.printf("%-8d %-25s $%-10.2f %-15s\n", 
                               menuItem.getItemID(), 
                               menuItem.getItemName(), 
                               menuItem.getPrice(), 
