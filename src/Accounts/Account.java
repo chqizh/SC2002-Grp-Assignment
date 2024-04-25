@@ -27,7 +27,7 @@ public class Account implements Serializable {
     /**
      * Retrieves the staff ID associated with this account.
      * 
-     * @return The staff ID.
+     * @return The associated staff ID as a string.
      */
     public String getStaffID() {
         return staffID;
@@ -45,7 +45,7 @@ public class Account implements Serializable {
     /**
      * Retrieves the hashed password for this account.
      * 
-     * @return The hashed password.
+     * @return The hashed password associated with the account, encoded as a Base64 string.
      */
     public String getPasswordHash() {
         return passwordHash;
@@ -61,10 +61,10 @@ public class Account implements Serializable {
     }
 
     /**
-     * Generates a hashed version of the given password.
+     * Generates a hashed version of the given password using the SHA-256 algorithm.
      * 
      * @param password The password to hash.
-     * @return The hashed password as a Base64 encoded string.
+     * @return The resulting hashed password as a Base64 encoded string.
      */
     private static String hashPassword(String password) {
         try {
@@ -72,7 +72,7 @@ public class Account implements Serializable {
             byte[] hash = digest.digest(password.getBytes());
             return Base64.getEncoder().encodeToString(hash);
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Could not hash password", e);
+            throw new RuntimeException("Could not hash password.", e);
         }
     }
 
