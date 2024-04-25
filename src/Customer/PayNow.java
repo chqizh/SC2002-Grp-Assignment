@@ -39,7 +39,7 @@ public class PayNow extends Payment {
         System.out.println("Processing payment...");
         printQRCode();
         simulateNetworkLatency();
-        System.out.println("PayNow Payment of $" + amount + " processed successfully.");
+        System.out.printf("PayNow Payment of $%.2f processed successfully.\n", amount);
         return true;
     }
 

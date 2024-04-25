@@ -196,7 +196,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
 
             if (db.removeBranchManager(staffID)){
                 db.removeAccount(staffID);
-                System.out.printf("Branch Manager %s (%s) successfully removed from %s.\n", name, staffID, branchName);
+                System.out.printf("Branch Manager %s (%s) removed from %s.", name, staffID, branchName);
                 System.out.println("Number of Branch Managers is now below required amount. Please add another Branch Manager.");
                 return true;
             }
@@ -248,11 +248,11 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         System.out.print("Enter employee's new Branch: ");
         String branchName = sc.nextLine();
         if (db.getEmployee(staffID) == null ) {
-            System.out.print("Staff/Manager does not exist.");
+            System.out.print("Staff/Manager does not exist. ");
             return false;
         }
         else if (db.getBranchByBranchName(branchName) == null) {
-            System.out.print("Branch does not exist.");
+            System.out.print("Branch does not exist. ");
             return false;
         }
         
@@ -267,13 +267,13 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             // Transfers staff to new branch.
             else if (db.getBranchByBranchName(branchName).addStaff(staffID)){
                 staff.setBranchName(branchName);
-                System.out.printf("Successfully %s transferred to new branch %s. ", staffID, branchName);
+                System.out.printf("%s transferred to new branch %s. ", staffID, branchName);
                 return true;
             }
             else {
                 // Since adding to new branch is unsuccessful, it will rever removing from old branch.
                 db.getBranchByBranchName(oldBranchName).addStaff(staffID);
-                System.out.printf("Failed to add %s to new branch %s. ", staffID, branchName);
+                System.out.printf("Failed to transfer %s to new branch %s. ", staffID, branchName);
                 return false;
             }
         }
@@ -293,7 +293,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             else {
                 // Since adding to new branch is unsuccessful, it will rever removing from old branch.
                 db.getBranchByBranchName(oldBranchName).addBranchManager(staffID);
-                System.out.printf("Failed to add %s to new branch %s. ", staffID, branchName);
+                System.out.printf("Failed to transfer %s to new branch %s. ", staffID, branchName);
                 return false;
             }
         }

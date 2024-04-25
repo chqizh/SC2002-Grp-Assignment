@@ -42,7 +42,7 @@ public class PayPal extends Payment {
         System.out.println("Processing payment...");
         System.out.println("Connecting to PayPal...");
         simulateNetworkLatency();
-        System.out.println("PayPal Payment of $" + amount + " processed successfully.");
+        System.out.printf("PayPal Payment of $%.2f processed successfully.\n", amount);
         return true;
     }
 

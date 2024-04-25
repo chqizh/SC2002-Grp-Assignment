@@ -45,7 +45,7 @@ public class BankCard extends Payment {
         System.out.println("Processing payment...");
         System.out.println("Connecting to the bank server...");
         simulateNetworkLatency();
-        System.out.println("Bank Card Payment of $" + amount + " processed successfully.");
+        System.out.printf("Bank Card Payment of $%.2f processed successfully.\n", amount);
         return true; 
     }
     

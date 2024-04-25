@@ -287,6 +287,7 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (3)  Edit Staff                   ║");
             System.out.println("║ (4)  Display Staff List           ║");
             System.out.println("║ (5)  Add Manager                  ║");
+            System.out.println("║ (6)  Remove Manager               ║");
             System.out.println("║ (7)  Promote Staff to Manager     ║");
             System.out.println("║ (8)  Transfer Staff/Manager       ║");
             System.out.println("║ (9)  Edit Payment Method          ║");

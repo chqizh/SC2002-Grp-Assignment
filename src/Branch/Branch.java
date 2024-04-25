@@ -131,6 +131,7 @@ public class Branch implements Serializable {
         else if (this.currentNumStaff >= 9 && this.currentNumStaff <= 15){
             this.maxNumManagers = 3;
         }
+        else this.maxNumManagers = 4;
     }
     /**
      * Gets the number of managers in the branch.
