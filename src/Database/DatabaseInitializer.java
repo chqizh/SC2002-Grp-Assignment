@@ -86,6 +86,7 @@ public class DatabaseInitializer {
     
     // Function to initialize BranchList
     public void initializeBranchList(String filePath) {
+        int branchesCount = 0;
         try {
             List<String> lines = Files.readAllLines(Paths.get(filePath));
             for (int i = 1; i < lines.size(); i++) {
@@ -104,11 +105,12 @@ public class DatabaseInitializer {
                 }
 
                 Branch branch = new Branch(name, location, staffQuota);
-                db.addBranch(branch);
+                if (db.addBranch(branch)) branchesCount++;
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
+        System.out.printf("Added %d Branches.\n", branchesCount);
     }
 
     public void initializeMenuList(String filePath) {
