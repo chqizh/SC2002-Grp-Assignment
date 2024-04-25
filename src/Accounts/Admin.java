@@ -165,7 +165,7 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             Account newAccount = new Account(staffID);
             if (db.addBranchManager(newBranchManager)){
                 db.addAccount(newAccount);
-                System.out.printf("Manager %s (%s) assigned to %s.", name, staffID, branchName);
+                System.out.printf("Manager %s (%s) assigned to %s. ", name, staffID, branchName);
                 return true;
             }
             else return false;
