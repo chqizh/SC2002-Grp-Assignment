@@ -9,7 +9,7 @@ The FOMS is an application aimed at streamlining the process of ordering, paymen
 <div>
 <h2> Members: </h2>
   
-- Chan Kit Ho 👾 ([@tyeckh](https://github.com/tyeckh))
+- Chan Kit Ho ([@tyeckh](https://github.com/tyeckh))
 
 - Chiang Qin Zhi ([@chqizh](https://github.com/chqizh))
 
