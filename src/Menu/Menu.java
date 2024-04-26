@@ -36,9 +36,17 @@ public class Menu implements Serializable{
     public boolean addItems() throws IOException {
         sc = new Scanner(System.in);
         System.out.print("Enter the number of items you would like to add: ");
-        int numberToAdd = sc.nextInt();
-        sc.nextLine();
-
+        int numberToAdd;
+        try {
+            numberToAdd = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid number added.");
+            return false;
+        }
+       
         for (int i = 0; i < numberToAdd; i++) {
             (this.editMenu).addItems(this.branchName);
         }
@@ -76,8 +84,16 @@ public class Menu implements Serializable{
     public void deleteItems() throws IOException {
         sc = new Scanner(System.in);
         System.out.println("How many menu items would you like to delete?");
-        int numberToDelete = sc.nextInt();
-        sc.nextLine();
+        int numberToDelete;
+        try {
+            numberToDelete = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid number entered.");
+            return;
+        }
         
         for (int i=0; i < numberToDelete; i++) {
             this.editMenu.deleteItems();
@@ -92,12 +108,21 @@ public class Menu implements Serializable{
     public void updateName() throws IOException{
         sc = new Scanner(System.in);
         System.out.print("Enter ID of item: ");
-        int itemId = sc.nextInt();
-        sc.nextLine();
+        int itemID;
+        try {
+            itemID = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid item ID entered.");
+            return;
+        }
+
         System.out.print("Enter new Name: ");
         String newName = sc.nextLine();
 
-        editMenu.updateName(itemId, newName, menu);
+        editMenu.updateName(itemID, newName, menu);
     }
 
     /**
@@ -108,13 +133,22 @@ public class Menu implements Serializable{
     public void updatePrice() throws IOException{
         sc = new Scanner(System.in);
         System.out.print("Enter ID of Item: ");
-        int itemId = sc.nextInt();
-        sc.nextLine();
+        int itemID;
+        try {
+            itemID = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid item ID entered.");
+            return;
+        }
+
         System.out.print("Enter new Price: ");
         float newprice = sc.nextFloat();
         sc.nextLine();
 
-        editMenu.updatePrice(itemId, newprice, menu);
+        editMenu.updatePrice(itemID, newprice, menu);
     }
 
     /**
