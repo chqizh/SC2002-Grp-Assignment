@@ -210,8 +210,14 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (5) Log Out                       ║");
             System.out.println("╚═══════════════════════════════════╝");
             System.out.print("Please select your action: ");
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = 0;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+            }
 
             switch (choice) {
                 case 1:
@@ -219,14 +225,31 @@ public class FOMSApp implements Serializable{
                     break;
                 case 2:
                     System.out.print("Enter the order ID: ");
-                    int orderID = sc.nextInt();
-                    sc.nextLine();
+                    int orderID;
+                    try {
+                        orderID = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    catch (Exception e){
+                        sc.nextLine();
+                        System.out.println("Invalid numerical orderID entered.");
+                        break;
+                    }
                     staff.viewOrder(branch,orderID);
                     break;
                 case 3:
                     System.out.print("Enter the order ID to be processed: ");
-                    int orderID_P = sc.nextInt();
-                    sc.nextLine();
+                    int orderID_P;
+                    try {
+                        orderID_P = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    catch (Exception e){
+                        sc.nextLine();
+                        System.out.println("Invalid numerical orderID entered.");
+                        break;
+                    }
+
                     staff.processOrders(branch, orderID_P);
                     break;
                 case 4:
@@ -250,6 +273,7 @@ public class FOMSApp implements Serializable{
      * @param manager The branch manager who is logged in.
      */
     private void displayBranchManagerInterface(BranchManager manager) {
+        sc = new Scanner(System.in);
         Branch branch = db.getBranchByBranchName(manager.getBranchName());
         boolean keepRunning = true;
         while (keepRunning) {
@@ -268,23 +292,47 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (9) Log Out                                ║");
             System.out.println("╚════════════════════════════════════════════╝");
             System.out.print("Please select your action: ");
-            sc = new Scanner(System.in);
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = 0;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+            }
+
             switch (choice) {
                 case 1:
                     manager.viewNewOrders(branch);
                     break;
                 case 2:
                     System.out.println("Enter order ID: ");
-                    int orderID = sc.nextInt();
-                    sc.nextLine();
+                    int orderID;
+                    try {
+                        orderID = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    catch (Exception e){
+                        sc.nextLine();
+                        System.out.println("Invalid numerical order ID entered.");
+                        break;
+                    }
+                    
                     manager.viewOrder(branch,orderID);
                     break;
                 case 3:
                     System.out.println("Enter order ID to process: ");
-                    int orderIdToProcess = sc.nextInt();
-                    sc.nextLine();
+                    int orderIdToProcess;
+                    try {
+                        orderIdToProcess = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    catch (Exception e){
+                        sc.nextLine();
+                        System.out.println("Invalid numerical order ID entered.");
+                        break;
+                    }
+                    
                     manager.processOrders(branch,orderIdToProcess);
                     break;
                 case 4:
@@ -319,6 +367,7 @@ public class FOMSApp implements Serializable{
      * @param admin The admin who is logged in.
      */
     private void displayAdminInterface(Admin admin) {
+        sc = new Scanner(System.in);
         boolean keepRunning = true;
         while (keepRunning) {
             System.out.println("\nUser: " + admin.getName());
@@ -339,11 +388,16 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (12) Export Staff List            ║");
             System.out.println("║ (13) Log Out                      ║");
             System.out.println("╚═══════════════════════════════════╝");
-
             System.out.print("Please select your action: ");
-            sc = new Scanner(System.in);
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = 0;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+            }
+
             switch (choice) {
                 case 1:
                     if (admin.addStaff()) System.out.println("Successfully added new staff.");
@@ -416,6 +470,7 @@ public class FOMSApp implements Serializable{
      * @param customer The customer using the system.
      */
     private void displayCustomerInterface(Customer customer) {
+        sc = new Scanner(System.in);
         boolean keepRunning = true;
     
         ArrayList<String> branchNames = db.getAllBranchNames();
@@ -432,7 +487,14 @@ public class FOMSApp implements Serializable{
         String branchName;
         do {
             System.out.print("Enter Branch Number:");
-            int branchNumber = Integer.parseInt(sc.nextLine());
+            int branchNumber = 0;
+            try {
+                branchNumber = sc.nextInt();
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+            }
             branchName = branchNumberMap.get(branchNumber); // Get branch name using the number
             if (branchName == null) {
                 System.out.println("You have entered an invalid Branch Number!");
@@ -459,8 +521,14 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (8) Exit System          ║");
             System.out.println("╚══════════════════════════╝");
             System.out.print("Please select your action: ");
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = 0;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+            }
 
             switch (choice) {
                 case 1:

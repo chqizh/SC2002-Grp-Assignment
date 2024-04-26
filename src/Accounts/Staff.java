@@ -94,27 +94,38 @@ public class Staff extends Employee implements IOrderProcess{
             System.out.println("(3) Completed");
             System.out.println("(4) Cancelled");
 
-            int choice = sc.nextInt();
-            sc.nextLine();
+            int choice = 0;
+            try {
+                choice = sc.nextInt();
+                sc.nextLine();
+            } 
+            catch (Exception e) {
+                sc.nextLine();
+            }
 
+            boolean updated = false;
             switch (choice) {
                 case 1:
                     order.setOrderStatus(Order.orderStatusFlags.PROCESSED);
+                    updated = true;
                     break;
                 case 2:
                     order.setOrderStatus(Order.orderStatusFlags.PICKUP);
+                    updated = true;
                     break;
                 case 3:
                     order.setOrderStatus(Order.orderStatusFlags.COMPLETED);
+                    updated = true;
                     break;
                 case 4:
                     order.setOrderStatus(Order.orderStatusFlags.CANCELLED);
+                    updated = true;
                     break;
                 default:
                     System.out.println("Invalid input, please try again.");
                     break;
             }
-            System.out.println("OrderID " + orderID + " has been updated to " + order.getOrderStatus());
+            if (updated) System.out.println("OrderID " + orderID + " has been updated to " + order.getOrderStatus());
         } else {
             System.out.println("OrderID " + orderID + " not found.");
         }

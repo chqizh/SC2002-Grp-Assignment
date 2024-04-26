@@ -48,15 +48,28 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String staffID = sc.nextLine();
             System.out.print("Enter their gender (M/F): ");
             char gender = sc.nextLine().charAt(0);
-            System.out.print("Enter their age: ");
-            int age = sc.nextInt();
-            sc.nextLine();
+
+            int age = 0;
+            do {
+                System.out.print("Enter their age: ");
+                try {
+                    age = sc.nextInt();
+                    sc.nextLine();
+                }
+                catch (Exception e) {
+                    sc.nextLine();
+                    System.out.println("Invalid age entered.");
+                }
+            } while (age <= 0);
+
             System.out.print("Enter their assigned Branch: ");
             String branchName = sc.nextLine();
+            
             if (db.getBranchByBranchName(branchName) == null) {
                 System.out.println("Branch does not exist.");
                 return false;
             }
+
             Staff newStaff = new Staff(name, staffID, gender, age, branchName, this.db);
             Account newAccount = new Account(staffID);
             if (db.addStaff(newStaff)){
@@ -125,12 +138,12 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                     employee.setAge(age);
                     break;
                 default:
-                    System.out.println("Invalid integer entered.");
+                    System.out.println("Invalid option entered.");
                     break;
             }
         }
         catch (Exception e){
-            System.out.println("Invalid integer entered.");
+            System.out.println("Invalid input entered.");
             return false;
         }
         return true;
@@ -150,9 +163,20 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String staffID = sc.nextLine();
             System.out.print("Enter their gender (M/F): ");
             char gender = sc.nextLine().charAt(0);
-            System.out.print("Enter their age: ");
-            int age = sc.nextInt();
-            sc.nextLine();
+
+            int age = 0;
+            do {
+                System.out.print("Enter their age: ");
+                try {
+                    age = sc.nextInt();
+                    sc.nextLine();
+                }
+                catch (Exception e) {
+                    sc.nextLine();
+                    System.out.println("Invalid age entered.");
+                }
+            } while (age <= 0);
+
             System.out.print("Enter their assigned Branch: ");
             String branchName = sc.nextLine();
 
@@ -313,15 +337,34 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
         sc = new Scanner(System.in);
         List<String> paymentMethods = db.getPaymentMethods();
         
-        System.out.println("Enter which payment method you would like to enable/disable:");
+        System.out.println("Payment Methods Status:");
         int i = 1;
         for (String paymentMethod : paymentMethods){
             if (db.getPaymentMethodsStatus(paymentMethod)) System.out.printf("(%d) %s : Enabled\n", i, paymentMethod);
             else System.out.printf("(%d) %s : Disabled\n", i, paymentMethod);
             i++;
         }
-        int choice = sc.nextInt();
-        sc.nextLine();
+
+        System.out.print("Enter which payment method you would like to enable/disable: ");
+        int choice;
+        try {
+            choice = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e) {
+            sc.nextLine();
+            System.out.println("Invalid number entered.");
+            return false;
+        }
+
+        try {
+            paymentMethods.get(choice - 1);
+        }
+        catch (Exception e){
+            System.out.println("Invalid number entered.");
+            return false;
+        }
+
         return db.togglePaymentMethod(paymentMethods.get(choice - 1));
     }
 
@@ -337,9 +380,20 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
             String branchName = sc.nextLine();
             System.out.print("Enter branch location: ");
             String branchLocation = sc.nextLine();
-            System.out.print("Enter staff quota: ");
-            int staffQuota = sc.nextInt();
-            sc.nextLine();
+
+            int staffQuota = 0;
+            do {
+                System.out.print("Enter staff quota: ");
+                try {
+                    staffQuota = sc.nextInt();
+                    sc.nextLine();
+                }
+                catch (Exception e){
+                    sc.nextLine();
+                    System.out.println("Invalid staff quota entered.");
+                }
+            } while (staffQuota <= 0);
+            
     
             Branch newBranch = new Branch(branchName, branchLocation, staffQuota); 
             if (db.addBranch(newBranch)){
@@ -481,8 +535,16 @@ public class Admin extends Employee implements IAdminManagement, IStaffManagemen
                 break;
             case 5:
                 System.out.print("Filter by age: ");
-                int age = sc.nextInt();
-                sc.nextLine();
+                int age;
+                try {
+                    age = sc.nextInt();
+                    sc.nextLine();
+                }
+                catch (Exception e){
+                    sc.nextLine();
+                    System.out.println("Invalid age entered.");
+                    break;
+                }
                 System.out.println("----------------------------------------------------------------------");
                 System.out.printf("%-20s %-10s %-16s %-8s %-5s %-15s\n", "Name", "staffID", "Role", "Gender", "Age", "Branch");
                 System.out.println("----------------------------------------------------------------------");
