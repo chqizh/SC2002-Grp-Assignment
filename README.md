@@ -43,4 +43,5 @@ Javadocs have been generated and stored in the <b><i>docs</i></b> folder as a ht
 Use the [index.html](docs/index.html) file in a suitable browser to easily navigate the docs. Javadocs for each class are stored within their respective folder under their package names. 
 
 ### Running the FOMSApp
+FOMS can be run through the FOMSApp.java file in the App folder, or the compiled binaries such as the FOMSApp.class file or FOMS.jar in the bin folder.
 For more information on how to generate javadocs, compile into .class and .jar, and execute the FOMSApp program, refer to [compile_instructions](compile_instructions.md). JDK required.

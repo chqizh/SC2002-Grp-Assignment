@@ -1,3 +1,5 @@
+This document assumes your are in the SC2002-Grp-Assignment directory.
+
 ## To Generate Javadocs:
 ```
 javadoc -sourcepath src -subpackages Accounts:App:Branch:Customer:Database:DataPersistence:Menu -d docs
@@ -16,7 +18,7 @@ java FOMSApp
 
 ## To Compile to Jar:
 ```
- cvfm bin/FOMS.jar bin/META-INF/MANIFEST.MF -C bin/ .
+jar cvfm bin/FOMS.jar bin/META-INF/MANIFEST.MF -C bin/ .
 ```
 
 ## To Run FOMS.jar:
