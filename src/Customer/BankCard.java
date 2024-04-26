@@ -54,8 +54,13 @@ public class BankCard extends Payment {
      */
     private void simulateNetworkLatency() {
         try {
-            Thread.sleep(2000);  // Simulate 2 seconds of network delay
-            System.out.println("Connected.");
+            System.out.print("Connecting to Bank.");
+            Thread.sleep(1000);  // Simulate 1 seconds of network delay
+            System.out.print(".");
+            Thread.sleep(1000);  // Simulate 1 seconds of network delay
+            System.out.print(".\n");
+            
+            System.out.println("Connected to Bank.");
             Thread.sleep(2000);  // Simulate 2 seconds of delay
         } catch (InterruptedException e) {
             System.out.println("Network error.");

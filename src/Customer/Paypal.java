@@ -40,7 +40,6 @@ public class PayPal extends Payment {
             return false;
         }
         System.out.println("Processing payment...");
-        System.out.println("Connecting to PayPal...");
         simulateNetworkLatency();
         System.out.printf("PayPal Payment of $%.2f processed successfully.\n", amount);
         return true;
@@ -51,7 +50,12 @@ public class PayPal extends Payment {
      */
     private void simulateNetworkLatency() {
         try {
-            Thread.sleep(2000);  // Simulate 2 seconds of network delay
+            System.out.print("Connecting to PayPal.");
+            Thread.sleep(1000);  // Simulate 1 seconds of network delay
+            System.out.print(".");
+            Thread.sleep(1000);  // Simulate 1 seconds of network delay
+            System.out.print(".\n");
+            Thread.sleep(1000);  // Simulate 1 seconds of network delay
             System.out.println("Connected to PayPal.");
             Thread.sleep(2000);  // Simulate 2 seconds of delay
         } catch (InterruptedException e) {
