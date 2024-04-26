@@ -89,9 +89,9 @@ public class MenuItem implements Serializable{
     }
 
     /**
-     * Sets the price of this menu item.
+     * Sets the price of this menu item. Always sets the absolute value even when a negative value is entered, i.e. price is always positive.
      * 
-     * @param price the new price of the menu item
+     * @param price the new price of the menu item. 
      */
     public void setPrice(float price) {
         this.price = Math.abs(price);

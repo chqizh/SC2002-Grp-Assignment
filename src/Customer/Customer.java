@@ -73,8 +73,16 @@ public class Customer implements ICustomerOrderProcess, Serializable{
         
         sc = new Scanner(System.in);
         System.out.print("Enter the item's ID you would like to order: ");
-        int itemID = sc.nextInt();
-        sc.nextLine();
+        int itemID;
+        try {
+            itemID = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid item ID entered.");
+            return;
+        }
 
         MenuItem cartItem = null;
         for (MenuItem item : menuItems){
@@ -107,9 +115,18 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     public void deleteFromCart() {
         sc = new Scanner(System.in);
         System.out.println("Enter Item ID that you would like to remove:");
-        int index = sc.nextInt();
-        sc.nextLine();
-        index= index-1;
+        int index;
+        try {
+            index = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid Item ID entered.");
+            return;
+        }
+
+        index = index - 1;
         if (index < 0 || index >= cart.size()) {
             System.out.println("Invalid index. Please enter a valid index within the range of items in the cart.");
             return;
@@ -131,7 +148,7 @@ public class Customer implements ICustomerOrderProcess, Serializable{
      */
     @Override
     public void placeOrder(String branchName){
-        int option;
+        int option = 0;
         sc = new Scanner(System.in);
 
         Branch branch = db.getBranchByBranchName(branchName);
@@ -148,8 +165,14 @@ public class Customer implements ICustomerOrderProcess, Serializable{
             System.out.println("(1) Dine-In");
             System.out.println("(2) Takeaway");
             System.out.print("Enter your choice [1 or 2]: ");
-            option = sc.nextInt();
-            sc.nextLine();
+            try {
+                option = sc.nextInt();
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+                System.out.println("Invalid option entered.");
+            }
         } while ((option!=1) && (option!=2));
 
         double totalPrice = calculateTotalPrice();
@@ -170,9 +193,16 @@ public class Customer implements ICustomerOrderProcess, Serializable{
                 }
             }
 
+            int choice = 0;
             System.out.print("Select payment method (by number): ");
-            int choice = sc.nextInt();  // Read the integer input
-            sc.nextLine();
+            try {
+                choice = sc.nextInt();  // Read the integer input
+                sc.nextLine();
+            }
+            catch (Exception e){
+                sc.nextLine();
+                System.out.println("Invalid option entered.");
+            }
             
             if (choice > 0 && choice <= activePaymentMethods.size()) {
                 String selectedMethodName = activePaymentMethods.get(choice - 1);
@@ -259,8 +289,16 @@ public class Customer implements ICustomerOrderProcess, Serializable{
     public void trackOrder(String branchName) {
         sc = new Scanner(System.in);
         System.out.print("Enter Order ID: ");
-        int orderID = sc.nextInt();
-        sc.nextLine();
+        int orderID;
+        try {
+            orderID = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid Order ID entered.");
+            return;
+        }
         
         Branch branch = db.getBranchByBranchName(branchName);
         if (branch != null){
@@ -289,8 +327,17 @@ public class Customer implements ICustomerOrderProcess, Serializable{
 
         sc = new Scanner(System.in);
         System.out.println("Enter Order ID:");
-        int orderID = sc.nextInt();
-        sc.nextLine();
+        int orderID;
+        try {
+            orderID = sc.nextInt();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid Order ID entered.");
+            return;
+        }
+
         Order order = branch.getBranchOrders().getOrder(orderID);
         if(order == null){
             System.out.println("Order not found.");
