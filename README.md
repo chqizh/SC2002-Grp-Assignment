@@ -18,11 +18,9 @@
 ```
 
 ## About
-
 The group assignment involves designing and developing a: Fastfood ordering and management System (FOMS).
 
-The FOMS is an application aimed at streamlining the process of ordering, payment, and order management for both customers and staff at Fastfood restaurants. The system is expected to facilitate easy staff management, menu browsing, order customization, and payment processing.
-
+The FOMS is an application aimed at streamlining the process of ordering, payment, and order management for both customers and staff at fast food restaurants. The system is expected to facilitate easy staff management, menu browsing, order customization, and payment processing.
 
 ## Members:
 - Chan Kit Ho ([@tyeckh](https://github.com/tyeckh))
@@ -34,7 +32,6 @@ The FOMS is an application aimed at streamlining the process of ordering, paymen
 - Pang Boslyn ([@boslyn](https://github.com/boslyn))
 
 - Lim Yu Kang ([@cgtdqykpu](https://github.com/cgtdqykpu))
-
 
 ## Special Thanks
 We would like to give appreciation to our Lab TA, LYU MINGZHI of NTU SCSE for being patient and responsive to our queries during our consultations in lab.

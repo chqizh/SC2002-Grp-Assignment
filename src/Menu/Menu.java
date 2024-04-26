@@ -145,10 +145,18 @@ public class Menu implements Serializable{
         }
 
         System.out.print("Enter new Price: ");
-        float newprice = sc.nextFloat();
-        sc.nextLine();
+        float newPrice;
+        try {
+            newPrice = sc.nextFloat();
+            sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid price entered.");
+            return;
+        }
 
-        editMenu.updatePrice(itemID, newprice, menu);
+        editMenu.updatePrice(itemID, newPrice, menu);
     }
 
     /**

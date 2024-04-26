@@ -31,7 +31,6 @@ public class MenuEditor implements Serializable{
      */
 	public boolean addItems(String branchName){
 		sc = new Scanner(System.in);
-        //int itemId = this.menu.size() + 1;
         int itemId = menuClass.getMaxItemID();
 
         while (true) {
@@ -49,17 +48,38 @@ public class MenuEditor implements Serializable{
             }
 
             if (!duplicateFound) {
-                System.out.print("Enter menu item price: ");
-                double price = sc.nextDouble();
-                sc.nextLine();
-                System.out.println("Categories:");
-                System.out.println("(1) Ala carte");
-                System.out.println("(2) Set Meal");
-                System.out.println("(3) Sides");
-                System.out.println("(4) Drinks");
-                System.out.print("Enter menu item category: ");
-                int categoryChoice = sc.nextInt();
-                sc.nextLine();
+                double price = -1;
+                do {
+                    try {
+                        System.out.print("Enter menu item price: ");
+                        price = sc.nextDouble();
+                        sc.nextLine();
+                    }
+                    catch (Exception e){
+                        sc.nextLine();
+                        System.out.println("Invalid price entered.");
+                    }
+                    if (price < 0) System.out.println("Invalid price entered.");
+                } while (price < 0);
+
+                int categoryChoice = 0;
+                do {
+                    System.out.println("Categories:");
+                    System.out.println("(1) Ala carte");
+                    System.out.println("(2) Set Meal");
+                    System.out.println("(3) Sides");
+                    System.out.println("(4) Drinks");
+                    System.out.print("Enter menu item category: ");
+                    try {
+                        categoryChoice = sc.nextInt();
+                        sc.nextLine();
+                    }
+                    catch (Exception e){
+                        sc.nextLine();
+                        System.out.println("Invalid option number entered.");
+                    }
+                    if (categoryChoice < 1 || categoryChoice > 4) System.out.println("Invalid option entered.");
+                } while (categoryChoice < 1 || categoryChoice > 4);
 
                 String category;
                 switch (categoryChoice) {
@@ -97,8 +117,16 @@ public class MenuEditor implements Serializable{
 	public void deleteItems() {
         sc = new Scanner(System.in);
         System.out.println("Please enter the Item ID of the item to delete:");
-        int id = sc.nextInt();
-		sc.nextLine();
+        int id;
+        try {
+            id = sc.nextInt();
+		    sc.nextLine();
+        }
+        catch (Exception e){
+            sc.nextLine();
+            System.out.println("Invalid item ID entered.");
+            return;
+        }
         
         boolean found = false;
         for (int i = 0; i < menu.size(); i++) {
