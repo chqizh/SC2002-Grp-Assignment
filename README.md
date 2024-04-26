@@ -44,4 +44,4 @@ Use the [index.html](docs/index.html) file in a suitable browser to easily navig
 
 ### Running the FOMSApp
 FOMS can be run through the FOMSApp.java file in the App folder, or the compiled binaries such as the FOMSApp.class file or FOMS.jar in the bin folder.
-For more information on how to generate javadocs, compile into .class and .jar, and execute the FOMSApp program, refer to [compile_instructions](compile_instructions.md). JDK required.
+For more information on how to generate javadocs, compile into .class and .jar, and execute the FOMSApp program, refer to [Usage_Instructions.md](Usage_Instructions.md). JDK required.
