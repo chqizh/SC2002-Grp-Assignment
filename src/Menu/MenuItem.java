@@ -1,6 +1,7 @@
 package Menu;
 
 import java.io.Serializable;
+import java.lang.Math;
 
 /**
  * This class represents a single item in the menu, containing all relevant details
@@ -93,7 +94,7 @@ public class MenuItem implements Serializable{
      * @param price the new price of the menu item
      */
     public void setPrice(float price) {
-        this.price = price;
+        this.price = Math.abs(price);
     }
     
     /**
