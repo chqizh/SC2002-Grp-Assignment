@@ -57,6 +57,7 @@ public class Staff extends Employee implements IOrderProcess{
         branch.getBranchOrders().getOrderList().stream()
                 .filter(order -> order.getOrderStatus() == Order.orderStatusFlags.NEW) // Assuming OrderStatus enum
                 .forEach(order -> order.printOrder()); // Print each order
+        System.out.println("");
     }
     
     /**

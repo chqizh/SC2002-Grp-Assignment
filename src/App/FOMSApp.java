@@ -273,6 +273,7 @@ public class FOMSApp implements Serializable{
      * @param manager The branch manager who is logged in.
      */
     private void displayBranchManagerInterface(BranchManager manager) {
+        Console console = System.console();
         sc = new Scanner(System.in);
         Branch branch = db.getBranchByBranchName(manager.getBranchName());
         boolean keepRunning = true;
@@ -289,7 +290,8 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (6) Add Menu Item                          ║");
             System.out.println("║ (7) Edit Menu Item                         ║");
             System.out.println("║ (8) Remove Menu Item                       ║");
-            System.out.println("║ (9) Log Out                                ║");
+            System.out.println("║ (9) Change Password                        ║");
+            System.out.println("║ (10) Log Out                               ║");
             System.out.println("╚════════════════════════════════════════════╝");
             System.out.print("Please select your action: ");
             int choice = 0;
@@ -351,6 +353,10 @@ public class FOMSApp implements Serializable{
                     manager.removeMenuItem(branch);
                     break;
                 case 9:
+                    Account account = db.getAccountByStaffID(manager.getStaffID());
+                    account.changePassword(console);
+                    break;
+                case 10:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;
@@ -367,6 +373,7 @@ public class FOMSApp implements Serializable{
      * @param admin The admin who is logged in.
      */
     private void displayAdminInterface(Admin admin) {
+        Console console = System.console();
         sc = new Scanner(System.in);
         boolean keepRunning = true;
         while (keepRunning) {
@@ -386,7 +393,8 @@ public class FOMSApp implements Serializable{
             System.out.println("║ (10) Open Branch                  ║");
             System.out.println("║ (11) Close Branch                 ║");
             System.out.println("║ (12) Export Staff List            ║");
-            System.out.println("║ (13) Log Out                      ║");
+            System.out.println("║ (13) Change Password              ║");
+            System.out.println("║ (14) Log Out                      ║");
             System.out.println("╚═══════════════════════════════════╝");
             System.out.print("Please select your action: ");
             int choice = 0;
@@ -454,6 +462,10 @@ public class FOMSApp implements Serializable{
                     }        
                     break;
                 case 13:
+                    Account account = db.getAccountByStaffID(admin.getStaffID());
+                    account.changePassword(console);
+                    break;
+                case 14:
                     System.out.println("Logging out...");
                     keepRunning = false;
                     break;
@@ -486,7 +498,7 @@ public class FOMSApp implements Serializable{
         Branch branch = null;
         String branchName;
         do {
-            System.out.print("Enter Branch Number:");
+            System.out.print("Enter Branch Number: ");
             int branchNumber = 0;
             try {
                 branchNumber = sc.nextInt();
